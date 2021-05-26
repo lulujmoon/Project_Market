@@ -7,7 +7,9 @@
 <title>Hello, world!</title>
 </head>
 <body>
-
+	
+	<form action="./productInsert">
+	</form>
 
 </body>
 </html>
