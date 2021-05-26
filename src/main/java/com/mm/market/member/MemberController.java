@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/member/**")
@@ -12,17 +13,19 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
-	@GetMapping("join")
-	public void setJoin()throws Exception{
-		
+
+	@GetMapping("memberJoin")
+	public String setJoin() throws Exception {
+		return "member/memberJoin";
 	}
+
 	
-	@PostMapping("join")
-	public int setJoin(MemberVO memberVO)throws Exception{
-		
-		int result = memberService.setJoin(memberVO);
-		
-		return result;
-	}
+	 @PostMapping("memberJoin")
+	 public ModelAndView setJoin(MemberVO memberVO,ModelAndView mv)throws Exception{
+	 int result = memberService.setJoin(memberVO); 
+	 mv.setViewName("redirect:../");
+	 return mv; 
+	  }
+	
+	 
 }
