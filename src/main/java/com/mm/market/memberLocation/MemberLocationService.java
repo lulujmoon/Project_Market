@@ -13,5 +13,12 @@ public class MemberLocationService {
 		return memberLocationMapper.getList(memberLocationVO);
 	}
 	
+	public int setInsert(MemberLocationVO memberLocationVO) throws Exception {
+		return memberLocationMapper.setInsert(memberLocationVO);
+	}
+	
+	public int setDelete(MemberLocationVO memberLocationVO) throws Exception {
+		return memberLocationMapper.setDelete(memberLocationVO);
+	}
 	
 }
