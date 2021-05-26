@@ -5,14 +5,9 @@
   
   <configuration>
   	<typeAliases>
-  		<typeAlias type="com.sw.s1.member.MemberVO" alias="MemberVO"/>
-  		<typeAlias type="com.sw.s1.member.MemberFileVO" alias="MemberFileVO"/>
-  		<typeAlias type="com.sw.s1.member.RoleVO" alias="RoleVO"/>
-  		<typeAlias type="com.sw.s1.board.BoardVO" alias="BoardVO"/>
-  		<typeAlias type="com.sw.s1.board.BoardFileVO" alias="BoardFileVO"/>
-  		<typeAlias type="com.sw.s1.board.notice.NoticeVO" alias="NoticeVO"/>
-  		<typeAlias type="com.sw.s1.board.qna.QnaVO" alias="QnaVO"/>
-  		<typeAlias type="com.sw.s1.util.Pager" alias="Pager"/>
+		<typeAlias type="com.mm.market.product.ProductVO" alias="ProductVO"/>
+		<typeAlias type="com.mm.market.product.ProductFileVO" alias="ProductFileVO"/>
+		<typeAlias type="com.mm.market.util.Pager" alias="Pager"/>
   	</typeAliases>
   
   </configuration>

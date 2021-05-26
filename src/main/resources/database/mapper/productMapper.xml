@@ -5,6 +5,47 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mm.market.product.ProductMapper">
+
+		<select id="getList" parameterType="Pager" resultMap="selectResult">
+			SELECT P.*, PF.* 
+			FROM product P LEFT JOIN productFile PF
+			ON P.productNum = PF.productNum	
+		</select>
+		
+		<resultMap type="ProductVO" id="selectResult">
+			<id property="productNum" column="productNum"></id>
+			<result property="productName" column="productName"/>
+			<result property="username" column="username"/>
+			<result property="productCategory" column="productCategory"/>
+			<result property="productDate" column="productDate"/>
+			<result property="productHit" column="productHit"/>
+			<result property="productHeart" column="productHeart"/>
+			<result property="productContent" column="productContent"/>
+			<result property="productStatus" column="productStatus"/>
+			<result property="productPrice" column="productPrice"/>
+			<result property="productNego" column="productNego"/>
+			<result property="locationCode" column="locationCode"/>
+			<collection property="files" javaType="java.util.List" ofType="ProductFileVO">
+				<id property="fileNum" column="fileNum"/>
+				<result property="fileName" column="fileName"/>
+				<result property="originName" column="originName"/>
+			</collection>
+		</resultMap> 
+		
+
+<!-- 		<select id="getList" resultType="ProductVO" parameterType="Pager">
+			select * from product
+			order by productNum desc
+			limit #{startRow}, #{perPage}
+			limit 시작index번호(0부터시작), 갯수
+		</select> -->
+
+		<select id="getTotalPage" resultType="Long" parameterType="Pager">
+			select count(productNum) from product
+		</select>
+
+	
+
 		<delete id="setDelete" parameterType="ProductVO">
 			delete from product where productNum=#{productNum}
 		</delete>
