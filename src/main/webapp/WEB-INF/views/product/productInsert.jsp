@@ -7,8 +7,9 @@
 <title>Hello, world!</title>
 </head>
 <body>
-	<h2>Product Insert Page</h2>
+	
+	<form action="./productInsert">
+	</form>
 
-	<a href="./product/productInsert"> Insert </a>
 </body>
 </html>
