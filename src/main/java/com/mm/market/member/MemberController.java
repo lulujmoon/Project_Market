@@ -14,6 +14,13 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	@GetMapping("memberLogin")
+	public String getLogin()throws Exception{
+		return "member/memberLogin";
+	}
+	
+	
+	
 	@GetMapping("memberJoin")
 	public String setJoin() throws Exception {
 		return "member/memberJoin";
