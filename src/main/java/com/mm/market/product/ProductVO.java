@@ -18,6 +18,6 @@ public class ProductVO {
 	private String productStatus;
 	private Long productPrice;
 	private boolean productNego;
-	private String locationCode;
+	private Long locationCode;
 	
 }
