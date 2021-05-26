@@ -21,10 +21,10 @@ public class MemberController {
 
 	
 	 @PostMapping("memberJoin")
-	 public ModelAndView setJoin(MemberVO memberVO,ModelAndView mv)throws Exception{
+	 public String setJoin(MemberVO memberVO,ModelAndView mv)throws Exception{
 	 int result = memberService.setJoin(memberVO); 
-	 mv.setViewName("redirect:../");
-	 return mv; 
+	
+	 return "redirect:../";
 	  }
 	
 	 
