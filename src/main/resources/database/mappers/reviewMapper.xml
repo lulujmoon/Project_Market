@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- 바로 쓸 경우가 아니면 mapper는 미리 쓰지 말고 비워주세용 -->
+
+<mapper namespace ="com.mm.market.review.ReviewMapper">
+	
+	<select id="getListByReviewer" parameterType="ReviewVO" resultType="ReviewVO">
+		select * from review where reviewer=#{reviewer}
+	</select>
+	
+	<select id="getListByReviewee" parameterType="ReviewVO" resultType="ReviewVO">
+		select * from review where reviewee=#{reviewee} and type=#{type}
+	</select>
+	
+	<select id="getSelect" parameterType="ReviewVO" resultType="ReviewVO">
+		select * from review where productNum=#{productNum}
+	</select>
+	
+	<insert id="setInsert" parameterType="ReviewVO">
+		insert into review (productNum, reviewer, reviewee, type, locationCode, state, manner, response, reviewContent)
+		values (#{productNum}, #{reviewer}, #{reviewee}, #{type}, #{locationCode}, #{state}, #{manner}, #{response}, #{reviewContent})
+	</insert>
+</mapper>
