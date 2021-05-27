@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- from "https://mybatis.org/mybatis-3/getting-started.html" -->
-
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
+
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.mm.market.review.ReviewVO" alias="ReviewVO"/>
 		<typeAlias type="com.mm.market.memberLocation.MemberLocationVO" alias="MemberLocationVO"/>
-	</typeAliases>
-</configuration>
-
+  		<typeAlias type="com.mm.market.member.MemberVO" alias="MemberVO"/>
+  		<typeAlias type="com.mm.market.member.RoleVO" alias="RoleVO"/>
+  	</typeAliases>
+  </configuration>
