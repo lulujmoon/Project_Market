@@ -8,6 +8,10 @@
 		<delete id="setDelete" parameterType="ProductVO">
 			delete from product where productNum=#{productNum}
 		</delete>
-
+	
+		<insert id="setInsert" parameterType="ProductVO">
+			insert into product values (productNum, productName, username, productCategory, productDate, productHit, productHeart, productContent, productStatus, productPrice, productNego, locationCode)
+		 values (#{productNum}, #{productName}, #{username}, #{productCategory}, NOW(), 0, 0, #{productContent}, '판매 중', #{productPrice}, 1, 0)
+		</insert>
 </mapper>   
 
