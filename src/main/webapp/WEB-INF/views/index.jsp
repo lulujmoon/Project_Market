@@ -8,6 +8,7 @@
 </head>
 <body>
 	
+	<a href="./product/productInsert"> Insert </a>
 
 </body>
 </html>

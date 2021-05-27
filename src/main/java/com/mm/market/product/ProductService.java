@@ -5,15 +5,18 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService {
-
 	
 	@Autowired
 	private ProductMapper productMapper;
 	
 	//insert
-	public int setInsert(ProductVO productVO)throws Exception{
-		int result = productMapper.setInsert(productVO);
-		
-		return result;
+	public int setInsert(ProductVO productVO) throws Exception {
+		return productMapper.setInsert(productVO);
 	}
+	
+	//update
+	public int setUpdate(ProductVO productVO) throws Exception {
+		return productMapper.setUpdate(productVO);
+	}
+	
 }
