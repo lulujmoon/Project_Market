@@ -4,13 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://kit.fontawesome.com/1b543f6f46.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../resources/css/common.css">
-<link rel="stylesheet" href="../resources/css/index.css">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
-
-<title>Hello, world!</title>
+<c:import url="./template/setting.jsp"></c:import>
+<title>Home</title>
 </head>
 <body>
 	
@@ -79,13 +74,6 @@
 	</div>
 
 <c:import url="./template/footer.jsp"></c:import>
-	
-	<script type="text/javascript">
-		var toggle_btn = document.querySelector("#toggle-btn");
-		var side_menu = document.querySelector(".side-menu");
-		toggle_btn.addEventListener("click", function(){
-			side_menu.classList.toggle("active");
-		});
-	</script>
+<script type="text/javascript" src="../resources/js/common.js"></script>
 </body>
 </html>

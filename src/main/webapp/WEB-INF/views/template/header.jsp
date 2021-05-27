@@ -18,8 +18,8 @@
 		</div>
 		<ul class="nav__personal">
 			<c:if test="${member == null}">
-				<li><a href="#">로그인</a>&nbsp;|&nbsp;</li>
-				<li><a href="#">회원가입</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/memberLogin">로그인</a>&nbsp;|&nbsp;</li>
+				<li><a href="${pageContext.request.contextPath}/member/memberJoin">회원가입</a></li>
 			</c:if>
 			<c:if test="${member != null}">
 				<li><a href="#">마이페이지</a>&nbsp;|&nbsp;</li>
@@ -34,7 +34,7 @@
 	<div class="side__user">
 		<h3>
 			<c:if test="${member == null}">
-				<a href="#"><i class="fas fa-unlock-alt"></i> 로그인</a>
+				<a href="${pageContext.request.contextPath}/member/memberLogin"><i class="fas fa-unlock-alt"></i> 로그인</a>
 			</c:if>
 			<c:if test="${member != null}">
 				<a href="#">${member.name} 님</a>
