@@ -7,7 +7,7 @@
 <title>Hello, world!</title>
 </head>
 <body>
-	
+	<a href="/product/list">Product List</a>
 
 </body>
 </html>

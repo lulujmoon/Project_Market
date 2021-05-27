@@ -10,7 +10,7 @@ import com.sw.s1.util.Pager;
 public interface ProductMapper {
 	
 	//List
-	public List<ProductVO> getList(Pager pager)throws Exception;
+	public List<ProductVO> getList()throws Exception;
 	
 	public Long getTotalCount(Pager pager)throws Exception;
 	

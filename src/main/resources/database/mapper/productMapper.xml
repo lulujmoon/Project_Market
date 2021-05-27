@@ -6,10 +6,11 @@
 
 <mapper namespace="com.mm.market.product.ProductMapper">
 
-		<select id="getList" parameterType="Pager" resultMap="selectResult">
-			SELECT P.*, PF.* 
+		<select id="getList" resultMap="selectResult">
+			SELECT P.*, PF.*
 			FROM product P LEFT JOIN productFile PF
-			ON P.productNum = PF.productNum	
+			ON P.productNum = PF.productNum
+			ORDER BY p.productNum desc
 		</select>
 		
 		<resultMap type="ProductVO" id="selectResult">
@@ -33,18 +34,9 @@
 		</resultMap> 
 		
 
-<!-- 		<select id="getList" resultType="ProductVO" parameterType="Pager">
-			select * from product
-			order by productNum desc
-			limit #{startRow}, #{perPage}
-			limit 시작index번호(0부터시작), 갯수
-		</select> -->
-
 		<select id="getTotalPage" resultType="Long" parameterType="Pager">
 			select count(productNum) from product
 		</select>
-
-	
 
 		<delete id="setDelete" parameterType="ProductVO">
 			delete from product where productNum=#{productNum}

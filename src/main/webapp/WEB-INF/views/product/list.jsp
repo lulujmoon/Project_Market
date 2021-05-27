@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <title>Insert title here</title>
-<c:import url="../template/bootStrap.jsp"></c:import>
 </head>
 <body>
-	<c:import url="../template/header.jsp"></c:import>
+
 
 
 	<div class="container">
@@ -28,6 +28,15 @@
 				</tr>
 			</thead>
 			<tbody>
+			<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			</tr>
+			<!--
 				<c:forEach items="${list}" var="dto">
 					<tr>
 						<td><a href="#"></a></td>
@@ -38,11 +47,12 @@
 						<td>${dto.productHit}</td>
 					</tr>
 				</c:forEach>
+			  -->
 			</tbody>
 		</table>
 
 		
-		
+		<!--
 		 <div class="container">
 
 			<ul class="pagination">
@@ -81,11 +91,11 @@
 			<a href="./insert" class="btn btn-primary" role="button">Write</a>
 			
 
-
+  -->
 
 		</div>
 
-	</div>
+
 
 
 </body>

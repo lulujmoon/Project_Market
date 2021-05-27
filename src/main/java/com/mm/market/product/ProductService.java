@@ -13,12 +13,9 @@ public class ProductService {
 	@Autowired
 	private ProductMapper productMapper;
 	
-	public List<ProductVO> getList(Pager pager)throws Exception{
-		pager.makeRow();
-		Long totalCount = productMapper.getTotalCount(pager);
-		pager.makeNum(totalCount);
-		
-		return productMapper.getList(pager);
+	public List<ProductVO> getList()throws Exception{
+
+		return productMapper.getList();
 	}
 	
 
