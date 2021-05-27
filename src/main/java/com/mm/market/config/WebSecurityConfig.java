@@ -30,11 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-				/*
-				 * .exceptionHandling() .accessDeniedHandler((AccessDeniedHandler) new
-				 * SecurityException()) .and() .cors() .and() .csrf() .disable()
-				 */
-				 
+
+		.cors().and()
+		.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/member/**").permitAll()
