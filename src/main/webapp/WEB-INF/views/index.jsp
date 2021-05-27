@@ -9,6 +9,7 @@
 <body>
 	
 	<a href="./member/memberJoin">회원가입</a>
+	<a href="./member/memberLogin">로그인</a>
 
 </body>
 </html>

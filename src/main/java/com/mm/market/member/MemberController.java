@@ -24,10 +24,9 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	@GetMapping("error")
-	public String error() {
-		return "error/error";
-	}
+	/*
+	 * @GetMapping("error") public String error() { return "error/error"; }
+	 */
 	
 	@GetMapping("memberLogin")
 	public String getLogin()throws Exception{
@@ -43,6 +42,8 @@ public class MemberController {
 	public String memberLoginResult(HttpSession session, Authentication auth2)throws Exception{
 		
 		Enumeration<String> en = session.getAttributeNames();
+		MemberVO memberVO = new MemberVO();
+		System.out.println(memberVO.getUsername());
 		
 		while(en.hasMoreElements()) {
 			System.out.println("attribute Name:+"+en.nextElement());
