@@ -93,10 +93,12 @@ public class MemberController {
 	 @PostMapping("memberJoin")
 	 public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
 		 System.out.println("Join process"+ memberVO.getName().length());
-		 
-		if(memberService.memberError(memberVO, errors)) {
-			return"member/memberJoin";
-		} 
+		 	
+			/*
+			 * if(memberService.memberError(memberVO, errors)) { System.out.println("에러났어");
+			 * return"member/memberJoin"; }
+			 */
+			 
 		 
 		 int result = memberService.setJoin(memberVO); 
 	
