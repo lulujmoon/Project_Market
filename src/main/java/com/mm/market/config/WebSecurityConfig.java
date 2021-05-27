@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 
 		.cors().and()
+		//데이터를 볼때 내가 보낸 토큰이 맞는지 보증하는거
 		.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/").permitAll()

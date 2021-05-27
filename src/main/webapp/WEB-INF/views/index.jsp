@@ -8,8 +8,13 @@
 </head>
 <body>
 	
+	<c:if test="${empty SPRING_SECURITY_CONTEXT}">
 	<a href="./member/memberJoin">회원가입</a>
 	<a href="./member/memberLogin">로그인</a>
+	</c:if>
+	<c:if test="${not empty SPRING_SECURITY_CONTEXT}">
+	<a href="./member/memberLogout">로그아웃</a>
+	</c:if>
 
 </body>
 </html>
