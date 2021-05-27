@@ -43,7 +43,7 @@
 						<td><a href="#"><img src="/images/바탕화면.jpg" width="90" height="90"/></a></td>
 						<td>${dto.productNum}</td>
 						<td>${dto.productCategory}</td>
-						<td><a href="./select?productnum=${dto.productNum}">${dto.productName}</a></td>
+						<td><a href="./select?productNum=${dto.productNum}">${dto.productName}</a></td>
 						<td>${dto.username}</td>
 						<td>${dto.productDate}</td>
 						<td>${dto.productHit}</td>

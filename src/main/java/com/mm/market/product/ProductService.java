@@ -19,6 +19,7 @@ public class ProductService {
 	
 	
 	public ProductVO getSelect(ProductVO productVO) throws Exception {
+		productMapper.setHitUpdate(productVO);
 		return productMapper.getSelect(productVO);
 	}
 	

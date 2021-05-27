@@ -44,7 +44,7 @@
 		
 
 
-			<a href="./delete" class="btn btn-primary" role="button">Delete</a>
+			<a href="./delete?productNum=${vo.productNum}" class="btn btn-primary" role="button">Delete</a>
 			
 
 		</div>

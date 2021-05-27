@@ -48,8 +48,10 @@
 
 
 		<delete id="setDelete" parameterType="ProductVO">
-			delete from product where productNum=#{productNum}
+			DELETE FROM product WHERE productNum=#{productNum}
 		</delete>
+
+
 
 </mapper>   
 

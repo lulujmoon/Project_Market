@@ -37,8 +37,14 @@ public class ProductController {
 	
 	@GetMapping("delete")
 	public String setDelete(ProductVO productVO)throws Exception{
+		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
-		return "redirect:../";
+		if(result==1) {
+		System.out.println("삭제 성공");
+		} else {
+			System.out.println("실패");
+		}
+		return "redirect:/product/list";
 	}
 	
 	
