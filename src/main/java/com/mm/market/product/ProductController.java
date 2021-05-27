@@ -22,9 +22,25 @@ public class ProductController {
 		
 		List<ProductVO> ar = productService.getList();
 		model.addAttribute("list", ar);
-//		model.addAttribute("pager", pager);
 		
 		return "product/list";
 	}
+	
+	@GetMapping("select")
+	public String getSelect(ProductVO productVO, Model model)throws Exception {
+		productVO = productService.getSelect(productVO);
+		System.out.println(productVO);
+		
+		model.addAttribute("vo", productVO);
+		return "product/select";
+	}
+	
+	@GetMapping("delete")
+	public String setDelete(ProductVO productVO)throws Exception{
+		int result = productService.setDelete(productVO);
+		return "redirect:../";
+	}
+	
+	
 	
 }

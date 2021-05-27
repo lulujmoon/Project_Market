@@ -10,7 +10,14 @@
 			SELECT P.*, PF.*
 			FROM product P LEFT JOIN productFile PF
 			ON P.productNum = PF.productNum
-			ORDER BY p.productNum desc
+			ORDER BY P.productNum desc
+		</select>
+		
+		<select id="getSelect" parameterType="ProductVO" resultMap="selectResult">
+			SELECT P.*, PF.* 
+			FROM product P LEFT JOIN productFile PF
+			ON P.productNum = PF.productNum
+			WHERE P.productNum=#{productNum}
 		</select>
 		
 		<resultMap type="ProductVO" id="selectResult">
@@ -33,6 +40,11 @@
 			</collection>
 		</resultMap> 
 		
+		
+		
+		<update id="setHitUpdate" parameterType="ProductVO">
+			UPDATE product SET productHit=productHit+1 WHERE productNum=#{productNum}
+		</update>
 
 
 		<delete id="setDelete" parameterType="ProductVO">

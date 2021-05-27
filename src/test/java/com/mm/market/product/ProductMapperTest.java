@@ -14,10 +14,19 @@ class ProductMapperTest {
 	@Autowired
 	private ProductMapper productMapper;
 
-	@Test
+	//@Test
 	void getListTest() throws  Exception {
 		List<ProductVO> ar = productMapper.getList();
 		assertNotEquals(0, ar.size());
 	}
 
+	
+	@Test
+	void getSelectTest()throws Exception{
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNum(3L);
+		
+		productVO = productMapper.getSelect(productVO);
+		assertNotNull(productVO);
+	}
 }

@@ -14,9 +14,16 @@ public class ProductService {
 	private ProductMapper productMapper;
 	
 	public List<ProductVO> getList()throws Exception{
-
 		return productMapper.getList();
 	}
 	
+	
+	public ProductVO getSelect(ProductVO productVO) throws Exception {
+		return productMapper.getSelect(productVO);
+	}
+	
+	public int setDelete(ProductVO productVO)throws Exception{
+		return productMapper.setDelete(productVO);
+	}
 
 }
