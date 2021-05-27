@@ -32,6 +32,7 @@ public class MemberService implements UserDetailsService{
 		return memberVO;
 	}
 	
+	
 	/*
 	 * //검증메서드 public boolean memberError(MemberVO memberVO, Errors errors) throws
 	 * Exception{ boolean result = false;
@@ -39,13 +40,16 @@ public class MemberService implements UserDetailsService{
 	 * result = errors.hasErrors();
 	 * 
 	 * //password일치 if(!memberVO.getPassword().equals(memberVO.getPassword1())) {
-	 * errors.rejectValue("password1", "memberVO.password.notEqual"); //formpath,
-	 * field명, properties의 code(key) result = true; }
+	 * errors.rejectValue("password1", "memberVO.password.notEqual");
+	 * //formpath,field명, properties의 code(key) result = true; }
 	 * 
 	 * //username 중복 MemberVO checkMember = memberMapper.getUsername(memberVO);
 	 * if(checkMember != null) { errors.rejectValue("username", "member.id.equal");
-	 * result = true; } return result; }
+	 * result = true; } return result;}
 	 */
+	  
+
+	 
 	
 	//예외가 발생했으면 자동으로 rollback
 	@Transactional(rollbackFor = Exception.class)

@@ -6,8 +6,8 @@
  <mapper namespace="com.mm.market.member.MemberMapper">  
  
 <insert id="setJoin" parameterType="MemberVO">
- 	insert into member(username,password,name,phone,email,joinDate)
- 	values(#{username},#{password},#{name},#{phone},#{email},now())
+ 	insert into member(username,password,name,phone,email,enabled,joinDate)
+ 	values(#{username},#{password},#{name},#{phone},#{email},#{enabled},now())
  </insert>
  
  <insert id="setMemberRole" parameterType="java.util.Map">

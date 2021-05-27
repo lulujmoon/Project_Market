@@ -22,7 +22,6 @@ public class MemberVO implements UserDetails{
 	@NotBlank(message="pw를 입력하세요.")
 	@Pattern(regexp="(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,20}",
 			 message="비밀번호는 영문 대,소문자와 숫자,특수기호가 적어도 1개이상 포함된 8~20자의 비밀번호여야 합니다.")
-	private String password1;
 	private String password;
 	@NotBlank(message="이름을 입력하세요")
 	private String name;
@@ -30,9 +29,9 @@ public class MemberVO implements UserDetails{
 	private String phone;
 	@NotBlank(message="이메일을 입력하세요")
 	private String email;
-	private Date joinDate;
 	
 	private boolean enabled;
+	private Date joinDate;
 	
 	//role
 	private List<RoleVO> roles;
@@ -47,7 +46,6 @@ public class MemberVO implements UserDetails{
 		}
 		return authorities;
 	}
-	
 	
 	@Override
 	public boolean isAccountNonExpired() {

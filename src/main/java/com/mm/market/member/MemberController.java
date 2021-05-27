@@ -27,85 +27,87 @@ public class MemberController {
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
 	 */
-	
+
 	@GetMapping("memberLogin")
 	public String getLogin()throws Exception{
 		return "member/memberLogin";
 	}
-	
+
 	@GetMapping("memberLoginFail")
 	public String loginFail()throws Exception{
 		return "redirect:/member/memberLogin";
 	}
-	
+
 	@GetMapping("memberLoginResult")
 	public String memberLoginResult(HttpSession session, Authentication auth2)throws Exception{
-		
+
 		Enumeration<String> en = session.getAttributeNames();
 		MemberVO memberVO = new MemberVO();
 		System.out.println(memberVO.getUsername());
-		
+
 		while(en.hasMoreElements()) {
 			System.out.println("attribute Name:+"+en.nextElement());
 		}
-		
+
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
-		
+
 		SecurityContextImpl sc = (SecurityContextImpl)obj;
-		
+
 		Authentication auth = sc.getAuthentication();
-		
+
 		System.out.println("===================================");
 		System.out.println("Name : "+auth.getName());
 		System.out.println("Details : "+auth.getDetails());
 		System.out.println("Principal : "+auth.getPrincipal());
 		System.out.println("Authorities : "+auth.getAuthorities());
 		System.out.println("===================================");
-		
+
 		System.out.println("===================================");
 		System.out.println("Name : "+auth2.getName());
 		System.out.println("Details : "+auth2.getDetails());
 		System.out.println("Principal : "+auth2.getPrincipal());
 		System.out.println("Authorities : "+auth2.getAuthorities());
 		System.out.println("===================================");
-		
+
 		System.out.println("obj : "+obj);
-		
+
 		System.out.println("login 성공");
-		
+
 		return "redirect:/";
-		
+
 	}
-	
+
 	@GetMapping("memberLogout")
 	public String logout(HttpSession session)throws Exception{
 		session.invalidate();
-		
+
 		return "redirect:../";
 	}
-		
-	
+
+
 	@GetMapping("memberJoin")
 	public String setJoin(@ModelAttribute MemberVO memberVO) throws Exception {
 		return "member/memberJoin";
 	}
 
-	
-	 @PostMapping("memberJoin")
-	 public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
-		 System.out.println("Join process"+ memberVO.getName().length());
-		 	
-			/*
-			 * if(memberService.memberError(memberVO, errors)) { System.out.println("에러났어");
-			 * return"member/memberJoin"; }
-			 */
-			 
-		 
-		 int result = memberService.setJoin(memberVO); 
-	
-	 return "redirect:../";
-	
-	 }
-	
-	 
+
+	@PostMapping("memberJoin")
+	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
+		System.out.println("Join process"+ memberVO.getName().length());
+
+
+		/*
+		 * if(memberService.memberError(memberVO, errors)) { System.out.println("에러났어");
+		 * return"member/memberJoin"; }
+		 */
+
+
+
+		int result = memberService.setJoin(memberVO); 
+
+		return "redirect:../";
+
+	}
+
+
 }
