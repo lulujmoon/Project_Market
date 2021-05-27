@@ -1,4 +1,4 @@
-package com.sw.s1.util;
+package com.mm.market.util;
 
 
 public class Pager {

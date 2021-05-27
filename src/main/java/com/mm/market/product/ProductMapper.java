@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.sw.s1.util.Pager;
+import com.mm.market.util.Pager;
 
 @Mapper
 public interface ProductMapper {

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sw.s1.util.Pager;
+import com.mm.market.util.Pager;
 
 @Service
 public class ProductService {

@@ -34,9 +34,6 @@
 		</resultMap> 
 		
 
-		<select id="getTotalPage" resultType="Long" parameterType="Pager">
-			select count(productNum) from product
-		</select>
 
 		<delete id="setDelete" parameterType="ProductVO">
 			delete from product where productNum=#{productNum}

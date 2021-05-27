@@ -1,4 +1,4 @@
-package com.sw.s1.util;
+package com.mm.market.util;
 
 import java.io.File;
 import java.util.UUID;

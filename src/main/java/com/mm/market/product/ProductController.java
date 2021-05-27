@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.sw.s1.util.Pager;
+import com.mm.market.util.Pager;
 
 @Controller
 @RequestMapping("/product/**")
@@ -20,8 +20,8 @@ public class ProductController {
 	@GetMapping("list")
 	public String getList(Model model) throws Exception {
 		
-//		List<ProductVO> ar = productService.getList();
-//		model.addAttribute("list", ar);
+		List<ProductVO> ar = productService.getList();
+		model.addAttribute("list", ar);
 //		model.addAttribute("pager", pager);
 		
 		return "product/list";
