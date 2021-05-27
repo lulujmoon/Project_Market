@@ -3,15 +3,19 @@ package com.mm.market.member;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.Errors;
 
 @Controller
 @RequestMapping("/member/**")
@@ -20,6 +24,11 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	@GetMapping("error")
+	public String error() {
+		return "error/error";
+	}
+	
 	@GetMapping("memberLogin")
 	public String getLogin()throws Exception{
 		return "member/memberLogin";
@@ -43,7 +52,21 @@ public class MemberController {
 		
 		SecurityContextImpl sc = (SecurityContextImpl)obj;
 		
-		Authentication auth= sc.getAuthentication();
+		Authentication auth = sc.getAuthentication();
+		
+		System.out.println("===================================");
+		System.out.println("Name : "+auth.getName());
+		System.out.println("Details : "+auth.getDetails());
+		System.out.println("Principal : "+auth.getPrincipal());
+		System.out.println("Authorities : "+auth.getAuthorities());
+		System.out.println("===================================");
+		
+		System.out.println("===================================");
+		System.out.println("Name : "+auth2.getName());
+		System.out.println("Details : "+auth2.getDetails());
+		System.out.println("Principal : "+auth2.getPrincipal());
+		System.out.println("Authorities : "+auth2.getAuthorities());
+		System.out.println("===================================");
 		
 		System.out.println("obj : "+obj);
 		
@@ -53,21 +76,33 @@ public class MemberController {
 		
 	}
 	
-	
-	
+	@GetMapping("memberLogout")
+	public String logout(HttpSession session)throws Exception{
+		session.invalidate();
+		
+		return "redirect:../";
+	}
+		
 	
 	@GetMapping("memberJoin")
-	public String setJoin() throws Exception {
+	public String setJoin(@ModelAttribute MemberVO memberVO) throws Exception {
 		return "member/memberJoin";
 	}
 
 	
 	 @PostMapping("memberJoin")
-	 public String setJoin(MemberVO memberVO,ModelAndView mv)throws Exception{
-	 int result = memberService.setJoin(memberVO); 
+	 public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
+		 System.out.println("Join process"+ memberVO.getName().length());
+		 
+		if(memberService.memberError(memberVO, errors)) {
+			return"member/memberJoin";
+		} 
+		 
+		 int result = memberService.setJoin(memberVO); 
 	
 	 return "redirect:../";
-	  }
+	
+	 }
 	
 	 
 }

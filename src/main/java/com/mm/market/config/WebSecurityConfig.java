@@ -30,8 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.exceptionHandling()
-		.accessDeniedPage(null)
-		.accessDeniedHandler(null)
+				/* .accessDeniedHandler(new SecurityException()) */
 		.and()
 		.cors()
 		.and()

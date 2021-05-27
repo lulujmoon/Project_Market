@@ -8,6 +8,7 @@
 </head>
 <body>
 	
+	<a href="./member/memberJoin">회원가입</a>
 
 </body>
 </html>
