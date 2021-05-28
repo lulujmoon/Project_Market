@@ -44,7 +44,7 @@
 		</table>
 
 		
-		<!--
+		
 		 <div class="container">
 
 			<ul class="pagination">
@@ -67,9 +67,9 @@
 				<input type="hidden" name="curPage" value="1" id="curPage">
 					<div class="input-group-prepend">
 						<select class="form-control" name="kind" id="kind">
-							<option class="sel">Title</option>
-							<option class="sel">Contents</option>
-							<option class="sel">Writer</option>
+							<option class="sel">ProductName</option>
+							<option class="sel">ProductContent</option>
+							<option class="sel">Username</option>
 						</select>
 					</div>
 					<input type="text" class="form-control" name="search" id="search" placeholder="" value="${pager.search}">
@@ -83,10 +83,8 @@
 			<a href="./insert" class="btn btn-primary" role="button">Write</a>
 			
 
-  -->
-
 		</div>
-
+</div>
 
 
 

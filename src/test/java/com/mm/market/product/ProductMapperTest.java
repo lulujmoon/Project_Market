@@ -15,10 +15,10 @@ class ProductMapperTest {
 	private ProductMapper productMapper;
 
 	//@Test
-	void getListTest() throws  Exception {
-		List<ProductVO> ar = productMapper.getList();
-		assertNotEquals(0, ar.size());
-	}
+	/*
+	 * void getListTest() throws Exception { List<ProductVO> ar =
+	 * productMapper.getList(); assertNotEquals(0, ar.size()); }
+	 */
 
 	
 	@Test

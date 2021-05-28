@@ -18,10 +18,11 @@ public class ProductController {
 	private ProductService productService;
 	
 	@GetMapping("list")
-	public String getList(Model model) throws Exception {
+	public String getList(Pager pager, Model model) throws Exception {
 		
-		List<ProductVO> ar = productService.getList();
+		List<ProductVO> ar = productService.getList(pager);
 		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
 		
 		return "product/list";
 	}

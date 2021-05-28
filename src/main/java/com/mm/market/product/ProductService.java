@@ -13,8 +13,14 @@ public class ProductService {
 	@Autowired
 	private ProductMapper productMapper;
 	
-	public List<ProductVO> getList()throws Exception{
-		return productMapper.getList();
+	public List<ProductVO> getList(Pager pager)throws Exception{
+		Long perPage = 20L;
+		Long perBlock = 5L;
+		
+		pager.makeRow(perPage);
+		Long totalCount = productMapper.getTotalCount(pager);
+		pager.makeNum(totalCount, perPage, perBlock);
+		return productMapper.getList(pager);
 	}
 	
 	
