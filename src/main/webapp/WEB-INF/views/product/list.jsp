@@ -21,7 +21,6 @@
 				<tr>
 					<th>IMAGES</th>
 					<th>NO</th>
-					<th>CATEGORY</th>
 					<th>SUBJECT</th>
 					<th>NAME</th>
 					<th>DATE</th>
@@ -29,21 +28,12 @@
 				</tr>
 			</thead>
 			<tbody>
-			<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-			</tr>
 			
 				<c:forEach items="${list}" var="dto">
 					<tr>
 						<td><a href="#"><img src="/images/바탕화면.jpg" width="90" height="90"/></a></td>
 						<td>${dto.productNum}</td>
-						<td>${dto.productCategory}</td>
-						<td><a href="./select?productNum=${dto.productNum}">${dto.productName}</a></td>
+						<td>[ ${dto.productCategory} ]<a href="./select?productNum=${dto.productNum}"> ${dto.productName}</a></td>
 						<td>${dto.username}</td>
 						<td>${dto.productDate}</td>
 						<td>${dto.productHit}</td>
