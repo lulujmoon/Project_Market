@@ -80,6 +80,15 @@
 			 values (#{productNum}, #{productName}, #{username}, #{productCategory}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, 0)
 		</insert>
 		
+		<update id="setUpdate" parameterType="ProductVO">
+			update product set 
+			productName=#{productName}, 
+			productCategory=#{productCategory}, 
+			productContent=#{productContent}, 
+			productPrice=#{productPrice}
+			where productNum=#{productNum}
+		</update>
+		
 		
 </mapper>   
 

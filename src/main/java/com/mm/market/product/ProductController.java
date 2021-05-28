@@ -55,4 +55,22 @@ public class ProductController {
 		
 		return "redirect:product/list";
 	}
+	
+	@GetMapping("update")
+	public String setUpdate(ProductVO productVO, Model model)throws Exception{
+		productVO = productService.getSelect(productVO);
+		model.addAttribute("vo", productVO);
+		
+		return "product/update";
+		
+	}
+	
+	@PostMapping("update")
+	public String setUpdate(ProductVO productVO)throws Exception{
+		int result = productService.setUpdate(productVO);
+		
+		
+		
+		return "redirect:./list";
+	}
 }

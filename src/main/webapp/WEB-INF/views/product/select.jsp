@@ -46,6 +46,7 @@
 
 			<a href="./delete?productNum=${vo.productNum}" class="btn btn-primary" role="button">Delete</a>
 			
+			<a href="./update?productNum=${vo.productNum}"> Update </a>
 
 		</div>
 
