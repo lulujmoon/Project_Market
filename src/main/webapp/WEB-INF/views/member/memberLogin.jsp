@@ -22,6 +22,7 @@
 					<label for="username">Username</label><br>
 					<input type="text"	class="form-control" id="username" name="username"><br>
 				</div>
+				
 				<div class="form-group">
 					<label for="password">Password</label><br> 
 					<input type="password" class="form-control" id="password" name="password">

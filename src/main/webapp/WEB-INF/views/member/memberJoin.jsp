@@ -18,9 +18,10 @@
 			<i class="fas fa-lemon"></i><span>&nbsp;Join</span>
 		</div>
 		<form action="./memberJoin" method="post">
-			<div class="form-group">
-				<label for="username">Username</label> 
-				<input type="text" class="form-control" id="username" name="username" required>
+				<div class="form-group username">
+					<span><label for="username">Username</label></span>
+					<input type="text" class="form-control" id="username" name="username" required>
+					<input type="button" class="btn-check" value="중복확인">
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label> 

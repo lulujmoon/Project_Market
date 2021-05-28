@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class MemberLocationVO {
 
-	private long locationNum;
+	private Long locationNum;
 	private String username;
-	private long locationCode;
+	private Long locationCode;
 	
 }

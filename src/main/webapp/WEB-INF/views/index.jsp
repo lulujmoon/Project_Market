@@ -67,8 +67,6 @@
 				<div class="soc__article"></div>
 				<div class="soc__article"></div>
 				<div class="soc__article"></div>
-				<div class="soc__article"></div>
-				<div class="soc__article"></div>
 			</div>
 		</section>
 	</div>

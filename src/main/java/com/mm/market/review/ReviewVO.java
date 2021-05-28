@@ -7,16 +7,16 @@ import lombok.Data;
 @Data
 public class ReviewVO {
 	
-	private long reviewNum;
-	private long productNum;
+	private Long reviewNum;
+	private Long productNum;
 	private String reviewer;
 	private String reviewee;
 	private boolean type; //구매자는 true, 판매자는 false
 	private Date reviewDate;
-	private long locationCode;
-	private long state;
-	private long manner;
-	private long response;
+	private Long locationCode;
+	private Long state;
+	private Long manner;
+	private Long response;
 	private String reviewContent;
 
 }
