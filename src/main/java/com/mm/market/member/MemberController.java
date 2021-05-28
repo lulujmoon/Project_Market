@@ -170,13 +170,13 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		System.out.println("카카오액세스토큰"+oAuthToken.getAccess_token());
+		System.out.println("카카오액세스토큰:"+oAuthToken.getAccess_token());
 		
 		RestTemplate rt2 = new RestTemplate();
 			
 		//HttpHeader 오브젝트 생성
 		HttpHeaders headers2 = new HttpHeaders();
-		headers2.add("Authorization", "Bearer ");
+		headers2.add("Authorization", "Bearer "+oAuthToken.getAccess_token());
 		headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 		
 		
@@ -186,14 +186,29 @@ public class MemberController {
 		
 		//Http 요청하기 - post방식으로 , response의 응답 받음
 		ResponseEntity<String> response2 = rt2.exchange(
-			"https://kapi.kakao.com",
+			"https://kapi.kakao.com//v2/user/me",
 				HttpMethod.POST,
 				kakaoProfileRequest2,
 				String.class
 				
 				);
+		System.out.println(response2.getBody());
+				
+		ObjectMapper objectMapper2 = new ObjectMapper();
+		KakaoProfile kakaoProfile = null;
+		try {
+			kakaoProfile = objectMapper2.readValue(response2.getBody(),KakaoProfile.class);
+		} catch (JsonMappingException e) {	
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		
-		return response.getBody();
+		System.out.println("카카오 아이디(번호):"+kakaoProfile.getId());
+		System.out.println("카카오 이메일(번호):"+kakaoProfile.getKakaoAccount().getEmail());
+		
+		
+		return response2.getBody();
 	}
 
 
