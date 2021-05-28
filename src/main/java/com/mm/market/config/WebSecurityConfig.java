@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
+import com.mm.market.security.LoginFail;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -30,20 +32,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-
 		.cors().and()
 		//데이터를 볼때 내가 보낸 토큰이 맞는지 보증하는거
 		.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/member/**").permitAll()
+		.antMatchers("/member/auth/kakao/callback").permitAll()
 		.anyRequest().authenticated()
 		.and()
+		
+		//로그인관련
 		.formLogin()
 		.loginPage("/member/memberLogin")
+		//로그인 성공시
 		.defaultSuccessUrl("/member/memberLoginResult")
+		//로그인 실패시 처리
+		.failureHandler(new LoginFail())
 		.permitAll()
 		.and()
+		
+		//로그아웃관련
 		.logout()
 		.logoutUrl("/member/memberLogout")
 		.logoutSuccessUrl("/")

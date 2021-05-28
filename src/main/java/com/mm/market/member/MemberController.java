@@ -2,20 +2,32 @@ package com.mm.market.member;
 
 import java.util.Enumeration;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.validation.Errors;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/member/**")
@@ -30,6 +42,14 @@ public class MemberController {
 
 	@GetMapping("memberLogin")
 	public String getLogin()throws Exception{
+		return "member/memberLogin";
+	}
+	
+	@PostMapping("memberLogin")
+	public String getLogin(HttpServletRequest request)throws Exception{
+		//포워딩된 어트리뷰트를 포스트형식으로 받아줌
+		System.out.println(request.getAttribute("message"));
+		
 		return "member/memberLogin";
 	}
 
@@ -52,7 +72,7 @@ public class MemberController {
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 
 		SecurityContextImpl sc = (SecurityContextImpl)obj;
-
+									//저장되는 session의 타입
 		Authentication auth = sc.getAuthentication();
 
 		System.out.println("===================================");
@@ -96,18 +116,84 @@ public class MemberController {
 	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
 		System.out.println("Join process"+ memberVO.getName().length());
 
-
-		/*
-		 * if(memberService.memberError(memberVO, errors)) { System.out.println("에러났어");
-		 * return"member/memberJoin"; }
-		 */
-
-
+		  if(memberService.memberError(memberVO, errors)) { 
+			  System.out.println("에러났어");
+		  return"member/memberJoin"; 
+		  
+		  }
 
 		int result = memberService.setJoin(memberVO); 
 
 		return "redirect:../";
 
+	}
+	
+	@GetMapping("auth/kakao/callback")
+	public @ResponseBody String kakaoCallback(String code) {
+			//data를 리턴해주는 컨트롤러 함수
+		
+		//post방식으로 key=value 데이터를 요청(카카오쪽으로)
+		RestTemplate rt = new RestTemplate();
+		
+		
+		//HttpHeader 오브젝트 생성
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		//HttpBody 오브젝트 생성
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		params.add("grant_type", "authorization_code");
+		params.add("client_id", "bdf85067bd67f89b950ae22189274a9c");
+		params.add("redirect_uri", "http://localhost/member/auth/kakao/callback");
+		params.add("code", code);
+		
+		//HttpHeader와 Httpbody를 하나의 오브젝트에 담기
+		HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest =
+				new HttpEntity<>(params,headers);
+		
+		//Http 요청하기 - post방식으로 , response의 응답 받음
+		ResponseEntity<String> response = rt.exchange(
+			"https://kauth.kakao.com/oauth/token",
+				HttpMethod.POST,
+				kakaoTokenRequest,
+				String.class
+				
+				);
+		//Gson,JsonSimple,ObjectMapper....
+		ObjectMapper objectMapper = new ObjectMapper();
+		OAuthToken oAuthToken = null;
+		try {
+			oAuthToken = objectMapper.readValue(response.getBody(),OAuthToken.class);
+		} catch (JsonMappingException e) {	
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("카카오액세스토큰"+oAuthToken.getAccess_token());
+		
+		RestTemplate rt2 = new RestTemplate();
+			
+		//HttpHeader 오브젝트 생성
+		HttpHeaders headers2 = new HttpHeaders();
+		headers2.add("Authorization", "Bearer ");
+		headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		
+		//HttpHeader와 Httpbody를 하나의 오브젝트에 담기
+		HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest2 =
+				new HttpEntity<>(headers2);
+		
+		//Http 요청하기 - post방식으로 , response의 응답 받음
+		ResponseEntity<String> response2 = rt2.exchange(
+			"https://kapi.kakao.com",
+				HttpMethod.POST,
+				kakaoProfileRequest2,
+				String.class
+				
+				);
+		
+		return response.getBody();
 	}
 
 
