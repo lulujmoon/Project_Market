@@ -42,17 +42,17 @@ public class ProductController {
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
 
-		return "redirect:/product/list";
+		return "redirect:product/list";
 	}
 
 	
-	@GetMapping("Insert")
+	@GetMapping("insert")
 	public void setInsert() throws Exception {}
 	
-	@PostMapping("Insert")
+	@PostMapping("insert")
 	public String setInsert(ProductVO productVO) throws Exception {
 		int result = productService.setInsert(productVO);
 		
-		return "redirect:/product/List";
+		return "redirect:product/list";
 	}
 }

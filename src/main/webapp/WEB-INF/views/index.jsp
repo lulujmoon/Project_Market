@@ -8,7 +8,7 @@
 </head>
 <body>
 	<a href="/product/list">Product List</a>	
-	<a href="./product/Insert"> Insert </a>
+	<a href="/product/insert"> Insert </a>
 
 </body>
 </html>

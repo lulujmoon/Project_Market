@@ -12,7 +12,7 @@
 </head>
 <body>
 <h2>Product Insert Page</h2>
-	<form action="./Insert" method="POST">
+	<form action="./insert" method="POST">
 	
 	  <div class="form-group">
 	    <label>상품 명</label>
