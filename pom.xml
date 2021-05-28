@@ -17,6 +17,17 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+		<!-- web socket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+		</dependency>
+		<!-- JSON -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		</dependency>			
+	
 		<!--tomcat-jasper for JSP in Sprng boot -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
