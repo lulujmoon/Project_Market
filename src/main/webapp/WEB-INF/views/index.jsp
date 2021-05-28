@@ -12,7 +12,21 @@
 <c:import url="./template/header.jsp"></c:import>
 	
 	<div class="home-contents">
-		<div class="home__carousel"><img src="../resources/images/641634667.jpg" class="carousel-img"></div>
+		<div class="carousel-container">
+			<div class="carousel__btn">
+				<i class="fas fa-chevron-left" id="prev-btn"></i>
+				<i class="fas fa-chevron-right" id="next-btn"></i>
+			</div>
+			<div class="carousel-slide">
+				<img src="../resources/images/635788502.jpg" class="carousel-images" id="lastClone">
+				<img src="../resources/images/641634667.jpg" class="carousel-images">
+				<img src="../resources/images/639509788.jpg" class="carousel-images">
+				<img src="../resources/images/641827905.jpg" class="carousel-images">
+				<img src="../resources/images/617974702.jpg" class="carousel-images">
+				<img src="../resources/images/635788502.jpg" class="carousel-images">
+				<img src="../resources/images/641634667.jpg" class="carousel-images" id="firstClone">			
+			</div>
+		</div>
 		<section class="home__products">
 			<div class="section-title">
 				<h2>새로 올라온 상품</h2>
@@ -73,5 +87,6 @@
 
 <c:import url="./template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/index.js"></script>
 </body>
 </html>

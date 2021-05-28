@@ -60,13 +60,13 @@ class ReviewTest {
 	@Test
 	void setInsert() throws Exception {
 		ReviewVO reviewVO = new ReviewVO();
-		reviewVO.setProductNum(1);
+		reviewVO.setProductNum(1L);
 		reviewVO.setReviewer("user");
 		reviewVO.setReviewee("user2");
 		reviewVO.setType(false);
-		reviewVO.setLocationCode(1111010300);
-		reviewVO.setManner(10);
-		reviewVO.setResponse(7);
+		reviewVO.setLocationCode(1111010300L);
+		reviewVO.setManner(10L);
+		reviewVO.setResponse(7L);
 		
 		int result = reviewMapper.setInsert(reviewVO);
 		assertNotEquals(0, result);
