@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -28,8 +29,10 @@ public class MemberVO implements UserDetails{
 	@NotBlank(message="이름을 입력하세요")
 	private String name;
 	@NotBlank(message="전화번호를 입력하세요")
+	@Pattern(regexp = "^01(?:0|1|[6-9])[.-]?(\\d{3}|\\d{4})[.-]?(\\d{4})$", message = "10 ~ 11 자리의 숫자만 입력 가능합니다.")
 	private String phone;
-	@NotBlank(message="이메일을 입력하세요")
+	
+	@Email(message="이메일 형식에 맞지 않습니다.")
 	private String email;
 	
 	private boolean enabled;
