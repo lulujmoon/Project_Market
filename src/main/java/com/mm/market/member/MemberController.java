@@ -2,6 +2,7 @@ package com.mm.market.member;
 
 import java.util.Enumeration;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -30,6 +31,14 @@ public class MemberController {
 
 	@GetMapping("memberLogin")
 	public String getLogin()throws Exception{
+		return "member/memberLogin";
+	}
+	
+	@PostMapping("memberLogin")
+	public String getLogin(HttpServletRequest request)throws Exception{
+		//포워딩된 어트리뷰트를 포스트형식으로 받아줌
+		System.out.println(request.getAttribute("message"));
+		
 		return "member/memberLogin";
 	}
 
