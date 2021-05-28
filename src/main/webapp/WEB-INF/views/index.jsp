@@ -7,8 +7,8 @@
 <title>Hello, world!</title>
 </head>
 <body>
-	<a href="/product/list">Product List</a>	
-	<a href="./product/productInsert"> Insert </a>
+	<a href="/product/list">Product List</a>
+	<a href="./product/insert"> Insert </a>
 
 </body>
 </html>

@@ -46,13 +46,13 @@ public class ProductController {
 	}
 
 	
-	@GetMapping("productInsert")
+	@GetMapping("insert")
 	public void setInsert() throws Exception {}
 	
-	@PostMapping("productInsert")
+	@PostMapping("insert")
 	public String setInsert(ProductVO productVO) throws Exception {
 		int result = productService.setInsert(productVO);
 		
-		return "redirect:/product/List";
+		return "redirect:/product/list";
 	}
 }

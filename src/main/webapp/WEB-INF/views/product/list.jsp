@@ -53,7 +53,7 @@
 				</c:if>
 
 				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-					<li class="page-item"><a class="page-link p" href="#" title="${i}">${i}</a></li>
+					<li class="page-item"><a class="page-link p" href="./list?curPage=${i}&kind=${pager.kind}&search=${pager.search}" title="${i}">${i}</a></li>
 				</c:forEach>
 
 				<c:if test="${pager.next}">
@@ -85,8 +85,6 @@
 
 		</div>
 </div>
-
-
 
 </body>
 </html>
