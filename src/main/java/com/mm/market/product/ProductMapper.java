@@ -22,4 +22,10 @@ public interface ProductMapper {
 	//Delete
 	public int setDelete(ProductVO productVO)throws Exception;
 
+	//insert
+	public int setInsert(ProductVO productVO) throws Exception;
+	
+	//update
+	public int setUpdate(ProductVO productVO) throws Exception;
+	
 }
