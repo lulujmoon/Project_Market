@@ -33,4 +33,14 @@ public class ProductService {
 		return productMapper.setDelete(productVO);
 	}
 
+	//insert
+	public int setInsert(ProductVO productVO) throws Exception {
+		return productMapper.setInsert(productVO);
+	}
+	
+	//update
+	public int setUpdate(ProductVO productVO) throws Exception {
+		return productMapper.setUpdate(productVO);
+	}
+	
 }

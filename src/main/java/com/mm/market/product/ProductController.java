@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mm.market.util.Pager;
@@ -43,7 +44,15 @@ public class ProductController {
 
 		return "redirect:/product/list";
 	}
+
 	
+	@GetMapping("productInsert")
+	public void setInsert() throws Exception {}
 	
-	
+	@PostMapping("productInsert")
+	public String setInsert(ProductVO productVO) throws Exception {
+		int result = productService.setInsert(productVO);
+		
+		return "redirect:/product/List";
+	}
 }
