@@ -38,7 +38,6 @@ public class MemberService implements UserDetailsService{
 	public boolean memberError(MemberVO memberVO, Errors errors) throws Exception{
 		boolean result = false;
 	
-
 		result = errors.hasErrors();
 
 	//password일치
@@ -49,7 +48,7 @@ public class MemberService implements UserDetailsService{
 
 		//username 중복
 		MemberVO checkMember = memberMapper.getUsername(memberVO);
-		if(checkMember != null) { errors.rejectValue("username", "member.id.equal");
+		if(checkMember != null) {errors.rejectValue("username", "memberVO.id.equal");
 		result = true;
 		} 
 		return result;

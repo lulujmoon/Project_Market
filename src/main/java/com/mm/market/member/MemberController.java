@@ -1,6 +1,7 @@
 package com.mm.market.member;
 
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 
 @Controller
 @RequestMapping("/member/**")
@@ -108,8 +112,8 @@ public class MemberController {
 		  if(memberService.memberError(memberVO, errors)) { 
 			  System.out.println("에러났어");
 		  return"member/memberJoin"; 
+		  
 		  }
-		 
 
 		int result = memberService.setJoin(memberVO); 
 
