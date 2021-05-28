@@ -46,10 +46,10 @@ public class ProductController {
 	}
 
 	
-	@GetMapping("productInsert")
+	@GetMapping("Insert")
 	public void setInsert() throws Exception {}
 	
-	@PostMapping("productInsert")
+	@PostMapping("Insert")
 	public String setInsert(ProductVO productVO) throws Exception {
 		int result = productService.setInsert(productVO);
 		
