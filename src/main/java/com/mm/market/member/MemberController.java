@@ -52,7 +52,7 @@ public class MemberController {
 		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 
 		SecurityContextImpl sc = (SecurityContextImpl)obj;
-
+									//저장되는 session의 타입
 		Authentication auth = sc.getAuthentication();
 
 		System.out.println("===================================");
@@ -96,13 +96,11 @@ public class MemberController {
 	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
 		System.out.println("Join process"+ memberVO.getName().length());
 
-
-		/*
-		 * if(memberService.memberError(memberVO, errors)) { System.out.println("에러났어");
-		 * return"member/memberJoin"; }
-		 */
-
-
+		  if(memberService.memberError(memberVO, errors)) { 
+			  System.out.println("에러났어");
+		  return"member/memberJoin"; 
+		  }
+		 
 
 		int result = memberService.setJoin(memberVO); 
 

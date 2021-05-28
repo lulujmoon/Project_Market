@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +17,18 @@
 
 			<div class="form-group">
 				<label for="username">Id:</label> <input type="text"
-					class="form-control myCheck" id="username" name="username">			
+					class="form-control myCheck" id="username" name="username">	
+							
 			</div>
 			
 				<div class="form-group">
 				<label for="pw">Pw:</label> <input type="text"
 					class="form-control myCheck" id="password" name="password">
+			</div>
+			
+				<div class="form-group">
+				<label for="pw">PwCheck:</label> <input type="text"
+					class="form-control myCheck" id="password1" name="password1">
 			</div>
 
 			<div class="form-group">

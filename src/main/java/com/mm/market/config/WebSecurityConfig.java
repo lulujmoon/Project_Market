@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
+import com.mm.market.security.LoginFail;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -39,11 +41,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/member/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
+		
+		//로그인관련
 		.formLogin()
 		.loginPage("/member/memberLogin")
+		//로그인 성공시
 		.defaultSuccessUrl("/member/memberLoginResult")
+		//로그인 실패시 처리
+		.failureHandler(new LoginFail())
 		.permitAll()
 		.and()
+		
+		//로그아웃관련
 		.logout()
 		.logoutUrl("/member/memberLogout")
 		.logoutSuccessUrl("/")
