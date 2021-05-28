@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h2>Product List Page</h2>
-
+ 
+ 	<a href="./productUpdate">Update</a>
 </body>
 </html>

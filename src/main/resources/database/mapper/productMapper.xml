@@ -7,8 +7,19 @@
 <mapper namespace="com.mm.market.product.ProductMapper">
 		<insert id="setInsert" parameterType="ProductVO">
 			insert into product 
-			(productNum, productName, username, productCategory, productDate, productHit, productHeart, productContent, productPrice, productNego, locationCode)
-			 values (#{productNum}, #{productName}, #{username}, #{productCategory}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, 0)
+			(productNum, productName, username, productCategory, productDate, productHit, productHeart, productContent, 
+			productPrice, productNego, locationCode)
+			 values (#{productNum}, #{productName}, #{username}, #{productCategory}, NOW(), 0, 0, 
+			 #{productContent}, #{productPrice}, 0, 0)
 		</insert>
+		
+		<update id="setUpdate" parameterType="ProductVO">
+			update product set productName=#{productName}, 
+			productCategory=#{productCategory},
+			productDate = #{productDate},
+			productContent=#{productContent},
+			productPrice=#{productPrice}
+			where productNum=#{productNum}		
+		</update>
 </mapper>   
 

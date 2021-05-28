@@ -20,6 +20,6 @@ public class ProductController {
 	public String setInsert(ProductVO productVO) throws Exception {
 		int result = productService.setInsert(productVO);
 		
-		return "redirect:../";
+		return "redirect:./productList";
 	}
 }
