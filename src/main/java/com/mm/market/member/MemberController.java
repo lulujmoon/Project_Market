@@ -221,11 +221,22 @@ public class MemberController {
 
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		memberVO.setPassword(code);	
+		memberVO.setPassword(garbagePassword.toString());
+		memberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
+		memberVO.setName(kakaoProfile.getProperties().getNickname());
 		
-		memberService.setJoin(null);
+		//가입자 혹은 비가입자 체크해서 처리
+		memberService.
 		
-		return response2.getBody();
+		try {
+			memberService.setJoin(memberVO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return "회원가입완료";
 		
 		
 	}
