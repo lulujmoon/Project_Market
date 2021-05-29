@@ -1,6 +1,7 @@
 package com.mm.market.member;
 
 import java.util.Enumeration;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -127,7 +128,7 @@ public class MemberController {
 		return "redirect:../";
 
 	}
-	
+		
 	@GetMapping("auth/kakao/callback")
 	public @ResponseBody String kakaoCallback(String code) {
 			//data를 리턴해주는 컨트롤러 함수
@@ -172,6 +173,8 @@ public class MemberController {
 		
 		System.out.println("카카오액세스토큰:"+oAuthToken.getAccess_token());
 		
+		
+	
 		RestTemplate rt2 = new RestTemplate();
 			
 		//HttpHeader 오브젝트 생성
@@ -193,22 +196,38 @@ public class MemberController {
 				
 				);
 		System.out.println(response2.getBody());
-				
+		
+		System.out.println("여기까지!!!!!!!!!!!");
+		
+		//여기부터 에러
 		ObjectMapper objectMapper2 = new ObjectMapper();
 		KakaoProfile kakaoProfile = null;
 		try {
-			kakaoProfile = objectMapper2.readValue(response2.getBody(),KakaoProfile.class);
+			kakaoProfile = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
 		} catch (JsonMappingException e) {	
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
 		
+		//User 오브젝트 : username,password,email
 		System.out.println("카카오 아이디(번호):"+kakaoProfile.getId());
-		System.out.println("카카오 이메일(번호):"+kakaoProfile.getKakaoAccount().getEmail());
+		System.out.println("카카오 이메일(번호):"+kakaoProfile.getKakao_account().getEmail());
 		
+		System.out.println("마켓서버 유저네임:" + kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		System.out.println("마켓서버 이메일:" + kakaoProfile.getKakao_account().getEmail());
+		UUID garbagePassword = UUID.randomUUID();
+		System.out.println("마켓서버 패스워드:"+garbagePassword);
+
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		memberVO.setPassword(code);	
+		
+		memberService.setJoin(null);
 		
 		return response2.getBody();
+		
+		
 	}
 
 
