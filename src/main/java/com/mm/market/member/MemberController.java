@@ -130,7 +130,7 @@ public class MemberController {
 	}
 		
 	@GetMapping("auth/kakao/callback")
-	public @ResponseBody String kakaoCallback(String code) {
+	public @ResponseBody String kakaoCallback(String code,HttpSession session,MemberVO memberVO) throws Exception {
 			//data를 리턴해주는 컨트롤러 함수
 		
 		//post방식으로 key=value 데이터를 요청(카카오쪽으로)
@@ -219,24 +219,31 @@ public class MemberController {
 		UUID garbagePassword = UUID.randomUUID();
 		System.out.println("마켓서버 패스워드:"+garbagePassword);
 
-		MemberVO memberVO = new MemberVO();
-		memberVO.setUsername(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		memberVO.setPassword(garbagePassword.toString());
-		memberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
-		memberVO.setName(kakaoProfile.getProperties().getNickname());
+		MemberVO KakaomemberVO = new MemberVO();
+		KakaomemberVO.setUsername(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		KakaomemberVO.setPassword(garbagePassword.toString());
+		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
+		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
 		
 		//가입자 혹은 비가입자 체크해서 처리
-		memberService.
+		MemberVO originmemberVO = memberService.findMember(KakaomemberVO);
 		
-		try {
-			memberService.setJoin(memberVO);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(originmemberVO==null) {
+			try {
+				System.out.println("기존회원아님->회원가입진행");
+				memberService.setJoin(KakaomemberVO);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}else {
+		
+		//로그인처리
+		System.out.println("로그인진행");
+		
 		}
 		
-		
-		return "회원가입완료";
+		return "index";
 		
 		
 	}

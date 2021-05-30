@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.sun.el.stream.Optional;
+
 @Mapper
 public interface MemberMapper {
 
@@ -14,5 +16,5 @@ public interface MemberMapper {
 	public MemberVO getLogin(MemberVO memberVO);
 	
 	public MemberVO getUsername(MemberVO memberVO) throws Exception;
-	
+
 }
