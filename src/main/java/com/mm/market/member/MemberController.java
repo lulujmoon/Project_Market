@@ -36,6 +36,7 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
 
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
@@ -130,7 +131,7 @@ public class MemberController {
 	}
 		
 	@GetMapping("auth/kakao/callback")
-	public @ResponseBody String kakaoCallback(String code,HttpSession session,MemberVO memberVO) throws Exception {
+	public @ResponseBody String kakaoCallback(String code) throws Exception {
 			//data를 리턴해주는 컨트롤러 함수
 		
 		//post방식으로 key=value 데이터를 요청(카카오쪽으로)
@@ -236,14 +237,15 @@ public class MemberController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
-		}else {
+		}
 		
 		//로그인처리
 		System.out.println("로그인진행");
-		
-		}
+
 		
 		return "index";
+		
+		
 		
 		
 	}
