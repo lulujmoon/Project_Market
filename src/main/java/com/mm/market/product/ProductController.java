@@ -28,6 +28,18 @@ public class ProductController {
 		return "product/list";
 	}
 	
+	@GetMapping("detail")
+	public String getCategoryList(Pager pager, Model model)throws Exception{
+		
+		List<ProductVO> ar = productService.getList(pager);
+		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
+		
+		return "product/detail";
+	}
+	
+	
+	
 	@GetMapping("select")
 	public String getSelect(ProductVO productVO, Model model)throws Exception {
 		productVO = productService.getSelect(productVO);

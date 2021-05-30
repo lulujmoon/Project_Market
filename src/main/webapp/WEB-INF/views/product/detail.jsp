@@ -19,24 +19,25 @@
 
 
 		<ul class="nav justify-content-center">
-			<li class="nav-item"><a class="nav-link" href="./detail?category='디지털/가전'">디지털/가전</a></li>
-			<li class="nav-item"><a class="nav-link" href="./detail?category='가구/인테리어'">가구/인테리어</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">생활/가공식품</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">스포츠/레저</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">여성의류/잡화</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">남성의류/잡화</a></li>
+			<li class="nav-item"><a class="nav-link" href="#" title="디지털/가전">디지털/가전</a></li>
+			<li class="nav-item"><a class="nav-link" href="#" title=가구/인테리어">가구/인테리어</a></li>
+			<li class="nav-item"><a class="nav-link" href="#" title="생활/가공식품">생활/가공식품</a></li>
+			<li class="nav-item"><a class="nav-link" href="#" title="스포츠/레저">스포츠/레저</a></li>
+			<li class="nav-item"><a class="nav-link" href="#" title="여성의류/잡화">여성의류/잡화</a></li>
+			<li class="nav-item"><a class="nav-link" href="#" title="남성의류/잡화">남성의류/잡화</a></li>
 		</ul>
 		<ul class="nav justify-content-center">
-			<li class="nav-item"><a class="nav-link" href="#">게임/취미</a></li>
+			<li class="nav-item"><a class="nav-link" href="#" title="게임/취미">게임/취미</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">뷰티/미용</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">도서/티켓/음반</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">무료나눔</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">삽니다</a></li>
 		</ul>
+			<input type="hidden" class="category" value="category" name="productCategory">
 
 
 
-		<h2>Product List</h2>
+		<h2>Detail List</h2>
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
@@ -49,21 +50,19 @@
 				</tr>
 			</thead>
 			<tbody>
-
-				<c:forEach items="${list}" var="dto">
+				<c:forEach items="${list}" var="dto">	
+										<!-- parameter 받아와야 -->
+				<c:if test="${dto.productCategory=='디지털/가전'}">
 					<tr>
-						<td><a href="#"><img src="/images/바탕화면.jpg" width="90"
-								height="90" /></a></td>
+						<td><a href="#"><img src="/images/바탕화면.jpg" width="90" height="90" /></a></td>
 						<td>${dto.productNum}</td>
-						<td>[ ${dto.productCategory} ]<a
-							href="./select?productNum=${dto.productNum}">
-								${dto.productName}</a></td>
+						<td>[ ${dto.productCategory} ]<a href="./select?productNum=${dto.productNum}"> ${dto.productName}</a></td>
 						<td>${dto.username}</td>
 						<td>${dto.productDate}</td>
 						<td>${dto.productHit}</td>
 					</tr>
+				</c:if>
 				</c:forEach>
-
 			</tbody>
 		</table>
 
@@ -114,11 +113,14 @@
 
 		</div>
 	</div>
+
+
+
 <script type="text/javascript">
 	$(".nav-link").click(){
 		let category = $(this).attr("title");
 		$("#category").val(category);	
-		alert(category);
+		alert(category); //안먹음 왜지...
 		
 		
 		
