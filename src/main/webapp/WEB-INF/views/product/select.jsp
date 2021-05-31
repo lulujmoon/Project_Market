@@ -46,6 +46,10 @@
 
 			<a href="./delete?productNum=${vo.productNum}" class="btn btn-primary" role="button">Delete</a>
 			
+			
+			<a href="#" class="btn btn-primary" role="button">가격제안</a>
+			<a href="#" class="btn btn-danger" role="button">신고하기</a>
+			
 
 		</div>
 

@@ -25,8 +25,23 @@ public class ProductController {
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		
+		String catename = ar.get(0).getCategory().getCategoryName();
+		System.out.println(catename);
+		
 		return "product/list";
 	}
+	
+	@GetMapping("detail")
+	public String getCategoryList(Pager pager, Model model)throws Exception{
+		
+		List<ProductVO> ar = productService.getList(pager);
+		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
+		
+		return "product/detail";
+	}
+	
+	
 	
 	@GetMapping("select")
 	public String getSelect(ProductVO productVO, Model model)throws Exception {
@@ -46,13 +61,13 @@ public class ProductController {
 	}
 
 	
-	@GetMapping("productInsert")
+	@GetMapping("insert")
 	public void setInsert() throws Exception {}
 	
-	@PostMapping("productInsert")
+	@PostMapping("insert")
 	public String setInsert(ProductVO productVO) throws Exception {
 		int result = productService.setInsert(productVO);
 		
-		return "redirect:/product/List";
+		return "redirect:/product/list";
 	}
 }
