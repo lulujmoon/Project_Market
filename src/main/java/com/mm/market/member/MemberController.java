@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.Errors;
@@ -116,7 +117,17 @@ public class MemberController {
 		return "member/memberJoin";
 	}
 
+	@GetMapping("memberApprove")
+	public void setApprove()throws Exception{
+			
+	}
 
+	@PostMapping("memberApprove")
+	public String setApprove(Model model)throws Exception{
+			
+		return "redirect:/member/memberJoin";
+	}
+	
 	@PostMapping("memberJoin")
 	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
 		System.out.println("Join process"+ memberVO.getName().length());
@@ -241,8 +252,7 @@ public class MemberController {
 				e.printStackTrace();
 			}		
 		}
-		
-		
+				
 		RestTemplate rt3 = new RestTemplate();
 			
 			

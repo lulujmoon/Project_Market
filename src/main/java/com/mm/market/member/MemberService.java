@@ -30,6 +30,8 @@ public class MemberService implements UserDetailsService{
 		memberVO.setUsername(username);
 		memberVO = memberMapper.getLogin(memberVO);
 
+		System.out.println("로드유저");
+		System.out.println(memberVO.getAuthorities());
 		return memberVO;
 	}
 
