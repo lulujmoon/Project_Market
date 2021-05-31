@@ -19,7 +19,6 @@ public class ProductVO {
 	private Long productPrice;
 	private boolean productNego;
 	private Long locationCode;
-
 	private List<ProductFileVO> files;
 
 	

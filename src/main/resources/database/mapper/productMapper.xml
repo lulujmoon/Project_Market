@@ -80,6 +80,11 @@
 			 values (#{productNum}, #{productName}, #{username}, #{productCategory}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, 0)
 		</insert>
 		
+		<insert id="setFileInsert" parameterType="ProductFileVO" useGeneratedKeys="true" keyProperty="productNum">
+			insert into productfile (productNum, fileName, oriName)
+			values (#{productNum}, #{fileName}, #{oriName})
+		</insert>
+		
 		<update id="setUpdate" parameterType="ProductVO">
 			update product set 
 			productName=#{productName}, 
