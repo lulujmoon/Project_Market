@@ -3,6 +3,7 @@ package com.mm.market.member;
 import java.util.Enumeration;
 import java.util.UUID;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -131,8 +132,8 @@ public class MemberController {
 	}
 		
 	@GetMapping("auth/kakao/callback")
-	public @ResponseBody String kakaoCallback(String code) throws Exception {
-			//data를 리턴해주는 컨트롤러 함수
+	public String kakaoCallback(String code) throws Exception {
+		
 		
 		//post방식으로 key=value 데이터를 요청(카카오쪽으로)
 		RestTemplate rt = new RestTemplate();
@@ -200,7 +201,7 @@ public class MemberController {
 		
 		System.out.println("여기까지!!!!!!!!!!!");
 		
-		//여기부터 에러
+		
 		ObjectMapper objectMapper2 = new ObjectMapper();
 		KakaoProfile kakaoProfile = null;
 		try {
@@ -217,12 +218,12 @@ public class MemberController {
 		
 		System.out.println("마켓서버 유저네임:" + kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
 		System.out.println("마켓서버 이메일:" + kakaoProfile.getKakao_account().getEmail());
-		UUID garbagePassword = UUID.randomUUID();
-		System.out.println("마켓서버 패스워드:"+garbagePassword);
+		
+		System.out.println("마켓서버 패스워드:"+kakaoProfile.getId());
 
 		MemberVO KakaomemberVO = new MemberVO();
 		KakaomemberVO.setUsername(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		KakaomemberVO.setPassword(garbagePassword.toString());
+		KakaomemberVO.setPassword(kakaoProfile.getId().toString());
 		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
 		
@@ -240,10 +241,29 @@ public class MemberController {
 		}
 		
 		//로그인처리를 어떻게?!!!!!!!!!!!!!!!!!!! 
-		System.out.println("로그인진행");
-
 		
-		return "index";
+		//HttpHeader 오브젝트 생성
+			RestTemplate rt3 = new RestTemplate();
+		
+				HttpHeaders headers3 = new HttpHeaders();
+				headers3.add("정보", kakaoProfile.toString());	
+				
+				//HttpHeader와 Httpbody를 하나의 오브젝트에 담기
+				HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest3 =
+						new HttpEntity<>(headers3);
+				
+				System.out.println(kakaoProfileRequest3);
+				
+				//Http 요청하기 - post방식으로 , response의 응답 받음
+				ResponseEntity<String> response3 = rt3.exchange(
+						"http://localhost/member/memberLogin",
+						HttpMethod.POST,
+						kakaoProfileRequest3,
+						String.class
+						
+						);
+		
+		return "redirect:/";
 		
 		
 		

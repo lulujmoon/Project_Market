@@ -22,7 +22,7 @@ public class MemberService implements UserDetailsService{
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	
+
 
 	//개발자가 호출x는 login메서드
 	@Override
