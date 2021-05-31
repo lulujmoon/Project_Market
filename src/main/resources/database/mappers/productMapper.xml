@@ -5,37 +5,19 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mm.market.product.ProductMapper">
-    	<sql id="searcher">
-    	<!-- 공통으로 사용하는 sql문 -->
-    		<where>
-				<choose>
-				<when test="kind=='ProductName'">
-					productName like concat('%', #{search}, '%')
-				</when>
-				
-				<when test="kind=='ProductContent'">
-					productContent like concat('%', #{search}, '%')
-				</when>
-				
-				<otherwise>
-					username like concat('%', #{search}, '%')
-				</otherwise>
-				</choose>
-			</where>
-    	</sql>
-
-
-		<select id="getList" resultMap="selectResult" parameterType="Pager">
-			SELECT C.*, P.*, PF.* 
-			FROM product P LEFT JOIN productFile PF
-			ON P.productNum = PF.productNum
-			INNER JOIN category C
-			ON C.categoryCode = P.categoryCode
-			<include refid="searcher"></include>
-			ORDER BY P.productNum desc
-			limit #{startRow}, 20
-		</select>
 		
+		
+		<select id="getList" resultMap="selectResult" parameterType="Pager">
+			 SELECT C.*, P.*, PF.*
+	         FROM product P LEFT JOIN productFile PF
+	         ON P.productNum = PF.productNum
+	         LEFT JOIN category C
+			 ON C.categoryCode = P.categoryCode
+	         WHERE P.productName LIKE CONCAT('%', #{search}, '%') OR 
+	         P.locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%'))
+	         ORDER BY P.productNum desc
+	         limit #{startRow}, 20
+         </select>
 		
 		<select id="getCateList" resultMap="selectResult" parameterType="Pager">
 			SELECT C.*, P.*, PF.* 
@@ -44,7 +26,6 @@
 			INNER JOIN category C
 			ON C.categoryCode = P.categoryCode
 			WHERE C.categoryCode=#{categoryCode}
-			
 		</select>
 		
 		
@@ -99,7 +80,7 @@
 			(productNum, productName, username, categoryCode, productDate, productHit, productHeart, productContent, 
 			productPrice, productNego, locationCode)
 			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, 
-			 #{productContent}, #{productPrice}, 0, 1100000000)
+			 #{productContent}, #{productPrice}, 0, #{locationCode})
 		</insert>
 		
 		
