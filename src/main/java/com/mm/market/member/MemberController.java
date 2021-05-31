@@ -240,28 +240,23 @@ public class MemberController {
 			}		
 		}
 		
-		//로그인처리를 어떻게?!!!!!!!!!!!!!!!!!!! 
 		
-		//HttpHeader 오브젝트 생성
-			RestTemplate rt3 = new RestTemplate();
+		RestTemplate rt3 = new RestTemplate();
+		  
+		  HttpHeaders headers3 = new HttpHeaders(); 
+		  headers3.add("아이디", kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		  headers3.add("비번", kakaoProfile.getId().toString());
+		  
+		  HttpEntity<MultiValueMap<String,String>> kakaoProfileRequest3 = new HttpEntity<>(headers3);
+	  
+		  ResponseEntity<String> response3 =
+		  rt3.exchange( "http://localhost/member/memberLogin", 
+				  HttpMethod.POST,
+				  kakaoProfileRequest3, 
+				  String.class
+		  
+		  );
 		
-				HttpHeaders headers3 = new HttpHeaders();
-				headers3.add("정보", kakaoProfile.toString());	
-				
-				//HttpHeader와 Httpbody를 하나의 오브젝트에 담기
-				HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest3 =
-						new HttpEntity<>(headers3);
-				
-				System.out.println(kakaoProfileRequest3);
-				
-				//Http 요청하기 - post방식으로 , response의 응답 받음
-				ResponseEntity<String> response3 = rt3.exchange(
-						"http://localhost/member/memberLogin",
-						HttpMethod.POST,
-						kakaoProfileRequest3,
-						String.class
-						
-						);
 		
 		return "redirect:/";
 		

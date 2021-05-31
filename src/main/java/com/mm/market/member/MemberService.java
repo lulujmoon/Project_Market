@@ -23,7 +23,6 @@ public class MemberService implements UserDetailsService{
 	private PasswordEncoder passwordEncoder;
 
 
-
 	//개발자가 호출x는 login메서드
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
