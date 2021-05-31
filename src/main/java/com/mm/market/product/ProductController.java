@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.mm.market.util.Pager;
 
@@ -51,15 +50,8 @@ public class ProductController {
 	public void setInsert() throws Exception {}
 	
 	@PostMapping("insert")
-	public String setInsert(ProductVO productVO, MultipartFile [] files) throws Exception {
-		/*
-		 * System.out.println(files.length); 
-		 * for(MultipartFile f : files) {
-		 * 		System.out.println(f.getOriginalFilename()); 
-		 * }
-		 */
-		
-		int result = productService.setInsert(productVO, files);
+	public String setInsert(ProductVO productVO) throws Exception {
+		int result = productService.setInsert(productVO);
 		
 		return "redirect:product/list";
 	}

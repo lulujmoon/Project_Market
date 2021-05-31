@@ -12,14 +12,8 @@
 </head>
 <body>
 <h2>Product Insert Page</h2>
-	<form action="./insert" method="POST" enctype="multipart/form-data">
-	  
-	  <div class="form-group">
-	    <input type="file" name="files">
-	    <input type="file" name="files">
-	    <input type="file" name="files">
-	    <input type="file" name="files">
-	  </div>
+	<form action="./insert" method="POST">
+	
 	  <div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" name="productName">
