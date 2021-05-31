@@ -242,21 +242,19 @@ public class MemberController {
 		
 		
 		RestTemplate rt3 = new RestTemplate();
+			
+			
+		  MultiValueMap<String,String> kakaoProfileRequest3 = new LinkedMultiValueMap<String, String>();
+		  kakaoProfileRequest3.add("아이디",kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		  kakaoProfileRequest3.add("비번", kakaoProfile.getId().toString());
 		  
-		  HttpHeaders headers3 = new HttpHeaders(); 
-		  headers3.add("아이디", kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		  headers3.add("비번", kakaoProfile.getId().toString());
-		  
-		  HttpEntity<MultiValueMap<String,String>> kakaoProfileRequest3 = new HttpEntity<>(headers3);
-	  
-		  ResponseEntity<String> response3 =
-		  rt3.exchange( "http://localhost/member/memberLogin", 
-				  HttpMethod.POST,
+		  ResponseEntity<String> response3 =rt3.postForEntity(
+				  "http://localhost/member/memberLogin", 		  
 				  kakaoProfileRequest3, 
-				  String.class
-		  
+				  String.class	  
 		  );
-		
+	
+		  
 		
 		return "redirect:/";
 		
