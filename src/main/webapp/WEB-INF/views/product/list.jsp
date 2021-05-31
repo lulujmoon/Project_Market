@@ -9,6 +9,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
 	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
 	crossorigin="anonymous">
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -18,21 +19,25 @@
 	<div class="container">
 
 
+
 		<ul class="nav justify-content-center">
-			<li class="nav-item"><a class="nav-link" href="./detail?category='디지털/가전'">디지털/가전</a></li>
-			<li class="nav-item"><a class="nav-link" href="./detail?category='가구/인테리어'">가구/인테리어</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">생활/가공식품</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">스포츠/레저</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">여성의류/잡화</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">남성의류/잡화</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=1">디지털/가전</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=2">가구/인테리어</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=3">유아동/유아도서</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=4">생활/가공식품</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=5">스포츠/레저</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=6">여성의류/잡화</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=7">남성의류/잡화</a></li>
 		</ul>
 		<ul class="nav justify-content-center">
-			<li class="nav-item"><a class="nav-link" href="#">게임/취미</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">뷰티/미용</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">도서/티켓/음반</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">무료나눔</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">삽니다</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=8">게임/취미</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=9">뷰티/미용</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=10">반려동물용품</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=11">도서/티켓/음반</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=12">삽니다</a></li>
 		</ul>
+		
+		<input type="hidden" class="category" value="category" name="categoryCode">
 
 
 
@@ -55,7 +60,7 @@
 						<td><a href="#"><img src="/images/바탕화면.jpg" width="90"
 								height="90" /></a></td>
 						<td>${dto.productNum}</td>
-						<td>[ ${dto.productCategory} ]<a
+						<td>[ ${dto.category.categoryName} ]<a
 							href="./select?productNum=${dto.productNum}">
 								${dto.productName}</a></td>
 						<td>${dto.username}</td>
@@ -115,15 +120,12 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	$(".nav-link").click(){
-		let category = $(this).attr("title");
-		$("#category").val(category);	
-		alert(category);
-		
-		
-		
-		
-	}
+
+$(".nav-link").click(function(){
+	let category = $(this).attr("title");
+	$("#category").val(category);	
+	alert(category);
+});
 
 </script>
 </body>

@@ -26,18 +26,34 @@
 
 
 		<select id="getList" resultMap="selectResult" parameterType="Pager">
-			SELECT P.*, PF.*
+			SELECT C.*, P.*, PF.* 
 			FROM product P LEFT JOIN productFile PF
 			ON P.productNum = PF.productNum
+			INNER JOIN category C
+			ON C.categoryCode = P.categoryCode
 			<include refid="searcher"></include>
 			ORDER BY P.productNum desc
 			limit #{startRow}, 20
 		</select>
 		
-		<select id="getSelect" parameterType="ProductVO" resultMap="selectResult">
-			SELECT P.*, PF.* 
+		
+		<select id="getCateList" resultMap="selectResult" parameterType="Pager">
+			SELECT C.*, P.*, PF.* 
 			FROM product P LEFT JOIN productFile PF
 			ON P.productNum = PF.productNum
+			INNER JOIN category C
+			ON C.categoryCode = P.categoryCode
+			WHERE C.categoryCode=#{categoryCode}
+			
+		</select>
+		
+		
+		<select id="getSelect" parameterType="ProductVO" resultMap="selectResult">
+			SELECT C.*, P.*, PF.* 
+			FROM product P LEFT JOIN productFile PF
+			ON P.productNum = PF.productNum
+			INNER JOIN category C
+			ON C.categoryCode = P.categoryCode
 			WHERE P.productNum=#{productNum}
 		</select>
 		
@@ -45,7 +61,7 @@
 			<id property="productNum" column="productNum"></id>
 			<result property="productName" column="productName"/>
 			<result property="username" column="username"/>
-			<result property="productCategory" column="productCategory"/>
+			<result property="categoryCode" column="categoryCode"/>
 			<result property="productDate" column="productDate"/>
 			<result property="productHit" column="productHit"/>
 			<result property="productHeart" column="productHeart"/>
@@ -58,6 +74,10 @@
 				<id property="fileNum" column="fileNum"/>
 				<result property="fileName" column="fileName"/>
 				<result property="originName" column="originName"/>
+			</collection>
+			<collection property="category" javaType="CategoryVO" ofType="CategoryVO">
+				<id property="categoryCode" column="categoryCode"/>
+				<result property="categoryName" column="categoryName"/>
 			</collection>
 		</resultMap> 
 		
@@ -76,10 +96,10 @@
 
 		<insert id="setInsert" parameterType="ProductVO">
 			insert into product 
-			(productNum, productName, username, productCategory, productDate, productHit, productHeart, productContent, 
+			(productNum, productName, username, categoryCode, productDate, productHit, productHeart, productContent, 
 			productPrice, productNego, locationCode)
-			 values (#{productNum}, #{productName}, #{username}, #{productCategory}, NOW(), 0, 0, 
-			 #{productContent}, #{productPrice}, 0, 0)
+			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, 
+			 #{productContent}, #{productPrice}, 0, 1100000000)
 		</insert>
 		
 		

@@ -10,7 +10,7 @@ public class ProductVO {
 	private Long productNum;
 	private String productName;
 	private String username;
-	private String productCategory;
+	private Long categoryCode;
 	private Timestamp productDate;
 	private Long productHit;
 	private Long productHeart;
@@ -21,6 +21,7 @@ public class ProductVO {
 	private Long locationCode;
 
 	private List<ProductFileVO> files;
+	private CategoryVO category;
 
 	
 }

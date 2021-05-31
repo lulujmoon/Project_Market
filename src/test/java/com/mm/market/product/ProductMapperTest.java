@@ -22,7 +22,7 @@ class ProductMapperTest {
 	 */
 
 	
-	@Test
+	//@Test
 	void getSelectTest()throws Exception{
 		ProductVO productVO = new ProductVO();
 		productVO.setProductNum(3L);
@@ -44,5 +44,25 @@ class ProductMapperTest {
 	 * 
 	 * System.out.println("finish"); }
 	 */
+	
+	
+	@Test
+	void setInsertTest() throws Exception{
+		for(int i=0;i<10;i++) {
+			ProductVO productVO = new ProductVO();
+			productVO.setProductName("product"+i+1);
+			productVO.setUsername("id1");
+			productVO.setCategoryCode(2L);
+			productVO.setProductContent("판매합니다");
+			productVO.setProductPrice(10000L);
+
+			int result = productMapper.setInsert(productVO);
+			
+			assertNotEquals(result, 0);
+		}
+		
+	}
+	
+	
 
 }

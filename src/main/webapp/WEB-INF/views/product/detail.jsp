@@ -19,21 +19,23 @@
 
 
 		<ul class="nav justify-content-center">
-			<li class="nav-item"><a class="nav-link" href="#" title="디지털/가전">디지털/가전</a></li>
-			<li class="nav-item"><a class="nav-link" href="#" title=가구/인테리어">가구/인테리어</a></li>
-			<li class="nav-item"><a class="nav-link" href="#" title="생활/가공식품">생활/가공식품</a></li>
-			<li class="nav-item"><a class="nav-link" href="#" title="스포츠/레저">스포츠/레저</a></li>
-			<li class="nav-item"><a class="nav-link" href="#" title="여성의류/잡화">여성의류/잡화</a></li>
-			<li class="nav-item"><a class="nav-link" href="#" title="남성의류/잡화">남성의류/잡화</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=1">디지털/가전</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=2">가구/인테리어</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=3">유아동/유아도서</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=4">생활/가공식품</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=5">스포츠/레저</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=6">여성의류/잡화</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=7">남성의류/잡화</a></li>
 		</ul>
 		<ul class="nav justify-content-center">
-			<li class="nav-item"><a class="nav-link" href="#" title="게임/취미">게임/취미</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">뷰티/미용</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">도서/티켓/음반</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">무료나눔</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">삽니다</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=8">게임/취미</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=9">뷰티/미용</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=10">반려동물용품</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=11">도서/티켓/음반</a></li>
+			<li class="nav-item"><a class="nav-link" href="./detail?categoryCode=12">삽니다</a></li>
 		</ul>
-			<input type="hidden" class="category" value="category" name="productCategory">
+
+		<input type="hidden" class="category" value="category" name="productCategory">
 
 
 
@@ -52,11 +54,11 @@
 			<tbody>
 				<c:forEach items="${list}" var="dto">	
 										<!-- parameter 받아와야 -->
-				<c:if test="${dto.productCategory=='디지털/가전'}">
+				<c:if test="${dto.categoryCode==2}">
 					<tr>
 						<td><a href="#"><img src="/images/바탕화면.jpg" width="90" height="90" /></a></td>
 						<td>${dto.productNum}</td>
-						<td>[ ${dto.productCategory} ]<a href="./select?productNum=${dto.productNum}"> ${dto.productName}</a></td>
+						<td>[ ${dto.category.categoryName} ]<a href="./select?productNum=${dto.productNum}"> ${dto.productName}</a></td>
 						<td>${dto.username}</td>
 						<td>${dto.productDate}</td>
 						<td>${dto.productHit}</td>
@@ -117,15 +119,7 @@
 
 
 <script type="text/javascript">
-	$(".nav-link").click(){
-		let category = $(this).attr("title");
-		$("#category").val(category);	
-		alert(category); //안먹음 왜지...
-		
-		
-		
-		
-	}
+
 
 </script>
 </body>
