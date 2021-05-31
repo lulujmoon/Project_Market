@@ -30,7 +30,7 @@
 
 .card__img {
 	width: 100%;
-	height: 100%;
+	height: 62%;
 	background-color: white;
 	border: 1px solid #e6e6e6;
 }
@@ -67,4 +67,35 @@
 	border-top: 1px solid #e6e6e6; 
 	width: 100%;
 	font-size: 0.8em;
+}
+
+
+/* 섹션 사이즈 줄이는 구간 1 */
+@media screen and (max-width: 85rem) {
+	
+	.list-container {
+		max-width: 906px;
+	}
+	
+	.prd__card {
+		width: 206.5px;
+		height: 206.5px;
+		padding: 5px;
+	}
+
+	
+}
+
+/* 섹션 사이즈 줄이는 구간 2 */
+@media screen and (max-width: 60rem) {
+	
+	.list-container {
+		max-width: 85vw;
+	}
+	
+	.prd__card {
+		width: 282.5px;
+		height: 282.5px;
+	}
+	
 }

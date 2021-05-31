@@ -5,6 +5,7 @@
 <html>
 <head>
 <c:import url="./template/setting.jsp"></c:import>
+<link rel="stylesheet" href="../resources/css/index.css">
 <title>Home</title>
 </head>
 <body>

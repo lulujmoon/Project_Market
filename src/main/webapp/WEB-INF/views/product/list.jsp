@@ -14,11 +14,11 @@
 <div class="container">
 	<div class="list-container">		
 				<c:forEach items="${list}" var="dto">
-					<div class="prd__card">
+					<div class="prd__card" onclick="goSelect(${dto.productNum})">
 						<img class="card__img" src="/images/바탕화면.jpg">
 						<div class="card__info">
-							<div class="info__name"><a href="./select?productNum=${dto.productNum}"> ${dto.productName}</a></div>
-							<div class="info__price">45000원</div>
+							<div class="info__name"> ${dto.productName}</div>
+							<div class="info__price">${dto.productPrice}</div>
 							<div class="info__date">${dto.productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${dto.productDate}</div>
 						</div>
@@ -48,5 +48,6 @@
 
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/productList.js"></script>
 </body>
 </html>
