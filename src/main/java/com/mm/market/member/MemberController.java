@@ -48,13 +48,15 @@ public class MemberController {
 		return "member/memberLogin";
 	}
 	
-	@PostMapping("memberLogin")
-	public String getLogin(HttpServletRequest request)throws Exception{
-		//포워딩된 어트리뷰트를 포스트형식으로 받아줌
-		System.out.println(request.getAttribute("message"));
-		
-		return "member/memberLogin";
-	}
+	
+	  @PostMapping("memberLogin") public String getLogin(HttpServletRequest
+	 request)throws Exception{
+		  //포워딩된 어트리뷰트를 포스트형식으로 받아줌
+	  System.out.println(request.getAttribute("message"));
+	  
+	  return "member/memberLogin"; 
+	  }
+	 
 
 	@GetMapping("memberLoginFail")
 	public String loginFail()throws Exception{
@@ -245,8 +247,8 @@ public class MemberController {
 			
 			
 		  MultiValueMap<String,String> kakaoProfileRequest3 = new LinkedMultiValueMap<String, String>();
-		  kakaoProfileRequest3.add("아이디",kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		  kakaoProfileRequest3.add("비번", kakaoProfile.getId().toString());
+		  kakaoProfileRequest3.add("username",kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		  kakaoProfileRequest3.add("password", kakaoProfile.getId().toString());
 		  
 		  ResponseEntity<String> response3 =rt3.postForEntity(
 				  "http://localhost/member/memberLogin", 		  
@@ -254,7 +256,8 @@ public class MemberController {
 				  String.class	  
 		  );
 	
-		  
+		  System.out.println("아이디"+kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		  System.out.println("비번"+kakaoProfile.getId().toString());
 		
 		return "redirect:/";
 		
