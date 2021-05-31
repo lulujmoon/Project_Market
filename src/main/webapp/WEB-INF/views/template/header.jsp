@@ -12,9 +12,12 @@
 				<i class="fas fa-lemon"></i><span>&nbsp;market</span>
 			</div>
 		</div>
-		<div class="nav__search">
-			<input type="text" class="nav__searchbox">
-			<i class="fas fa-search"></i>
+		<div class="nav__search">	
+			<form id="frm" action="${pageContext.request.contextPath}/product/list" class="nav__search-form">
+				<input type="hidden" name="curPage" value="1" id="curPage">
+				<input type="text" class="nav__searchbox" name="search" id="search" placeholder="상품명 또는 지역명을 검색하세요" value="${pager.search}">
+				<button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+			</form>	
 		</div>
 		<ul class="nav__personal">
 			<c:if test="${member == null}">

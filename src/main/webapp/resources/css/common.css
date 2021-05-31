@@ -90,10 +90,25 @@ header{
 	font-size: 1em;
 }
 
-.nav__search > i{
+.nav__search-form{
+	width: 95%;
+	height: 90%;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nav__search i{
 	color: #f8cb45;
 	font-size: 1.5rem;
 	cursor: pointer;
+}
+
+.search-btn{
+	border: none;
+	outline: none;
+	background-color: transparent;
 }
 
 .nav__personal {

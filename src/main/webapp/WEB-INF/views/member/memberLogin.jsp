@@ -11,7 +11,6 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
-
 	<div class="login">
 		<div class="container">
 			<div class="logo">

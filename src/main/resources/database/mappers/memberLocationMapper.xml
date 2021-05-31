@@ -8,7 +8,7 @@
 
 <mapper namespace ="com.mm.market.memberLocation.MemberLocationMapper">
 	
-	<select id="getList" parameterType="MemberLocationVO" resultMap="MemberLocationVO">
+	<select id="getList" parameterType="MemberLocationVO" resultType="MemberLocationVO">
 		select * from memberLocation where username=#{username}
 	</select>
 	

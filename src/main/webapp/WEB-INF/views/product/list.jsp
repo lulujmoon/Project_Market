@@ -5,17 +5,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<c:import url="../template/setting.jsp"></c:import>
+<link rel="stylesheet" href="../resources/css/productList.css">
 <title>Insert title here</title>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 
-
-
-	<div class="container">
-
-
-		<h2>Product List</h2>
+	<div class="list-container">
 		<table class="table">
 			<thead class="thead-dark">
 				<tr>
@@ -45,7 +42,7 @@
 
 		
 		
-		 <div class="container">
+		 <div class="page-container">
 
 			<ul class="pagination">
 				<c:if test="${pager.pre}">
@@ -61,32 +58,13 @@
 				</c:if>
 			</ul>
 
-
-			<div class="input-group mt-3 mb-3">
-				<form id="frm" action="./list" class="form-inline">
-				<input type="hidden" name="curPage" value="1" id="curPage">
-					<div class="input-group-prepend">
-						<select class="form-control" name="kind" id="kind">
-							<option class="sel">ProductName</option>
-							<option class="sel">ProductContent</option>
-							<option class="sel">Username</option>
-						</select>
-					</div>
-					<input type="text" class="form-control" name="search" id="search" placeholder="" value="${pager.search}">
-					<div class="input-group-append">
-						<button class="btn btn-success" type="submit">Search</button>
-					</div>
-				</form>
-			</div>
-
-
 			<a href="./insert" class="btn btn-primary" role="button">Write</a>
 			
-
 		</div>
 </div>
 
 
-
+<c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="../resources/js/common.js"></script>
 </body>
 </html>

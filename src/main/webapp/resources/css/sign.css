@@ -46,6 +46,11 @@
 	outline: none;
 }
 
+.form-notice{
+	color: red;
+	font-weight: normal;
+}
+
 .username{
 	width: 322px;
 	display: flex;

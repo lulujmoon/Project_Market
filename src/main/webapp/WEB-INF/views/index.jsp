@@ -11,7 +11,7 @@
 	
 <c:import url="./template/header.jsp"></c:import>
 	
-	<div class="home-contents">
+	<div class="container">
 		<div class="carousel-container">
 			<div class="carousel__btn">
 				<i class="fas fa-chevron-left" id="prev-btn"></i>
@@ -30,7 +30,7 @@
 		<section class="home__products">
 			<div class="section-title">
 				<h2>새로 올라온 상품</h2>
-				<a href="#">더 보기</a>
+				<a href="${pageContext.request.contextPath}/product/list">더 보기</a>
 			</div>
 			<div class="section-contents">
 				<div class="prd__card">
