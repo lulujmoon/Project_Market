@@ -52,12 +52,12 @@ public class ProductController {
 	
 	@PostMapping("insert")
 	public String setInsert(ProductVO productVO, MultipartFile [] files) throws Exception {
-		
-		 System.out.println(files.length); 
-		 for(MultipartFile f : files) {
-		 		System.out.println(f.getOriginalFilename()); 
-		 }
-		 
+		/*
+		 * System.out.println(files.length); 
+		 * for(MultipartFile f : files) {
+		 * 		System.out.println(f.getOriginalFilename()); 
+		 * }
+		 */
 		
 		int result = productService.setInsert(productVO, files);
 		

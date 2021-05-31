@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
-public class fm1 {
+public class FileManager1 {
 	
 	public String save(String dirName, MultipartFile multipartFile, HttpSession session) throws Exception {
 		
