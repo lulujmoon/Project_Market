@@ -239,7 +239,7 @@ public class MemberController {
 			}		
 		}
 		
-		//로그인처리
+		//로그인처리를 어떻게?!!!!!!!!!!!!!!!!!!! 
 		System.out.println("로그인진행");
 
 		
