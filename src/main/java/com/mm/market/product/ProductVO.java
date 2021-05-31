@@ -1,7 +1,6 @@
 package com.mm.market.product;
 
 import java.sql.Timestamp;
-import java.util.List;
 import lombok.Data;
 
 @Data
@@ -19,8 +18,5 @@ public class ProductVO {
 	private Long productPrice;
 	private boolean productNego;
 	private Long locationCode;
-
-	private List<ProductFileVO> files;
-
 	
 }
