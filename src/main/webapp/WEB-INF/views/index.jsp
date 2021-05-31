@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hello, world!</title>
 </head>
 <body>
-	<h1>Hello, World!</h1>
+	<a href="/social/list">동네 생활</a>	
+	<a href="./social/insert">Insert</a>
 </body>
 </html>
