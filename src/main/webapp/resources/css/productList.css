@@ -1,8 +1,70 @@
 @charset "UTF-8";
 
-.list-container{
+.container{
 	position: relative;
 	top: 125px;
-	width: 1210px;
-	margin: 0 auto;
+}
+
+.list-container{
+	width: 100%;
+	max-width: 1230px;
+	margin: auto;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.prd__card {
+	width: 285px;
+	height: 285px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	cursor: pointer;
+	/* 테스트용 */
+	/* background-color: #d2eeff; */
+}
+
+.card__img {
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	border: 1px solid #e6e6e6;
+}
+
+.card__info {
+	width: 100%;
+	height: 32%;
+	border: 1px solid #e6e6e6;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	/* 테스트용 */	
+	background-color: white;
+}
+
+.card__info div {
+	padding: 2% 3%;
+}
+
+.info__name {
+	width: 100%;
+}
+
+.info__price {
+	font-weight: 800;
+}
+
+.info__date {
+	font-size: 0.7em;
+	color: grey;
+}
+
+.info__location {
+	border-top: 1px solid #e6e6e6; 
+	width: 100%;
+	font-size: 0.8em;
 }
