@@ -50,11 +50,12 @@ class ProductMapperTest {
 	void setInsertTest() throws Exception{
 		for(int i=0;i<10;i++) {
 			ProductVO productVO = new ProductVO();
-			productVO.setProductName("product"+i+1);
+			productVO.setProductName("티켓"+i);
 			productVO.setUsername("id1");
-			productVO.setCategoryCode(2L);
+			productVO.setCategoryCode(11L);
 			productVO.setProductContent("판매합니다");
 			productVO.setProductPrice(10000L);
+			productVO.setLocationCode(1111011900L);
 
 			int result = productMapper.setInsert(productVO);
 			

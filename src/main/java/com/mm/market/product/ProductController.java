@@ -26,7 +26,7 @@ public class ProductController {
 		model.addAttribute("pager", pager);
 		
 		String catename = ar.get(0).getCategory().getCategoryName();
-		System.out.println(catename);
+		//System.out.println(catename);
 		
 		return "product/list";
 	}

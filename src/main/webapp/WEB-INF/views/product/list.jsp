@@ -98,15 +98,9 @@
 			<div class="input-group mt-3 mb-3">
 				<form id="frm" action="./list" class="form-inline">
 					<input type="hidden" name="curPage" value="1" id="curPage">
-					<div class="input-group-prepend">
-						<select class="form-control" name="kind" id="kind">
-							<option class="sel">ProductName</option>
-							<option class="sel">ProductContent</option>
-							<option class="sel">Username</option>
-						</select>
-					</div>
+
 					<input type="text" class="form-control" name="search" id="search"
-						placeholder="" value="${pager.search}">
+						placeholder="동네이름, 물품명 등을 검색해보세요!" value="${pager.search}">
 					<div class="input-group-append">
 						<button class="btn btn-success" type="submit">Search</button>
 					</div>
@@ -119,14 +113,6 @@
 
 		</div>
 	</div>
-<script type="text/javascript">
 
-$(".nav-link").click(function(){
-	let category = $(this).attr("title");
-	$("#category").val(category);	
-	alert(category);
-});
-
-</script>
 </body>
 </html>
