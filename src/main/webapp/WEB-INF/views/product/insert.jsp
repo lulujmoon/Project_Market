@@ -17,9 +17,8 @@
 	  <div class="form-group">
 	    <input type="file" name="files">
 	    <input type="file" name="files">
-	    <input type="file" name="files">
-	    <input type="file" name="files">
 	  </div>
+	  
 	  <div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" name="productName">
