@@ -9,4 +9,6 @@ public interface CategoryMapper {
 
 	public List<CategoryVO> getList() throws Exception;
 	
+
 }
+

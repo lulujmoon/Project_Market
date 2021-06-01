@@ -5,15 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-	crossorigin="anonymous">
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<link rel="stylesheet" href="../resources/css/productList.css">
+<c:import url="../template/setting.jsp"></c:import>
+<link rel="stylesheet" href="../resources/css/productList.css">
 <title>Insert title here</title>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
 <div class="container">
 	<div class="category-container">
 		<ul class="category-list">
@@ -55,8 +52,8 @@
 		<a href="./insert" class="btn btn-primary" role="button">Write</a>
 </div>
 
+<c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
 <script type="text/javascript" src="../resources/js/productList.js"></script>
-
 </body>
 </html>

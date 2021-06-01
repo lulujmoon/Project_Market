@@ -19,12 +19,12 @@
 			<if test="categoryCode != 0L">
 				C.categoryCode=#{categoryCode} AND 		
 			</if>
-	       (P.productName LIKE CONCAT('%', #{search}, '%') OR 
-	       P.locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%')))
-	       ORDER BY P.productNum desc
-	       limit #{startRow}, 20
-	    </select>
-			
+
+      (P.productName LIKE CONCAT('%', #{search}, '%') OR 
+      P.locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%')))
+      ORDER BY P.productNum desc
+      limit #{startRow}, 20
+    </select>
 		
 		<select id="getSelect" parameterType="ProductVO" resultMap="selectResult">
 			SELECT C.*, P.*, PF.*, L.*
@@ -67,9 +67,10 @@
 		
 		<select id="getTotalCount" resultType="Long" parameterType="Pager">
 			SELECT count(productNum) FROM product
-		    WHERE productName LIKE CONCAT('%', #{search}, '%') OR 
-		    locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%'))
-		    AND productNum > 0
+      WHERE productName LIKE CONCAT('%', #{search}, '%') OR 
+      locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%'))
+      AND productNum > 0
+
 		</select>
 		
 		<update id="setHitUpdate" parameterType="ProductVO">

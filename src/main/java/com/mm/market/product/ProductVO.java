@@ -28,6 +28,4 @@ public class ProductVO {
 	private CategoryVO category;
 	private LocationVO location;
 	
-
-	
 }

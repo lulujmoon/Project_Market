@@ -36,7 +36,6 @@ public class ProductController {
 		return "product/list";
 	}
 	
-	
 	@GetMapping("select")
 	public String getSelect(ProductVO productVO, Model model)throws Exception {
 		productVO = productService.getSelect(productVO);
