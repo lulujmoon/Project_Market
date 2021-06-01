@@ -9,7 +9,7 @@
 <body>
 
 <h1>약관동의페이지</h1>
-<button class="test" id="test">테스트버튼</button>
+
 
 <div class="wrap">
 	<div class= "logo">
@@ -63,7 +63,7 @@
 		<li class="terms__box">
 		<div class="input__check">
 		<input type="checkbox" name="agreement" id="allowPromotions" value="allowPromotions"/>
-		<lable for="allowPromotions">프로모션 정보 수신 동의</lable>
+		<lable for="allowPromotions">프로모션 정보 수신 동의(선택)</lable>
 		</div>
 		<div class="terms__content">
 		
@@ -75,7 +75,7 @@
 		</div>
 		</li>
 	</ul>
-	<button type="submit" class="confirm" id="hi">확인</button>
+	<button type="submit">확인</button>
 	</form>
 	
 	</div>
