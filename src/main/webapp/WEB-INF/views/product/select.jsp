@@ -41,6 +41,11 @@
 			</tbody>
 		</table>
 
+		<form name="frm_read" id="frm_read" method="get">
+			<input type="hidden" id="productNum" value="${vo.productNum}">
+			<input type="hidden" id="categoryCode" value="${vo.categoryCode}">
+			<input type="hidden" id="username" value="${vo.username}">
+		</form>
 		
 
 
@@ -49,13 +54,24 @@
 			
 			<a href="#" class="btn btn-primary" role="button">가격제안</a>
 			<a href="#" class="btn btn-danger" role="button">신고하기</a>
-			<a href="./setHeart?id=${vo.productNum}"
-			onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}"> 좋아요 </a>
+					<a href="javascript: like_func();" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}"><img src="/resources/images/검정.png" width="50px" height="50px"> </a>
+		
+	<!--  "./setHeart?id=${vo.productNum}"
+			<c:choose>
+				<c:when test="${username ne null}">
+				</c:when>
+				<c:otherwise>
+					<a href="javascript: login_need();" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}"><img src="/resources/images/검정.png" width="50px" height="50px"> </a>
+				</c:otherwise>
+			</c:choose>
+		
+		 -->	
+		
 
 		</div>
 
 
 
-
+<script type="text/javascript" src="/resources/js/productSelect.js"></script>	
 </body>
 </html>

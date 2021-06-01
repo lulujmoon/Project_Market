@@ -90,12 +90,12 @@
 			 #{productContent}, #{productPrice}, 0, #{locationCode})
 		</insert>
 		
-		<update id="setHeart" parameterType="java.util.Map">
+		<update id="setHeart" parameterType="Hashmap">
 			UPDATE heart SET heartCheck = heartCheck+1 WHERE username=#{username} AND productNum=#{productNum}
 		</update>
 		
 		
-		<update id="setHeartDelete">
+		<update id="setHeartDelete" parameterType="Hashmap">
 			UPDATE heart SET heartCheck = 0 WHERE username=#{username} AND productNum=#{productNum}
 		</update>
 		
