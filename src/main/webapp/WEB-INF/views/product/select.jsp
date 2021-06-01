@@ -49,7 +49,8 @@
 			
 			<a href="#" class="btn btn-primary" role="button">가격제안</a>
 			<a href="#" class="btn btn-danger" role="button">신고하기</a>
-			
+			<a href="./setHeart?id=${vo.productNum}"
+			onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}"> 좋아요 </a>
 
 		</div>
 
