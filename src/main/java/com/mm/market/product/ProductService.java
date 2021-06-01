@@ -40,7 +40,7 @@ public class ProductService {
 	}
 
 	//insert
-	public int setInsert(ProductVO productVO, MultipartFile [] files) throws Exception {
+	public int setInsert(ProductVO productVO, MultipartFile []files) throws Exception {
 		int result = productMapper.setInsert(productVO);
 		String filePath = "upload/product/";
 		

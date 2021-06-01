@@ -51,7 +51,7 @@ public class ProductController {
 	public void setInsert() throws Exception {}
 	
 	@PostMapping("insert")
-	public String setInsert(ProductVO productVO, MultipartFile [] files) throws Exception {
+	public String setInsert(ProductVO productVO, MultipartFile[] files) throws Exception {
 		  //Test
 //		  System.out.println(files.length); 
 //		  

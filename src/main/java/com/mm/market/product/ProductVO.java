@@ -18,7 +18,8 @@ public class ProductVO {
 	private String productContent;
 	private String productStatus;
 	private Long productPrice;
-	private boolean productNego;
+	private Boolean productNego;
 	private Long locationCode;
+	
 	private List<ProductFileVO> files;
 }
