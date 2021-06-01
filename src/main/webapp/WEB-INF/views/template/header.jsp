@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!-- 헤더 -->
 <header>
@@ -20,15 +21,15 @@
 			</form>	
 		</div>
 		<ul class="nav__personal">
-			<c:if test="${member == null}">
+			<sec:authorize access="isAnonymous()">
 				<li><a href="${pageContext.request.contextPath}/member/memberLogin">로그인</a>&nbsp;|&nbsp;</li>
-				<li><a href="${pageContext.request.contextPath}/member/memberJoin">회원가입</a></li>
-			</c:if>
-			<c:if test="${member != null}">
+				<li><a href="${pageContext.request.contextPath}/member/memberApprove">회원가입</a></li>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
 				<li><a href="#">마이페이지</a>&nbsp;|&nbsp;</li>
 				<li><a href="#">알림</a>&nbsp;|&nbsp;</li>
 				<li><a href="#">메세지</a></li>
-			</c:if>
+			</sec:authorize>
 		</ul>
 	</nav>
 </header>
@@ -36,12 +37,12 @@
 <div class="side side-menu">
 	<div class="side__user">
 		<h3>
-			<c:if test="${member == null}">
+			<sec:authorize access="isAnonymous()">
 				<a href="${pageContext.request.contextPath}/member/memberLogin"><i class="fas fa-unlock-alt"></i> 로그인</a>
-			</c:if>
-			<c:if test="${member != null}">
-				<a href="#">${member.name} 님</a>
-			</c:if>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<a href="${pageContext.request.contextPath}/member/memberLogout"><sec:authentication property="principal.name"/> 님</a>
+			</sec:authorize>
 		</h3>
 	</div>
 	<div class="side__categories">
