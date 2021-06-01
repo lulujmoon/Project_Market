@@ -30,7 +30,7 @@
 			<tbody>
 
 					<tr>
-						<td><a href="#"><img src="/images/바탕화면.jpg" width="300" height="300"/></a></td>
+						<td><a href="#"><img src="/resources/upload/product/${vo.files.fileName}" width="300" height="300"/></a></td>
 						<td>${vo.productNum}</td>
 						<td>${vo.productName}</td>
 						<td>${vo.username}</td>

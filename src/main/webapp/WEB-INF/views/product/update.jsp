@@ -15,7 +15,10 @@
 
 	<form action="./update" method="post">
 		<input type="hidden" name="productNum" value="${vo.productNum}">
-		
+	<div>
+		<input type="file" name="files">
+		<input type="file" name="files">
+	</div>
 	  <div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" value="${vo.productName}" name="productName">

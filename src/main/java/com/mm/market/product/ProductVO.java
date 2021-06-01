@@ -9,7 +9,7 @@ public class ProductVO {
 	private Long productNum;
 	private String productName;
 	private String username;
-	private String productCategory;
+	private String categoryCode;
 	private Timestamp productDate;
 	private Long productHit;
 	private Long productHeart;
@@ -18,5 +18,4 @@ public class ProductVO {
 	private Long productPrice;
 	private boolean productNego;
 	private Long locationCode;
-	
 }

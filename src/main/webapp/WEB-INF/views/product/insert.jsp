@@ -13,7 +13,7 @@
 <body>
 <h2>Product Insert Page</h2>
 	<form action="./insert" method="POST" enctype="multipart/form-data">
-		<div >
+		<div>
 			<input type="file" name="files">
 			<input type="file" name="files">
 		</div>
@@ -28,7 +28,7 @@
 	  </div>
 	  <div class="form-group">
 	    <label>카테고리</label>
-	    <input type="text" name="productCategory">
+	    <input type="text" name="categoryCode">
 	  </div>
 	    <div class="form-group">
 	    <label>상품 설명</label>

@@ -25,7 +25,7 @@
     	</sql>
 
 
-		<select id="getList" resultType="ProductVO" parameterType="Pager">
+		<select id="getList" resultMap="selectResult" parameterType="Pager">
 			SELECT P.*, PF.*
 			FROM product P LEFT JOIN productFile PF
 			ON P.productNum = PF.productNum
@@ -34,33 +34,33 @@
 			limit #{startRow}, 20
 		</select>
 		
-		<select id="getSelect" parameterType="ProductVO" resultType="ProductVO">
+		<select id="getSelect" parameterType="ProductVO" resultMap="selectResult">
 			SELECT P.*, PF.* 
 			FROM product P LEFT JOIN productFile PF
 			ON P.productNum = PF.productNum
 			WHERE P.productNum=#{productNum}
 		</select>
 		
-<!-- 		<resultMap type="ProductVO" id="selectResult">
-			<id property="productNum" column="productNum"></id>
-			<result property="productName" column="productName"/>
-			<result property="username" column="username"/>
-			<result property="productCategory" column="productCategory"/>
-			<result property="productDate" column="productDate"/>
-			<result property="productHit" column="productHit"/>
-			<result property="productHeart" column="productHeart"/>
-			<result property="productContent" column="productContent"/>
-			<result property="productStatus" column="productStatus"/>
-			<result property="productPrice" column="productPrice"/>
-			<result property="productNego" column="productNego"/>
-			<result property="locationCode" column="locationCode"/>
+		<resultMap type="ProductVO" id="selecResult">
+			<id column="productNum" property="productNum"/>
+			<result column="productName" property="productName"/>
+			<result column="username" property="username"/>
+			<result column="categoryCode" property="categoryCode"/>
+			<result column="productDate" property="productDate"/>
+			<result column="productHit" property="productHit"/>
+			<result column="productHeart" property="productHeart"/>
+			<result column="productContent" property="productContent"/>
+			<result column="productStatus" property="productStatus"/>
+			<result column="productPrice" property="productPrice"/>
+			<result column="productNego" property="productNego"/>
+			<result column="locationCode" property="locationCode"/>
 			<collection property="files" javaType="java.util.List" ofType="ProductFileVO">
-				<id property="fileNum" column="fileNum"/>
-				<result property="fileName" column="fileName"/>
-				<result property="originName" column="originName"/>
+				<id column="fileNum" property="fileNum"/>
+				<result column="fileName" property="fileName"/>
+				<result column="originName" property="originName"/>
 			</collection>
-		</resultMap>  -->
-		
+		</resultMap>
+			
 		<select id="getTotalCount" resultType="Long" parameterType="Pager">
 			select count(productNum) from product
 		</select>
@@ -76,19 +76,19 @@
 
 		<insert id="setInsert" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
 			insert into product 
-			(productNum, productName, username, productCategory, productDate, productHit, productHeart, productContent, productPrice, productNego, locationCode)
-			 values (#{productNum}, #{productName}, #{username}, #{productCategory}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, 0)
+			(productNum, productName, username, categoryCode, productDate, productHit, productHeart, productContent, productPrice, productNego, locationCode)
+			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, 1100000000)
 		</insert>
 		
 		<insert id="setFileInsert" parameterType="ProductFileVO">
-			insert into productfile (productNum, fileName, originName)
+			insert into productFile (productNum, fileName, originName)
 			values (#{productNum}, #{fileName}, #{originName})
 		</insert>
 		
 		<update id="setUpdate" parameterType="ProductVO">
 			update product set 
 			productName=#{productName}, 
-			productCategory=#{productCategory}, 
+			categoryCode=#{categoryCode}, 
 			productContent=#{productContent}, 
 			productPrice=#{productPrice}
 			where productNum=#{productNum}
