@@ -14,6 +14,7 @@ public class Pager {
 	
 	private String kind;
 	private String search;
+	private Long categoryCode;
 	
 	
 	public void makeRow(Long perPage) {
@@ -143,6 +144,22 @@ public class Pager {
 		}		
 		this.search = search;
 	}
+
+	public Long getCategoryCode() {
+		if(this.categoryCode == null) {
+			this.categoryCode = 0L;
+		}
+		return categoryCode;
+	}
+
+	public void setCategoryCode(Long categoryCode) {
+		if(categoryCode == null) {
+			categoryCode = 0L;
+		}
+		this.categoryCode = categoryCode;
+	}
+	
+	
 	
 	
 

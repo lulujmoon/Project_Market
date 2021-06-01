@@ -8,33 +8,31 @@
 		
 		
 		<select id="getList" resultMap="selectResult" parameterType="Pager">
-			 SELECT C.*, P.*, PF.*
-	         FROM product P LEFT JOIN productFile PF
-	         ON P.productNum = PF.productNum
-	         LEFT JOIN category C
-			 ON C.categoryCode = P.categoryCode
-	         WHERE P.productName LIKE CONCAT('%', #{search}, '%') OR 
-	         P.locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%'))
-	         ORDER BY P.productNum desc
-	         limit #{startRow}, 20
-         </select>
-		
-		<select id="getCateList" resultMap="selectResult" parameterType="Pager">
-			SELECT C.*, P.*, PF.* 
+			SELECT C.*, P.*, PF.*, L.*
 			FROM product P LEFT JOIN productFile PF
 			ON P.productNum = PF.productNum
 			INNER JOIN category C
 			ON C.categoryCode = P.categoryCode
-			WHERE C.categoryCode=#{categoryCode}
-		</select>
-		
+			LEFT JOIN Location L
+			ON P.locationCode = L.locationCode
+			WHERE 
+			<if test="categoryCode != 0L">
+				C.categoryCode=#{categoryCode} AND 		
+			</if>
+      (P.productName LIKE CONCAT('%', #{search}, '%') OR 
+      P.locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%')))
+      ORDER BY P.productNum desc
+      limit #{startRow}, 20
+    </select>
 		
 		<select id="getSelect" parameterType="ProductVO" resultMap="selectResult">
-			SELECT C.*, P.*, PF.* 
+			SELECT C.*, P.*, PF.*, L.*
 			FROM product P LEFT JOIN productFile PF
 			ON P.productNum = PF.productNum
 			INNER JOIN category C
 			ON C.categoryCode = P.categoryCode
+			INNER JOIN location L
+			ON P.locationCode = L.locationCode
 			WHERE P.productNum=#{productNum}
 		</select>
 		
@@ -51,19 +49,26 @@
 			<result property="productPrice" column="productPrice"/>
 			<result property="productNego" column="productNego"/>
 			<result property="locationCode" column="locationCode"/>
+			<association property="category" javaType="CategoryVO">
+				<id property="categoryCode" column="categoryCode"/>
+				<result property="categoryName" column="categoryName"/>
+			</association>
+			<association property="location" javaType="LocationVO">
+				<id property="locationCode" column="locationCode"/>
+				<result property="locationName" column="locationName"/>
+			</association>
 			<collection property="files" javaType="java.util.List" ofType="ProductFileVO">
 				<id property="fileNum" column="fileNum"/>
 				<result property="fileName" column="fileName"/>
 				<result property="originName" column="originName"/>
 			</collection>
-			<collection property="category" javaType="CategoryVO" ofType="CategoryVO">
-				<id property="categoryCode" column="categoryCode"/>
-				<result property="categoryName" column="categoryName"/>
-			</collection>
 		</resultMap> 
 		
 		<select id="getTotalCount" resultType="Long" parameterType="Pager">
-			select count(productNum) from product
+			SELECT count(productNum) FROM product
+      WHERE productName LIKE CONCAT('%', #{search}, '%') OR 
+      locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%'))
+      AND productNum > 0
 		</select>
 		
 		<update id="setHitUpdate" parameterType="ProductVO">

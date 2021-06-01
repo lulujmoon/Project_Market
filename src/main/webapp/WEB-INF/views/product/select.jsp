@@ -35,7 +35,7 @@
 						<td>${vo.productName}</td>
 						<td>${vo.username}</td>
 						<td>${vo.productDate}</td>
-						<td>${vo.productHit}</td>
+						<td>${vo.location.locationName}</td>
 					</tr>
 			  
 			</tbody>

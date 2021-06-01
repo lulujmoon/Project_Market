@@ -12,6 +12,16 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
+	<div class="category-container">
+		<ul class="category-list">
+			<c:forEach items="${categories}" var="category">
+				<li><a class="category__item" href="#" onclick="goListByCategory(${category.categoryCode}, '${pager.search}')">${category.categoryName}</a></li>
+			</c:forEach>
+		</ul>
+		
+		<input type="hidden" class="category" value="category" name="categoryCode">
+	</div>
+
 	<div class="list-container">		
 				<c:forEach items="${list}" var="dto">
 					<div class="prd__card" onclick="goSelect(${dto.productNum})">
@@ -20,30 +30,26 @@
 							<div class="info__name"> ${dto.productName}</div>
 							<div class="info__price">${dto.productPrice}</div>
 							<div class="info__date">${dto.productDate}</div>
-							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${dto.productDate}</div>
+							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${dto.location.locationName}</div>
 						</div>
 					</div>
 				</c:forEach>
 	</div>
 	
-	<div class="page-container">
-		<ul class="pagination">
+		<ul class="page-list">
 			<c:if test="${pager.pre}">
 				<li class="page-item"><a class="page-link p" href="#" title="${pager.startNum-1}">Previous</a></li>
 			</c:if>
 	
 			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<li class="page-item"><a class="page-link p" href="#" title="${i}">${i}</a></li>
+				<li class="page-item"><a class="page-link p" href="#" onclick="goPage('${pager.search}', ${i})">${i}</a></li>
 			</c:forEach>
 	
 			<c:if test="${pager.next}">
-				<li class="page-item"><a class="page-link p" href="#" title="${pager.lastNum+1}">Next</a></li>
+				<li class="page-item"><a class="page-link p" href="#" onclick="goPage(${pager.search}, ${pager.lastNum+1})">Next</a></li>
 			</c:if>
-		</ul>
-	
+		</ul>		
 		<a href="./insert" class="btn btn-primary" role="button">Write</a>
-		
-	</div>
 </div>
 
 <c:import url="../template/footer.jsp"></c:import>

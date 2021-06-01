@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mm.market.category.CategoryMapper;
+import com.mm.market.category.CategoryVO;
 import com.mm.market.util.Pager;
 
 @Controller
@@ -18,30 +20,21 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private CategoryMapper categoryMapper;
+	
 	@GetMapping("list")
 	public String getList(Pager pager, Model model) throws Exception {
 		
 		List<ProductVO> ar = productService.getList(pager);
+		List<CategoryVO> categories = categoryMapper.getList();
+
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
-		
-		String catename = ar.get(0).getCategory().getCategoryName();
-		//System.out.println(catename);
+		model.addAttribute("categories", categories);
 		
 		return "product/list";
 	}
-	
-	@GetMapping("detail")
-	public String getCategoryList(Pager pager, Model model)throws Exception{
-		
-		List<ProductVO> ar = productService.getList(pager);
-		model.addAttribute("list", ar);
-		model.addAttribute("pager", pager);
-		
-		return "product/detail";
-	}
-	
-	
 	
 	@GetMapping("select")
 	public String getSelect(ProductVO productVO, Model model)throws Exception {

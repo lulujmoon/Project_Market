@@ -3,8 +3,7 @@
 /* 홈 컨텐츠 */
 
 .container{
-	position: relative;
-	top: 125px;
+	padding-top: 125px;
 	width: 100%;
 	margin: 0 auto;
 	display: flex;

@@ -2,6 +2,10 @@ package com.mm.market.product;
 
 import java.sql.Timestamp;
 import java.util.List;
+
+import com.mm.market.category.CategoryVO;
+import com.mm.market.location.LocationVO;
+
 import lombok.Data;
 
 @Data
@@ -22,6 +26,7 @@ public class ProductVO {
 
 	private List<ProductFileVO> files;
 	private CategoryVO category;
+	private LocationVO location;
 
 	
 }

@@ -10,11 +10,12 @@
 	<typeAliases>
 		<typeAlias type="com.mm.market.review.ReviewVO" alias="ReviewVO"/>
 		<typeAlias type="com.mm.market.memberLocation.MemberLocationVO" alias="MemberLocationVO"/>
-  		<typeAlias type="com.mm.market.member.MemberVO" alias="MemberVO"/>
-  		<typeAlias type="com.mm.market.member.RoleVO" alias="RoleVO"/>
+		<typeAlias type="com.mm.market.location.LocationVO" alias="LocationVO"/>
+  	<typeAlias type="com.mm.market.member.MemberVO" alias="MemberVO"/>
+  	<typeAlias type="com.mm.market.member.RoleVO" alias="RoleVO"/>
 		<typeAlias type="com.mm.market.product.ProductVO" alias="ProductVO"/>
 		<typeAlias type="com.mm.market.product.ProductFileVO" alias="ProductFileVO"/>
-		<typeAlias type="com.mm.market.product.CategoryVO" alias="CategoryVO"/>
+		<typeAlias type="com.mm.market.category.CategoryVO" alias="CategoryVO"/>
 		<typeAlias type="com.mm.market.util.Pager" alias="Pager"/>
   	</typeAliases>
   

@@ -1,5 +1,6 @@
 package com.mm.market.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class ProductService {
 		pager.makeRow(perPage);
 		Long totalCount = productMapper.getTotalCount(pager);
 		pager.makeNum(totalCount, perPage, perBlock);
+		
 		return productMapper.getList(pager);
 	}
 	

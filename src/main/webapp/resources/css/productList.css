@@ -1,17 +1,35 @@
 @charset "UTF-8";
 
 .container{
-	position: relative;
-	top: 125px;
+	padding-top: 125px;
+	width: 100%;
+	margin-bottom: 30px;
+}
+
+.category-container{
+	width: 100%;
+	max-width: 1170px;
+	margin: 40px auto;
+	padding: 0 10px 0 20px;
+	border: 1px solid #b4b4b4;
+}
+
+.category-list{
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.category__item{
+	padding: 0 5px;
 }
 
 .list-container{
 	width: 100%;
-	max-width: 1230px;
+	max-width: 1220px;
 	margin: auto;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: center;
+	justify-content: flex-start;
 	align-items: center;
 }
 
@@ -69,6 +87,26 @@
 	font-size: 0.8em;
 }
 
+.page-list{
+	width: 1230px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.page-item a{
+	width: 22px;
+	height: 22px;
+	padding: 4px;
+	margin: 0 3px;
+	border: 1px solid #b4b4b4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #b4b4b4;
+}
+
 
 /* 섹션 사이즈 줄이는 구간 1 */
 @media screen and (max-width: 85rem) {
@@ -91,6 +129,7 @@
 	
 	.list-container {
 		max-width: 85vw;
+		justify-content: center;
 	}
 	
 	.prd__card {
