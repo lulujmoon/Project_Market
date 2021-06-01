@@ -9,7 +9,7 @@
 <body>
 
 <h1>약관동의페이지</h1>
-<button class="test">테스트버튼</button>
+<button class="test" id="test">테스트버튼</button>
 
 <div class="wrap">
 	<div class= "logo">
