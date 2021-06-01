@@ -13,14 +13,10 @@
 <c:import url="../template/header.jsp"></c:import>
 
 <div class="container">
-	<form action="./member/memberApprove" method="POST" id="form_wrap">
-	<div class="terms__check__all">
-		<input type="checkbox" name="checkAll" id="checkAll"/>
-		<label for="checkAll">
-			market 이용약관, 개인정보 수집 및 이용, 프로모션등 정보수신에 모두 동의합니다.
-		</label>
+	<div class="logo">
+		<i class="fas fa-lemon"></i><span>&nbsp;Join</span>
 	</div>
-	
+	<form action="./member/memberApprove" method="POST" id="form_wrap">
 	<ul class="terms__list">
 		<li class="terms__box">
 		<div class="input__check">
@@ -38,8 +34,8 @@
 		</li>
 		<li class="terms__box">
 		<div class="input__check">
-		<input type="checkbox" name="agreement" class="checkEach" value="privacyPolicy" id="privacyPolicy" required/>
-		<label for="privacyPolicy" class="required">
+			<input type="checkbox" name="agreement" class="checkEach" value="privacyPolicy" id="privacyPolicy" required/>
+			<label for="privacyPolicy" class="required">
 		개인정보 수집 및 이용 동의
 		</label>
 		</div>
@@ -54,8 +50,8 @@
 		</li>
 		<li class="terms__box">
 		<div class="input__check">
-		<input type="checkbox" name="agreement" class="checkEach" value="allowPromotions" id="allowPromotions"/>
-		<label for="allowPromotions">프로모션 정보 수신 동의(선택)</label>
+			<input type="checkbox" name="agreement" class="checkEach" value="allowPromotions" id="allowPromotions"/>
+			<label for="allowPromotions">프로모션 정보 수신 동의(선택)</label>
 		</div>
 		<div class="terms__content">
       market에서 제공하는 이벤트/혜택 등 다양한 정보를 휴대전화(market앱 알림 또는 문자), 이메일로 받아보실 수
@@ -65,7 +61,13 @@
 		</div>
 		</li>
 	</ul>
-	<button type="submit">확인</button>
+	<div class="terms__check__all">
+		<input type="checkbox" name="checkAll" id="checkAll"/>
+		<label for="checkAll">
+			market 이용약관, 개인정보 수집 및 이용, 프로모션등 정보수신에 모두 동의합니다.
+		</label>
+	</div>
+	<button type="submit" class="btn-submit">확인</button>
 	</form>	
 </div>
 
