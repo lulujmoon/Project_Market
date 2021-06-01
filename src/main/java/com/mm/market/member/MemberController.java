@@ -1,7 +1,9 @@
 package com.mm.market.member;
 
 import java.util.Enumeration;
+import java.util.UUID;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.Errors;
@@ -35,6 +38,7 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
 
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
@@ -45,13 +49,15 @@ public class MemberController {
 		return "member/memberLogin";
 	}
 	
-	@PostMapping("memberLogin")
-	public String getLogin(HttpServletRequest request)throws Exception{
-		//포워딩된 어트리뷰트를 포스트형식으로 받아줌
-		System.out.println(request.getAttribute("message"));
-		
-		return "member/memberLogin";
-	}
+	
+	  @PostMapping("memberLogin") public String getLogin(HttpServletRequest
+	 request)throws Exception{
+		  //포워딩된 어트리뷰트를 포스트형식으로 받아줌
+	  System.out.println(request.getAttribute("message"));
+	  
+	  return "member/memberLogin"; 
+	  }
+	 
 
 	@GetMapping("memberLoginFail")
 	public String loginFail()throws Exception{
@@ -111,7 +117,17 @@ public class MemberController {
 		return "member/memberJoin";
 	}
 
+	@GetMapping("memberApprove")
+	public void setApprove()throws Exception{
+			
+	}
 
+	@PostMapping("memberApprove")
+	public String setApprove(Model model)throws Exception{
+			
+		return "redirect:/member/memberJoin";
+	}
+	
 	@PostMapping("memberJoin")
 	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
 		System.out.println("Join process"+ memberVO.getName().length());
@@ -127,10 +143,10 @@ public class MemberController {
 		return "redirect:../";
 
 	}
-	
+		
 	@GetMapping("auth/kakao/callback")
-	public @ResponseBody String kakaoCallback(String code) {
-			//data를 리턴해주는 컨트롤러 함수
+	public String kakaoCallback(String code) throws Exception {
+		
 		
 		//post방식으로 key=value 데이터를 요청(카카오쪽으로)
 		RestTemplate rt = new RestTemplate();
@@ -170,13 +186,15 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		
-		System.out.println("카카오액세스토큰"+oAuthToken.getAccess_token());
+		System.out.println("카카오액세스토큰:"+oAuthToken.getAccess_token());
 		
+		
+	
 		RestTemplate rt2 = new RestTemplate();
 			
 		//HttpHeader 오브젝트 생성
 		HttpHeaders headers2 = new HttpHeaders();
-		headers2.add("Authorization", "Bearer ");
+		headers2.add("Authorization", "Bearer "+oAuthToken.getAccess_token());
 		headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 		
 		
@@ -186,14 +204,76 @@ public class MemberController {
 		
 		//Http 요청하기 - post방식으로 , response의 응답 받음
 		ResponseEntity<String> response2 = rt2.exchange(
-			"https://kapi.kakao.com",
+			"https://kapi.kakao.com//v2/user/me",
 				HttpMethod.POST,
 				kakaoProfileRequest2,
 				String.class
 				
 				);
+		System.out.println(response2.getBody());
 		
-		return response.getBody();
+		System.out.println("여기까지!!!!!!!!!!!");
+		
+		
+		ObjectMapper objectMapper2 = new ObjectMapper();
+		KakaoProfile kakaoProfile = null;
+		try {
+			kakaoProfile = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
+		} catch (JsonMappingException e) {	
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		//User 오브젝트 : username,password,email
+		System.out.println("카카오 아이디(번호):"+kakaoProfile.getId());
+		System.out.println("카카오 이메일(번호):"+kakaoProfile.getKakao_account().getEmail());
+		
+		System.out.println("마켓서버 유저네임:" + kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		System.out.println("마켓서버 이메일:" + kakaoProfile.getKakao_account().getEmail());
+		
+		System.out.println("마켓서버 패스워드:"+kakaoProfile.getId());
+
+		MemberVO KakaomemberVO = new MemberVO();
+		KakaomemberVO.setUsername(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		KakaomemberVO.setPassword(kakaoProfile.getId().toString());
+		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
+		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
+		
+		//가입자 혹은 비가입자 체크해서 처리
+		MemberVO originmemberVO = memberService.findMember(KakaomemberVO);
+		
+		if(originmemberVO==null) {
+			try {
+				System.out.println("기존회원아님->회원가입진행");
+				memberService.setJoin(KakaomemberVO);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+		}
+				
+		RestTemplate rt3 = new RestTemplate();
+			
+			
+		  MultiValueMap<String,String> kakaoProfileRequest3 = new LinkedMultiValueMap<String, String>();
+		  kakaoProfileRequest3.add("username",kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		  kakaoProfileRequest3.add("password", kakaoProfile.getId().toString());
+		  
+		  ResponseEntity<String> response3 =rt3.postForEntity(
+				  "http://localhost/member/memberLogin", 		  
+				  kakaoProfileRequest3, 
+				  String.class	  
+		  );
+	
+		  System.out.println("아이디"+kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		  System.out.println("비번"+kakaoProfile.getId().toString());
+		
+		return "redirect:/";
+		
+		
+		
+		
 	}
 
 

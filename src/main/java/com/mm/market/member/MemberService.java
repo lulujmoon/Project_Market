@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
 
+
+
 @Service
 public class MemberService implements UserDetailsService{
 
@@ -28,10 +30,16 @@ public class MemberService implements UserDetailsService{
 		memberVO.setUsername(username);
 		memberVO = memberMapper.getLogin(memberVO);
 
-		System.out.println("service 로그인");
+		System.out.println("로드유저");
+		System.out.println(memberVO.getAuthorities());
 		return memberVO;
 	}
 
+	public MemberVO findMember(MemberVO memberVO)throws Exception {
+		MemberVO checkMember = memberMapper.getUsername(memberVO);
+
+		return checkMember;
+	}
 
 
 	//검증메서드
@@ -73,6 +81,11 @@ public class MemberService implements UserDetailsService{
 		result = memberMapper.setMemberRole(map);
 
 		return result;
+	}
+
+	public MemberVO findMember(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	}
 
