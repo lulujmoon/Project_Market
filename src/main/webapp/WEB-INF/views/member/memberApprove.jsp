@@ -9,6 +9,7 @@
 <body>
 
 <h1>약관동의페이지</h1>
+<button class="test">테스트버튼</button>
 
 <div class="wrap">
 	<div class= "logo">
@@ -74,7 +75,7 @@
 		</div>
 		</li>
 	</ul>
-	<button type="submit" class="confirm">확인</button>
+	<button type="submit" class="confirm" id="hi">확인</button>
 	</form>
 	
 	</div>
