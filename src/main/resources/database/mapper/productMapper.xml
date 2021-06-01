@@ -25,7 +25,7 @@
     	</sql>
 
 
-		<select id="getList" resultMap="selectResult" parameterType="Pager">
+		<select id="getList" resultType="ProductVO" parameterType="Pager">
 			SELECT P.*, PF.*
 			FROM product P LEFT JOIN productFile PF
 			ON P.productNum = PF.productNum
@@ -34,14 +34,14 @@
 			limit #{startRow}, 20
 		</select>
 		
-		<select id="getSelect" parameterType="ProductVO" resultMap="selectResult">
+		<select id="getSelect" parameterType="ProductVO" resultType="ProductVO">
 			SELECT P.*, PF.* 
 			FROM product P LEFT JOIN productFile PF
 			ON P.productNum = PF.productNum
 			WHERE P.productNum=#{productNum}
 		</select>
 		
-		<resultMap type="ProductVO" id="selectResult">
+<!-- 		<resultMap type="ProductVO" id="selectResult">
 			<id property="productNum" column="productNum"></id>
 			<result property="productName" column="productName"/>
 			<result property="username" column="username"/>
@@ -59,7 +59,7 @@
 				<result property="fileName" column="fileName"/>
 				<result property="originName" column="originName"/>
 			</collection>
-		</resultMap> 
+		</resultMap>  -->
 		
 		<select id="getTotalCount" resultType="Long" parameterType="Pager">
 			select count(productNum) from product
@@ -74,10 +74,15 @@
 			DELETE FROM product WHERE productNum=#{productNum}
 		</delete>
 
-		<insert id="setInsert" parameterType="ProductVO">
+		<insert id="setInsert" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
 			insert into product 
 			(productNum, productName, username, productCategory, productDate, productHit, productHeart, productContent, productPrice, productNego, locationCode)
 			 values (#{productNum}, #{productName}, #{username}, #{productCategory}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, 0)
+		</insert>
+		
+		<insert id="setFileInsert" parameterType="ProductFileVO">
+			insert into productfile (productNum, fileName, originName)
+			values (#{productNum}, #{fileName}, #{originName})
 		</insert>
 		
 		<update id="setUpdate" parameterType="ProductVO">

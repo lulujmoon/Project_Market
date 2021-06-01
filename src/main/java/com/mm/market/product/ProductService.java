@@ -4,14 +4,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.mm.market.util.FileManager;
 import com.mm.market.util.Pager;
 
 @Service
 public class ProductService {
 	
+	
 	@Autowired
 	private ProductMapper productMapper;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	public List<ProductVO> getList(Pager pager)throws Exception{
 		Long perPage = 20L;
@@ -34,8 +40,24 @@ public class ProductService {
 	}
 
 	//insert
-	public int setInsert(ProductVO productVO) throws Exception {
-		return productMapper.setInsert(productVO);
+	public int setInsert(ProductVO productVO, MultipartFile [] files) throws Exception {
+		int result = productMapper.setInsert(productVO);
+		String filePath = "upload/product/";
+		
+		for(MultipartFile multipartFile:files) {
+			if(multipartFile.getSize()==0) {
+				continue;
+			}
+			String fileName = fileManager.save(multipartFile, filePath);
+			System.out.println(fileName);
+			ProductFileVO productFileVO = new ProductFileVO();
+			productFileVO.setFileName(fileName);
+			productFileVO.setOriginName(multipartFile.getOriginalFilename());
+			productFileVO.setProductNum(productVO.getProductNum());
+			
+			productMapper.setFileInsert(productFileVO);
+		}
+		return result; 
 	}
 	
 	//update
