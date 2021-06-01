@@ -81,6 +81,7 @@
 	</div>
 
 </div>
+
 <script type="text/javascript" src="../resources/js/memberApprove.js"></script>
 </body>
 </html>
