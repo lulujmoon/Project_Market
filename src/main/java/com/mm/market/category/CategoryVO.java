@@ -1,4 +1,4 @@
-package com.mm.market.product;
+package com.mm.market.category;
 
 import lombok.Data;
 

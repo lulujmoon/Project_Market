@@ -23,6 +23,11 @@ public class ProductService {
 		return productMapper.getList(pager);
 	}
 	
+	public List<ProductVO> getCateList(Pager pager)throws Exception {
+		
+		return productMapper.getCateList(pager);
+	}
+	
 	
 	public ProductVO getSelect(ProductVO productVO) throws Exception {
 		productMapper.setHitUpdate(productVO);

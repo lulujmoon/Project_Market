@@ -11,14 +11,12 @@
 //	
 //	@Override
 //	public void registerStompEndpoints(StompEndpointRegistry registry) {
-//		// TODO Auto-generated method stub
-//		WebSocketMessageBrokerConfigurer.super.registerStompEndpoints(registry);
+//		registry.addEndpoint("/ws").withSockJS();
 //	}
 //	
 //	@Override
 //	public void configureMessageBroker(MessageBrokerRegistry registry) {
-//		// TODO Auto-generated method stub
-//		WebSocketMessageBrokerConfigurer.super.configureMessageBroker(registry);
+//		
 //	}
 //
 //	
