@@ -143,6 +143,12 @@ public class MemberController {
 		return "redirect:../";
 
 	}
+	
+	@GetMapping("memberPage")
+	public void memberPage()throws Exception{
+		
+		
+	}
 		
 	@GetMapping("auth/kakao/callback")
 	public String kakaoCallback(String code) throws Exception {

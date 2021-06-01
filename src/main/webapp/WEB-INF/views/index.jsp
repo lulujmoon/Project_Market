@@ -10,7 +10,6 @@
 </head>
 <body>	
 
-<h1>${sessionScope.SPRING_SECURITY_CONTEXT.authentication}</h1>
 
 <c:if test="${empty SPRING_SECURITY_CONTEXT}">
 	
@@ -22,6 +21,7 @@
 </c:if>
 	<c:if test="${not empty SPRING_SECURITY_CONTEXT}">
 	
+	<a href="./member/memberPage">마이페이지</a>
 	<a href="./member/memberLogout">로그아웃</a>
 	</c:if>
 
