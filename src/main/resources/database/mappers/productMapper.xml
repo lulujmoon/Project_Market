@@ -63,7 +63,7 @@
 			
 			
 		<select id="getProductNum" resultType="java.lang.Long">
-			select product_seq.nextval from dual
+			SELECT LAST_INSERT_ID();
 		</select>
 		
 		<select id="getTotalCount" resultType="Long" parameterType="Pager">
