@@ -16,5 +16,7 @@ public interface MemberMapper {
 	public MemberVO getLogin(MemberVO memberVO);
 	
 	public MemberVO getUsername(MemberVO memberVO) throws Exception;
+	
+	public int setUpdate(MemberVO memberVO) throws Exception;
 
 }

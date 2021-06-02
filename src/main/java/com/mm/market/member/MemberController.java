@@ -144,15 +144,19 @@ public class MemberController {
 
 	}
 	
-	@GetMapping("info")
-	public void memberPage()throws Exception{
+	@GetMapping("information")
+	public void infomation(MemberVO memberVO)throws Exception{
 		
 	}
 	
-	@GetMapping("memberUpdate")
-	public void setUpdate()throws Exception{
+	@PostMapping("update")
+	public String setUpdate(MemberVO memberVO)throws Exception{
+		int result = memberService.setJpdate(memberVO);
 		
-	}	
+		
+		return "redirect:./";
+	}
+
 		
 	@GetMapping("auth/kakao/callback")
 	public String kakaoCallback(String code) throws Exception {
