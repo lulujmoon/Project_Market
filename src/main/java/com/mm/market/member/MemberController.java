@@ -86,20 +86,6 @@ public class MemberController {
 									//저장되는 session의 타입
 		Authentication auth = sc.getAuthentication();
 
-		System.out.println("===================================");
-		System.out.println("Name : "+auth.getName());
-		System.out.println("Details : "+auth.getDetails());
-		System.out.println("Principal : "+auth.getPrincipal());
-		System.out.println("Authorities : "+auth.getAuthorities());
-		System.out.println("===================================");
-
-		System.out.println("===================================");
-		System.out.println("Name : "+auth2.getName());
-		System.out.println("Details : "+auth2.getDetails());
-		System.out.println("Principal : "+auth2.getPrincipal());
-		System.out.println("Authorities : "+auth2.getAuthorities());
-		System.out.println("===================================");
-
 		System.out.println("obj : "+obj);
 
 		System.out.println("login 성공");
@@ -231,7 +217,6 @@ public class MemberController {
 				);
 		System.out.println(response2.getBody());
 		
-		System.out.println("여기까지!!!!!!!!!!!");
 		
 		
 		ObjectMapper objectMapper2 = new ObjectMapper();
