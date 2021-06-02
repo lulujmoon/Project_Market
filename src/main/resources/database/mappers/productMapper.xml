@@ -62,8 +62,8 @@
 		</resultMap>
 			
 			
-		<select id="getProductNum" resultType="java.lang.Long">
-			SELECT LAST_INSERT_ID();
+		<select id="getProductNum" resultType="Long">
+			SELECT LAST_INSERT_ID()
 		</select>
 		
 		<select id="getTotalCount" resultType="Long" parameterType="Pager">
@@ -83,6 +83,9 @@
 			insert into product 
 			(productNum, productName, username, categoryCode, productDate, productHit, productHeart, productContent, productPrice, productNego, locationCode)
 			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, 1100000000)
+<!-- 		 <selectKey keyProperty="productNum" resultType="Long" order="AFTER">
+       		 SELECT LAST_INSERT_ID()
+    	</selectKey> -->
 		</insert>
 		
 		<insert id="setFileInsert" parameterType="ProductFileVO">

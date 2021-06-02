@@ -17,6 +17,7 @@ public interface ProductMapper {
 	//Select
 	public ProductVO getSelect(ProductVO productVO)throws Exception;
 	
+	//productNum
 	public long getProductNum()throws Exception;
 	
 	

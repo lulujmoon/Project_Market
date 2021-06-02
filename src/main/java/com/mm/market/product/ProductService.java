@@ -45,22 +45,26 @@ public class ProductService {
 	}
 
 	//insert
-	public ProductVO setInsert(ProductVO productVO, MultipartFile file) throws Exception {
+	public int setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
+		int result = productMapper.setInsert(productVO);
 		
-		String fileName = fileManager.save("product", file, session);
 		long productNum = productMapper.getProductNum();
-		
 		productVO.setProductNum(productNum);
 		
-		ProductFileVO productFileVO = new ProductFileVO();
-		productFileVO.setProductNum(productNum);
-		productFileVO.setFileName(fileName);
-		productFileVO.setOriginName(file.getOriginalFilename());
 		
-		int result = productMapper.setInsert(productVO);
-		result = productMapper.setFileInsert(productFileVO);
+		for(MultipartFile f:file) {
+			ProductFileVO productFileVO = new ProductFileVO();
+			String fileName = fileManager.save("product", f, session);
+			
+			productFileVO.setProductNum(productNum);
+			productFileVO.setFileName(fileName);
+			productFileVO.setOriginName(f.getOriginalFilename());
+			
+			productMapper.setFileInsert(productFileVO);
+		}
 		
-		return productVO; 
+		return result;
+
 	}
 	
 	//update

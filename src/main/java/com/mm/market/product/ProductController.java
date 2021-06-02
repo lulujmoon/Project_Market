@@ -51,16 +51,9 @@ public class ProductController {
 	public void setInsert() throws Exception {}
 	
 	@PostMapping("insert")
-	public String setInsert(ProductVO productVO, MultipartFile file) throws Exception {
-		  //Test
-//		  System.out.println(file.length); 
-//		  
-//		  for(MultipartFile f : file) {
-//		  		System.out.println(f.getOriginalFilename()); 
-//		  }
-		 
-		productVO = productService.setInsert(productVO, file);
-		
+	public String setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
+		int result = productService.setInsert(productVO, file);
+
 		return "redirect:product/list";
 	}
 	
