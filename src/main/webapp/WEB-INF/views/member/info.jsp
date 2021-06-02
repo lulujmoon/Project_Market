@@ -11,8 +11,8 @@
 <h1>마이페이지</h1>
 
 
-<%-- <p>principal.username : <sec:authentication property="principal.username"/></p>
+<p>principal.username : <sec:authentication property="principal.username"/></p>
 <p>principal.password : <sec:authentication property="principal.password"/></p>
-<p>principal.email : <sec:authentication property="principal.email"/></p> --%>
+<p>principal.email : <sec:authentication property="principal.email"/></p>
 </body>
 </html>
