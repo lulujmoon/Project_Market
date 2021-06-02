@@ -144,7 +144,7 @@ public class MemberController {
 
 	}
 	
-	@GetMapping("memberPage")
+	@GetMapping("information")
 	public void memberPage()throws Exception{
 		
 	}

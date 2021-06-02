@@ -9,7 +9,6 @@
 </head>
 <body>
 <h1>마이페이지</h1>
-<a href="./memberUpdate">회원정보수정</a>
 
 
 <%-- <p>principal.username : <sec:authentication property="principal.username"/></p>
