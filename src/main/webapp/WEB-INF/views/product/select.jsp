@@ -30,7 +30,13 @@
 			<tbody>
 
 					<tr>
-						<td><a href="#"><img src="/upload/product/${vo.productfile.fileName}" width="300" height="300"/></a></td>
+						<td>
+						<div>
+						<c:forEach items="${vo.files}" var="file">
+							<a href="/upload/product/${file.fileName}">${file.originName}</a>
+						</c:forEach>
+						</div>
+						</td>
 						<td>${vo.productNum}</td>
 						<td>${vo.productName}</td>
 						<td>${vo.username}</td>
@@ -40,8 +46,6 @@
 			  
 			</tbody>
 		</table>
-
-		
 
 
 			<a href="./delete?productNum=${vo.productNum}" class="btn btn-primary" role="button">Delete</a>

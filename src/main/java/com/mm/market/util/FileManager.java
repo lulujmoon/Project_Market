@@ -14,24 +14,26 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class FileManager {
 	
-	public String save(String dirName, MultipartFile multipartFile, HttpSession session) throws Exception {
+	@Autowired
+	private ResourceLoader resourceLoader;
+	
+	public String save(String filePath, MultipartFile multipartFile, HttpSession session) throws Exception {
 		
-		String path = session.getServletContext().getRealPath("resources/upload/"+dirName);
-		File file = new File(path);
+		String path = "classpath:/static/upload";
+		
+		File file = new File(resourceLoader.getResource(path).getFile(), filePath);
+		//System.out.println(file.getAbsolutePath());
 		if(!file.exists()) {
-			file.mkdirs();
+			file.mkdir();
 		}
 		
-		String fileName = "";
-		fileName = UUID.randomUUID().toString()+"_"+multipartFile.getOriginalFilename();
-		
+		String fileName=UUID.randomUUID().toString()+"_"+multipartFile.getOriginalFilename();
 		file = new File(file, fileName);
 		multipartFile.transferTo(file);
 		
-		System.out.println("파일 저장 경로 : "+path);
-		
 		return fileName;
 	}
+	
 	
 	public boolean delete(String dirName, String fileName, HttpSession session) throws Exception {
 		

@@ -32,6 +32,7 @@ public interface ProductMapper {
 	//fileInsert
 	public int setFileInsert(ProductFileVO productFileVO)throws Exception;
 	
+	//file Delete
 	public int setFileDelete(ProductFileVO productFileVO)throws Exception;
 	
 	//update

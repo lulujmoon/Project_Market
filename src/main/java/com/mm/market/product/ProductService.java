@@ -55,7 +55,7 @@ public class ProductService {
 		for(MultipartFile f:file) {
 			ProductFileVO productFileVO = new ProductFileVO();
 			String fileName = fileManager.save("product", f, session);
-			
+			//System.out.println(fileName);
 			productFileVO.setProductNum(productNum);
 			productFileVO.setFileName(fileName);
 			productFileVO.setOriginName(f.getOriginalFilename());
@@ -69,7 +69,34 @@ public class ProductService {
 	
 	//update
 	public int setUpdate(ProductVO productVO, MultipartFile file) throws Exception {
-		return productMapper.setUpdate(productVO);
+		int result = 0;
+		
+		if(file.getOriginalFilename().length()!=0) {
+			ProductVO productVO2 = productMapper.getSelect(productVO);
+			
+			if(productVO2.getThumbnail()!=null) {
+				String delFileName = productVO2.getThumbnail().getFileName();
+				boolean check = fileManager.delete("product", delFileName, session);
+				
+				ProductFileVO productFileVO = new ProductFileVO();
+				productFileVO.setFileNum(productVO2.getThumbnail().getFileNum());
+				productMapper.setFileDelete(productFileVO);
+			}
+			
+			String fileName = fileManager.save("product", file, session);
+			
+			ProductFileVO productFileVO = new ProductFileVO();
+			productFileVO.setProductNum(productVO.getProductNum());
+			productFileVO.setFileName(fileName);
+			productFileVO.setOriginName(file.getOriginalFilename());
+			
+			result = productMapper.setUpdate(productVO);
+			result = productMapper.setFileInsert(productFileVO);
+		} else {
+			result = productMapper.setUpdate(productVO);
+		}
+		return result;
+		
 	}
 	
 }

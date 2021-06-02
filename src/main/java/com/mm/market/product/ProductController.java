@@ -68,10 +68,9 @@ public class ProductController {
 	
 	@PostMapping("update")
 	public String setUpdate(ProductVO productVO, MultipartFile file)throws Exception{
-		int result = productService.setUpdate(productVO, file);
-		
-		
-		
+		productService.setUpdate(productVO, file);
+		productVO = productService.getSelect(productVO);
+				
 		return "redirect:./list";
 	}
 }

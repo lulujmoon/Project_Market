@@ -22,4 +22,6 @@ public class ProductVO {
 	private Long locationCode;
 	
 	private List<ProductFileVO> files;
+	
+	private ProductFileVO thumbnail;
 }
