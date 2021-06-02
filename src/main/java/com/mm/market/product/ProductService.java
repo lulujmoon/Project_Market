@@ -2,6 +2,8 @@ package com.mm.market.product;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,9 @@ public class ProductService {
 	
 	@Autowired
 	private FileManager fileManager;
+	
+	@Autowired
+	private HttpSession session;
 	
 	public List<ProductVO> getList(Pager pager)throws Exception{
 		Long perPage = 20L;
@@ -40,28 +45,26 @@ public class ProductService {
 	}
 
 	//insert
-	public int setInsert(ProductVO productVO, MultipartFile []files) throws Exception {
-		int result = productMapper.setInsert(productVO);
-		String filePath = "upload/product/";
+	public ProductVO setInsert(ProductVO productVO, MultipartFile file) throws Exception {
 		
-		for(MultipartFile multipartFile:files) {
-			if(multipartFile.getSize()==0) {
-				continue;
-			}
-			String fileName = fileManager.save(multipartFile, filePath);
-			System.out.println(fileName);
-			ProductFileVO productFileVO = new ProductFileVO();
-			productFileVO.setFileName(fileName);
-			productFileVO.setOriginName(multipartFile.getOriginalFilename());
-			productFileVO.setProductNum(productVO.getProductNum());
-			
-			productMapper.setFileInsert(productFileVO);
-		}
-		return result; 
+		String fileName = fileManager.save("product", file, session);
+		long productNum = productMapper.getProductNum();
+		
+		productVO.setProductNum(productNum);
+		
+		ProductFileVO productFileVO = new ProductFileVO();
+		productFileVO.setProductNum(productNum);
+		productFileVO.setFileName(fileName);
+		productFileVO.setOriginName(file.getOriginalFilename());
+		
+		int result = productMapper.setInsert(productVO);
+		result = productMapper.setFileInsert(productFileVO);
+		
+		return productVO; 
 	}
 	
 	//update
-	public int setUpdate(ProductVO productVO) throws Exception {
+	public int setUpdate(ProductVO productVO, MultipartFile file) throws Exception {
 		return productMapper.setUpdate(productVO);
 	}
 	

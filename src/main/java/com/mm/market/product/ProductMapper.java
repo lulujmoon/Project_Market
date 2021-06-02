@@ -17,6 +17,9 @@ public interface ProductMapper {
 	//Select
 	public ProductVO getSelect(ProductVO productVO)throws Exception;
 	
+	public long getProductNum()throws Exception;
+	
+	
 	public int setHitUpdate(ProductVO productVO)throws Exception;
 	
 	//Delete
@@ -27,6 +30,8 @@ public interface ProductMapper {
 	
 	//fileInsert
 	public int setFileInsert(ProductFileVO productFileVO)throws Exception;
+	
+	public int setFileDelete(ProductFileVO productFileVO)throws Exception;
 	
 	//update
 	public int setUpdate(ProductVO productVO) throws Exception;

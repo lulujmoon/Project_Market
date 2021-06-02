@@ -14,8 +14,8 @@
 <h2>Product Insert Page</h2>
 	<form action="./insert" method="POST" enctype="multipart/form-data">
 		<div>
-			<input type="file" name="files">
-			<input type="file" name="files">
+			<input type="file" name="file">
+			<input type="file" name="file">
 		</div>
 		
 	  <div class="form-group">

@@ -61,6 +61,11 @@
 			</collection>
 		</resultMap>
 			
+			
+		<select id="getProductNum" resultType="java.lang.Long">
+			select product_seq.nextval from dual
+		</select>
+		
 		<select id="getTotalCount" resultType="Long" parameterType="Pager">
 			select count(productNum) from product
 		</select>
@@ -85,8 +90,12 @@
 			values (#{productNum}, #{fileName}, #{originName})
 		</insert>
 		
+		<delete id="setFileDelete" parameterType="ProductFileVO">
+			delete productFile where fileNum=#{fileNum}
+		</delete>
+		
 		<update id="setUpdate" parameterType="ProductVO">
-			update product set 
+			update product set
 			productName=#{productName}, 
 			categoryCode=#{categoryCode}, 
 			productContent=#{productContent}, 

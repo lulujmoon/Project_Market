@@ -51,16 +51,15 @@ public class ProductController {
 	public void setInsert() throws Exception {}
 	
 	@PostMapping("insert")
-	public String setInsert(ProductVO productVO, MultipartFile[] files) throws Exception {
+	public String setInsert(ProductVO productVO, MultipartFile file) throws Exception {
 		  //Test
-//		  System.out.println(files.length); 
+//		  System.out.println(file.length); 
 //		  
-//		  for(MultipartFile f : files) {
+//		  for(MultipartFile f : file) {
 //		  		System.out.println(f.getOriginalFilename()); 
 //		  }
 		 
-		
-		int result = productService.setInsert(productVO, files);
+		productVO = productService.setInsert(productVO, file);
 		
 		return "redirect:product/list";
 	}
@@ -75,8 +74,8 @@ public class ProductController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(ProductVO productVO)throws Exception{
-		int result = productService.setUpdate(productVO);
+	public String setUpdate(ProductVO productVO, MultipartFile file)throws Exception{
+		int result = productService.setUpdate(productVO, file);
 		
 		
 		

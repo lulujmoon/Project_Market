@@ -16,8 +16,8 @@
 	<form action="./update" method="post">
 		<input type="hidden" name="productNum" value="${vo.productNum}">
 	<div>
-		<input type="file" name="files">
-		<input type="file" name="files">
+		<input type="file" name="file">
+		<input type="file" name="file">
 	</div>
 	  <div class="form-group">
 	    <label>상품 명</label>
@@ -29,7 +29,7 @@
 	  </div>
 	  <div class="form-group">
 	    <label>카테고리</label>
-	    <input type="text" value="${vo.productCategory}" name="productCategory">
+	    <input type="text" value="${vo.categoryCode}" name="categoryCode">
 	  </div>
 	    <div class="form-group">
 	    <label>상품 설명</label>
