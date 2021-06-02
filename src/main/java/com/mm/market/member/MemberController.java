@@ -145,11 +145,11 @@ public class MemberController {
 	}
 	
 	@GetMapping("information")
-	public void setUpdate(MemberVO memberVO)throws Exception{
+	public void infomation(MemberVO memberVO)throws Exception{
 		
 	}
 	
-	@PostMapping("information")
+	@PostMapping("update")
 	public String setUpdate(MemberVO memberVO,ModelAndView mv)throws Exception{
 		int result = memberService.setJpdate(memberVO);
 		
