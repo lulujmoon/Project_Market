@@ -10,11 +10,12 @@
 </head>
 <body>	
 
+<h1>${dto.password}</h1>
 
 <c:if test="${empty SPRING_SECURITY_CONTEXT}">
 	
-	<a href="./member/memberApprove">회원가입</a>
-	<a href="./member/memberLogin">로그인</a>
+	<a href="${pageContext.request.contextPath}/member/memberApprove">회원가입</a>
+	<a href="${pageContext.request.contextPath}/member/memberLogin">로그인</a>
       	
 	<a href="https://kauth.kakao.com/oauth/authorize?client_id=bdf85067bd67f89b950ae22189274a9c&redirect_uri=http://localhost/member/auth/kakao/callback&response_type=code"><img src="/img/kakao_login_button.png"></a>
 
