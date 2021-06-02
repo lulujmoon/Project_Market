@@ -26,8 +26,7 @@
 		<dependency>
     <groupId>javax.validation</groupId>
     <artifactId>validation-api</artifactId>
-    <version>2.0.1.Final</version>
-</dependency>
+    </dependency>
 		<!-- web socket -->
 		<dependency>
 			<groupId>org.springframework</groupId>

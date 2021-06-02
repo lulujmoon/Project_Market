@@ -8,7 +8,6 @@ public class HeartVO {
 	private Long heartNum;
 	private String username;
 	private Long productNum;
-	private int heartCheck;
-	
+
 
 }

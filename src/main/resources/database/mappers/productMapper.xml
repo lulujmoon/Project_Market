@@ -67,9 +67,9 @@
 		
 		<select id="getTotalCount" resultType="Long" parameterType="Pager">
 			SELECT count(productNum) FROM product
-      WHERE productName LIKE CONCAT('%', #{search}, '%') OR 
-      locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%'))
-      AND productNum > 0
+		    WHERE productName LIKE CONCAT('%', #{search}, '%') OR 
+		    locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%'))
+		    AND productNum > 0
 
 		</select>
 		
@@ -82,22 +82,38 @@
 			DELETE FROM product WHERE productNum=#{productNum}
 		</delete>
 
-		<insert id="setInsert" parameterType="ProductVO">
+		<insert id="setInsert" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
 			insert into product 
 			(productNum, productName, username, categoryCode, productDate, productHit, productHeart, productContent, 
 			productPrice, productNego, locationCode)
 			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, 
-			 #{productContent}, #{productPrice}, 0, #{locationCode})
+			 #{productContent}, #{productPrice}, 0, 1100000000)
 		</insert>
 		
-		<update id="setHeart" parameterType="Hashmap">
-			UPDATE heart SET heartCheck = heartCheck+1 WHERE username=#{username} AND productNum=#{productNum}
-		</update>
+		<insert id="setFileInsert" parameterType="ProductFileVO">
+			insert into productFile (productNum, fileName, originName)
+			values (#{productNum}, #{fileName}, #{originName})
+		</insert>
 		
 		
-		<update id="setHeartDelete" parameterType="Hashmap">
-			UPDATE heart SET heartCheck = 0 WHERE username=#{username} AND productNum=#{productNum}
+		
+		<!-- heart -->
+		<insert id="setHeart" parameterType="HeartVO">
+			insert into heart (username, productNum) values (#{username}, #{productNum}) 
+		</insert>
+		
+		<delete id="deleteHeart" parameterType="HeartVO">
+			delete from heart where username=#{username} and productNum=#{productNum}
+		</delete>
+		
+		<update id="updateHeart" parameterType="HeartVO">
+			update product set productHeart = (select count(*) from heart where productNum=#{productNum})where productNum=#{productNum}
 		</update>
+		
+		<select id="getHeart" resultType="Long">
+			SELECT COUNT(heartNum) FROM heart WHERE username=#{username} and productNum=#{productNum}
+		</select>
+		
 		
 </mapper>   
 

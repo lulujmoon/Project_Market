@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -54,24 +55,55 @@
 			
 			<a href="#" class="btn btn-primary" role="button">가격제안</a>
 			<a href="#" class="btn btn-danger" role="button">신고하기</a>
-					<a href="javascript: like_func();" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}"><img src="/resources/images/검정.png" width="50px" height="50px"> </a>
-		
-	<!--  "./setHeart?id=${vo.productNum}"
-			<c:choose>
-				<c:when test="${username ne null}">
-				</c:when>
-				<c:otherwise>
-					<a href="javascript: login_need();" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}"><img src="/resources/images/검정.png" width="50px" height="50px"> </a>
-				</c:otherwise>
-			</c:choose>
-		
-		 -->	
-		
+			
+
+				<a class="heart" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}">
+					<img id="heart" src="" width="50px" height="50px"> 
+				</a>
+	
+			
 
 		</div>
 
 
 
-<script type="text/javascript" src="/resources/js/productSelect.js"></script>	
+
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	let heartval = ${heart}
+	
+	if(heartval>0) {
+		console.log("heart : "+heartval);
+		$("#heart").prop("src", "/resources/images/빨강.png");
+		$(".heart").prop("name", heartval);
+	} else {
+		console.log("heart : "+heartval);
+		$("#heart").prop("src", "/resources/images/검정.png");
+		$(".heart").prop("name", heartval);
+	}
+	
+	$(".heart").on("click", function(){
+		
+		let that = $(".heart");
+		
+		let sendData = {'productNum' : '${productVO.productNum}', 'heart' : that.prop('name')};
+		$.ajax({
+			url : '/product/heart',
+			type : 'POST',
+			data : sendData,
+			success : function(data) {
+				that.prop('name', data);
+				if(data==1) {
+					$("heart").prop("src","/resources/images/빨강.png");
+				} else {
+					$("heart").prop("src","/resources/images/검정.png");
+				}
+				
+			}
+		})
+	})
+})
+</script>
 </body>
 </html>

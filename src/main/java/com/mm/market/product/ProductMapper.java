@@ -27,9 +27,23 @@ public interface ProductMapper {
 	//insert
 	public int setInsert(ProductVO productVO) throws Exception;
 	
+	//fileInsert
+	public int setFileInsert(ProductFileVO productFileVO)throws Exception;
+	
+	public int setFileDelete(ProductFileVO productFileVO)throws Exception;
+	
 	//update
 	public int setUpdate(ProductVO productVO) throws Exception;
 	
 
+	
+	//heart
+	public Long getHeart(HeartVO heartVO)throws Exception;
+	
+	public int setHeart(HeartVO heartVO)throws Exception;
+	
+	public int deleteHeart(HeartVO heartVO)throws Exception;
+	
+	public void updateHeart(Long productNum)throws Exception;
 	
 }
