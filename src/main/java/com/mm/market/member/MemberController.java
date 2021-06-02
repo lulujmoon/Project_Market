@@ -150,7 +150,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(MemberVO memberVO,ModelAndView mv)throws Exception{
+	public String setUpdate(MemberVO memberVO)throws Exception{
 		int result = memberService.setJpdate(memberVO);
 		
 		
