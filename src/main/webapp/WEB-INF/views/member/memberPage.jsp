@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>멤버페이지</h1>
+<h1>마이페이지</h1>
+<a href="./memberUpdate">회원정보수정</a>
 
 
 <%-- <p>principal.username : <sec:authentication property="principal.username"/></p>
