@@ -82,6 +82,14 @@ public class MemberService implements UserDetailsService{
 
 		return result;
 	}
+	
+	public int setJpdate(MemberVO memberVO)throws Exception{
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		
+		int result = memberMapper.setUpdate(memberVO);
+		
+		return result;
+	}
 
 	public MemberVO findMember(String username) {
 		// TODO Auto-generated method stub
