@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
 	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
@@ -13,34 +14,37 @@
 </head>
 <body>
 	<div class="container">
-		<h2>동네 생활</h2>
-		<table class="table">
-			<thead class="thead-dark">
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>카테고리</th>
-					<th>작성자</th>
-					<th>작성 날짜</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${list}" var="dto">
-					<tr>
-						<td>${dto.socialNum}</td>
-						<td><a href="./select?num=${dto.socialNum}"> <c:catch>
-									<c:forEach begin="1" end="${dto.depth}">--</c:forEach>
-								</c:catch>${dto.socialTitle}</a></td>
-						<td>${dto.socialCategory}</td>
-						<td>${dto.socialWriter}</td>
-						<td>${dto.socialDate}</td>
-					</tr>
+		<h2>Social Page</h2>
+		<div class="category-container">
+			<ul class="category-list">
+				<c:forEach items="${categories}" var="category">
+					<li><a href="./list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
 				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-
-	<div class="container">
+			</ul>
+			<table class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th>번호</th>
+						<th>카테고리</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성 날짜</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${list}" var="dto">
+						<tr>
+							<td>${dto.socialNum}</td>
+							<td>${dto.categoryCode}</td>
+							<td><a href="./select?socialNum=${dto.socialNum}">
+									${dto.socialTitle}</a></td>
+							<td>${dto.username}</td>
+							<td>${dto.socialDate}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 		<ul class="pagination">
 			<c:if test="${pager.pre}">
 				<li class="page-item"><a class="page-link p" href="#"
@@ -61,9 +65,10 @@
 				<input type="hidden" name="curPage" value="1" id="curPage">
 				<div class="input-group-prepend">
 					<select class="form-control" name="kind" id="kind">
-						<option>제목</option>
-						<option>내용</option>
-						<option>작성자</option>
+						<option class="sel">제목</option>
+						<option class="sel">카테고리</option>
+						<option class="sel">내용</option>
+						<option class="sel">작성자</option>
 					</select>
 				</div>
 				<input type="text" class="form-control" name="search" id="search"
@@ -75,5 +80,6 @@
 		</div>
 		<a href="./insert" class="btn btn-primary" role="button">작성</a>
 	</div>
+	<script type="text/javascript" src="../resources/js/common.js"></script>
 </body>
 </html>

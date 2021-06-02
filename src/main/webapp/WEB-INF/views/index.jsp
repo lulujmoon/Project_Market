@@ -7,7 +7,8 @@
 <title>Hello, world!</title>
 </head>
 <body>
-	<a href="/social/list">동네 생활</a>	
-	<a href="./social/insert">Insert</a>
+	<a href="/social/list">우리동네</a>	
+	<a href="/social/insert">Insert</a>
+
 </body>
 </html>

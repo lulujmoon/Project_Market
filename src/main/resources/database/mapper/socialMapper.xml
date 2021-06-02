@@ -8,8 +8,8 @@
 		<!-- 공통으로 사용하는 sql문 -->
 		<where>
 			<choose>
-				<when test="kind=='SocialWriter'">
-					socialWriter like concat('%', #{search}, '%')
+				<when test="kind=='SocialTitle'">
+					socialTitle like concat('%', #{search}, '%')
 				</when>
 
 				<when test="kind=='SocialContent'">
@@ -17,38 +17,43 @@
 				</when>
 
 				<otherwise>
-					socialTitle like concat('%', #{search}, '%')
+					username like concat('%', #{search}, '%')
 				</otherwise>
 			</choose>
 		</where>
 	</sql>
 
-	<select id="getList" resultType="SocialVO" parameterType="Pager">
-		select * from social
+	<select id="getList" resultMap="selectResult" parameterType="Pager">
+		select S.*, SC.*, SF.*
+		from social S left join socialFile SF
+		on S.socialNum = SF.socialNum
+		inner join socialCategory SC
+		on S.categoryCode = SC.categoryCode
 		<include refid="searcher"></include>
-		order by socialNum desc
+		order by S.socialNum desc
 		limit #{startRow}, #{perPage}
 	</select>
 
-	<select id="getTotalCount" parameterType="Pager" resultType="Long">
-		select count(socialNum) from social
-	</select>
-
-	<select id="getSelect" resultType="SocialVO"
-		parameterType="SocialVO">
-		select S.*, SF.*
-		from social S left join socialFiles SF
+	<select id="getSelect" resultMap="selectResult" parameterType="SocialVO">
+		select S.*, SC.*, SF.*
+		from social S left join socialFile SF
 		on S.socialNum = SF.socialNum
+		inner join socialCategory SC
+		on S.categoryCode = SC.categoryCode
 		where S.socialNum=#{socialNum}
 	</select>
 
 	<resultMap type="SocialVO" id="selectResult">
 		<id column="socialNum" property="socialNum"></id>
 		<result column="socialTitle" property="socialTitle" />
-		<result column="socialCategory" property="socialCategory" />
+		<result column="categoryCode" property="categoryCode" />
 		<result column="username" property="username" />
 		<result column="socialContent" property="socialContent" />
 		<result column="socialDate" property="socialDate" />
+		<association property="socialCategory" javaType="SocialCategoryVO">
+			<id property="categoryCode" column="categoryCode"/>
+			<result property="categoryName" column="categoryName"/>
+		</association>
 		<collection property="files" javaType="java.util.List" ofType="SocialFileVO">
 			<id column="fileNum" property="fileNum" />
 			<result column="fileName" property="fileName" />
@@ -56,19 +61,24 @@
 		</collection>
 	</resultMap>
 
+	<select id="getTotalCount" resultType="Long" parameterType="Pager">
+		select count(socialNum) from social
+	</select>
+
 	<insert id="setInsert" parameterType="SocialVO">
 		insert into social
-		values(#{num}, #{title}, #{writer}, #{contents}, now(), 0)
+		(socialNum, socialTitle, categoryCode, username, socialContent, socialDate)
+		values(#{socialNum}, #{socialTitle}, #{categoryCode}, #{username}, #{socialContent}, now())
 	</insert>
 
 	<insert id="setFileInsert" parameterType="SocialFileVO">
-		insert into socialFiles (socialNum, fileName, originName)
+		insert into socialFile (socialNum, fileName, originName)
 		values (#{socialNum}, #{fileName}, #{originName})
 	</insert>
 
 	<update id="setUpdate" parameterType="SocialVO">
-		update social set socialTitle=#{socialTitle}, socialContent=#{socialContent}
-		where socialNum=#{socialNnum}
+		update social set socialTitle=#{socialTitle}, categoryCode=#{categoryCode}, socialContent=#{socialContent}
+		where socialNum=#{socialNum}
 	</update>
 
 	<delete id="setDelete" parameterType="SocialVO">

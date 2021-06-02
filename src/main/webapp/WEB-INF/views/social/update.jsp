@@ -12,30 +12,30 @@
 </head>
 <body>
 	<h2>Product Insert Page</h2>
-	<form action="./insert" method="POST" enctype="multipart/form-data">
+	<form action="./update" method="POST">
+		<input type="hidden" name="socialNum" value="${vo.socialNum}">
 
 		<div class="form-group">
-			<label>제목</label> <input type="text" name="socialTitle">
+			<label>제목</label>
+			<input type="text" value="${vo.socialTitle}" name="socialTitle">
 		</div>
 
 		<div class="form-group">
-			<label>작성자</label> <input type="text" name="username">
+			<label>작성자</label>
+			<input type="text" value="${vo.username}" name="username">
 		</div>
 
 		<div class="form-group">
-			<label>카테고리</label> <input type="text" name="categoryCode">
+			<label>카테고리</label>
+			<input type="text" value="${vo.categoryCode}" name="categoryCode">
 		</div>
 
 		<div class="form-group">
 			<label>글 내용</label>
-			<input type="text" name="socialContent">
-		</div>
-		
-		<div>
-			<input type="file" name="files">
+			<input type="text" value="${vo.socialContent}" name="socialContent">
 		</div>
 
-		<button class="btn btn-outline-secondary">작성</button>
+		<button class="btn btn-outline-secondary">수정</button>
 	</form>
 </body>
 </html>

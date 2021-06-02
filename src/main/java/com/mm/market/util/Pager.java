@@ -16,6 +16,7 @@ public class Pager {
 	//search
 	private String kind;
 	private String search;
+	private Long categoryCode;
 
 	public void makeNum(Long totalCount) {
 		int perBlock = 5;
@@ -154,5 +155,19 @@ public class Pager {
 
 	public void setSearch(String search) {
 		this.search = search;
+	}
+
+	public Long getCategoryCode() {
+		if(this.categoryCode == null) {
+			this.categoryCode = 0L;
+		}
+		return categoryCode;
+	}
+
+	public void setCategoryCode(Long categoryCode) {
+		if(categoryCode == null) {
+			categoryCode = 0L;
+		}
+		this.categoryCode = categoryCode;
 	}
 }

@@ -11,6 +11,8 @@ public interface SocialMapper {
 
 	//List
 	public List<SocialVO> getList(Pager pager) throws Exception;
+	//Category List
+	public List<SocialVO> getCategoryList(Pager pager) throws Exception;
 	//Count
 	public Long getTotalCount(Pager pager) throws Exception;
 	//Select
