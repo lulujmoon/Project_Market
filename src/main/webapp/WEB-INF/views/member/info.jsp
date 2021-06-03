@@ -23,9 +23,9 @@
 		<div class="info__header">
 			<h2>내 정보</h2>
 			<div class="btn-group">
-				<button class="btn-edit" class="active">수정</button>
-				<button class="btn-submit">완료</button>
-				<button class="btn-cancel">취소</button>
+				<button class="btn btn-edit" class="active">수정</button>
+				<button class="btn btn-submit">완료</button>
+				<button class="btn btn-cancel">취소</button>
 			</div>
 		</div>
 		<form id="info-form" action="./update" method="post">
@@ -57,8 +57,23 @@
 		</form>
 	</div>
 	<div class="location-container">
-		<h2> 내 지역 </h2>
-		최대 3개 지역까지 설정할 수 있습니다.
+		<div class="location__header">
+			<h2> 내 지역 </h2>
+			최대 3개 지역까지 설정할 수 있습니다.
+			<button class="btn btn-add active">추가</button>
+		</div>
+		<div class="location-group">
+			<div class="location__title">내 지역 1</div>
+			<div class="location__content">세종시 아름동</div>
+		</div>
+		<div class="location-group">
+			<div class="location__title">내 지역 2</div>
+			<div class="location__content">세종시 아름동</div>
+		</div>
+		<div class="location-group">
+			<div class="location__title">내 지역 3</div>
+			<div class="location__content">세종시 아름동</div>
+		</div>		
 	</div>
 </div>								
 								

@@ -10,7 +10,7 @@
 	justify-content: space-between;
 }
 
-.info-container{
+.info-container, .location-container{
 	width: 100%;
 	max-width: 500px;
 	margin: 40px 0;
@@ -18,14 +18,6 @@
 	border: 1px solid #b4b4b4;
 	display: flex;
 	flex-direction: column;
-}
-
-.location-container{
-	width: 100%;
-	max-width: 500px;
-	margin: 40px 0;
-	padding: 10px 40px;
-	border: 1px solid #b4b4b4;
 }
 
 .info-group{
@@ -36,7 +28,14 @@
 	align-items: center;
 }
 
-.info__header{
+.location-group{
+	margin: auto 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.info__header, .location__header{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -44,76 +43,20 @@
 	border-bottom: 1px solid #b4b4b4;
 }
 
-.btn-group{
-	display: flex;
-	justify-content: flex-end;
+.info__title, .location__title{
+	width: 20%;
+	margin: 10px 0;
+	border-right: 1px solid #b4b4b4;
 }
-
-.btn-edit.active{
-	all: unset;
-	height: 25px;
-	border: 1px solid #b4b4b4;
-	border-radius: 5px;
-	padding: 5px 10px;
-	cursor: pointer;
-}
-
-.btn-edit.active:hover{
-	background-color: #b4b4b4;
-	color: white;
-}
-
-.btn-edit{
-	display: none;
-}
-
-.btn-submit{
-	display:none;
-}
-
-.btn-submit.active{
-	all: unset;
-	display: block;
-	height: 25px;
-	margin-right: 5px;
-	padding: 5px 10px;
-	border: 1px solid #b4b4b4;
-	border-radius: 5px;
-	cursor: pointer;
-}
-
-.btn-submit.active:hover{
-	background-color: #b4b4b4;
-	color: white;
-}
-
-.btn-cancel{
-	display:none;
-}
-
-.btn-cancel.active{
-	all: unset;
-	display: block;
-	height: 25px;
-	border: 1px solid #b4b4b4;
-	border-radius: 5px;
-	padding: 5px 10px;
-	cursor: pointer;
-}
-
-.btn-cancel.active:hover{
-	background-color: #b4b4b4;
-	color: white;
-}
-
 
 .info__title{
-	width: 20%;
 	height: 35px;
-	margin: 10px 0;
 	line-height: 35px;
-	border-right: 1px solid #b4b4b4;
-	
+}
+
+.location__title{
+	height: 60px;
+	line-height: 60px;
 }
 
 .info__content{
@@ -150,4 +93,29 @@
 	border: 1px solid #aeaeae;
 	outline: none;
 	font-size: 0.9em;
+}
+
+.btn-group{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn{
+	display:none;
+}
+
+.btn.active{
+	all: unset;
+	display: block;
+	height: 25px;
+	margin-left: 5px;
+	padding: 5px 10px;
+	border: 1px solid #b4b4b4;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.btn.active:hover{
+	background-color: #b4b4b4;
+	color: white;
 }
