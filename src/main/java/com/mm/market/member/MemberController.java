@@ -164,7 +164,7 @@ public class MemberController {
 
 		
 	@GetMapping("auth/kakao/callback")
-	public String kakaoCallback(String code,MultipartFile avatar) throws Exception {
+	public String kakaoCallback(String code) throws Exception {
 		
 		
 		//post방식으로 key=value 데이터를 요청(카카오쪽으로)
@@ -265,7 +265,7 @@ public class MemberController {
 		if(originmemberVO==null) {
 			try {
 				System.out.println("기존회원아님->회원가입진행");
-				memberService.setJoin(KakaomemberVO,avatar);
+				memberService.setKakaoJoin(KakaomemberVO);
 			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
