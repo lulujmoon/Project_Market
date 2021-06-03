@@ -26,6 +26,7 @@
 					<th>NAME</th>
 					<th>DATE</th>
 					<th>HIT</th>
+					<th>HEART</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,6 +38,7 @@
 						<td>${vo.username}</td>
 						<td>${vo.productDate}</td>
 						<td>${vo.location.locationName}</td>
+						<td>${vo.productHeart}</td>
 					</tr>
 			  
 			</tbody>
@@ -77,10 +79,12 @@ $(document).ready(function(){
 		console.log("heart : "+heartval);
 		$("#heart").prop("src", "/resources/images/빨강.png");
 		$(".heart").prop("name", heartval);
+	//	$(".heart").prop("onclick", "if ( confirm('찜을 취소하시겠습니까?')==false ){return false;}");
 	} else {
 		console.log("heart : "+heartval);
 		$("#heart").prop("src", "/resources/images/검정.png");
 		$(".heart").prop("name", heartval);
+	//	$(".heart").prop("onclick", "if ( confirm('찜을 취소하시겠습니까?')==false ){return false;}");
 	}
 	
 	$(".heart").on("click", function(){
@@ -102,6 +106,9 @@ $(document).ready(function(){
 				
 			}
 		})
+	
+
+		
 	})
 })
 </script>

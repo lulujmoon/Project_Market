@@ -106,9 +106,9 @@
 			delete from heart where username=#{username} and productNum=#{productNum}
 		</delete>
 		
-		<update id="updateHeart" parameterType="HeartVO">
+		<select id="updateHeart" parameterType="HeartVO">
 			update product set productHeart = (select count(*) from heart where productNum=#{productNum})where productNum=#{productNum}
-		</update>
+		</select>
 		
 		<select id="getHeart" resultType="Long">
 			SELECT COUNT(heartNum) FROM heart WHERE username=#{username} and productNum=#{productNum}

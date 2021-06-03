@@ -5,12 +5,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mm.market.category.CategoryMapper;
@@ -42,11 +47,15 @@ public class ProductController {
 	
 	
 	@GetMapping("select")
-	public String getSelect(@RequestParam("productNum") Long productNum ,ProductVO productVO, Model model, HttpServletRequest httpServletRequest)throws Exception {
+	public String getSelect(@RequestParam("productNum") Long productNum ,ProductVO productVO, Model model, Authentication auth1)throws Exception {
 		productVO = productService.getSelect(productVO);
 		System.out.println(productVO);
 		
-		String username = String.valueOf(httpServletRequest.getSession().getAttribute("username"));
+		int startInx = auth1.getPrincipal().toString().indexOf("=");
+		int lastInx = auth1.getPrincipal().toString().indexOf(",");
+		
+		String username = auth1.getPrincipal().toString().substring(startInx+1, lastInx);
+		System.out.println(username);
 		
 		HeartVO heartVO = new HeartVO();
 		heartVO.setProductNum(productNum);
@@ -57,24 +66,30 @@ public class ProductController {
 		
 		
 		model.addAttribute("heart", heart);
-		
 		model.addAttribute("vo", productVO);
 		return "product/select";
 	}
 	
+	@ResponseBody
 	@PostMapping(value="heart", produces = "application/json")
-	public Long heart(HttpServletRequest httpServletRequest)throws Exception{
+	public Long heart(HttpServletRequest httpServletRequest, Authentication auth)throws Exception{
 		
 		Long heart = Long.parseLong(httpServletRequest.getParameter("heart"));
 		Long productNum =Long.parseLong(httpServletRequest.getParameter("productNum"));
-		String username = String.valueOf(httpServletRequest.getSession().getAttribute("username"));
+
+		int startInx = auth.getPrincipal().toString().indexOf("=");
+		int lastInx = auth.getPrincipal().toString().indexOf(",");
 		
+		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
+		System.out.println(username);
+		
+		
+
 		HeartVO heartVO = new HeartVO();
 		
 		heartVO.setProductNum(productNum);
 		heartVO.setUsername(username);
 		
-		System.out.println(heart);
 		
 		if(heart >= 1 ) {
 			productService.deleteHeart(heartVO);
@@ -84,6 +99,8 @@ public class ProductController {
 			heart=1L;
 		}
 		
+		System.out.println("HEART : "+heart);
+
 		return heart;
 	}
 	
