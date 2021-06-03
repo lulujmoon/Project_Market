@@ -1,6 +1,8 @@
 package com.mm.market.member;
 
+import java.security.Principal;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.UUID;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -18,6 +20,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -35,6 +38,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mm.market.memberLocation.MemberLocationService;
+import com.mm.market.memberLocation.MemberLocationVO;
 
 @Controller
 @RequestMapping("/member/**")
@@ -45,6 +50,9 @@ public class MemberController {
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private MemberLocationService memberLocationService;
 
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
@@ -137,12 +145,20 @@ public class MemberController {
 	}
 	
 	@GetMapping("info")
-	public void infomation(MemberVO memberVO)throws Exception{
+	public void infomation(Authentication authentication, HttpSession session)throws Exception{
 		
+		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+		
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		memberLocationVO.setUsername(userDetails.getUsername());
+		List<MemberLocationVO> list = memberLocationService.getList(memberLocationVO);
+		
+		session.setAttribute("locations", list);
 	}
 	
 	@PostMapping("update")
 	public String setUpdate(MemberVO memberVO) throws Exception{
+		
 		int result = memberService.setUpdate(memberVO);
 		return "redirect:./info";
 	}
