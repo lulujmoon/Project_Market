@@ -1,32 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<c:import url="../template/setting.jsp"></c:import>
+<link rel="stylesheet" href="../resources/css/sign.css">
+<title>Login</title>
 </head>
 <body>
-	<h1>member Login Page</h1>
-	<h1>${message}</h1>
-
-	<form action="./memberLogin" method="post">
-		<div class="form-group">
-			<label for="username">ID</label> <input type="text"
-				class="form-control" id="username" name="username"
-				aria-describedby="idlHelp">
+<c:import url="../template/header.jsp"></c:import>
+	<div class="login">
+		<div class="container">
+			<div class="logo">
+				<i class="fas fa-lemon"></i><span>&nbsp;Login</span>
+			</div>
+			<form action="./memberLogin" method="post">
+				<div class="form-group">
+					<label for="username">Username</label><br>
+					<input type="text"	class="form-control" id="username" name="username"><br>
+				</div>
+				
+				<div class="form-group">
+					<label for="password">Password</label><br> 
+					<input type="password" class="form-control" id="password" name="password">
+				</div>
+				<div class="login-btn">
+					<button type="submit" class="btn-wide btn-submit">Login</button>
+					<a href="./memberJoin">회원가입</a>
+					<a href="#">아이디/비밀번호 찾기</a>
+				</div>
+			</form>
+			<div class="login-btn">
+				<button type="button" class="btn-wide btn-naver">Login with Naver</button>
+			</div>
+			<div class="login-btn">
+				<button type="button" class="btn-wide btn-kakao">Login with Kakao</button>
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="password">Password</label> <input type="password"
-				class="form-control" id="password" name="password">
-		</div>
-
-		<div class="form-group form-check">
-			<input type="checkbox" class="form-check-input" id="exampleCheck1">
-			<label class="form-check-label" for="exampleCheck1">Check me
-				out</label>
-		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
-	</form>
+	</div>
+	
+<c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="../resources/js/common.js"></script>
 </body>
 </html>

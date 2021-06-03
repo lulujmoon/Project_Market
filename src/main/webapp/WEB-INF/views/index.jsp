@@ -1,42 +1,93 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Hello, world!</title>
+<c:import url="./template/setting.jsp"></c:import>
+<link rel="stylesheet" href="../resources/css/index.css">
+<title>Home</title>
 </head>
-<body>	
-
-<h1>${dto.password}</h1>
-
-<c:if test="${empty SPRING_SECURITY_CONTEXT}">
+<body>
 	
-	<a href="${pageContext.request.contextPath}/member/memberApprove">회원가입</a>
-	<a href="${pageContext.request.contextPath}/member/memberLogin">로그인</a>
-      	
-	<a href="https://kauth.kakao.com/oauth/authorize?client_id=bdf85067bd67f89b950ae22189274a9c&redirect_uri=http://localhost/member/auth/kakao/callback&response_type=code"><img src="/img/kakao_login_button.png"></a>
-
-</c:if>
-	<c:if test="${not empty SPRING_SECURITY_CONTEXT}">
+<c:import url="./template/header.jsp"></c:import>
 	
-	<a href="./member/information">마이페이지</a>
-	<a href="./member/memberLogout">로그아웃</a>
-	</c:if>
+	<div class="container">
+		<div class="carousel-container">
+			<div class="carousel__btn">
+				<i class="fas fa-chevron-left" id="prev-btn"></i>
+				<i class="fas fa-chevron-right" id="next-btn"></i>
+			</div>
+			<div class="carousel-slide">
+				<img src="../resources/images/635788502.jpg" class="carousel-images" id="lastClone">
+				<img src="../resources/images/641634667.jpg" class="carousel-images">
+				<img src="../resources/images/639509788.jpg" class="carousel-images">
+				<img src="../resources/images/641827905.jpg" class="carousel-images">
+				<img src="../resources/images/617974702.jpg" class="carousel-images">
+				<img src="../resources/images/635788502.jpg" class="carousel-images">
+				<img src="../resources/images/641634667.jpg" class="carousel-images" id="firstClone">			
+			</div>
+		</div>
+		<section class="home__products">
+			<div class="section-title">
+				<h2>새로 올라온 상품</h2>
+				<a href="${pageContext.request.contextPath}/product/list">더 보기</a>
+			</div>
+			<div class="section-contents">
+				<div class="prd__card">
+					<img class="card__img" src="../resources/images/test01.jpg">
+					<div class="card__info">
+						<div class="info__name">모여봐요 동물의 숲</div>
+						<div class="info__price">45000원</div>
+						<div class="info__date">9분 전</div>
+						<div class="info__location"><i class="fas fa-map-marker-alt"></i> 세종시 아름동</div>
+					</div>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>	
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>	
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>												
+			</div>
+		</section>
+		<section class="home__socials">
+			<div class="section-title">
+				<h2>새로 올라온 글</h2>
+				<a href="#">더 보기</a>
+			</div>
+			<div class="section-contents">
+				<div class="soc__article"></div>
+				<div class="soc__article"></div>
+				<div class="soc__article"></div>
+			</div>
+		</section>
+	</div>
 
-<%-- 	<sec:authorize access="isAuthenticated()">
-	로그인상태
-	</sec:authorize>
-	
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
-	관리자
-	</sec:authorize>
-	
-	<sec:authentication property="principal.username"/>님 환영합니다 --%>
-	
-
-
+<c:import url="./template/footer.jsp"></c:import>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/index.js"></script>
 </body>
 </html>

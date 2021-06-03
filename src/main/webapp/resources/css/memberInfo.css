@@ -1,0 +1,153 @@
+@charset "UTF-8";
+
+.container{
+	padding-top: 125px;
+	width: 100%;
+	max-width: 1210px;
+	margin: 30px auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.info-container{
+	width: 100%;
+	max-width: 500px;
+	margin: 40px 0;
+	padding: 10px 40px;
+	border: 1px solid #b4b4b4;
+	display: flex;
+	flex-direction: column;
+}
+
+.location-container{
+	width: 100%;
+	max-width: 500px;
+	margin: 40px 0;
+	padding: 10px 40px;
+	border: 1px solid #b4b4b4;
+}
+
+.info-group{
+	width: 90%;
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.info__header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid #b4b4b4;
+}
+
+.btn-group{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn-edit.active{
+	all: unset;
+	height: 25px;
+	border: 1px solid #b4b4b4;
+	border-radius: 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.btn-edit.active:hover{
+	background-color: #b4b4b4;
+	color: white;
+}
+
+.btn-edit{
+	display: none;
+}
+
+.btn-submit{
+	display:none;
+}
+
+.btn-submit.active{
+	all: unset;
+	display: block;
+	height: 25px;
+	margin-right: 5px;
+	padding: 5px 10px;
+	border: 1px solid #b4b4b4;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.btn-submit.active:hover{
+	background-color: #b4b4b4;
+	color: white;
+}
+
+.btn-cancel{
+	display:none;
+}
+
+.btn-cancel.active{
+	all: unset;
+	display: block;
+	height: 25px;
+	border: 1px solid #b4b4b4;
+	border-radius: 5px;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+.btn-cancel.active:hover{
+	background-color: #b4b4b4;
+	color: white;
+}
+
+
+.info__title{
+	width: 20%;
+	height: 35px;
+	margin: 10px 0;
+	line-height: 35px;
+	border-right: 1px solid #b4b4b4;
+	
+}
+
+.info__content{
+	display: none;
+}
+
+.info__content.active{
+	display: block;
+	width: 60%;
+	height: 35px;
+	padding-left: 20px;
+	margin: 10px 0;
+	line-height: 35px;	
+}
+
+.info__input.username, .info__input{
+	display: none;
+}
+
+.info__input.username.active{
+	all: unset;
+	display: block;
+	margin-left: 20px;
+}
+
+.info__input.active{
+	all: unset;
+	display: block;
+	width: 45%;
+	height: 2rem;
+	margin-left: 20px;
+	padding: 0 0.5em;
+	border-radius: 5px;
+	border: 1px solid #aeaeae;
+	outline: none;
+	font-size: 0.9em;
+}

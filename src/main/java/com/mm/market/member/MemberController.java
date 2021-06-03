@@ -135,17 +135,16 @@ public class MemberController {
 
 	}
 	
-	@GetMapping("information")
+	@GetMapping("info")
 	public void infomation(MemberVO memberVO)throws Exception{
 		
 	}
 	
 	@PostMapping("update")
 	public String setUpdate(MemberVO memberVO)throws Exception{
-		int result = memberService.setJpdate(memberVO);
+		int result = memberService.setUpdate(memberVO);
 		
-		
-		return "redirect:./";
+		return "redirect:./info";
 	}
 
 		

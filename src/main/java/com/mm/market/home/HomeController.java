@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HomeController {
 	
 	@GetMapping("/")
-	public String home() {
-		
+	public String home()throws Exception {
+		//System.out.println("index start");
 		return "index";
 	}
 	
