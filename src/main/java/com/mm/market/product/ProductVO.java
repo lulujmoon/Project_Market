@@ -11,7 +11,7 @@ public class ProductVO {
 	private Long productNum;
 	private String productName;
 	private String username;
-	private String categoryCode;
+	private Long categoryCode;
 	private Timestamp productDate;
 	private Long productHit;
 	private Long productHeart;

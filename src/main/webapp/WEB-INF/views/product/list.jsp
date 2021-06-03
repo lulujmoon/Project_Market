@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- <c:import url="../template/setting.jsp"></c:import>
-<link rel="stylesheet" href="../resources/css/productList.css"> --%>
+<c:import url="../template/setting.jsp"></c:import>
+<!-- <link rel="stylesheet" href="../resources/css/productList.css"> -->
 <title>Insert title here</title>
 </head>
 <body>
