@@ -24,4 +24,5 @@ public class ProductVO {
 	private List<ProductFileVO> files;
 	
 	private ProductFileVO thumbnail;
+	
 }
