@@ -141,14 +141,21 @@ public class MemberController {
 	@GetMapping("info")
 	public void infomation(MemberVO memberVO)throws Exception{
 		
+		//여기서 먼저 데이터베이스를 조회
+		
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(MemberVO memberVO, HttpSession session) throws Exception{
+	public String setUpdate(MemberVO memberVO, HttpSession session, Authentication authentication) throws Exception{
 		int result = memberService.setUpdate(memberVO);
 		//db값 변경됐지만 session값 변경안됨
 
+		MemberVO old =(MemberVO)authentication.getPrincipal();
 		
+		old.setPassword(memberVO.getPassword());
+		old.setName(memberVO.getName());
+		old.setPhone(memberVO.getPhone());
+		old.setEmail(memberVO.getEmail());
 		
 		return "redirect:./info";
 	}
