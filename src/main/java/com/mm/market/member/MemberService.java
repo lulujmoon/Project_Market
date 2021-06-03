@@ -3,8 +3,6 @@ package com.mm.market.member;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,8 +26,6 @@ public class MemberService implements UserDetailsService{
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private FileManager fileManager;
-	@Autowired
-	private HttpSession session;
 
 
 	//개발자가 호출x는 login메서드
@@ -92,7 +88,7 @@ public class MemberService implements UserDetailsService{
 		//hdd file
 		String filePath="upload/member/";
 		if(multipartFile.getSize() !=0) {
-			String fileName= fileManager.save(filePath, multipartFile, session);
+			String fileName= fileManager.save(multipartFile,filePath);
 			System.out.println(fileName);
 			MemberFileVO memberFileVO = new MemberFileVO();
 			memberFileVO.setFileName(fileName);
@@ -106,20 +102,16 @@ public class MemberService implements UserDetailsService{
 	}
 	
 	public int setUpdate(MemberVO memberVO)throws Exception{
-		
-		//memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
-		memberVO = memberMapper.getUsername(memberVO);
+		if(memberVO.getPassword()!="") {
+			memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));			
+		}else {
+			MemberVO memberVO2 = memberMapper.getUsername(memberVO);
+			memberVO.setPassword(memberVO2.getPassword());
+		}
 		
 		int result = memberMapper.setUpdate(memberVO);
 		
 		return result;
-	}
-
-
-	public MemberVO getUsername(MemberVO memberVO) throws Exception{
-		memberVO= memberMapper.getUsername(memberVO);
-		
-		return memberVO;
 	}
 	
 
