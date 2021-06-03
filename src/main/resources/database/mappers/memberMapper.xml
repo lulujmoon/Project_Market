@@ -50,7 +50,7 @@
  </select>
  
  <update id="setUpdate" parameterType="MemberVO">
- 	update member set password=#{password}, phone=#{phone}, email=#{email} where username=#{username}
+ 	update member set password=#{password}, name=#{name}, phone=#{phone}, email=#{email} where username=#{username}
  </update>
  
  </mapper>  

@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -58,28 +60,28 @@ public class MemberController {
 	 * @GetMapping("error") public String error() { return "error/error"; }
 	 */
 
-	@GetMapping("memberLogin")
+	@GetMapping("login")
 	public String getLogin()throws Exception{
-		return "member/memberLogin";
+		return "member/login";
 	}
 	
 	
-	  @PostMapping("memberLogin") public String getLogin(HttpServletRequest
+	  @PostMapping("login") public String getLogin(HttpServletRequest
 	 request)throws Exception{
 		  //포워딩된 어트리뷰트를 포스트형식으로 받아줌
 	  System.out.println(request.getAttribute("message"));
 	  
-	  return "member/memberLogin"; 
+	  return "member/login"; 
 	  }
 	 
 
-	@GetMapping("memberLoginFail")
+	@GetMapping("loginFail")
 	public String loginFail()throws Exception{
-		return "redirect:/member/memberLogin";
+		return "redirect:/member/login";
 	}
 
-	@GetMapping("memberLoginResult")
-	public String memberLoginResult(HttpSession session, Authentication auth2)throws Exception{
+	@GetMapping("loginResult")
+	public String loginResult(HttpSession session, Authentication auth2)throws Exception{
 
 		Enumeration<String> en = session.getAttributeNames();
 		MemberVO memberVO = new MemberVO();
@@ -103,7 +105,7 @@ public class MemberController {
 
 	}
 
-	@GetMapping("memberLogout")
+	@GetMapping("logout")
 	public String logout(HttpSession session)throws Exception{
 		System.out.println("로그아웃");
 		session.invalidate();
@@ -112,29 +114,29 @@ public class MemberController {
 	}
 
 
-	@GetMapping("memberJoin")
+	@GetMapping("join")
 	public String setJoin(@ModelAttribute MemberVO memberVO) throws Exception {
-		return "member/memberJoin";
+		return "member/join";
 	}
 
-	@GetMapping("memberApprove")
+	@GetMapping("approve")
 	public void setApprove()throws Exception{
 			
 	}
 
-	@PostMapping("memberApprove")
+	@PostMapping("approve")
 	public String setApprove(Model model)throws Exception{
 			
-		return "redirect:/member/memberJoin";
+		return "redirect:/member/join";
 	}
 	
-	@PostMapping("memberJoin")
+	@PostMapping("join")
 	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv,MultipartFile avatar)throws Exception{
 		System.out.println("Join process"+ memberVO.getName().length());
 
 		  if(memberService.memberError(memberVO, errors)) { 
 			  
-		  return"member/memberJoin"; 
+		  return"member/join"; 
 		  
 		  }
 
@@ -148,8 +150,7 @@ public class MemberController {
 	public void infomation(Authentication authentication, HttpSession session)throws Exception{
 		
 		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-		
-		MemberLocationVO memberLocationVO = new MemberLocationVO();
+
 		memberLocationVO.setUsername(userDetails.getUsername());
 		List<MemberLocationVO> list = memberLocationService.getList(memberLocationVO);
 		
@@ -157,9 +158,18 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(MemberVO memberVO) throws Exception{
-		
+	public String setUpdate(MemberVO memberVO, HttpSession session, Authentication authentication) throws Exception{
+
 		int result = memberService.setUpdate(memberVO);
+		//db값 변경됐지만 session값 변경안됨
+
+		MemberVO old =(MemberVO)authentication.getPrincipal();
+		
+		old.setPassword(memberVO.getPassword());
+		old.setName(memberVO.getName());
+		old.setPhone(memberVO.getPhone());
+		old.setEmail(memberVO.getEmail());
+		
 		return "redirect:./info";
 	}
 
@@ -259,6 +269,7 @@ public class MemberController {
 		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
 		
+				
 		//가입자 혹은 비가입자 체크해서 처리
 		MemberVO originmemberVO = memberService.findMember(KakaomemberVO);
 		
@@ -266,13 +277,13 @@ public class MemberController {
 			try {
 				System.out.println("기존회원아님->회원가입진행");
 				memberService.setJoin(KakaomemberVO,avatar);
+			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
 		}
-				
-		
+						
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(KakaomemberVO.getUsername(),KakaomemberVO.getPassword() ));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);

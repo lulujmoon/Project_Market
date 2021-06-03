@@ -41,6 +41,8 @@ public class MemberVO implements UserDetails{
 	//role
 	private List<RoleVO> roles;
 	
+	private MemberFileVO memberFileVO;
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		//계정이 가지고 있는 권한을 목록으로 리턴
