@@ -19,10 +19,10 @@ public class FileManager {
 	
 	public String save(String filePath, MultipartFile multipartFile, HttpSession session) throws Exception {
 		
-		String path = "classpath:/static/upload";
+		String path = "classpath:/static";
 		
 		File file = new File(resourceLoader.getResource(path).getFile(), filePath);
-		//System.out.println(file.getAbsolutePath());
+		System.out.println(file.getAbsolutePath());
 		if(!file.exists()) {
 			file.mkdir();
 		}
@@ -35,9 +35,9 @@ public class FileManager {
 	}
 	
 	
-	public boolean delete(String dirName, String fileName, HttpSession session) throws Exception {
+	public boolean delete(String filePath, String fileName, HttpSession session) throws Exception {
 		
-		String path = session.getServletContext().getRealPath("resources/upload/"+dirName);
+		String path = "classpath:/static";
 		File file = new File(path, fileName);
 		
 		boolean deleted = false;

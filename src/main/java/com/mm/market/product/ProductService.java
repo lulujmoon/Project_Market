@@ -1,5 +1,6 @@
 package com.mm.market.product;
 
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -31,7 +32,13 @@ public class ProductService {
 		pager.makeRow(perPage);
 		Long totalCount = productMapper.getTotalCount(pager);
 		pager.makeNum(totalCount, perPage, perBlock);
+		
 		return productMapper.getList(pager);
+	}
+	
+	public List<ProductVO> getCateList(Pager pager)throws Exception {
+		
+		return productMapper.getCateList(pager);
 	}
 	
 	
@@ -46,6 +53,7 @@ public class ProductService {
 
 	//insert
 	public int setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
+		
 		int result = productMapper.setInsert(productVO);
 		
 		long productNum = productMapper.getProductNum();
@@ -54,8 +62,8 @@ public class ProductService {
 		
 		for(MultipartFile f:file) {
 			ProductFileVO productFileVO = new ProductFileVO();
-			String fileName = fileManager.save("product", f, session);
-			//System.out.println(fileName);
+			String fileName = fileManager.save("upload/product", f, session);
+			System.out.println(fileName);
 			productFileVO.setProductNum(productNum);
 			productFileVO.setFileName(fileName);
 			productFileVO.setOriginName(f.getOriginalFilename());
@@ -76,7 +84,7 @@ public class ProductService {
 			
 			if(productVO2.getThumbnail()!=null) {
 				String delFileName = productVO2.getThumbnail().getFileName();
-				boolean check = fileManager.delete("product", delFileName, session);
+				boolean check = fileManager.delete("upload/product", delFileName, session);
 				
 				ProductFileVO productFileVO = new ProductFileVO();
 				productFileVO.setFileNum(productVO2.getThumbnail().getFileNum());

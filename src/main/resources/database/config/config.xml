@@ -7,6 +7,10 @@
   	<typeAliases>
 		<typeAlias type="com.mm.market.product.ProductVO" alias="ProductVO"/>
  		<typeAlias type="com.mm.market.product.ProductFileVO" alias="ProductFileVO"/>
+
+		<typeAlias type="com.mm.market.category.CategoryVO" alias="CategoryVO"/>
+
+
 		<typeAlias type="com.mm.market.util.Pager" alias="Pager"/>
   	</typeAliases>
   

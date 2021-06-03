@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mm.market.category.CategoryMapper;
+import com.mm.market.category.CategoryVO;
 import com.mm.market.util.Pager;
 
 @Controller
@@ -19,12 +21,18 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private CategoryMapper categoryMapper;
+	
 	@GetMapping("list")
 	public String getList(Pager pager, Model model) throws Exception {
 		
 		List<ProductVO> ar = productService.getList(pager);
+		List<CategoryVO> categories = categoryMapper.getList();
+
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
+		model.addAttribute("categories", categories);
 		
 		return "product/list";
 	}

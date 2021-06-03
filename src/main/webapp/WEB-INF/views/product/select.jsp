@@ -33,7 +33,7 @@
 						<td>
 						<div>
 						<c:forEach items="${vo.files}" var="file">
-							<a href="/upload/product/${file.fileName}">${file.originName}</a>
+							<img src="/upload/product/${file.fileName}">${file.originName}</a>
 						</c:forEach>
 						</div>
 						</td>

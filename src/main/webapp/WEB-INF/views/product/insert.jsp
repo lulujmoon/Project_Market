@@ -26,10 +26,12 @@
 	    <label>판매자</label>
 	    <input type="text" name="username">
 	  </div>
-	  <div class="form-group">
-	    <label>카테고리</label>
-	    <input type="text" name="categoryCode">
-	  </div>
+	  	<div class="category-container">
+	  	<label>카테고리</label>
+	  	<select>
+			<option value=""></option>
+	  	</select>
+		</div>
 	    <div class="form-group">
 	    <label>상품 설명</label>
 	    <input type="text" name="productContent">

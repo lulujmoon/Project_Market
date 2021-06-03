@@ -73,6 +73,10 @@
 		<update id="setHitUpdate" parameterType="ProductVO">
 			UPDATE product SET productHit=productHit+1 WHERE productNum=#{productNum}
 		</update>
+		
+		<select id="setCategory" parameterType="CategoryVO">
+			select * from category where categoryCode=#{categoryCode}
+		</select>
 
 
 		<delete id="setDelete" parameterType="ProductVO">
