@@ -44,73 +44,26 @@
 			</tbody>
 		</table>
 
-		<form name="frm_read" id="frm_read" method="get">
-			<input type="hidden" id="productNum" value="${vo.productNum}">
-			<input type="hidden" id="categoryCode" value="${vo.categoryCode}">
-			<input type="hidden" id="username" value="${vo.username}">
-		</form>
+		<div>
+			<input id="heartNumber" type="hidden" title="${heart}">
+			<input id="productNum" type="hidden" title="${vo.productNum}">
+		</div>
 		
-
-
+		<div id="reload_div">
 			<a href="./delete?productNum=${vo.productNum}" class="btn btn-primary" role="button">Delete</a>
-			
-			
 			<a href="#" class="btn btn-primary" role="button">가격제안</a>
 			<a href="#" class="btn btn-danger" role="button">신고하기</a>
-			
 
-				<a class="heart" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}">
-					<img id="heart" src="" width="50px" height="50px"> 
-				</a>
-	
-			
-
+			<a class="heart" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}">
+				<img id="heart" src="" width="50px" height="50px"> 
+			</a>
 		</div>
 
+	</div>
 
 
 
-<script type="text/javascript">
-$(document).ready(function(){
-	
-	let heartval = ${heart}
-	
-	if(heartval>0) {
-		console.log("heart : "+heartval);
-		$("#heart").prop("src", "/resources/images/빨강.png");
-		$(".heart").prop("name", heartval);
-	//	$(".heart").prop("onclick", "if ( confirm('찜을 취소하시겠습니까?')==false ){return false;}");
-	} else {
-		console.log("heart : "+heartval);
-		$("#heart").prop("src", "/resources/images/검정.png");
-		$(".heart").prop("name", heartval);
-	//	$(".heart").prop("onclick", "if ( confirm('찜을 취소하시겠습니까?')==false ){return false;}");
-	}
-	
-	$(".heart").on("click", function(){
-		
-		let that = $(".heart");
-		
-		let sendData = {'productNum' : '${productVO.productNum}', 'heart' : that.prop('name')};
-		$.ajax({
-			url : '/product/heart',
-			type : 'POST',
-			data : sendData,
-			success : function(data) {
-				that.prop('name', data);
-				if(data==1) {
-					$("heart").prop("src","/resources/images/빨강.png");
-				} else {
-					$("heart").prop("src","/resources/images/검정.png");
-				}
-				
-			}
-		})
-	
 
-		
-	})
-})
-</script>
+<script type="text/javascript" src="/resources/js/productSelect.js"></script>
 </body>
 </html>
