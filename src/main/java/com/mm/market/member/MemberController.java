@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -120,16 +121,16 @@ public class MemberController {
 	}
 	
 	@PostMapping("memberJoin")
-	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
+	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv,MultipartFile avatar)throws Exception{
 		System.out.println("Join process"+ memberVO.getName().length());
 
 		  if(memberService.memberError(memberVO, errors)) { 
-			  System.out.println("에러났어");
+			  
 		  return"member/memberJoin"; 
 		  
 		  }
 
-		int result = memberService.setJoin(memberVO); 
+		int result = memberService.setJoin(memberVO, avatar);
 
 		return "redirect:../";
 
@@ -146,12 +147,12 @@ public class MemberController {
 		memberVO = memberService.getUsername(memberVO);
 		int result = memberService.setUpdate(memberVO);
 		
-		return "redirect:./info";
+		return "redirect:../";
 	}
 
 		
 	@GetMapping("auth/kakao/callback")
-	public String kakaoCallback(String code) throws Exception {
+	public String kakaoCallback(String code,MultipartFile avatar) throws Exception {
 		
 		
 		//post방식으로 key=value 데이터를 요청(카카오쪽으로)
@@ -251,7 +252,7 @@ public class MemberController {
 		if(originmemberVO==null) {
 			try {
 				System.out.println("기존회원아님->회원가입진행");
-				memberService.setJoin(KakaomemberVO);
+				memberService.setJoin(KakaomemberVO,avatar);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

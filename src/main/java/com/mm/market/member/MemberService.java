@@ -11,6 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.mm.market.util.FileManager;
 
 
 
@@ -21,6 +24,8 @@ public class MemberService implements UserDetailsService{
 	private MemberMapper memberMapper;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private FileManager fileManager;
 
 
 	//개발자가 호출x는 login메서드
@@ -65,7 +70,7 @@ public class MemberService implements UserDetailsService{
 
 	//예외가 발생했으면 자동으로 rollback
 	@Transactional(rollbackFor = Exception.class)
-	public int setJoin(MemberVO memberVO)throws Exception{
+	public int setJoin(MemberVO memberVO,MultipartFile multipartFile)throws Exception{
 		//password 암호
 		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		//계정활성화
@@ -81,8 +86,17 @@ public class MemberService implements UserDetailsService{
 		result = memberMapper.setMemberRole(map);
 		
 		//hdd file
-		//String filePate="upload/member/";
-		//if(multipartFile)
+		String filePath="upload/member/";
+		if(multipartFile.getSize() !=0) {
+			String fileName= fileManager.save(multipartFile,filePath);
+			System.out.println(fileName);
+			MemberFileVO memberFileVO = new MemberFileVO();
+			memberFileVO.setFileName(fileName);
+			memberFileVO.setOriginName(multipartFile.getOriginalFilename());
+			memberFileVO.setUsername(memberVO.getUsername());
+		//3. MemberFiles table 저장
+			result = memberMapper.setJoinFile(memberFileVO);
+		}
 
 		return result;
 	}

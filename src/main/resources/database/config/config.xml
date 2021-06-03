@@ -12,6 +12,7 @@
 		<typeAlias type="com.mm.market.memberLocation.MemberLocationVO" alias="MemberLocationVO"/>
 		<typeAlias type="com.mm.market.location.LocationVO" alias="LocationVO"/>
   	<typeAlias type="com.mm.market.member.MemberVO" alias="MemberVO"/>
+  	<typeAlias type="com.mm.market.member.MemberFileVO" alias="MemberFileVO"/>
   	<typeAlias type="com.mm.market.member.RoleVO" alias="RoleVO"/>
 		<typeAlias type="com.mm.market.product.ProductVO" alias="ProductVO"/>
 		<typeAlias type="com.mm.market.product.ProductFileVO" alias="ProductFileVO"/>

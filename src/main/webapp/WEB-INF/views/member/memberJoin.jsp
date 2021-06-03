@@ -20,7 +20,7 @@
 		<div class="logo">
 			<i class="fas fa-lemon"></i><span>&nbsp;Join</span>
 		</div>
-		<form:form modelAttribute="memberVO" id="frm" action="./memberJoin" method="post">
+		<form:form modelAttribute="memberVO" id="frm" action="./memberJoin" method="post" enctype="multipart/form-data">
 				<div class="form-group username">
 					<span><label for="username">Username</label></span>
 					<form:input class="form-control myCheck" type="text" id="username" name="username" path="username"/>	
@@ -50,6 +50,11 @@
 				<label for="email">Email</label> 
 				<form:input type="text" class="form-control myCheck" id="email" name="email" path="email"/>
 				<small class="form-notice"><form:errors path="email"></form:errors></small>
+			</div>
+			
+			<div class="form-group">
+				<label for="avatar">Avatar</label> 
+				<input type="file" class="form-control etc"	id="avatar" name="avatar">
 			</div>
 			<div class="join-btn">
 				<button type="submit" class="btn-wide btn-submit">Join</button>
