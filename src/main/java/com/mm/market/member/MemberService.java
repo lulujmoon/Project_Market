@@ -3,6 +3,8 @@ package com.mm.market.member;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,6 +28,8 @@ public class MemberService implements UserDetailsService{
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private FileManager fileManager;
+	@Autowired
+	private HttpSession session;
 
 
 	//개발자가 호출x는 login메서드
@@ -88,7 +92,7 @@ public class MemberService implements UserDetailsService{
 		//hdd file
 		String filePath="upload/member/";
 		if(multipartFile.getSize() !=0) {
-			String fileName= fileManager.save(multipartFile,filePath);
+			String fileName= fileManager.save(filePath, multipartFile, session);
 			System.out.println(fileName);
 			MemberFileVO memberFileVO = new MemberFileVO();
 			memberFileVO.setFileName(fileName);
