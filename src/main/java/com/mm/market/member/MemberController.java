@@ -1,6 +1,8 @@
 package com.mm.market.member;
 
+import java.security.Principal;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.UUID;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -16,10 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -37,6 +38,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mm.market.memberLocation.MemberLocationService;
+import com.mm.market.memberLocation.MemberLocationVO;
 
 @Controller
 @RequestMapping("/member/**")
@@ -47,6 +50,9 @@ public class MemberController {
 	
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private MemberLocationService memberLocationService;
 
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
@@ -139,26 +145,21 @@ public class MemberController {
 	}
 	
 	@GetMapping("info")
-	public void infomation(MemberVO memberVO)throws Exception{
+	public void infomation(Authentication authentication, HttpSession session)throws Exception{
 		
-		//여기서 먼저 데이터베이스를 조회
+		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 		
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		memberLocationVO.setUsername(userDetails.getUsername());
+		List<MemberLocationVO> list = memberLocationService.getList(memberLocationVO);
+		
+		session.setAttribute("locations", list);
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(MemberVO memberVO, HttpSession session, Authentication authentication) throws Exception{
+	public String setUpdate(MemberVO memberVO) throws Exception{
+		
 		int result = memberService.setUpdate(memberVO);
-		//db값 변경됐지만 session값 변경안됨
-
-		//현재 멤버vo의 값을 받아오는거
-		MemberVO old =(MemberVO)authentication.getPrincipal();
-		
-		//바뀐 멤버디티오 넣어주기
-		old.setPassword(memberVO.getPassword());
-		old.setName(memberVO.getName());
-		old.setPhone(memberVO.getPhone());
-		old.setEmail(memberVO.getEmail());
-		
 		return "redirect:./info";
 	}
 
@@ -258,7 +259,6 @@ public class MemberController {
 		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
 		
-				
 		//가입자 혹은 비가입자 체크해서 처리
 		MemberVO originmemberVO = memberService.findMember(KakaomemberVO);
 		
@@ -266,13 +266,13 @@ public class MemberController {
 			try {
 				System.out.println("기존회원아님->회원가입진행");
 				memberService.setJoin(KakaomemberVO,avatar);
-			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
 		}
-						
+				
+		
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(KakaomemberVO.getUsername(),KakaomemberVO.getPassword() ));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
