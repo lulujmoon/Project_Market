@@ -11,5 +11,9 @@
 	<select id="getList" resultType="CategoryVO">
 		select * from category order by categoryCode asc
 	</select>
+	
+	<select id="getCode" resultType="CategoryVO" parameterType="CategoryVO">
+		select categoryCode from category where categoryName=#{categoryName}
+	</select>
 
 </mapper>

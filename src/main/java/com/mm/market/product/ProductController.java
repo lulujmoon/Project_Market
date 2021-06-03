@@ -26,6 +26,7 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+
 	
 	@Autowired
 	private CategoryMapper categoryMapper;
@@ -119,6 +120,7 @@ public class ProductController {
 	
 	@PostMapping("insert")
 	public String setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
+		
 		int result = productService.setInsert(productVO, file);
 
 		return "product/list";
@@ -130,7 +132,6 @@ public class ProductController {
 		model.addAttribute("vo", productVO);
 		
 		return "product/update";
-		
 	}
 	
 	@PostMapping("update")

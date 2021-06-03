@@ -31,13 +31,21 @@
 	  	<label>카테고리</label>
 		  <div class="form-group">
 		    <label for="category">Example select</label>
-		    <select class="form-control" id="category" name="categoryCode">
-		      <option>1</option>
-		      <option>2</option>
-		      <option>3</option>
-		      <option>4</option>
-		      <option>5</option>
+		    <select class="form-control" id="category" name="categoryName">
+		      <option>디지털/가전</option>
+		      <option>가구/인테리어</option>
+		      <option>유아동/유아도서</option>
+		      <option>생활/가공식품</option>
+		      <option>스포츠/레저</option>
+		      <option>여성의류/잡화</option>
+		      <option>남성의류/잡화</option>
+		      <option>게임/취미</option>
+		      <option>뷰티/미용</option>
+		      <option>반려동물용품</option>
+		      <option>도서/티켓/음반</option>
+		      <option>삽니다</option>
 		    </select>
+		    
 		  </div>
 		</div>
 	    <div class="form-group">
