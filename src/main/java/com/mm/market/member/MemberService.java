@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,6 +30,8 @@ public class MemberService implements UserDetailsService{
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private FileManager fileManager;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
 
 	//개발자가 호출x는 login메서드
@@ -108,6 +114,7 @@ public class MemberService implements UserDetailsService{
 			MemberVO memberVO2 = memberMapper.getUsername(memberVO);
 			memberVO.setPassword(memberVO2.getPassword());
 		}
+
 		
 		int result = memberMapper.setUpdate(memberVO);
 		

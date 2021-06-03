@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
@@ -142,8 +144,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(MemberVO memberVO) throws Exception{
+	public String setUpdate(MemberVO memberVO, HttpSession session) throws Exception{
 		int result = memberService.setUpdate(memberVO);
+		//db값 변경됐지만 session값 변경안됨
+
+		
+		
 		return "redirect:./info";
 	}
 
@@ -243,6 +249,7 @@ public class MemberController {
 		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
 		
+				
 		//가입자 혹은 비가입자 체크해서 처리
 		MemberVO originmemberVO = memberService.findMember(KakaomemberVO);
 		
@@ -250,13 +257,13 @@ public class MemberController {
 			try {
 				System.out.println("기존회원아님->회원가입진행");
 				memberService.setJoin(KakaomemberVO,avatar);
+			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
 		}
-				
-		
+						
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(KakaomemberVO.getUsername(),KakaomemberVO.getPassword() ));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
