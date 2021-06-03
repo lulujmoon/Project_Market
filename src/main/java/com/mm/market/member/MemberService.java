@@ -83,7 +83,7 @@ public class MemberService implements UserDetailsService{
 		return result;
 	}
 	
-	public int setJpdate(MemberVO memberVO)throws Exception{
+	public int setUpdate(MemberVO memberVO)throws Exception{
 		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		
 		int result = memberMapper.setUpdate(memberVO);

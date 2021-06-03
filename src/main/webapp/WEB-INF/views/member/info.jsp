@@ -1,100 +1,69 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal" />
+<sec:authentication property="principal" var="principal" />
 </sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<c:import url="../template/setting.jsp"></c:import>
+<link rel="stylesheet" href="../resources/css/memberInfo.css">
+<title>내 정보</title>
 </head>
 <body>
-	<h1>마이페이지</h1>
+<c:import url="../template/header.jsp"></c:import>
 
-	<table>
-		<tbody>
-			<tr>
-				<th scope="row">
-					<div class="thcell">
-						사용자 <span class="word_br"> ID </span>
-					</div>
-				</th>
-				<td>
-					<div class="tdcell">
-						<p class="contxt_tit">${principal.username}</p>
-						<p class="contxt_desc">로그인 전용 아이디입니다.</p>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">
-					<div class="thcell">
-						사용자 <span class="word_br">PASSWORD</span>
-					</div>
-				</th>
-				<td>
-					<div class="tdcell">
-						<p class="contxt_tit">password</p>
-						<p class="contxt_desc">패스워드를 변경하실수있습니다.</p>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">
-					<div class="thcell">
-						사용자 <span class="word_br">이름</span>
-					</div>
-				</th>
-				<td>
-					<div class="tdcell">
-						<p class="contxt_tit">${principal.name}</p>
-						<p class="contxt_desc">사용자 이름입니다.</p>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">
-					<div class="thcell">
-						사용자 <span class="word_br">이메일</span>
-					</div>
-				</th>
-				<td>
-					<div class="tdcell">
-						<p class="contxt_tit">${principal.email}</p>
-						<p class="contxt_desc">계정의 이메일 주소입니다.</p>
-					</div>
-				</td>
-			</tr>
-
-			<tr>
-				<th scope="row">
-					<div class="thcell">
-						사용자 <span class="word_br">전화번호</span>
-					</div>
-				</th>
-				<td>
-					<div class="tdcell">
-						<p class="contxt_tit">${principal.phone }</p>
-						<p class="contxt_desc">계정의 전화번호입니다.</p>
-					</div>
-				</td>
-			</tr>
-
-
-		</tbody>
-	</table>
-<a href="#" class="btn_model"><b class="btn2">수정</b></a>
+<div class="container">
+	<div class="info-container">
+		<div class="info__header">
+			<h2>내 정보</h2>
+			<div class="btn-group">
+				<button class="btn-edit" class="active">수정</button>
+				<button class="btn-submit">완료</button>
+				<button class="btn-cancel">취소</button>
+			</div>
+		</div>
+		<form id="info-form" action="./update" method="post">
+			<div class="info-group">
+				<div class="info__title">Username</div>
+				<div class="info__content">${principal.username}</div>
+				<input class="info__input username" type="text" name="username" value="${principal.username}">
+			</div>
+			<div class="info-group">
+				<div class="info__title">Password</div>
+				<div class="info__content">********</div>
+				<input class="info__input" type="password" name="password" placeholder="변경 시에만 입력하세요.">
+			</div>
+			<div class="info-group">
+				<div class="info__title">Name</div>
+				<div class="info__content">${principal.name}</div>
+				<input class="info__input" type="text" name="name" value="${principal.name}">
+			</div>
+			<div class="info-group">
+				<div class="info__title">Phone</div>
+				<div class="info__content">${principal.phone}</div>
+				<input class="info__input" type="text" name="phone" value="${principal.phone}">
+			</div>
+			<div class="info-group">
+				<div class="info__title">Email</div>
+				<div class="info__content">${principal.email}</div>
+				<input class="info__input" type="text" name="email" value="${principal.email}">
+			</div>
+		</form>
+	</div>
+	<div class="location-container">
+		<h2> 내 지역 </h2>
+		최대 3개 지역까지 설정할 수 있습니다.
+	</div>
+</div>								
 								
-								
-
+<c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/memberInfo.js"></script>
 </body>
 </html>

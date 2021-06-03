@@ -1,0 +1,56 @@
+/**
+ * 
+ */
+ 
+/**
+	* @function showEdit()
+	* 1. 수정 버튼을 누르면 info__content 요소들을 input 타입으로 바꿔준다.
+	* 2. 수정 버튼은 완료 버튼으로 변경된다.
+	* 3. 완료 버튼을 누르면 '/member/update'로 form을 보낸다.
+ */
+ 
+ function showEdit(){
+	for(content of infoContents){
+		content.classList.toggle('active');
+	}
+	for(input of infoInputs){
+		input.classList.toggle('active');
+	}
+}
+
+function manageBtns(){
+	btnEdit.classList.toggle('active');
+	btnSubmit.classList.toggle('active');
+	btnCancel.classList.toggle('active');	
+}
+
+
+const btnEdit = document.querySelector('.btn-edit');
+const btnSubmit = document.querySelector('.btn-submit');
+const btnCancel = document.querySelector('.btn-cancel');
+const infoContents = document.querySelectorAll('.info__content');
+const infoInputs = document.querySelectorAll('.info__input');
+
+btnEdit.classList.toggle('active');
+for(content of infoContents){
+	content.classList.toggle('active');
+}
+
+
+btnEdit.addEventListener('click', ()=>{
+	manageBtns();
+	showEdit();
+});
+
+btnCancel.addEventListener('click', ()=>{
+	manageBtns();
+	showEdit();
+});
+
+
+
+btnSubmit.addEventListener('click', ()=>{
+	let contentInputs = document.querySelectorAll('.content__input');
+	const infoForm = document.querySelector('#info-form');
+	infoForm.submit();
+});
