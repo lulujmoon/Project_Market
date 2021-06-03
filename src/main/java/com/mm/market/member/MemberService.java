@@ -79,6 +79,10 @@ public class MemberService implements UserDetailsService{
 		map.put("username", memberVO.getUsername()); //키값 ,밸류값
 		map.put("roleName", "ROLE_MEMBER");
 		result = memberMapper.setMemberRole(map);
+		
+		//hdd file
+		String filePate="upload/member/";
+		//if(multipartFile)
 
 		return result;
 	}
