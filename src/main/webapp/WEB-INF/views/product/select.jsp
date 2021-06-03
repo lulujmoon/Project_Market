@@ -11,11 +11,7 @@
 </head>
 <body>
 
-
-
 	<div class="container">
-
-
 		<h2>Product Select Page</h2>
 		<table class="table">
 			<thead class="thead-dark">
@@ -61,7 +57,6 @@
 			<a href="./update?productNum=${vo.productNum}"> Update </a>
 			<a href="#" class="btn btn-primary" role="button">가격제안</a>
 			<a href="#" class="btn btn-danger" role="button">신고하기</a>
-
 
 			<a class="heart" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}">
 				<img id="heart" src="" width="50px" height="50px"> 

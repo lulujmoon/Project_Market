@@ -29,7 +29,6 @@ $(document).ready(function(){
 		$.ajax({
 			url : '/product/heart',
 			type : 'POST',
-			async: false,
 			data : sendData,
 			success : function(data) {
 				that.prop('name', data);
