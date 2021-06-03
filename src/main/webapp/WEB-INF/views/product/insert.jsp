@@ -13,7 +13,12 @@
 <body>
 <h2>Product Insert Page</h2>
 	<form action="./insert" method="POST" enctype="multipart/form-data">
-	
+
+		<div class="productimg">
+			<label>상품 이미지</label>
+			<input type="file" name="file" multiple>
+		</div>
+		
 	  <div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" name="productName">
@@ -22,10 +27,10 @@
 	    <label>판매자</label>
 	    <input type="text" name="username">
 	  </div>
-	  <div class="form-group">
-	    <label>카테고리</label>
-	    <input type="text" name="productCategory">
-	  </div>
+	  	<div>
+	  	<label>카테고리</label>
+
+		</div>
 	    <div class="form-group">
 	    <label>상품 설명</label>
 	    <input type="text" name="productContent">
@@ -44,6 +49,6 @@
 	  
 	 <button class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
- 
+
 </body>
 </html>

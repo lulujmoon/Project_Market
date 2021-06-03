@@ -57,4 +57,5 @@ function confirm() {
 	} else {
 		if(confirm('찜하기')== false) {return false;};
 	}
+
 }

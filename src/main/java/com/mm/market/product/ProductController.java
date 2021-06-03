@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mm.market.category.CategoryMapper;
@@ -111,7 +112,7 @@ public class ProductController {
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
 
-		return "redirect:/product/list";
+		return "redirect:product/list";
 	}
 
 	
@@ -119,15 +120,26 @@ public class ProductController {
 	public void setInsert() throws Exception {}
 	
 	@PostMapping("insert")
-	public String setInsert(ProductVO productVO, MultipartFile [] files) throws Exception {
-		System.out.println(files.length);
+	public String setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
+		int result = productService.setInsert(productVO, file);
+
+		return "redirect:product/list";
+	}
+	
+	@GetMapping("update")
+	public String setUpdate(ProductVO productVO, Model model)throws Exception{
+		productVO = productService.getSelect(productVO);
+		model.addAttribute("vo", productVO);
 		
-		for(MultipartFile f: files) {
-			System.out.println(f.getOriginalFilename());
-		}
+		return "product/update";
 		
-		int result = productService.setInsert(productVO, files);
-		
-		return "redirect:/product/list";
+	}
+	
+	@PostMapping("update")
+	public String setUpdate(ProductVO productVO, MultipartFile file)throws Exception{
+		productService.setUpdate(productVO, file);
+		productVO = productService.getSelect(productVO);
+				
+		return "redirect:./list";
 	}
 }

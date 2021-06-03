@@ -6,7 +6,6 @@
 
 <mapper namespace="com.mm.market.product.ProductMapper">
 		
-		
 		<select id="getList" resultMap="selectResult" parameterType="Pager">
 			SELECT C.*, P.*, PF.*, L.*
 			FROM product P LEFT JOIN productFile PF
@@ -65,18 +64,20 @@
 			</collection>
 		</resultMap> 
 		
+		<select id="getProductNum" resultType="Long">
+			SELECT LAST_INSERT_ID()
+		</select>
+		
 		<select id="getTotalCount" resultType="Long" parameterType="Pager">
 			SELECT count(productNum) FROM product
 		    WHERE productName LIKE CONCAT('%', #{search}, '%') OR 
 		    locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%'))
 		    AND productNum > 0
-
 		</select>
 		
 		<update id="setHitUpdate" parameterType="ProductVO">
 			UPDATE product SET productHit=productHit+1 WHERE productNum=#{productNum}
 		</update>
-
 
 		<delete id="setDelete" parameterType="ProductVO">
 			DELETE FROM product WHERE productNum=#{productNum}
@@ -84,18 +85,30 @@
 
 		<insert id="setInsert" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
 			insert into product 
-			(productNum, productName, username, categoryCode, productDate, productHit, productHeart, productContent, 
-			productPrice, productNego, locationCode)
-			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, 
-			 #{productContent}, #{productPrice}, 0, 1100000000)
+			(productNum, productName, username, categoryCode, productDate, productHit, productHeart, productContent, productPrice, productNego, locationCode)
+			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, 1100000000)
+<!-- 		 <selectKey keyProperty="productNum" resultType="Long" order="AFTER">
+       		 SELECT LAST_INSERT_ID()
+    	</selectKey> -->
 		</insert>
 		
 		<insert id="setFileInsert" parameterType="ProductFileVO">
 			insert into productFile (productNum, fileName, originName)
 			values (#{productNum}, #{fileName}, #{originName})
 		</insert>
-		
-		
+
+		<delete id="setFileDelete" parameterType="ProductFileVO">
+			delete from productFile where fileNum=#{fileNum}
+		</delete>
+	
+		<update id="setUpdate" parameterType="ProductVO">
+			update product set
+			productName=#{productName}, 
+			categoryCode=#{categoryCode}, 
+			productContent=#{productContent}, 
+			productPrice=#{productPrice}
+			where productNum=#{productNum}
+		</update>
 		
 		<!-- heart -->
 		<insert id="setHeart" parameterType="HeartVO">
@@ -113,7 +126,6 @@
 		<select id="getHeart" resultType="Long">
 			SELECT COUNT(heartNum) FROM heart WHERE username=#{username} and productNum=#{productNum}
 		</select>
-		
 		
 </mapper>   
 

@@ -1,6 +1,8 @@
 package com.mm.market.product;
 
-import java.util.ArrayList;
+
+import java.nio.file.Files;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mm.market.util.FileManager;
@@ -16,6 +19,7 @@ import com.mm.market.util.Pager;
 
 @Service
 public class ProductService {
+	
 	
 	@Autowired
 	private ProductMapper productMapper;
@@ -25,9 +29,6 @@ public class ProductService {
 	
 	@Autowired
 	private HttpSession session;
-	
-//	@Value("${product.filePath}")
-//	private String filePath;
 	
 	public List<ProductVO> getList(Pager pager)throws Exception{
 		Long perPage = 20L;
@@ -41,7 +42,7 @@ public class ProductService {
 	}
 	
 	public List<ProductVO> getCateList(Pager pager)throws Exception {
-		
+
 		return productMapper.getCateList(pager);
 	}
 	
@@ -58,31 +59,58 @@ public class ProductService {
 
 	//insert
 	@Transactional(rollbackFor = Exception.class)
-	public int setInsert(ProductVO productVO, MultipartFile [] files) throws Exception {
-			int result = productMapper.setInsert(productVO);
+	public int setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
+		
+		int result = productMapper.setInsert(productVO);
+		
+		long productNum = productMapper.getProductNum();
+		productVO.setProductNum(productNum);
+		
+		
+		for(MultipartFile f:file) {
+			ProductFileVO productFileVO = new ProductFileVO();
+			String fileName = fileManager.save("product", f, session);
+			System.out.println(fileName);
+			productFileVO.setProductNum(productNum);
+			productFileVO.setFileName(fileName);
+			productFileVO.setOriginName(f.getOriginalFilename());
 			
-			String filePath = "product";
-			
-			for(MultipartFile multipartFile:files) {
-				if(multipartFile.getSize()==0) {
-					continue;
-				}
-				String fileName = fileManager.save(filePath, multipartFile, session);
-				System.out.println(fileName);
-				ProductFileVO productFileVO = new ProductFileVO();
-				productFileVO.setFileName(fileName);
-				productFileVO.setOriginName(multipartFile.getOriginalFilename());
-				productFileVO.setFileNum(productVO.getProductNum());
-				
-				productMapper.setFileInsert(productFileVO);
-			}	
-			
-		return result; 
+			productMapper.setFileInsert(productFileVO);
+		}
+		
+		return result;
 	}
 	
 	//update
-	public int setUpdate(ProductVO productVO) throws Exception {
-		return productMapper.setUpdate(productVO);
+	public int setUpdate(ProductVO productVO, MultipartFile file) throws Exception {
+		int result = 0;
+		
+		if(file.getOriginalFilename().length()!=0) {
+			ProductVO productVO2 = productMapper.getSelect(productVO);
+			
+			if(productVO2.getThumbnail()!=null) {
+				String delFileName = productVO2.getThumbnail().getFileName();
+				boolean check = fileManager.delete("product", delFileName, session);
+				
+				ProductFileVO productFileVO = new ProductFileVO();
+				productFileVO.setFileNum(productVO2.getThumbnail().getFileNum());
+				productMapper.setFileDelete(productFileVO);
+			}
+			
+			String fileName = fileManager.save("product", file, session);
+			
+			ProductFileVO productFileVO = new ProductFileVO();
+			productFileVO.setProductNum(productVO.getProductNum());
+			productFileVO.setFileName(fileName);
+			productFileVO.setOriginName(file.getOriginalFilename());
+			
+			result = productMapper.setUpdate(productVO);
+			result = productMapper.setFileInsert(productFileVO);
+		} else {
+			result = productMapper.setUpdate(productVO);
+		}
+		return result;
+		
 	}
 	
 	

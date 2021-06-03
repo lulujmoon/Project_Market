@@ -32,7 +32,13 @@
 			<tbody>
 
 					<tr>
-						<td><a href="#"><img src="/images/바탕화면.jpg" width="300" height="300"/></a></td>
+						<td>
+						<div>
+						<c:forEach items="${vo.files}" var="file">
+							<img src="/upload/product/${file.fileName}">${file.originName}
+						</c:forEach>
+						</div>
+						</td>
 						<td>${vo.productNum}</td>
 						<td>${vo.productName}</td>
 						<td>${vo.username}</td>
@@ -44,6 +50,7 @@
 			</tbody>
 		</table>
 
+
 		<div>
 			<input id="heartNumber" type="hidden" title="${heart}">
 			<input id="productNum" type="hidden" title="${vo.productNum}">
@@ -51,8 +58,10 @@
 		
 		<div>
 			<a href="./delete?productNum=${vo.productNum}" class="btn btn-primary" role="button">Delete</a>
+			<a href="./update?productNum=${vo.productNum}"> Update </a>
 			<a href="#" class="btn btn-primary" role="button">가격제안</a>
 			<a href="#" class="btn btn-danger" role="button">신고하기</a>
+
 
 			<a class="heart" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}">
 				<img id="heart" src="" width="50px" height="50px"> 

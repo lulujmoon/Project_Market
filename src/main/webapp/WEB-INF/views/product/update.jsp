@@ -12,30 +12,37 @@
 </head>
 <body>
 <h2>Product Update Page</h2>
-	<form action="./productInsert" method="POST">
-	
+
+	<form action="./update" method="post">
+		<input type="hidden" name="productNum" value="${vo.productNum}">
+	<div>
+		<label>상품 사진</label>
+		<c:forEach items="${vo.files}" var="file">
+			<input type="file" name="file" value="${file.fileName}">${file.originName}
+		</c:forEach>
+	</div>
 	  <div class="form-group">
 	    <label>상품 명</label>
-	    <input type="text" name="productName">
+	    <input type="text" value="${vo.productName}" name="productName">
 	  </div>
 	    <div class="form-group">
 	    <label>판매자</label>
-	    <input type="text" name="username">
+	    <input type="text" value="${vo.username}" name="username">
 	  </div>
 	  <div class="form-group">
 	    <label>카테고리</label>
-	    <input type="text" name="productCategory">
+	    <input type="text" value="${vo.categoryCode}" name="categoryCode">
 	  </div>
 	    <div class="form-group">
 	    <label>상품 설명</label>
-	    <input type="text" name="productContent">
+	    <input type="text" value="${vo.productContent}" name="productContent">
 	  </div>
 	    <div class="form-group">
 	    <label>상품 가격</label>
-	    <input type="text" name="productPrice">
+	    <input type="text" value="${vo.productPrice}" name="productPrice">
 	  </div>
 	  
-	 <button class="btn btn-outline-secondary">Write</button><br><br><br>
+	 <button class="btn btn-outline-secondary">Update</button><br><br><br>
 </form>
  
 </body>
