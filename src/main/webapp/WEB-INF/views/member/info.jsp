@@ -60,25 +60,20 @@
 		<div class="location__header">
 			<h2> 내 지역 </h2>
 			최대 3개 지역까지 설정할 수 있습니다.
+			<button class="btn btn-add active">추가</button>
 		</div>
-			<div class="location-group">
-				<div class="location__title">내 지역 1</div>
-				<div class="location__content">${locations[0].locationName}</div>
-				<button class="btn btn-insert" onclick="insertLocation(0), ${locations[0].locationNum}">추가</button>
-				<button class="btn btn-delete" onclick="deleteLocation(0, ${locations[0].locationNum})">삭제</button>
-			</div>
-			<div class="location-group">
-				<div class="location__title">내 지역 2</div>
-				<div class="location__content">${locations[1].locationName}</div>
-				<button class="btn btn-insert" onclick="insertLocation(1, ${locations[1].locationNum})">추가</button>
-				<button class="btn btn-delete" onclick="deleteLocation(1, ${locations[1].locationNum})">삭제</button>
-			</div>
-			<div class="location-group">
-				<div class="location__title">내 지역 3</div>
-				<div class="location__content">${locations[2].locationName}</div>
-				<button class="btn btn-insert" onclick="insertLocation(2, ${locations[2].locationNum})">추가</button>
-				<button class="btn btn-delete" onclick="deleteLocation(2, ${locations[2].locationNum})">삭제</button>
-			</div>
+		<div class="location-group">
+			<div class="location__title">내 지역 1</div>
+			<div class="location__content">세종시 아름동</div>
+		</div>
+		<div class="location-group">
+			<div class="location__title">내 지역 2</div>
+			<div class="location__content">세종시 아름동</div>
+		</div>
+		<div class="location-group">
+			<div class="location__title">내 지역 3</div>
+			<div class="location__content">세종시 아름동</div>
+		</div>
 	</div>
 </div>
 
