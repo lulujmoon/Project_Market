@@ -81,7 +81,7 @@ public class MemberService implements UserDetailsService{
 		result = memberMapper.setMemberRole(map);
 		
 		//hdd file
-		String filePate="upload/member/";
+		//String filePate="upload/member/";
 		//if(multipartFile)
 
 		return result;
@@ -95,10 +95,12 @@ public class MemberService implements UserDetailsService{
 		return result;
 	}
 
-	public MemberVO findMember(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	}
 
+	public MemberVO getUsername(MemberVO memberVO) throws Exception{
+		memberVO= memberMapper.getUsername(memberVO);
+		
+		return memberVO;
+	}
+	
 
+}
