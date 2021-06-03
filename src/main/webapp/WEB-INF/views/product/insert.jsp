@@ -13,6 +13,7 @@
 <body>
 <h2>Product Insert Page</h2>
 	<form action="./insert" method="POST" enctype="multipart/form-data">
+		
 		<div>
 			<input type="file" name="file">
 			<input type="file" name="file">
@@ -44,5 +45,6 @@
 	 <button class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
  
+
 </body>
 </html>

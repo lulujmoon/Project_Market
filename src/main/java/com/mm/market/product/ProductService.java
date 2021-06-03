@@ -62,7 +62,7 @@ public class ProductService {
 		
 		for(MultipartFile f:file) {
 			ProductFileVO productFileVO = new ProductFileVO();
-			String fileName = fileManager.save("upload/product", f, session);
+			String fileName = fileManager.save("product", f, session);
 			System.out.println(fileName);
 			productFileVO.setProductNum(productNum);
 			productFileVO.setFileName(fileName);
@@ -84,7 +84,7 @@ public class ProductService {
 			
 			if(productVO2.getThumbnail()!=null) {
 				String delFileName = productVO2.getThumbnail().getFileName();
-				boolean check = fileManager.delete("upload/product", delFileName, session);
+				boolean check = fileManager.delete("product", delFileName, session);
 				
 				ProductFileVO productFileVO = new ProductFileVO();
 				productFileVO.setFileNum(productVO2.getThumbnail().getFileNum());

@@ -98,7 +98,7 @@
 		</insert>
 		
 		<delete id="setFileDelete" parameterType="ProductFileVO">
-			delete productFile where productNum=#{productNum}
+			delete from productFile where fileNum=#{fileNum}
 		</delete>
 	
 		

@@ -19,25 +19,29 @@ public class FileManager {
 	
 	public String save(String filePath, MultipartFile multipartFile, HttpSession session) throws Exception {
 		
-		String path = "classpath:/static";
+		String path = "classpath:/static/upload";
 		
 		File file = new File(resourceLoader.getResource(path).getFile(), filePath);
 		System.out.println(file.getAbsolutePath());
 		if(!file.exists()) {
-			file.mkdir();
+			file.mkdirs();
 		}
 		
 		String fileName=UUID.randomUUID().toString()+"_"+multipartFile.getOriginalFilename();
-		file = new File(file, fileName);
-		multipartFile.transferTo(file);
-		
+		if(multipartFile.getOriginalFilename()!=null) {
+			file = new File(file, fileName);
+			multipartFile.transferTo(file);
+
+		}else {
+			file.delete();
+		}
 		return fileName;
 	}
 	
 	
 	public boolean delete(String filePath, String fileName, HttpSession session) throws Exception {
 		
-		String path = "classpath:/static";
+		String path = "classpath:/static/upload";
 		File file = new File(path, fileName);
 		
 		boolean deleted = false;

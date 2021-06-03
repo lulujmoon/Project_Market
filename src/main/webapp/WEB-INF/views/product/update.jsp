@@ -16,8 +16,9 @@
 	<form action="./update" method="post">
 		<input type="hidden" name="productNum" value="${vo.productNum}">
 	<div>
-		<input type="file" name="file">
-		<input type="file" name="file">
+		<c:forEach items="${vo.files}" var="file">
+			<img src="/upload/product/${file.fileName}">${file.originName}		
+		</c:forEach>
 	</div>
 	  <div class="form-group">
 	    <label>상품 명</label>
