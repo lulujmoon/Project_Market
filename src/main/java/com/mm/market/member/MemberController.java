@@ -150,8 +150,10 @@ public class MemberController {
 		int result = memberService.setUpdate(memberVO);
 		//db값 변경됐지만 session값 변경안됨
 
+		//현재 멤버vo의 값을 받아오는거
 		MemberVO old =(MemberVO)authentication.getPrincipal();
 		
+		//바뀐 멤버디티오 넣어주기
 		old.setPassword(memberVO.getPassword());
 		old.setName(memberVO.getName());
 		old.setPhone(memberVO.getPhone());
