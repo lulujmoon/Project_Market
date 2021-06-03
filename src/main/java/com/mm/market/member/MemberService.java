@@ -88,7 +88,9 @@ public class MemberService implements UserDetailsService{
 	}
 	
 	public int setUpdate(MemberVO memberVO)throws Exception{
-		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		if(memberVO.getPassword()!=null) {
+			memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));			
+		}
 		
 		int result = memberMapper.setUpdate(memberVO);
 		
@@ -98,7 +100,6 @@ public class MemberService implements UserDetailsService{
 
 	public MemberVO getUsername(MemberVO memberVO) throws Exception{
 		memberVO= memberMapper.getUsername(memberVO);
-		
 		return memberVO;
 	}
 	

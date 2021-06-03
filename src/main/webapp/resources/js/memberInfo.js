@@ -30,6 +30,7 @@ function manageBtns(){
 const btnEdit = document.querySelector('.btn-edit');
 const btnSubmit = document.querySelector('.btn-submit');
 const btnCancel = document.querySelector('.btn-cancel');
+const btnAdd = document.querySelector('.btn-add');
 const infoContents = document.querySelectorAll('.info__content');
 const infoInputs = document.querySelectorAll('.info__input');
 
@@ -55,3 +56,13 @@ btnSubmit.addEventListener('click', ()=>{
 	const infoForm = document.querySelector('#info-form');
 	infoForm.submit();
 });
+
+
+/* 우편번호 */
+btnAdd.addEventListener('click', ()=>{
+    new daum.Postcode({
+        oncomplete: function(data) {
+					location.href = '../memberLocation/insert?locationCode='+data.bcode;
+        }
+    }).open();	
+})

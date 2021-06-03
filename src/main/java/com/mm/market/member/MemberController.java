@@ -142,8 +142,7 @@ public class MemberController {
 	
 	@PostMapping("update")
 	public String setUpdate(MemberVO memberVO)throws Exception{
-		
-		memberVO = memberService.getUsername(memberVO);
+
 		int result = memberService.setUpdate(memberVO);
 		
 		return "redirect:./info";
