@@ -14,8 +14,6 @@ public interface ProductMapper {
 	
 	public List<ProductVO> getCateList(Pager pager)throws Exception;
 	
-	public int setCategory(ProductVO productVO)throws Exception;
-	
 	public Long getTotalCount(Pager pager)throws Exception;
 	
 	//Select

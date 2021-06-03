@@ -15,8 +15,8 @@
 	<form action="./insert" method="POST" enctype="multipart/form-data">
 		
 		<div>
-			<input type="file" name="file">
-			<input type="file" name="file">
+			<label>상품 이미지</label>
+			<input multiple type="file" name="file">
 		</div>
 		
 	  <div class="form-group">
@@ -27,11 +27,9 @@
 	    <label>판매자</label>
 	    <input type="text" name="username">
 	  </div>
-	  	<div class="category-container">
+	  	<div>
 	  	<label>카테고리</label>
-	  	<select>
-			<option value=""></option>
-	  	</select>
+
 		</div>
 	    <div class="form-group">
 	    <label>상품 설명</label>

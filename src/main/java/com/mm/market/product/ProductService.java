@@ -37,7 +37,6 @@ public class ProductService {
 	}
 	
 	public List<ProductVO> getCateList(Pager pager)throws Exception {
-		
 		return productMapper.getCateList(pager);
 	}
 	
