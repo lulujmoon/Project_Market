@@ -16,12 +16,12 @@
 	<div class="logo">
 		<i class="fas fa-lemon"></i><span>&nbsp;Join</span>
 	</div>
-	<form action="./member/memberApprove" method="POST" id="form_wrap">
+	<form action="./member/approve" method="POST" id="form_wrap">
 	<ul class="terms__list">
 		<li class="terms__box">
 		<div class="input__check">
 			<input type="checkbox" name="agreement" class="checkEach" value="termsOfService" id="termsOfService" required/>	
-			<label for ="termsOfService" class="requierd">market 이용약관에 동의</label>
+			<label for ="termsOfService" class="required">market 이용약관에 동의</label>
 		</div>
 		<div class="terms__content">
         여러분을 환영합니다. market 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 market

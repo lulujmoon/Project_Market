@@ -23,7 +23,7 @@
 		<ul class="nav__personal">
 			<sec:authorize access="isAnonymous()">
 				<li><a href="${pageContext.request.contextPath}/member/login">로그인</a>&nbsp;|&nbsp;</li>
-				<li><a href="${pageContext.request.contextPath}/member/memberApprove">회원가입</a></li>
+				<li><a href="${pageContext.request.contextPath}/member/approve">회원가입</a></li>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<li><a href="#">내 상점</a>&nbsp;|&nbsp;</li>
