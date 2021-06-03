@@ -106,7 +106,9 @@ public class MemberService implements UserDetailsService{
 	}
 	
 	public int setUpdate(MemberVO memberVO)throws Exception{
-		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		
+		//memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		memberVO = memberMapper.getUsername(memberVO);
 		
 		int result = memberMapper.setUpdate(memberVO);
 		
