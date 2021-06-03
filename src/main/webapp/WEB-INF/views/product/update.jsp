@@ -5,23 +5,36 @@
 <html>
 <head>
 <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<c:import url="../template/setting.jsp"></c:import>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Hello, world!</title>
+<!-- <style type="text/css">
+	#inputimg {
+		display: none;
+	}
+</style> -->
 </head>
 <body>
 <h2>Product Update Page</h2>
+	<form action="./insert" method="POST" enctype="multipart/form-data">
 
-	<form action="./update" method="post">
-		<input type="hidden" name="productNum" value="${vo.productNum}">
-	<div>
-		<label>상품 사진</label>
-		<c:forEach items="${vo.files}" var="file">
-			<input type="file" name="file" value="${file.fileName}">${file.originName}
-		</c:forEach>
-	</div>
-	  <div class="form-group">
+		<div>
+			<label>상품 이미지</label>
+			<div id="thumbnail">
+			<div id="img_container"></div>
+				<div id="inputimg">
+					<div>
+						<input type="file" name="file" multiple onchange="setThumbnail(event);"> 
+						<input type="button" id="del" value="Delete">
+					</div>
+				</div>
+			</div>
+			<button type="button" id="add" value="ADD">ADD</button>
+		</div>
+
+		 <div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" value="${vo.productName}" name="productName">
 	  </div>
@@ -42,8 +55,9 @@
 	    <input type="text" value="${vo.productPrice}" name="productPrice">
 	  </div>
 	  
-	 <button class="btn btn-outline-secondary">Update</button><br><br><br>
+	 <button class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
- 
+
+<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
 </body>
 </html>

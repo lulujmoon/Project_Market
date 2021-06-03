@@ -5,10 +5,16 @@
 <html>
 <head>
 <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<c:import url="../template/setting.jsp"></c:import>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Hello, world!</title>
+<!-- <style type="text/css">
+	#inputimg {
+		display: none;
+	}
+</style> -->
 </head>
 <body>
 <h2>Product Insert Page</h2>
@@ -16,10 +22,19 @@
 
 		<div class="productimg">
 			<label>상품 이미지</label>
-			<input type="file" name="file" multiple>
+			<div id="thumbnail">
+			<div id="img_container"></div>
+				<div id="inputimg">
+					<div>
+						<input type="file" name="file" multiple onchange="setThumbnail(event);"> 
+						<input type="button" id="del" value="Delete">
+					</div>
+				</div>
+			</div>
+			<button type="button" id="add" value="ADD">ADD</button>
 		</div>
-		
-	  <div class="form-group">
+
+		<div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" name="productName">
 	  </div>
@@ -67,5 +82,6 @@
 	 <button class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
 
+<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
 </body>
 </html>
