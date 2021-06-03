@@ -13,7 +13,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +42,8 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
@@ -80,20 +85,6 @@ public class MemberController {
 		SecurityContextImpl sc = (SecurityContextImpl)obj;
 									//저장되는 session의 타입
 		Authentication auth = sc.getAuthentication();
-
-		System.out.println("===================================");
-		System.out.println("Name : "+auth.getName());
-		System.out.println("Details : "+auth.getDetails());
-		System.out.println("Principal : "+auth.getPrincipal());
-		System.out.println("Authorities : "+auth.getAuthorities());
-		System.out.println("===================================");
-
-		System.out.println("===================================");
-		System.out.println("Name : "+auth2.getName());
-		System.out.println("Details : "+auth2.getDetails());
-		System.out.println("Principal : "+auth2.getPrincipal());
-		System.out.println("Authorities : "+auth2.getAuthorities());
-		System.out.println("===================================");
 
 		System.out.println("obj : "+obj);
 
@@ -151,6 +142,8 @@ public class MemberController {
 	
 	@PostMapping("update")
 	public String setUpdate(MemberVO memberVO)throws Exception{
+		
+		memberVO = memberService.getUsername(memberVO);
 		int result = memberService.setUpdate(memberVO);
 		
 		return "redirect:./info";
@@ -225,7 +218,6 @@ public class MemberController {
 				);
 		System.out.println(response2.getBody());
 		
-		System.out.println("여기까지!!!!!!!!!!!");
 		
 		
 		ObjectMapper objectMapper2 = new ObjectMapper();
@@ -242,13 +234,13 @@ public class MemberController {
 		System.out.println("카카오 아이디(번호):"+kakaoProfile.getId());
 		System.out.println("카카오 이메일(번호):"+kakaoProfile.getKakao_account().getEmail());
 		
-		System.out.println("마켓서버 유저네임:" + kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		System.out.println("마켓서버 유저네임:" + kakaoProfile.getKakao_account().getEmail());
 		System.out.println("마켓서버 이메일:" + kakaoProfile.getKakao_account().getEmail());
 		
 		System.out.println("마켓서버 패스워드:"+kakaoProfile.getId());
 
 		MemberVO KakaomemberVO = new MemberVO();
-		KakaomemberVO.setUsername(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		KakaomemberVO.setUsername(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setPassword(kakaoProfile.getId().toString());
 		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
@@ -266,25 +258,13 @@ public class MemberController {
 			}		
 		}
 				
-		RestTemplate rt3 = new RestTemplate();
-			
-			
-		  MultiValueMap<String,String> kakaoProfileRequest3 = new LinkedMultiValueMap<String, String>();
-		  kakaoProfileRequest3.add("username",kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		  kakaoProfileRequest3.add("password", kakaoProfile.getId().toString());
-		  
-		  ResponseEntity<String> response3 =rt3.postForEntity(
-				  "http://localhost/member/memberLogin", 		  
-				  kakaoProfileRequest3, 
-				  String.class	  
-		  );
-	
-		  System.out.println("아이디"+kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		  System.out.println("비번"+kakaoProfile.getId().toString());
+		
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(KakaomemberVO.getUsername(),KakaomemberVO.getPassword() ));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
 		
 		return "redirect:/";
-		
-		
 		
 		
 	}

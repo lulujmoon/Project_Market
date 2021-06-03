@@ -79,6 +79,10 @@ public class MemberService implements UserDetailsService{
 		map.put("username", memberVO.getUsername()); //키값 ,밸류값
 		map.put("roleName", "ROLE_MEMBER");
 		result = memberMapper.setMemberRole(map);
+		
+		//hdd file
+		//String filePate="upload/member/";
+		//if(multipartFile)
 
 		return result;
 	}
@@ -91,10 +95,12 @@ public class MemberService implements UserDetailsService{
 		return result;
 	}
 
-	public MemberVO findMember(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	}
 
+	public MemberVO getUsername(MemberVO memberVO) throws Exception{
+		memberVO= memberMapper.getUsername(memberVO);
+		
+		return memberVO;
+	}
+	
 
+}
