@@ -6,9 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +39,7 @@ public class ProductController {
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		model.addAttribute("categories", categories);
+		
 		
 		return "product/list";
 	}
@@ -123,7 +121,7 @@ public class ProductController {
 	public String setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
 		int result = productService.setInsert(productVO, file);
 
-		return "redirect:product/list";
+		return "product/list";
 	}
 	
 	@GetMapping("update")

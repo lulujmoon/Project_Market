@@ -17,11 +17,11 @@ public class FileManager {
 	@Autowired
 	private ResourceLoader resourceLoader;
 	
-	public String save(String filePath, MultipartFile multipartFile, HttpSession session) throws Exception {
+	public String save(String dirName, MultipartFile multipartFile, HttpSession session) throws Exception {
 		
-		String path = "classpath:/static/upload";
+		String path = session.getServletContext().getRealPath("resources/upload/"+dirName);
 		
-		File file = new File(resourceLoader.getResource(path).getFile(), filePath);
+		File file = new File(path);
 		System.out.println(file.getAbsolutePath());
 		if(!file.exists()) {
 			file.mkdirs();

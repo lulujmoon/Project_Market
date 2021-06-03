@@ -29,7 +29,16 @@
 	  </div>
 	  	<div>
 	  	<label>카테고리</label>
-
+		  <div class="form-group">
+		    <label for="category">Example select</label>
+		    <select class="form-control" id="category" name="categoryCode">
+		      <option>1</option>
+		      <option>2</option>
+		      <option>3</option>
+		      <option>4</option>
+		      <option>5</option>
+		    </select>
+		  </div>
 		</div>
 	    <div class="form-group">
 	    <label>상품 설명</label>
@@ -43,8 +52,8 @@
 	   <input type="hidden" name="productNum">
 	  
 	  <div>
-			<input type="file" name="files">
-			<input type="file" name="files">
+			<input type="file" name="file">
+			<input type="file" name="file">
 		</div>
 	  
 	 <button class="btn btn-outline-secondary">Write</button><br><br><br>

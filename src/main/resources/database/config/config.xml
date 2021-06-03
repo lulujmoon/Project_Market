@@ -19,6 +19,7 @@
 		<typeAlias type="com.mm.market.category.CategoryVO" alias="CategoryVO"/>
 		<typeAlias type="com.mm.market.location.LocationVO" alias="LocationVO"/>
 
+		<typeAlias type="com.mm.market.review.ReviewVO" alias="ReviewVO"/>
 		<typeAlias type="com.mm.market.util.Pager" alias="Pager"/>
   	</typeAliases>
   
