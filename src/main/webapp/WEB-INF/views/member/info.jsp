@@ -64,20 +64,32 @@
 			<div class="location-group">
 				<div class="location__title">내 지역 1</div>
 				<div class="location__content">${locations[0].locationName}</div>
-				<button class="btn btn-insert" onclick="insertLocation(0), ${locations[0].locationNum}">추가</button>
-				<button class="btn btn-delete" onclick="deleteLocation(0, ${locations[0].locationNum})">삭제</button>
+				<c:if test="${locations[0] == null}">
+					<button class="btn btn-insert active" onclick="insertLocation()">추가</button>				
+				</c:if>
+				<c:if test="${locations[0] != null}">
+					<button class="btn btn-delete active" onclick="deleteLocation(${locations[0].locationNum})">삭제</button>				
+				</c:if>
 			</div>
 			<div class="location-group">
 				<div class="location__title">내 지역 2</div>
 				<div class="location__content">${locations[1].locationName}</div>
-				<button class="btn btn-insert" onclick="insertLocation(1, ${locations[1].locationNum})">추가</button>
-				<button class="btn btn-delete" onclick="deleteLocation(1, ${locations[1].locationNum})">삭제</button>
+				<c:if test="${locations[1] == null}">
+					<button class="btn btn-insert active" onclick="insertLocation()">추가</button>				
+				</c:if>
+				<c:if test="${locations[1] != null}">
+					<button class="btn btn-delete active" onclick="deleteLocation(${locations[1].locationNum})">삭제</button>				
+				</c:if>
 			</div>
 			<div class="location-group">
 				<div class="location__title">내 지역 3</div>
 				<div class="location__content">${locations[2].locationName}</div>
-				<button class="btn btn-insert" onclick="insertLocation(2, ${locations[2].locationNum})">추가</button>
-				<button class="btn btn-delete" onclick="deleteLocation(2, ${locations[2].locationNum})">삭제</button>
+				<c:if test="${locations[2] == null}">
+					<button class="btn btn-insert active" onclick="insertLocation()">추가</button>				
+				</c:if>
+				<c:if test="${locations[2] != null}">
+					<button class="btn btn-delete active" onclick="deleteLocation(${locations[0].locationNum})">삭제</button>				
+				</c:if>				
 			</div>
 	</div>
 </div>
