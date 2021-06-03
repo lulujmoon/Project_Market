@@ -16,7 +16,7 @@
 	<div class="logo">
 		<i class="fas fa-lemon"></i><span>&nbsp;Join</span>
 	</div>
-	<form action="./member/memberApprove" method="POST" id="form_wrap">
+	<form action="./member/approve" method="POST" id="form_wrap">
 	<ul class="terms__list">
 		<li class="terms__box">
 		<div class="input__check">

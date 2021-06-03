@@ -20,7 +20,7 @@
 		<div class="logo">
 			<i class="fas fa-lemon"></i><span>&nbsp;Join</span>
 		</div>
-		<form:form modelAttribute="memberVO" id="frm" action="./memberJoin" method="post" enctype="multipart/form-data">
+		<form:form modelAttribute="memberVO" id="frm" action="./join" method="post" enctype="multipart/form-data">
 				<div class="form-group username">
 					<span><label for="username">Username</label></span>
 					<form:input class="form-control myCheck" type="text" id="username" name="username" path="username"/>	
