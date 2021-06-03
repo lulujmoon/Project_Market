@@ -44,4 +44,9 @@ public class FileManager {
 		
 	}
 
+	public String save(MultipartFile multipartFile, String filePath) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
