@@ -151,6 +151,7 @@ public class MemberController {
 		
 		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(userDetails.getUsername());
 		List<MemberLocationVO> list = memberLocationService.getList(memberLocationVO);
 		

@@ -83,11 +83,6 @@ function insertLocation(btnNum){
 					insertForm.submit();
         }
     }).open();
-    
-  let btnInsert = btnInserts[btnNum];
-	let btnDelete = btnDeletes[btnNum];
-	btnInsert.classList.toggle('active');
-	btnDelete.classList.toggle('active');
 };
 
 /* 내 지역 삭제 */
@@ -95,11 +90,6 @@ function deleteLocation(btnNum, locationNum){
 	makeDeleteForm(locationNum);
 	let deleteForm = document.querySelector('#location-delete-form');
 	deleteForm.submit();
-	
-	let btnInsert = btnInserts[btnNum];
-	let btnDelete = btnDeletes[btnNum];
-	btnInsert.classList.toggle('active');
-	btnDelete.classList.toggle('active');
 }
 
 /* 함수 끝 */

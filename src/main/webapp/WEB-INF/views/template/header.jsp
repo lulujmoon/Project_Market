@@ -22,7 +22,7 @@
 		</div>
 		<ul class="nav__personal">
 			<sec:authorize access="isAnonymous()">
-				<li><a href="${pageContext.request.contextPath}/member/memberLogin">로그인</a>&nbsp;|&nbsp;</li>
+				<li><a href="${pageContext.request.contextPath}/member/login">로그인</a>&nbsp;|&nbsp;</li>
 				<li><a href="${pageContext.request.contextPath}/member/memberApprove">회원가입</a></li>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
@@ -39,10 +39,10 @@
 	<div class="side__user">
 		<h3>
 			<sec:authorize access="isAnonymous()">
-				<a href="${pageContext.request.contextPath}/member/memberLogin"><i class="fas fa-unlock-alt"></i> 로그인</a>
+				<a href="${pageContext.request.contextPath}/member/login"><i class="fas fa-unlock-alt"></i> 로그인</a>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-				<a href="${pageContext.request.contextPath}/member/memberLogout"><sec:authentication property="principal.name"/> 님</a>
+				<a href="${pageContext.request.contextPath}/member/logout"><sec:authentication property="principal.name"/> 님</a>
 			</sec:authorize>
 		</h3>
 	</div>
