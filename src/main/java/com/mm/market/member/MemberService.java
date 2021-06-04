@@ -34,6 +34,8 @@ public class MemberService implements UserDetailsService{
 	private FileManager fileManager;
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	@Autowired
+	private HttpSession session;
 
 
 	//개발자가 호출x는 login메서드
@@ -78,7 +80,7 @@ public class MemberService implements UserDetailsService{
 
 	//예외가 발생했으면 자동으로 rollback
 	@Transactional(rollbackFor = Exception.class)
-	public int setJoin(MemberVO memberVO,MultipartFile multipartFile,HttpSession session)throws Exception{
+	public int setJoin(MemberVO memberVO,MultipartFile multipartFile)throws Exception{
 		//password 암호
 		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		//계정활성화
