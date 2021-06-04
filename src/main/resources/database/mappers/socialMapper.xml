@@ -13,7 +13,7 @@
 				</when>
 
 				<when test="kind=='SocialContent'">
-					socialContents like concat('%', #{search}, '%')
+					socialContent like concat('%', #{search}, '%')
 				</when>
 
 				<otherwise>
@@ -31,7 +31,7 @@
 		on S.categoryCode = SC.categoryCode
 		<include refid="searcher"></include>
 		order by S.socialNum desc
-		limit #{startRow}, #{perPage}
+		limit #{startRow}
 	</select>
 
 	<select id="getSelect" resultMap="selectResult" parameterType="SocialVO">
