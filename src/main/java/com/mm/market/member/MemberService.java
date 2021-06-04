@@ -3,6 +3,8 @@ package com.mm.market.member;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,6 +34,8 @@ public class MemberService implements UserDetailsService{
 	private FileManager fileManager;
 	@Autowired
 	private AuthenticationManager authenticationManager;
+	@Autowired
+	private HttpSession session;
 
 
 	//개발자가 호출x는 login메서드
@@ -94,7 +98,7 @@ public class MemberService implements UserDetailsService{
 		//hdd file
 		String filePath="upload/member/";
 		if(multipartFile.getSize() !=0) {
-			String fileName= fileManager.save(multipartFile,filePath);
+			String fileName= fileManager.save(filePath, multipartFile, session);
 			System.out.println(fileName);
 			MemberFileVO memberFileVO = new MemberFileVO();
 			memberFileVO.setFileName(fileName);
@@ -103,6 +107,26 @@ public class MemberService implements UserDetailsService{
 		//3. MemberFiles table 저장
 			result = memberMapper.setJoinFile(memberFileVO);
 		}
+
+		return result;
+	}
+	
+	@Transactional(rollbackFor = Exception.class)
+	public int setKakaoJoin(MemberVO memberVO)throws Exception{
+		//password 암호
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
+		//계정활성화
+		memberVO.setEnabled(true);
+		
+
+		//member table
+		int result = memberMapper.setJoin(memberVO);
+
+		//role table
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("username", memberVO.getUsername()); //키값 ,밸류값
+		map.put("roleName", "ROLE_MEMBER");
+		result = memberMapper.setMemberRole(map);
 
 		return result;
 	}
@@ -119,6 +143,10 @@ public class MemberService implements UserDetailsService{
 		int result = memberMapper.setUpdate(memberVO);
 		
 		return result;
+	}
+	
+	public MemberFileVO selectFile(MemberVO memberVO) throws Exception{
+		return memberMapper.selectFile(memberVO);
 	}
 	
 

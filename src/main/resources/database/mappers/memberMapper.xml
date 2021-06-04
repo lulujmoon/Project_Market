@@ -6,14 +6,18 @@
  <mapper namespace="com.mm.market.member.MemberMapper">  
  
 <insert id="setJoin" parameterType="MemberVO">
- 	insert into member(username,password,name,phone,email,enabled,joinDate)
- 	values(#{username},#{password},#{name},#{phone},#{email},#{enabled},now())
+ 	insert into member(username,password,name,phone,email,enabled,oauth,joinDate)
+ 	values(#{username},#{password},#{name},#{phone},#{email},#{enabled},#{oauth},now())
  </insert>
  
  <insert id="setJoinFile" parameterType="MemberFileVO">
  	insert into memberfile(username,fileName,originName)
  	values(#{username},#{fileName},#{originName})
  </insert>
+ 
+ <select id="selectFile" resultType="MemberFileVO" parameterType="MemberVO">
+ 	select * from memberfile where username=#{username}
+ </select>
  
  <insert id="setMemberRole" parameterType="java.util.Map">
  	insert into member_role (username, id)

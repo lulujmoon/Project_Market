@@ -80,8 +80,8 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 
-	@GetMapping("loginResult")
-	public String loginResult(HttpSession session, Authentication auth2)throws Exception{
+	@GetMapping("memberLoginResult")
+	public String memberLoginResult(HttpSession session, Authentication auth2)throws Exception{
 
 		Enumeration<String> en = session.getAttributeNames();
 		MemberVO memberVO = new MemberVO();
@@ -269,6 +269,7 @@ public class MemberController {
 		KakaomemberVO.setPassword(kakaoProfile.getId().toString());
 		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
+		KakaomemberVO.setOauth(true);
 		
 				
 		//가입자 혹은 비가입자 체크해서 처리
@@ -277,7 +278,7 @@ public class MemberController {
 		if(originmemberVO==null) {
 			try {
 				System.out.println("기존회원아님->회원가입진행");
-				memberService.setJoin(KakaomemberVO,avatar);
+				memberService.setKakaoJoin(KakaomemberVO);
 			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -290,13 +291,23 @@ public class MemberController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		
+		System.out.println("카카오oauth: " + KakaomemberVO.isOauth());
 		return "redirect:/";
-		
-		
 	}
-	
-	@GetMapping("store")
-	public void store() throws Exception { }
+		
+	//-----------------shop	
+			
+		@GetMapping("store")
+		public ModelAndView store(MemberFileVO memberFileVO,Authentication authentication)throws Exception{
+			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
+			memberFileVO = memberService.selectFile(memberVO);
+			
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("file",memberFileVO);
+			mv.setViewName("member/store");
+			
+			return mv;
+		};
 
 
 }
