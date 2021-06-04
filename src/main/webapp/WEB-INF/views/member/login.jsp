@@ -16,7 +16,7 @@
 			<div class="logo">
 				<i class="fas fa-lemon"></i><span>&nbsp;Login</span>
 			</div>
-			<form action="./memberLogin" method="post">
+			<form action="./login" method="post">
 				<div class="form-group">
 					<label for="username">Username</label><br>
 					<input type="text"	class="form-control" id="username" name="username"><br>
@@ -28,7 +28,7 @@
 				</div>
 				<div class="login-btn">
 					<button type="submit" class="btn-wide btn-submit">Login</button>
-					<a href="./memberJoin">회원가입</a>
+					<a href="./join">회원가입</a>
 					<a href="#">아이디/비밀번호 찾기</a>
 				</div>
 			</form>

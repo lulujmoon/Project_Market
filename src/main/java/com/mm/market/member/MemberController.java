@@ -80,7 +80,7 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 
-	@GetMapping("memberLoginResult")
+	@GetMapping("loginResult")
 	public String memberLoginResult(HttpSession session, Authentication auth2)throws Exception{
 
 		Enumeration<String> en = session.getAttributeNames();
@@ -309,6 +309,8 @@ public class MemberController {
 			
 			return mv;
 		};
+		
+		
 
 
 }
