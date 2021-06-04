@@ -294,6 +294,9 @@ public class MemberController {
 		
 		
 	}
+	
+	@GetMapping("store")
+	public void store() throws Exception { }
 
 
 }

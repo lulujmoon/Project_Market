@@ -74,7 +74,7 @@
 			<div class="location-group">
 				<div class="location__title">내 지역 2</div>
 				<div class="location__content">${locations[1].locationName}</div>
-				<c:if test="${locations[1] == null}">
+				<c:if test="${locations[0] != null && locations[1] == null}">
 					<button class="btn btn-insert active" onclick="insertLocation()">추가</button>				
 				</c:if>
 				<c:if test="${locations[1] != null}">
@@ -84,7 +84,7 @@
 			<div class="location-group">
 				<div class="location__title">내 지역 3</div>
 				<div class="location__content">${locations[2].locationName}</div>
-				<c:if test="${locations[2] == null}">
+				<c:if test="${locations[1] != null && locations[2] == null}">
 					<button class="btn btn-insert active" onclick="insertLocation()">추가</button>				
 				</c:if>
 				<c:if test="${locations[2] != null}">
