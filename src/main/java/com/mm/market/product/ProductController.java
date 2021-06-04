@@ -31,7 +31,7 @@ public class ProductController {
 	private CategoryMapper categoryMapper;
 	
 	@GetMapping("list")
-	public String getList( Pager pager, Model model) throws Exception {
+	public String getList(Pager pager, Model model) throws Exception {
 		
 		List<ProductVO> ar = productService.getList(pager);
 		List<CategoryVO> categories = categoryMapper.getList();
@@ -122,7 +122,7 @@ public class ProductController {
 		
 		int result = productService.setInsert(productVO, file);
 
-		return "product/list";
+		return "redirect:./list";
 	}
 	
 	@GetMapping("update")

@@ -10,11 +10,6 @@
 <c:import url="../template/setting.jsp"></c:import>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>Hello, world!</title>
-<!-- <style type="text/css">
-	#inputimg {
-		display: none;
-	}
-</style> -->
 </head>
 <body>
 <h2>Product Insert Page</h2>
@@ -43,7 +38,6 @@
 	    <input type="text" name="username">
 	  </div>
 	  	<div>
-	  	<label>카테고리</label>
 		  <div class="form-group">
 		    <label for="category">카테고리</label>
 		    <select class="form-control" id="category" name="categoryCode">

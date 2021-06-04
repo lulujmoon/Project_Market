@@ -27,7 +27,7 @@
 				<c:forEach items="${list}" var="dto">
 					<div class="prd__card" onclick="goSelect(${dto.productNum})">
 
-						<img class="card__img" src="/upload/product/${dto.thumbnail.fileName}">
+						<img class="card__img" src="/resources/upload/product/${files.fileName}">
 						<div class="card__info">
 							<div class="info__name"> ${dto.productName}</div>
 							<div class="info__price">${dto.productPrice}</div>

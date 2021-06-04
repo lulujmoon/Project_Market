@@ -14,8 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Component
 public class FileManager {
 	
-	@Autowired
-	private ResourceLoader resourceLoader;
 	
 	public String save(String dirName, MultipartFile multipartFile, HttpSession session) throws Exception {
 		
