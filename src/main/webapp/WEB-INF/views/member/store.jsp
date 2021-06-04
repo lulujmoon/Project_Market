@@ -13,10 +13,11 @@
 </head>
 <body>
 <h1> 마이샵 </h1>
-<h1>${principal.oauth}</h1>
 
 <!--기본이미지 -->
+<c:if test="${principal.oauth not empty }">
 <img src="../resources/upload/upload/member/default.jpg">
+</c:if>
 
 <img src="../resources/upload/upload/member/${file.fileName}">
 

@@ -35,7 +35,7 @@ public class MemberVO implements UserDetails{
 	@Email(message="이메일 형식에 맞지 않습니다.")
 	private String email;
 	private boolean enabled;
-	private boolean oauth;
+	private String oauth;
 	private Date joinDate;
 	private Long code;
 	
