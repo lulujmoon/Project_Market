@@ -21,7 +21,7 @@
 <!-- 일반멤버일경우 input된 이미지출력 -->
 <c:if test="${principal.oauth eq false}">
 <img src="../resources/upload/upload/member/${file.fileName}">
-<a href="#">프로필수정</a>
+<a href="./profileUpdate">프로필수정</a>
 </c:if>
 
 

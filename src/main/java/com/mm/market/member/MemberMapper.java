@@ -22,4 +22,6 @@ public interface MemberMapper {
 	public int setUpdate(MemberVO memberVO) throws Exception;
 
 	public MemberFileVO selectFile(MemberVO memberVO)throws Exception;
+	
+	public int setDeleteFile (MemberFileVO memberFileVO) throws Exception;
 }

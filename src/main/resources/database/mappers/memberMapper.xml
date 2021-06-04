@@ -19,6 +19,10 @@
  	select * from memberfile where username=#{username}
  </select>
  
+<delete id="setDeleteFile" parameterType="MemberFileVO">
+	delete from memberfile where fileNum=#{fileNum}
+</delete>
+ 
  <insert id="setMemberRole" parameterType="java.util.Map">
  	insert into member_role (username, id)
  	values(#{username},(select id from role where roleName=#{roleName}))

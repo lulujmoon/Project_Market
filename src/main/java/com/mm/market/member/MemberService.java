@@ -148,5 +148,34 @@ public class MemberService implements UserDetailsService{
 		return memberMapper.selectFile(memberVO);
 	}
 	
+	public int setUpdateFile(MultipartFile multipartFile,MemberVO memberVO, Authentication authentication)throws Exception{
+		int result=0;
+		memberVO =(MemberVO)authentication.getPrincipal();
+		
+		//새로운 이미지를 넣었다면 실행
+		if(multipartFile.getOriginalFilename().length()!=0) {
+			//존재하는 이미지 삭제
+			MemberFileVO memberFileVO = memberMapper.selectFile(memberVO);
+			
+			if(memberFileVO!=null) {
+				String delFileName = memberFileVO.getFileName();
+				boolean check = fileManager.delete("magazineT", delFileName, session);
 
+				memberFileVO.setFileName(delFileName);
+				memberMapper.setDeleteFile(memberFileVO);				
+			}
+
+			String filePath="upload/member/";
+			String fileName= fileManager.save(filePath, multipartFile, session);
+			System.out.println(fileName);
+			MemberFileVO memberFileVO2 = new MemberFileVO();
+			memberFileVO.setFileName(fileName);
+			memberFileVO.setOriginName(multipartFile.getOriginalFilename());
+
+			
+			result = memberMapper.setJoinFile(memberFileVO);
+				
+	}
+		return result;
+	}
 }
