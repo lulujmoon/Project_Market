@@ -11,12 +11,23 @@
 	<groupId>com.mm</groupId>
 	<artifactId>market</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>SpringBoot_MyBatis_Thymeleaf_Security-1</name>
+	<name>Project_Market</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+	<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+		
+
+		<dependency>
+    <groupId>javax.validation</groupId>
+    <artifactId>validation-api</artifactId>
+    <version>2.0.1.Final</version>
+</dependency>
 		<!-- web socket -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -26,21 +37,28 @@
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
+		</dependency>			
+	
+			<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+
+
 		<!--tomcat-jasper for JSP in Sprng boot -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
-		<!-- jstl -->
+				<!-- jstl -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
-<!-- 	<dependency>
-		<groupId>org.springframework.boot</groupId>
+ 		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency> -->
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -50,10 +68,11 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.1.4</version>
 		</dependency>
-<!-- 	<dependency>
+<!-- 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency> -->
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -75,7 +94,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!-- 	<dependency>
+<!-- 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
