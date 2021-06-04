@@ -58,6 +58,7 @@
 			</association>
 			<collection property="files" javaType="java.util.List" ofType="ProductFileVO">
 				<id property="fileNum" column="fileNum"/>
+				<result property="productNum" column="productNum"/>
 				<result property="fileName" column="fileName"/>
 				<result property="originName" column="originName"/>
 			</collection>

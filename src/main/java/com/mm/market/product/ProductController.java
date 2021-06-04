@@ -35,25 +35,26 @@ public class ProductController {
 		
 		List<ProductVO> ar = productService.getList(pager);
 		List<CategoryVO> categories = categoryMapper.getList();
-
+		
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		model.addAttribute("categories", categories);
 		
+		System.out.println(ar.get(0).getFiles().get(0).getFileName());
 		
 		return "product/list";
 	}
 	
 	
 	@GetMapping("select")
-	public String getSelect(@RequestParam("productNum") Long productNum ,ProductVO productVO, Model model, Authentication auth1)throws Exception {
+	public String getSelect(@RequestParam("productNum") Long productNum ,ProductVO productVO, Model model, Authentication auth)throws Exception {
 		productVO = productService.getSelect(productVO);
 		System.out.println(productVO);
 		
-		int startInx = auth1.getPrincipal().toString().indexOf("=");
-		int lastInx = auth1.getPrincipal().toString().indexOf(",");
+		int startInx = auth.getPrincipal().toString().indexOf("=");
+		int lastInx = auth.getPrincipal().toString().indexOf(",");
 		
-		String username = auth1.getPrincipal().toString().substring(startInx+1, lastInx);
+		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
 		System.out.println(username);
 		
 		HeartVO heartVO = new HeartVO();
@@ -82,8 +83,6 @@ public class ProductController {
 		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
 		System.out.println(username);
 		
-		
-
 		HeartVO heartVO = new HeartVO();
 		
 		heartVO.setProductNum(productNum);
