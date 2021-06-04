@@ -73,6 +73,10 @@
 	height: 100%;
 	background-color: white;
 	border-right: 1px solid #b4b4b4;
+	font-size: 1.2em;
+	line-height: 60px;
+	text-align: center;
+	cursor: pointer;
 }
 
 .board__contents{

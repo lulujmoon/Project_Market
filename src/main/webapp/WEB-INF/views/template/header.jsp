@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
+<sec:authentication property="principal" var="principal" />
 <!-- 헤더 -->
 <header>
 	<nav class="navbar nav">
@@ -26,7 +26,7 @@
 				<li><a href="${pageContext.request.contextPath}/member/approve">회원가입</a></li>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-				<li><a href="${pageContext.request.contextPath}/store/products">내 상점</a>&nbsp;|&nbsp;</li>
+				<li><a href="${pageContext.request.contextPath}/store/${principal.code}/products">내 상점</a>&nbsp;|&nbsp;</li>
 				<li><a href="${pageContext.request.contextPath}/member/info">내 정보</a>&nbsp;|&nbsp;</li>
 				<li><a href="#">알림</a>&nbsp;|&nbsp;</li>
 				<li><a href="#">메세지</a></li>

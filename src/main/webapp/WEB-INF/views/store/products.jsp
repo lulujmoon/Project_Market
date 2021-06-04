@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
-<link rel="stylesheet" href="../resources/css/store.css">
+<link rel="stylesheet" href="/resources/css/store.css">
 <title>내 상점</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
 
 <div class="container">
 	<div class="profile-container">
-		<img class="profile__photo" src = "../resources/images/test01.jpg">
+		<img class="profile__photo" src = "/resources/images/test01.jpg">
 		<div class="profile__info">
 			<div class="profile__name">문정현</div>
 			<div class="profile__location">세종특별자치시 아름동</div>
@@ -38,6 +38,6 @@
 </div>
 
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/common.js"></script>
 </body>
 </html>

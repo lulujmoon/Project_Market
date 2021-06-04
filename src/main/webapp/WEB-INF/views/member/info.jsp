@@ -18,11 +18,11 @@
 <body>
 
 <c:import url="../template/header.jsp"></c:import>
-
 <div class="container">
 	<div class="info-container">
 		<div class="info__header">
 			<h2>내 정보</h2>
+			<h1>코드 : ${principal.code}</h1>
 			<div class="btn-group">
 				<button class="btn btn-edit" class="active">수정</button>
 				<button class="btn btn-submit">완료</button>
