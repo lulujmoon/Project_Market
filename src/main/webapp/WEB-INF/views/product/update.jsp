@@ -13,7 +13,7 @@
 </head>
 <body>
 <h2>Product Update Page</h2>
-	<form action="./insert" method="POST" enctype="multipart/form-data">
+	<form action="./update" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="productNum" value="${vo.productNum}">
 		
 		<div>		
@@ -22,8 +22,18 @@
          <div id="img_container"></div>
             <div id="inputimg">
                <div>
-                  <input type="file" name="file" multiple onchange="setThumbnail(event);"
+                  <input type="file" name="file" id="images" multiple onchange="setThumbnail(event);"
                    	value="/resources/upload/product/${file.fileName}"> 
+                   	
+          				<c:forEach items="${files}" var="files" >
+				         <div class="uploadResult">
+				      		<a href="#">${files.originName}</a>
+				      		<img src="/resources/upload/product/${files.fileName}" width="10%" height="10%">
+				         </div>
+						</c:forEach>
+                   	
+                   	
+                   	
                   <input type="button" id="del" value="Delete">
                </div>
             </div>

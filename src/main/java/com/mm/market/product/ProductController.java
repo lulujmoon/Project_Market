@@ -128,7 +128,16 @@ public class ProductController {
 	@GetMapping("update")
 	public String setUpdate(ProductVO productVO, Model model)throws Exception{
 		productVO = productService.getSelect(productVO);
+		List<ProductFileVO> file = productVO.getFiles();
+		
+		for(int i=0;i<file.size();i++) {
+			file.get(i).setProductNum(productVO.getProductNum());
+		}
+		
 		model.addAttribute("vo", productVO);
+		model.addAttribute("files", file);
+	
+		System.out.println(file);
 		
 		return "product/update";
 	}

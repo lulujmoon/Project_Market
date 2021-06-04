@@ -35,3 +35,19 @@ function setThumbnail(event){
 	
 	reader.readAsDataURL(event.target.files[0]);
 };
+
+
+$(document).ready(function(){
+	(function(){
+		let productNum = $("#productNum").attr("title");
+		
+	
+		
+		
+		
+		
+	})
+
+
+	
+})
