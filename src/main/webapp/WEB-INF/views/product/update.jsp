@@ -23,7 +23,7 @@
             <div id="inputimg">
                <div>
                   <input type="file" name="file" multiple onchange="setThumbnail(event);"
-                   	value="/upload/product/${file.fileName}"> 
+                   	value="${file.fileName}"> 
                   <input type="button" id="del" value="Delete">
                </div>
             </div>
