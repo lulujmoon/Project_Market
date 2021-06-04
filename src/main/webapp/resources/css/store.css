@@ -66,6 +66,7 @@
 	justify-content: flex-start;
 	background-color: #b4b4b4;
 	border: 1px solid #b4b4b4;
+	border-bottom: none;
 }
 
 .nav__item{
@@ -74,10 +75,18 @@
 	background-color: white;
 	border-right: 1px solid #b4b4b4;
 	font-size: 1.2em;
+	font-weight: bold;
 	line-height: 60px;
 	text-align: center;
 	cursor: pointer;
 }
+
+/*
+.nav__selected{
+	background-color: #fadd85;
+	color: white;
+}
+*/
 
 .board__contents{
 	width: 100%;

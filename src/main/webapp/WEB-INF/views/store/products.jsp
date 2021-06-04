@@ -28,7 +28,7 @@
 	</div>
 	<div class="board-container">
 		<div class="board__nav">
-			<div class="nav__item">판매 상품</div>
+			<div class="nav__item nav__selected">판매 상품</div>
 			<div class="nav__item">받은 후기</div>
 			<div class="nav__item">동네 생활</div>
 		</div>
