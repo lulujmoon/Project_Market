@@ -3,6 +3,8 @@ package com.mm.market.member;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -76,7 +78,7 @@ public class MemberService implements UserDetailsService{
 
 	//예외가 발생했으면 자동으로 rollback
 	@Transactional(rollbackFor = Exception.class)
-	public int setJoin(MemberVO memberVO,MultipartFile multipartFile)throws Exception{
+	public int setJoin(MemberVO memberVO,MultipartFile multipartFile,HttpSession session)throws Exception{
 		//password 암호
 		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		//계정활성화
@@ -94,7 +96,7 @@ public class MemberService implements UserDetailsService{
 		//hdd file
 		String filePath="upload/member/";
 		if(multipartFile.getSize() !=0) {
-			String fileName= fileManager.save(multipartFile,filePath);
+			String fileName= fileManager.save(filePath, multipartFile, session);
 			System.out.println(fileName);
 			MemberFileVO memberFileVO = new MemberFileVO();
 			memberFileVO.setFileName(fileName);
@@ -138,6 +140,10 @@ public class MemberService implements UserDetailsService{
 		int result = memberMapper.setUpdate(memberVO);
 		
 		return result;
+	}
+	
+	public MemberFileVO selectFile(MemberVO memberVO) throws Exception{
+		return memberMapper.selectFile(memberVO);
 	}
 	
 

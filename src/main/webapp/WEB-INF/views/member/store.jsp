@@ -8,7 +8,8 @@
 </head>
 <body>
 <h1> 마이샵 </h1>
-<img src="./resources/upload/member/e4ea680a-9811-4c68-b2e4-4274e9788962_role.PNG">
+
+<h1>${file.originName}</h1>
 
 </body>
 </html>

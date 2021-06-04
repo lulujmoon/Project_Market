@@ -15,6 +15,10 @@
  	values(#{username},#{fileName},#{originName})
  </insert>
  
+ <select id="selectFile" resultType="MemberFileVO" parameterType="MemberVO">
+ 	select * from memberfile where username=#{username}
+ </select>
+ 
  <insert id="setMemberRole" parameterType="java.util.Map">
  	insert into member_role (username, id)
  	values(#{username},(select id from role where roleName=#{roleName}))
