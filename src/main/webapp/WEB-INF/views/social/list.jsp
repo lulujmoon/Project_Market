@@ -17,7 +17,7 @@
 		<div class="category-container">
 			<ul class="category-list">
 				<c:forEach items="${categories}" var="category">
-					<li><a href="#" onclick="./list?categoryCode=${category.categoryCode}">${category.categoryName}</a></li>
+					<li><a href="./list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
 				</c:forEach>
 			</ul>
 
@@ -37,8 +37,7 @@
 					<c:forEach items="${list}" var="dto">
 						<tr>
 							<td>${dto.socialNum}</td>
-							<td><a href="./list?categoryCode=${dto.categoryCode}">
-									${dto.categoryCode}</a></td>
+							<td>${dto.categoryCode}</td>
 							<td><a href="./select?socialNum=${dto.socialNum}">
 									${dto.socialTitle}</a></td>
 							<td>${dto.username}</td>
