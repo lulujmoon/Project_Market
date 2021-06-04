@@ -2,8 +2,7 @@
 
 .container{
 	padding-top: 125px;
-	width: 100%;
-	max-width: 1210px;
+	width: 1210px;
 	min-height: 55vh;
 	margin: 30px auto;
 }
@@ -14,15 +13,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	/* 테스트용 */
-	border: 1px solid #b4b4b4;
-}
 
-/* 테스트용 */
-.profile-container > div{
-	width: 30%;
-	height: 100%;
-	border: 1px solid #b4b4b4;
 }
 
 .profile__photo{
@@ -32,9 +23,31 @@
 }
 
 .profile__info{
+	width: 600px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	padding: 0 20px;
+}
+
+.profile__name{
+	font-size: 1.7em;
+	font-weight: 800;
+	padding: 20px;
+}
+
+.profile__location{
+	font-size: 0.9em;
+	padding: 4px 20px;
+}
+
+.profile__joinDate{
+	font-size: 0.9em;	
+	padding: 4px 20px;
+}
+
+.profile__rating div{
+	padding: 4px 20px;
 }
 
 

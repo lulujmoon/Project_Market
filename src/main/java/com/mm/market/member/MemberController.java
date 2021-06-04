@@ -298,13 +298,15 @@ public class MemberController {
 	//-----------------shop	
 			
 		@GetMapping("store")
-		public ModelAndView store(MemberFileVO memberFileVO,Authentication authentication)throws Exception{
+		public ModelAndView store(MemberFileVO memberFileVO, Authentication authentication)throws Exception{
 			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
 			memberFileVO = memberService.selectFile(memberVO);
 			
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("file",memberFileVO);
 			mv.setViewName("member/store");
+			
+			System.out.println(memberVO.isOauth());
 			
 			return mv;
 		};
