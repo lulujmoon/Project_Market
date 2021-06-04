@@ -80,8 +80,8 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 
-	@GetMapping("loginResult")
-	public String loginResult(HttpSession session, Authentication auth2)throws Exception{
+	@GetMapping("memberLoginResult")
+	public String memberLoginResult(HttpSession session, Authentication auth2)throws Exception{
 
 		Enumeration<String> en = session.getAttributeNames();
 		MemberVO memberVO = new MemberVO();
@@ -297,7 +297,7 @@ public class MemberController {
 	//-----------------shop	
 			
 		@GetMapping("store")
-		public ModelAndView store(MemberFileVO memberFileVO, Authentication authentication)throws Exception{
+		public ModelAndView store(MemberFileVO memberFileVO,Authentication authentication)throws Exception{
 			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
 			memberFileVO = memberService.selectFile(memberVO);
 	
@@ -306,8 +306,6 @@ public class MemberController {
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("file",memberFileVO);
 			mv.setViewName("member/store");
-			
-			System.out.println(memberVO.isOauth());
 			
 			return mv;
 		};

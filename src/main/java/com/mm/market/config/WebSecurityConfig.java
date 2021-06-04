@@ -44,9 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		//로그인관련
 		.formLogin()
-		.loginPage("/member/login")
+		.loginPage("/member/memberLogin")
 		//로그인 성공시
-		.defaultSuccessUrl("/member/loginResult")
+		.defaultSuccessUrl("/member/memberLoginResult")
 		//로그인 실패시 처리
 		.failureHandler(new LoginFail())
 		.permitAll()
@@ -54,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		//로그아웃관련
 		.logout()
-		.logoutUrl("/member/logout")
+		.logoutUrl("/member/memberLogout")
 		.logoutSuccessUrl("/")
 		.invalidateHttpSession(true)
 		.deleteCookies("JESSIONID")
