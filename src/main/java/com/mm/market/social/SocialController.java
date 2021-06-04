@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mm.market.comment.CommentService;
+import com.mm.market.comment.CommentVO;
 import com.mm.market.socialCategory.SocialCategoryMapper;
 import com.mm.market.socialCategory.SocialCategoryVO;
 import com.mm.market.util.Pager;
@@ -22,6 +24,9 @@ public class SocialController {
 	private SocialService socialService;
 	
 	@Autowired
+	private CommentService commentService;
+	
+	@Autowired
 	private SocialCategoryMapper socialCategoryMapper;
 	
 	@GetMapping("list")
@@ -32,7 +37,7 @@ public class SocialController {
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		model.addAttribute("categories", categories);
-
+		
 		return "social/list";
 	}
 	
@@ -72,4 +77,5 @@ public class SocialController {
 		int result = socialService.setDelete(socialVO);
 		return "redirect:./list";
 	}
+	
 }

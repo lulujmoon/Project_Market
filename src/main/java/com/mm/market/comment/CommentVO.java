@@ -11,7 +11,6 @@ public class CommentVO {
 	private Long socialNum;
 	private String username;
 	private Date commentDate;
-	private Long commentParent;
 	private String commentContent;
 
 }

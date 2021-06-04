@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
 	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
@@ -18,9 +17,12 @@
 		<div class="category-container">
 			<ul class="category-list">
 				<c:forEach items="${categories}" var="category">
-					<li><a href="./list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
+					<li><a href="#" onclick="./list?categoryCode=${category.categoryCode}">${category.categoryName}</a></li>
 				</c:forEach>
 			</ul>
+
+			<input type="hidden" class="category" value="category"
+				name="categoryCode">
 			<table class="table">
 				<thead class="thead-dark">
 					<tr>
@@ -35,7 +37,8 @@
 					<c:forEach items="${list}" var="dto">
 						<tr>
 							<td>${dto.socialNum}</td>
-							<td>${dto.categoryCode}</td>
+							<td><a href="./list?categoryCode=${dto.categoryCode}">
+									${dto.categoryCode}</a></td>
 							<td><a href="./select?socialNum=${dto.socialNum}">
 									${dto.socialTitle}</a></td>
 							<td>${dto.username}</td>
@@ -80,6 +83,5 @@
 		</div>
 		<a href="./insert" class="btn btn-primary" role="button">작성</a>
 	</div>
-	<script type="text/javascript" src="../resources/js/common.js"></script>
 </body>
 </html>

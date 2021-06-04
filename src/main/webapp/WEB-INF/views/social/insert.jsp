@@ -22,15 +22,26 @@
 			<label>작성자</label> <input type="text" name="username">
 		</div>
 
-		<div class="form-group">
-			<label>카테고리</label> <input type="text" name="categoryCode">
+		<div>
+			<label>카테고리</label>
+			<div class="form-group">
+				<label for="category">카테고리</label> <select class="form-control"
+					id="socialCategory" name="categoryCode">
+					<option value="1">동네맛집</option>
+					<option value="2">동네소식</option>
+					<option value="3">취미생활</option>
+					<option value="4">애완동물</option>
+					<option value="5">살림/인테리어</option>
+					<option value="6">출산/육아</option>
+					<option value="7">기타</option>
+				</select>
+			</div>
 		</div>
 
 		<div class="form-group">
-			<label>글 내용</label>
-			<input type="text" name="socialContent">
+			<label>글 내용</label> <input type="text" name="socialContent">
 		</div>
-		
+
 		<div>
 			<input type="file" name="files">
 		</div>
