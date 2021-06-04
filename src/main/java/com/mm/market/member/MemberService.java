@@ -70,13 +70,18 @@ public class MemberService implements UserDetailsService{
 		result = true; }
 
 		//username 중복
-		MemberVO checkMember = memberMapper.getUsername(memberVO);
-		if(checkMember != null) {errors.rejectValue("username", "memberVO.id.equal");
-		result = true;
-		} 
+		//MemberVO checkMember = memberMapper.getUsername(memberVO);
+		//if(checkMember != null) {
+		//errors.rejectValue("username", "memberVO.id.equal");
+		//result = true;
+		//} 
 		return result;
 		}
-
+	
+	public MemberVO idCheck(String username)throws Exception{
+		return memberMapper.idCheck(username);
+	
+	}
 
 	//예외가 발생했으면 자동으로 rollback
 	@Transactional(rollbackFor = Exception.class)

@@ -43,6 +43,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
 
+import ch.qos.logback.classic.Logger;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
@@ -65,9 +67,8 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	
-	  @PostMapping("login") public String getLogin(HttpServletRequest
-	 request)throws Exception{
+	  @PostMapping("login") 
+	  public String getLogin(HttpServletRequest request)throws Exception{
 		  //포워딩된 어트리뷰트를 포스트형식으로 받아줌
 	  System.out.println(request.getAttribute("message"));
 	  
@@ -144,6 +145,20 @@ public class MemberController {
 
 		return "redirect:../";
 
+	}
+	
+	@ResponseBody
+	@PostMapping("idCheck")
+	public int idCheck(HttpServletRequest req)throws Exception{
+		
+		String username = req.getParameter("username");
+		MemberVO idCheck = memberService.idCheck(username);
+		
+		int result =0;
+		if(idCheck != null) {
+			result =1;
+		}
+		return result;
 	}
 	
 	@GetMapping("info")

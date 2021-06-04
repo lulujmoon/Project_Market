@@ -35,8 +35,6 @@ public class LoginFail implements AuthenticationFailureHandler {
 		//request와 response를 통하여 메세지 뿌려주기	
 		request.setAttribute("message", message);
 		request.getRequestDispatcher("/member/login").forward(request, response);
-		
-	
 	
 	}
 }

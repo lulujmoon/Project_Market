@@ -62,4 +62,8 @@
  	update member set password=#{password}, name=#{name}, phone=#{phone}, email=#{email} where username=#{username}
  </update>
  
+ <select id="idCheck" resultType="MemberVO">
+ 	select username from member where username =#{username}
+ </select>
+ 
  </mapper>  
