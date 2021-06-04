@@ -18,11 +18,11 @@
 <body>
 
 <c:import url="../template/header.jsp"></c:import>
-
 <div class="container">
 	<div class="info-container">
 		<div class="info__header">
 			<h2>내 정보</h2>
+			<h1>코드 : ${principal.code}</h1>
 			<div class="btn-group">
 				<button class="btn btn-edit" class="active">수정</button>
 				<button class="btn btn-submit">완료</button>
@@ -61,20 +61,37 @@
 		<div class="location__header">
 			<h2> 내 지역 </h2>
 			최대 3개 지역까지 설정할 수 있습니다.
-			<button class="btn btn-add active">추가</button>
 		</div>
-		<div class="location-group">
-			<div class="location__title">내 지역 1</div>
-			<div class="location__content">세종시 아름동</div>
-		</div>
-		<div class="location-group">
-			<div class="location__title">내 지역 2</div>
-			<div class="location__content">세종시 아름동</div>
-		</div>
-		<div class="location-group">
-			<div class="location__title">내 지역 3</div>
-			<div class="location__content">세종시 아름동</div>
-		</div>
+			<div class="location-group">
+				<div class="location__title">내 지역 1</div>
+				<div class="location__content">${locations[0].locationName}</div>
+				<c:if test="${locations[0] == null}">
+					<button class="btn btn-insert active" onclick="insertLocation()">추가</button>				
+				</c:if>
+				<c:if test="${locations[0] != null}">
+					<button class="btn btn-delete active" onclick="deleteLocation(${locations[0].locationNum})">삭제</button>				
+				</c:if>
+			</div>
+			<div class="location-group">
+				<div class="location__title">내 지역 2</div>
+				<div class="location__content">${locations[1].locationName}</div>
+				<c:if test="${locations[0] != null && locations[1] == null}">
+					<button class="btn btn-insert active" onclick="insertLocation()">추가</button>				
+				</c:if>
+				<c:if test="${locations[1] != null}">
+					<button class="btn btn-delete active" onclick="deleteLocation(${locations[1].locationNum})">삭제</button>				
+				</c:if>
+			</div>
+			<div class="location-group">
+				<div class="location__title">내 지역 3</div>
+				<div class="location__content">${locations[2].locationName}</div>
+				<c:if test="${locations[1] != null && locations[2] == null}">
+					<button class="btn btn-insert active" onclick="insertLocation()">추가</button>				
+				</c:if>
+				<c:if test="${locations[2] != null}">
+					<button class="btn btn-delete active" onclick="deleteLocation(${locations[0].locationNum})">삭제</button>				
+				</c:if>				
+			</div>
 	</div>
 </div>
 

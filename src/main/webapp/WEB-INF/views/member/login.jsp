@@ -16,7 +16,7 @@
 			<div class="logo">
 				<i class="fas fa-lemon"></i><span>&nbsp;Login</span>
 			</div>
-			<form action="./memberLogin" method="post">
+			<form action="./login" method="post">
 				<div class="form-group">
 					<label for="username">Username</label><br>
 					<input type="text"	class="form-control" id="username" name="username"><br>
