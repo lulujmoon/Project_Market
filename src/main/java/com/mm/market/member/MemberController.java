@@ -269,7 +269,7 @@ public class MemberController {
 		KakaomemberVO.setPassword(kakaoProfile.getId().toString());
 		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
-		KakaomemberVO.setOauth("1");
+		KakaomemberVO.setOauth(true);
 		
 				
 		//가입자 혹은 비가입자 체크해서 처리

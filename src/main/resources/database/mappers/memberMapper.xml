@@ -41,6 +41,7 @@
  <result column="email" property="email"/>
  <result column="joinDate" property="joinDate"/>
  <result column="enabled" property="enabled"/>
+ <result column="oauth" property="oauth"/>
  <collection property="roles" javaType="java.util.List" ofType="roleVO">
  	<id column="id" property="id"/>
  	<result column="roleName" property="roleName"/>
