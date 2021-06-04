@@ -291,9 +291,14 @@ public class MemberController {
 		
 		
 		return "redirect:/";
-		
-		
 	}
+		
+	//-----------------shop	
+			
+		@GetMapping("store")
+		public void store()throws Exception{
+			
+		};
 
 
 }
