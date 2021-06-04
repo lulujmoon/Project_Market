@@ -16,6 +16,7 @@
 <title>내 정보</title>
 </head>
 <body>
+
 <c:import url="../template/header.jsp"></c:import>
 
 <div class="container">

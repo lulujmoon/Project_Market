@@ -14,7 +14,6 @@
 <body>
 <h1> 마이샵 </h1>
 <h1>${principal.oauth}</h1>
-<h1>${principal.enabled}</h1>
 
 <!--기본이미지 -->
 <img src="../resources/upload/upload/member/default.jpg">

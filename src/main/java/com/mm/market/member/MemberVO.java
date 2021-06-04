@@ -37,6 +37,7 @@ public class MemberVO implements UserDetails{
 	private boolean enabled;
 	private boolean oauth;
 	private Date joinDate;
+	private Long code;
 	
 	//role
 	private List<RoleVO> roles;
