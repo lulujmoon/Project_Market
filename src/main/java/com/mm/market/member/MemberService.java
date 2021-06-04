@@ -117,7 +117,6 @@ public class MemberService implements UserDetailsService{
 		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		//계정활성화
 		memberVO.setEnabled(true);
-		
 
 		//member table
 		int result = memberMapper.setJoin(memberVO);

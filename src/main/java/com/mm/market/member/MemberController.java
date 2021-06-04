@@ -291,7 +291,6 @@ public class MemberController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		
-		System.out.println("카카오oauth: " + KakaomemberVO.isOauth());
 		return "redirect:/";
 	}
 		
@@ -301,6 +300,8 @@ public class MemberController {
 		public ModelAndView store(MemberFileVO memberFileVO,Authentication authentication)throws Exception{
 			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
 			memberFileVO = memberService.selectFile(memberVO);
+	
+		
 			
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("file",memberFileVO);
