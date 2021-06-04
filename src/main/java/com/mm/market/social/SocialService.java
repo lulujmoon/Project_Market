@@ -19,14 +19,14 @@ public class SocialService {
 	
 	@Autowired
 	private FileManager fileManager;
-	
-	@Autowired
-	private SqlSession session;
 
 	public List<SocialVO> getList(Pager pager) throws Exception {
-		pager.makeRow();
+		Long perPage = 20L;
+		Long perBlock = 5L;
+
+		pager.makeRow(perPage);
 		Long totalCount = socialMapper.getTotalCount(pager);
-		pager.makeNum(totalCount);
+		pager.makeNum(totalCount, perPage, perBlock);
 		return socialMapper.getList(pager);
 	}
 
