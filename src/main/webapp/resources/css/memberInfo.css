@@ -4,7 +4,6 @@
 	padding-top: 125px;
 	width: 100%;
 	max-width: 1210px;
-	min-height: 55vh;
 	margin: 30px auto;
 	display: flex;
 	flex-direction: row;
@@ -58,13 +57,6 @@
 .location__title{
 	height: 60px;
 	line-height: 60px;
-}
-
-.location__content{
-	width:60%;
-	height: 60px;
-	line-height: 60px;
-	padding: 10px 20px;
 }
 
 .info__content{

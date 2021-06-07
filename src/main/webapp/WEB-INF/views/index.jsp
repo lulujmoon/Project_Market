@@ -5,7 +5,7 @@
 <html>
 <head>
 <c:import url="./template/setting.jsp"></c:import>
-<link rel="stylesheet" href="../resources/css/home.css">
+<link rel="stylesheet" href="../resources/css/index.css">
 <title>Home</title>
 </head>
 <body>
@@ -34,17 +34,43 @@
 				<a href="${pageContext.request.contextPath}/product/list">더 보기</a>
 			</div>
 			<div class="section-contents">
-				<c:forEach var="i" begin="0" end="7">
-					<div class="prd__card" onclick="goSelect(${products[i].productNum})">
-						<img class="card__img" src="../resources/images/test01.jpg">
-						<div class="card__info">
-							<div class="info__name">${products[i].productName}</div>
-							<div class="info__price">${products[i].productPrice}</div>
-							<div class="info__date">9분 전</div>
-							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${products[i].location.locationName}</div>
-						</div>
+				<div class="prd__card">
+					<img class="card__img" src="../resources/images/test01.jpg">
+					<div class="card__info">
+						<div class="info__name">모여봐요 동물의 숲</div>
+						<div class="info__price">45000원</div>
+						<div class="info__date">9분 전</div>
+						<div class="info__location"><i class="fas fa-map-marker-alt"></i> 세종시 아름동</div>
 					</div>
-				</c:forEach>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>	
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>	
+				<div class="prd__card">
+					<div class="card__img"></div>
+					<div class="card__info"></div>
+				</div>												
 			</div>
 		</section>
 		<section class="home__socials">
@@ -62,6 +88,6 @@
 
 <c:import url="./template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
-<script type="text/javascript" src="../resources/js/home.js"></script>
+<script type="text/javascript" src="../resources/js/index.js"></script>
 </body>
 </html>

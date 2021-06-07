@@ -19,7 +19,11 @@ public interface MemberMapper {
 	
 	public MemberVO getUsername(MemberVO memberVO) throws Exception;
 	
+	public MemberVO idCheck(String username) throws Exception;
+	
 	public int setUpdate(MemberVO memberVO) throws Exception;
 
 	public MemberFileVO selectFile(MemberVO memberVO)throws Exception;
+	
+	public int setDeleteFile (MemberFileVO memberFileVO) throws Exception;
 }
