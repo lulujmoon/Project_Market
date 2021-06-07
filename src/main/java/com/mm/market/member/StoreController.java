@@ -19,7 +19,10 @@ public class StoreController {
 	
 	@GetMapping("{code}/products")
 	public ModelAndView products(@PathVariable("code") Long code, Authentication authentication, ModelAndView mv) throws Exception {
-		MemberVO memberVO =(MemberVO)authentication.getPrincipal();
+		
+		MemberVO memberVO = new MemberVO();
+		memberVO.setCode(code);
+		memberVO = memberService.getSelectByCode(memberVO);
 		MemberFileVO memberFileVO = memberService.selectFile(memberVO);
 		
 		mv.addObject("member", memberFileVO);

@@ -59,7 +59,9 @@
  	select * from member where username=#{username}
  </select>
  
- <select id="getSelectByCode" parameterType="MemberVO" resultType="MemberVO"></select>
+ <select id="getSelectByCode" parameterType="MemberVO" resultType="MemberVO">
+ 	select * from member where code=#{code}
+ </select>
  
  <update id="setUpdate" parameterType="MemberVO">
  	update member set password=#{password}, name=#{name}, phone=#{phone}, email=#{email} where username=#{username}
