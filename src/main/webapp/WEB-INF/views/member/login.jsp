@@ -28,7 +28,7 @@
 				</div>
 				<div class="login-btn">
 					<button type="submit" class="btn-wide btn-submit">Login</button>
-					<a href="./join">회원가입</a>
+					<a href="./memberJoin">회원가입</a>
 					<a href="#">아이디/비밀번호 찾기</a>
 				</div>
 			</form>
