@@ -32,6 +32,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
 		</dependency>
+		<!-- MessageBrokerRegistry -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+		</dependency>
+		
 		<!-- JSON 데이터 자동처리 -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>

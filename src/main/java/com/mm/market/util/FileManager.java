@@ -42,11 +42,14 @@ public class FileManager {
 		String path = session.getServletContext().getRealPath("resources/upload/"+name);
 		File file = new File(path, fileName);
 		
+//		System.out.println("FM.path : "+ path);
+//		System.out.println("FM.file : "+ file);
+		
 		boolean deleted = false;
 		if(file.exists()) {
 			deleted = file.delete();
 		}
-		
+//		System.out.println("FM.deleted : "+deleted);
 		return deleted;
 		
 	}

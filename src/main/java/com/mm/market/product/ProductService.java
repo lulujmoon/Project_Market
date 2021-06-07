@@ -51,7 +51,15 @@ public class ProductService {
 	}
 	
 	public int setDelete(ProductVO productVO)throws Exception{
+		productVO = productMapper.getSelect(productVO);
+		
+		for(int i=0;i<productVO.getFiles().size();i++) {
+			ProductFileVO productFileVO = productVO.getFiles().get(i);
+			boolean deleted = fileManager.delete("product", productVO.getFiles().get(i).getFileName(), session);
+			System.out.println("delete : "+ deleted);
+		}
 		return productMapper.setDelete(productVO);
+		
 	}
 
 	public int setFileDelete(ProductFileVO productFileVO) throws  Exception {
@@ -63,7 +71,8 @@ public class ProductService {
 		//3. HDD 삭제
 		if(result>0) {
 			boolean deleted = fileManager.delete("product", productFileVO.getFileName(), session);
-			System.out.println(deleted);
+			System.out.println("delete : "+deleted);
+			System.out.println("fileName : "+productFileVO.getFileName());
 		}
 		
 		return result;

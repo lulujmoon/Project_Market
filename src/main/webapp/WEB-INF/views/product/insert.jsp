@@ -15,20 +15,19 @@
 <h2>Product Insert Page</h2>
 	<form action="./insert" method="POST" enctype="multipart/form-data">
 
-		<div>
-         <label>상품 이미지</label>
-         <div id="thumbnail">
-         <div id="img_container"></div>
-            <div id="inputimg">
-               <div>
-                  <input type="file" name="file" multiple onchange="setThumbnail(event);"> 
-                  <input type="button" id="del" value="Delete">
-               </div>
-            </div>
-         </div>
-         <button type="button" id="add" value="ADD">ADD</button>
-      </div>
-		
+ 		<div>
+			<label>상품 이미지</label>
+			<div id="thumbnail">
+				<div id="img_container">
+				</div>
+				<div id="imgform">
+					<div class="inputimg">
+						<input type="file" name="file" class="img" multiple onchange="addFileForm(); setThumbnail(event);"> 
+						<input type="button" id="del" value="Delete">
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" name="productName">
@@ -67,7 +66,7 @@
 	  
 	   <input type="hidden" name="productNum">
 
-	 <button class="btn btn-outline-secondary">Write</button><br><br><br>
+	 <button id="insertbtn" class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
 
 <script type="text/javascript" src="../resources/js/fileAdd.js"></script>

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
+import com.mm.market.util.FileManager;
 import com.mm.market.util.Pager;
 
 @Controller
@@ -40,8 +41,6 @@ public class ProductController {
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
 		model.addAttribute("categories", categories);
-		
-		System.out.println(ar.get(0).getFiles().get(0).getFileName());
 		
 		return "product/list";
 	}
@@ -110,7 +109,8 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
-		
+		System.out.println(productVO);
+			
 		String message="삭제 실패";
 		String path = "./list";
 		
