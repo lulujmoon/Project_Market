@@ -323,28 +323,6 @@ public class MemberController {
 			return mv;
 		};
 		
-		
-		@GetMapping("profileUpdate")
-		public ModelAndView setUpdateFile(MemberFileVO memberFileVO,Authentication authentication) throws Exception{
-			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
-			memberFileVO = memberService.selectFile(memberVO);
-			
-			ModelAndView mv = new ModelAndView();
-			mv.addObject("file",memberFileVO);
-			mv.setViewName("member/profileUpdate");
-			
-			return mv;
-		}
-		
-		@PostMapping("profileUpdate")
-		public String setUpdateFile(MemberFileVO memberFileVO,MultipartFile avatar,MemberVO memberVO,Authentication authentication) throws Exception{
-		
-			
-			int result = memberService.setUpdateFile(avatar, memberVO,authentication);
-	
-			return "redirect:/member/store";
-		}
-		
 
 
 }

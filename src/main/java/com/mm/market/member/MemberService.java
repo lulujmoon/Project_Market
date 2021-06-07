@@ -51,7 +51,7 @@ public class MemberService implements UserDetailsService{
 	}
 
 	public MemberVO findMember(MemberVO memberVO)throws Exception {
-		MemberVO checkMember = memberMapper.getUsername(memberVO);
+		MemberVO checkMember = memberMapper.getSelectByUsername(memberVO);
 
 		return checkMember;
 	}
@@ -101,7 +101,7 @@ public class MemberService implements UserDetailsService{
 		result = memberMapper.setMemberRole(map);
 		
 		//hdd file
-		String filePath="upload/member/";
+		String filePath="member/";
 		if(multipartFile.getSize() !=0) {
 			String fileName= fileManager.save(filePath, multipartFile, session);
 			System.out.println(fileName);
@@ -139,7 +139,7 @@ public class MemberService implements UserDetailsService{
 		if(memberVO.getPassword()!="") {
 			memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));			
 		}else {
-			MemberVO memberVO2 = memberMapper.getUsername(memberVO);
+			MemberVO memberVO2 = memberMapper.getSelectByUsername(memberVO);
 			memberVO.setPassword(memberVO2.getPassword());
 		}
 
@@ -153,10 +153,9 @@ public class MemberService implements UserDetailsService{
 		return memberMapper.selectFile(memberVO);
 	}
 	
-	public int setUpdateFile(MultipartFile multipartFile,MemberVO memberVO, Authentication authentication)throws Exception{
+	public int setUpdateFile(MultipartFile multipartFile, MemberVO memberVO, Authentication authentication)throws Exception{
 		int result=0;
-		memberVO =(MemberVO)authentication.getPrincipal();
-		
+
 		//새로운 이미지를 넣었다면 실행
 		if(multipartFile.getOriginalFilename().length()!=0) {
 			//존재하는 이미지 삭제
@@ -164,13 +163,13 @@ public class MemberService implements UserDetailsService{
 			
 			if(memberFileVO!=null) {
 				String delFileName = memberFileVO.getFileName();
-				boolean check = fileManager.delete("magazineT", delFileName, session);
+				boolean check = fileManager.delete("member", delFileName, session);
 
 				memberFileVO.setFileName(delFileName);
 				memberMapper.setDeleteFile(memberFileVO);				
 			}
 
-			String filePath="upload/member/";
+			String filePath="member/";
 			String fileName= fileManager.save(filePath, multipartFile, session);
 			System.out.println(fileName);
 			MemberFileVO memberFileVO2 = new MemberFileVO();
@@ -180,7 +179,11 @@ public class MemberService implements UserDetailsService{
 			
 			result = memberMapper.setJoinFile(memberFileVO);
 				
-	}
+		}
 		return result;
+	}
+	
+	public MemberVO getSelectByCode(MemberVO memberVO) throws Exception {
+		return memberMapper.getSelectByCode(memberVO);
 	}
 }

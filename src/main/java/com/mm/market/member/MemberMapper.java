@@ -17,7 +17,9 @@ public interface MemberMapper {
 	
 	public MemberVO getLogin(MemberVO memberVO);
 	
-	public MemberVO getUsername(MemberVO memberVO) throws Exception;
+	public MemberVO getSelectByUsername(MemberVO memberVO) throws Exception;
+	
+	public MemberVO getSelectByCode(MemberVO memberVO) throws Exception;
 	
 	public MemberVO idCheck(String username) throws Exception;
 	

@@ -55,9 +55,11 @@
  
  </resultMap>
  
- <select id="getUsername" parameterType="MemberVO" resultType="MemberVO">
+ <select id="getSelectByUsername" parameterType="MemberVO" resultType="MemberVO">
  	select * from member where username=#{username}
  </select>
+ 
+ <select id="getSelectByCode" parameterType="MemberVO" resultType="MemberVO"></select>
  
  <update id="setUpdate" parameterType="MemberVO">
  	update member set password=#{password}, name=#{name}, phone=#{phone}, email=#{email} where username=#{username}
