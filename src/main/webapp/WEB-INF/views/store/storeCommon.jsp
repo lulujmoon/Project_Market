@@ -12,13 +12,16 @@
 		<input type="file" name="avatar" class="input-file">
   </form>
 	<div class="profile__info">
-		<div class="profile__name">문정현</div>
-		<div class="profile__location">세종특별자치시 아름동</div>
-		<div class="profile__joinDate">2021년 6월 4일 가입</div>
+		<div class="profile__name">${member.username}</div>
+		<div class="profile__location">${locations[0].locationName}</div>
+		<div class="profile__joinDate">${member.joinDate}</div>
 	</div>
 	<div class="profile__rating">
-		<div class="rating__state">상품 상태 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"><i class="fas fa-star-half-alt"></i></i><i class="far fa-star"></i></div>
-		<div class="rating__manner">거래 매너 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"><i class="fas fa-star-half-alt"></i></i><i class="far fa-star"></i></div>
-		<div class="rating__response">응답 속도 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"><i class="fas fa-star-half-alt"></i></i><i class="far fa-star"></i></div>
+		<div class="rating__notice">
+			${member.username}님이 받은 거래 평가입니다.
+		</div>
+		<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">6</div> (15)</div>
+		<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">7</div> (23)</div>
+		<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">8</div> (23)</div>
 	</div>
 </div>

@@ -2,7 +2,8 @@
 
 .container{
 	padding-top: 125px;
-	width: 100%;
+	width: 1210px;
+	min-height: 55vh;
 	margin: 30px auto;
 }
 
@@ -29,13 +30,13 @@
 	margin: auto;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 }
 
 .prd__card {
-	width: 285px;
-	height: 285px;
+	width: 270px;
+	height: 270px;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/store.css">
+<link rel="stylesheet" href="/resources/css/productList.css">
 <title>내 상점</title>
 </head>
 <body>
@@ -20,7 +21,21 @@
 			<div class="nav__item">받은 후기</div>
 			<div class="nav__item">동네 생활</div>
 		</div>
-		<div class="board__contents"></div>
+		<div class="board__contents">
+				<div class="list-container">		
+				<c:forEach items="${products}" var="product">
+					<div class="prd__card" onclick="goSelect(${dto.productNum})">
+						<img class="card__img" src="/images/바탕화면.jpg">
+						<div class="card__info">
+							<div class="info__name"> ${product.productName}</div>
+							<div class="info__price">${product.productPrice}</div>
+							<div class="info__date">${product.productDate}</div>
+							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
+						</div>
+					</div>
+				</c:forEach>
+	</div>
+		</div>
 	</div>
 
 </div>
