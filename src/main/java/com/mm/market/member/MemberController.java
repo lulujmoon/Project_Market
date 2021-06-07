@@ -323,6 +323,10 @@ public class MemberController {
 			return mv;
 		};
 		
-
+//-----------알람
+		@GetMapping("alarm")
+		public void alarm()throws Exception{
+			
+		}
 
 }
