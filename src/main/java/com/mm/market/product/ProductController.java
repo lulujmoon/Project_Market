@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
@@ -105,13 +106,36 @@ public class ProductController {
 	
 	
 	@GetMapping("delete")
-	public String setDelete(ProductVO productVO)throws Exception{
+	public ModelAndView setDelete(ProductVO productVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
+		
+		String message="삭제 실패";
+		String path = "./list";
+		
+		if(result>0) {
+			message="삭제 성공!";
+		}
+		
+		mv.addObject("msg", message);
+		mv.addObject("path", path);
+		mv.setViewName("common/commonResult");
 
-		return "redirect:product/list";
+		return mv;
 	}
 
+	public ModelAndView setFileDelete(ProductFileVO productFileVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = productService.setFileDelete(productFileVO);
+		mv.addObject("result", result);
+		mv.addObject("msg", "정말 삭제하시겠습니까?");
+		mv.setViewName("common/commonResult");
+		
+		return mv;
+	}
+	
+	
 	
 	@GetMapping("insert")
 	public void setInsert() throws Exception {}
@@ -127,19 +151,17 @@ public class ProductController {
 	@GetMapping("update")
 	public String setUpdate(ProductVO productVO, Model model)throws Exception{
 		productVO = productService.getSelect(productVO);
-		
-/*		List<ProductFileVO> file = productVO.getFiles();
-		
+		List<ProductFileVO> file = productVO.getFiles();
+
 		for(int i=0;i<file.size();i++) {
 			file.get(i).setProductNum(productVO.getProductNum());
 		}
-		
-		model.addAttribute("files", file);
-		System.out.println(file);
-*/		
-		
+
 		model.addAttribute("vo", productVO);
-		
+		model.addAttribute("files", file);
+
+		System.out.println(file);
+
 		return "product/update";
 	}
 	

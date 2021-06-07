@@ -95,9 +95,13 @@
 		</insert>
 
 		<delete id="setFileDelete" parameterType="ProductFileVO">
-			delete from productFile where productNum=#{productNum}
+			delete from productFile where fileNum=#{fileNum}
 		</delete>
-	
+		
+		<select id="setFileSelect" parameterType="ProductFileVO" resultType="ProductFileVO">
+			select * from productFile where fileNum=#{fileNum}
+		</select>
+		
 		<update id="setUpdate" parameterType="ProductVO">
 			update product set
 			productName=#{productName}, 

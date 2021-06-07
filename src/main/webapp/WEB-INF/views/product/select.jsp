@@ -34,7 +34,7 @@
 						<div>
 							<c:forEach items="${vo.files}" var="file">
 								<a href="/resources/upload/product/${file.fileName}">
-								<img src="/resources/upload/product/${file.fileName}">
+								<img src="/resources/upload/product/${file.fileName}" width="100px" height="100px">
 								</a>
 							</c:forEach>
 						</div>
@@ -63,7 +63,7 @@
 			<a href="#" class="btn btn-primary" role="button">가격제안</a>
 			<a href="#" class="btn btn-danger" role="button">신고하기</a>
 
-			<a class="heart" onclick="if ( confirm('찜 하시겠습니까?')==false ){return false;}">
+			<a class="heart" onclick="confirm();">
 				<img id="heart" src="" width="50px" height="50px"> 
 			</a>
 		</div>

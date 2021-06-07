@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.util.FileManager;
 import com.mm.market.util.Pager;
@@ -53,7 +54,19 @@ public class ProductService {
 		return productMapper.setDelete(productVO);
 	}
 
-
+	public int setFileDelete(ProductFileVO productFileVO) throws  Exception {
+		
+		productFileVO = productMapper.setFileSelect(productFileVO);
+		int result = productMapper.setFileDelete(productFileVO);
+		if(result>0) {
+			boolean deleted = fileManager.delete("product", productFileVO.getFileName(), session);
+			System.out.println(deleted);
+		}
+		
+		return result;
+	}
+	
+	
 	//insert
 	@Transactional(rollbackFor = Exception.class)
 	public int setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
@@ -109,7 +122,6 @@ public class ProductService {
 		return result;
 		
 	}
-	
 	
 	
 	//heart

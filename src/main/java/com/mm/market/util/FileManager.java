@@ -37,9 +37,9 @@ public class FileManager {
 	}
 	
 	
-	public boolean delete(String filePath, String fileName, HttpSession session) throws Exception {
+	public boolean delete(String name, String fileName, HttpSession session) throws Exception {
 		
-		String path = "classpath:/static/upload";
+		String path = session.getServletContext().getRealPath("resources/upload/"+name);
 		File file = new File(path, fileName);
 		
 		boolean deleted = false;

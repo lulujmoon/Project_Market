@@ -12,13 +12,11 @@ $(document).ready(function(){
 		console.log("heart : "+heartval);
 		$("#heart").prop("src", "/resources/images/빨강.png");
 		$(".heart").attr("name", heartval);
-		$(".heart").attr("onclick", "if ( confirm('찜취소')==false ){return false;}");
 		
 	} else {
 		console.log("heart : "+heartval);
 		$("#heart").prop("src", "/resources/images/검정.png");
 		$(".heart").attr("name", heartval);
-		$(".heart").attr("onclick", "if ( confirm('찜하기')==false ){return false;}");
 	}
 	
 	$(".heart").on("click", function(){
@@ -47,7 +45,6 @@ $(document).ready(function(){
 function heart_reload() {
 	$("#heart").load(window.location.href='/product/select?productNum='+productNum);
 }
-
 
 
 function confirm() {
