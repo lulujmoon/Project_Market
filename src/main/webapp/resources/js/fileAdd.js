@@ -10,6 +10,7 @@ input.style.opacity = 0;
 input.addEventListener('change', updateImageDisplay);
 
 function updateImageDisplay() {
+	/* 리셋 */
   while(preview.firstChild) {
     preview.removeChild(preview.firstChild);
   }
