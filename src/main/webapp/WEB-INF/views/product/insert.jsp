@@ -21,13 +21,30 @@
 <h2>Product Insert Page</h2>
 	<form action="./insert" method="POST" enctype="multipart/form-data">
 		
- 			<div>
-				<label for="image_uploads">이미지 등록</label>
-				<input type="file" class="img" id="image_uploads" name="file" multiple>
+<!-- 		<div>
+			<div id="thumbnail">
+						<label>상품 이미지</label>
+				<div id="img_container">
+				</div>
+				<div id="imgform">
+					<div class="inputimg">
+						<input type="file" name="file" class="img" multiple onchange="addFileForm(); setThumbnail(event);"> 
+						<input type="button" id="del" value="Delete">
+					</div>
+				</div>
 			</div>
-			<div class="preview">
-		       <p>추가된 파일이 없습니다</p>
-		  	</div> 
+		</div> -->
+		
+		
+		<div> 
+		
+			<input type="button" id="add" value="ADD" class="add">
+			<div id="file" title="0"> </div>
+				
+		</div>
+		
+		
+		
 		
 		
 		<div class="form-group">
@@ -67,12 +84,14 @@
 	  </div>
 	  
 	   <input type="hidden" name="productNum">
+	   
+	  
 
 	 <button id="insertbtn" class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
 
 <!-- <script type="text/javascript" src="../resources/js/summerFile.js"></script> -->
-<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
+<script type="text/javascript" src="../resources/js/fileAdd2.js"></script>
 
 
 </body>
