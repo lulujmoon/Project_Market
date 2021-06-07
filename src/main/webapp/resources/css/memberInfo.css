@@ -60,6 +60,13 @@
 	line-height: 60px;
 }
 
+.location__content{
+	width:60%;
+	height: 60px;
+	line-height: 60px;
+	padding: 10px 20px;
+}
+
 .info__content{
 	display: none;
 }
