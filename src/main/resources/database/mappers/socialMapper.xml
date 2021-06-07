@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mm.market.social.SocialMapper">
+	<sql id="searcher">
+		<!-- 공통으로 사용하는 sql문 -->
+		<where>
+			<choose>
+				<when test="kind=='SocialTitle'">
+					socialTitle like concat('%', #{search}, '%')
+				</when>
+
+				<when test="kind=='SocialContent'">
+					socialContent like concat('%', #{search}, '%')
+				</when>
+
+				<otherwise>
+					username like concat('%', #{search}, '%')
+				</otherwise>
+			</choose>
+		</where>
+	</sql>
+
+	<select id="getList" resultMap="selectResult" parameterType="Pager">
+		select S.*, SC.*, SF.*
+		from social S left join socialFile SF
+		on S.socialNum = SF.socialNum
+		inner join socialCategory SC
+		on S.categoryCode = SC.categoryCode
+		<include refid="searcher"></include>
+		order by S.socialNum desc
+		limit #{startRow}
+	</select>
+
+	<select id="getSelect" resultMap="selectResult" parameterType="SocialVO">
+		select S.*, SC.*, SF.*
+		from social S left join socialFile SF
+		on S.socialNum = SF.socialNum
+		inner join socialCategory SC
+		on S.categoryCode = SC.categoryCode
+		where S.socialNum=#{socialNum}
+	</select>
+
+	<resultMap type="SocialVO" id="selectResult">
+		<id column="socialNum" property="socialNum"></id>
+		<result column="socialTitle" property="socialTitle" />
+		<result column="categoryCode" property="categoryCode" />
+		<result column="username" property="username" />
+		<result column="socialContent" property="socialContent" />
+		<result column="socialDate" property="socialDate" />
+		<association property="socialCategory" javaType="SocialCategoryVO">
+			<id property="categoryCode" column="categoryCode"/>
+			<result property="categoryName" column="categoryName"/>
+		</association>
+		<collection property="files" javaType="java.util.List" ofType="SocialFileVO">
+			<id column="fileNum" property="fileNum" />
+			<result column="fileName" property="fileName" />
+			<result column="originName" property="originName" />
+		</collection>
+	</resultMap>
+
+	<select id="getTotalCount" resultType="Long" parameterType="Pager">
+		select count(socialNum) from social
+	</select>
+
+	<insert id="setInsert" parameterType="SocialVO">
+		insert into social
+		(socialNum, socialTitle, categoryCode, username, socialContent, socialDate)
+		values(#{socialNum}, #{socialTitle}, #{categoryCode}, #{username}, #{socialContent}, now())
+	</insert>
+
+	<insert id="setFileInsert" parameterType="SocialFileVO">
+		insert into socialFile (socialNum, fileName, originName)
+		values (#{socialNum}, #{fileName}, #{originName})
+	</insert>
+
+	<update id="setUpdate" parameterType="SocialVO">
+		update social set socialTitle=#{socialTitle}, categoryCode=#{categoryCode}, socialContent=#{socialContent}
+		where socialNum=#{socialNum}
+	</update>
+
+	<delete id="setDelete" parameterType="SocialVO">
+		delete from social where socialNum=#{socialNum}
+	</delete>
+</mapper>

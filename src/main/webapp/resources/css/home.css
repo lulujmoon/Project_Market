@@ -120,6 +120,9 @@
 
 .info__name {
 	width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .info__price {
