@@ -2,6 +2,8 @@ package com.mm.market.social;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,12 +41,12 @@ public class SocialService {
 	}
 
 	@Transactional(rollbackFor = Exception.class)
-	public int setInsert(SocialVO socialVO, MultipartFile [] files) throws Exception {
+	public int setInsert(SocialVO socialVO, MultipartFile [] files, HttpSession session) throws Exception {
 		int result = socialMapper.setInsert(socialVO);
 
 		for(MultipartFile f:files) {
 			SocialFileVO socialFileVO = new SocialFileVO();
-			String fileName = fileManager.save(f, "social");
+			String fileName = fileManager.save("file", f, session);
 			System.out.println(fileName);
 			socialFileVO.setFileName(fileName);
 			socialFileVO.setOriginName(f.getOriginalFilename());

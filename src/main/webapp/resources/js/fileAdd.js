@@ -5,14 +5,14 @@
 var input = document.querySelector('.img');
 var preview = document.querySelector('.preview');
 
+const list = document.createElement('ol');
+preview.appendChild(list);
+
 input.style.opacity = 0;
 
 input.addEventListener('change', updateImageDisplay);
 
 function updateImageDisplay() {
-  while(preview.firstChild) {
-    preview.removeChild(preview.firstChild);
-  }
 
   const curFiles = input.files;
   if(curFiles.length === 0) {
@@ -20,9 +20,6 @@ function updateImageDisplay() {
     para.textContent = '추가된 파일이 없습니다';
     preview.appendChild(para);
   } else {
-    const list = document.createElement('ol');
-    preview.appendChild(list);
-
     for(const file of curFiles) {
       const listItem = document.createElement('li');
       const para = document.createElement('p');

@@ -2,6 +2,8 @@ package com.mm.market.social;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,8 +55,8 @@ public class SocialController {
 	public void setInsert() throws Exception {}
 	
 	@PostMapping("insert")
-	public String setInsert(SocialVO socialVO, MultipartFile [] files) throws Exception {
-		int result = socialService.setInsert(socialVO, files);
+	public String setInsert(SocialVO socialVO, MultipartFile [] files, HttpSession session) throws Exception {
+		int result = socialService.setInsert(socialVO, files, session);
 
 		return "redirect:./list";
 	}
