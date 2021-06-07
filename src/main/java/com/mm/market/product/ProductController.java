@@ -109,7 +109,7 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
-		System.out.println(productVO);
+	//	System.out.println(productVO);
 			
 		String message="삭제 실패";
 		String path = "./list";
@@ -147,6 +147,28 @@ public class ProductController {
 		int result = productService.setInsert(productVO, file);
 
 		return "redirect:./list";
+	}
+	
+	
+	@PostMapping("summerFileDelete")
+	public ModelAndView setSummerFileDelete(String fileName) throws Exception {
+		ModelAndView mv= new ModelAndView();
+		boolean result = productService.setSummerFileDelete(fileName);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	@PostMapping("summerFileUpload")
+	public ModelAndView setSummerFileUpload(MultipartFile file) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		System.out.println("Summer File Upload");
+		System.out.println(file.getOriginalFilename()); 
+		String fileName = productService.setSummerFileUpload(file);
+		fileName = "../resources/upload/product/"+fileName;
+		mv.addObject("result", fileName);
+		mv.setViewName("common/ajaxResult");
+		return mv;
 	}
 	
 	@GetMapping("update")

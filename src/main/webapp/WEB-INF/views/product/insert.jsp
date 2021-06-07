@@ -8,26 +8,28 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <c:import url="../template/setting.jsp"></c:import>
+
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- summernote -->
+  <!--   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> -->
+<!-- ---------- -->
 <title>Hello, world!</title>
+
 </head>
 <body>
 <h2>Product Insert Page</h2>
 	<form action="./insert" method="POST" enctype="multipart/form-data">
-
- 		<div>
-			<label>상품 이미지</label>
-			<div id="thumbnail">
-				<div id="img_container">
-				</div>
-				<div id="imgform">
-					<div class="inputimg">
-						<input type="file" name="file" class="img" multiple onchange="addFileForm(); setThumbnail(event);"> 
-						<input type="button" id="del" value="Delete">
-					</div>
-				</div>
+		
+ 			<div>
+				<label for="image_uploads">이미지 등록</label>
+				<input type="file" class="img" id="image_uploads" name="file" multiple>
 			</div>
-		</div>
+			<div class="preview">
+		       <p>추가된 파일이 없습니다</p>
+		  	</div> 
+		
+		
 		<div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" name="productName">
@@ -56,8 +58,8 @@
 		  </div>
 		</div>
 	    <div class="form-group">
-	    <label>상품 설명</label>
-	    <input type="text" name="productContent">
+	    <label for="productContents">상품 설명</label>
+	    <textarea id="productContent" rows="5" name="productContent"></textarea>
 	  </div>
 	    <div class="form-group">
 	    <label>상품 가격</label>
@@ -69,6 +71,9 @@
 	 <button id="insertbtn" class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
 
+<!-- <script type="text/javascript" src="../resources/js/summerFile.js"></script> -->
 <script type="text/javascript" src="../resources/js/fileAdd.js"></script>
+
+
 </body>
 </html>

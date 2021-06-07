@@ -2,6 +2,65 @@
  * 
  */
 
+var input = document.querySelector('.img');
+var preview = document.querySelector('.preview');
+
+input.style.opacity = 0;
+
+input.addEventListener('change', updateImageDisplay);
+
+function updateImageDisplay() {
+  while(preview.firstChild) {
+    preview.removeChild(preview.firstChild);
+  }
+
+  const curFiles = input.files;
+  if(curFiles.length === 0) {
+    const para = document.createElement('p');
+    para.textContent = '추가된 파일이 없습니다';
+    preview.appendChild(para);
+  } else {
+    const list = document.createElement('ol');
+    preview.appendChild(list);
+
+    for(const file of curFiles) {
+      const listItem = document.createElement('li');
+      const para = document.createElement('p');
+/*      const del = document.createElement('a');
+
+		del.textContent= 'x';
+		del.addEventListener('click',deleteFile(file))*/
+	
+        para.textContent = `${file.name}`;
+        const image = document.createElement('img');
+        image.src = URL.createObjectURL(file);
+		
+        listItem.appendChild(image);
+        listItem.appendChild(para);
+/*		listItem.appendChild(del);*/
+		
+      list.appendChild(listItem);
+    }
+  }
+}
+
+
+
+function deleteFile(file) {
+
+	let fileName = document.querySelector('p');
+
+	console.log(fileName);
+/*	let fileName = $(files[0]).attr("src");
+	fileName = fileName.substr(fileName.lastIndexOf('/')+1);
+	alert(fileName);*/
+/*	$.post("summerFileDelete", {fileName:fileName}, function(result){
+		console.log(result);
+	});*/
+}
+
+
+
 
 
 //초기 개수

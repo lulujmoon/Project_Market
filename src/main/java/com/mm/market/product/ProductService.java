@@ -53,10 +53,12 @@ public class ProductService {
 	public int setDelete(ProductVO productVO)throws Exception{
 		productVO = productMapper.getSelect(productVO);
 		
-		for(int i=0;i<productVO.getFiles().size();i++) {
-			ProductFileVO productFileVO = productVO.getFiles().get(i);
-			boolean deleted = fileManager.delete("product", productVO.getFiles().get(i).getFileName(), session);
-			System.out.println("delete : "+ deleted);
+		if(productVO.getFiles().size()!=0) {
+			for(int i=0;i<productVO.getFiles().size();i++) {
+				ProductFileVO productFileVO = productVO.getFiles().get(i);
+				boolean deleted = fileManager.delete("product", productVO.getFiles().get(i).getFileName(), session);
+				System.out.println("delete : "+ deleted);
+			}
 		}
 		return productMapper.setDelete(productVO);
 		
@@ -102,6 +104,21 @@ public class ProductService {
 		
 		return result;
 	}
+	
+	
+	public boolean setSummerFileDelete(String fileName) throws Exception {
+		boolean result = fileManager.delete("product", fileName, session);
+		return result;
+	}
+	
+	public String setSummerFileUpload(MultipartFile file) throws Exception {
+		
+		String fileName = fileManager.save("product", file, session);
+		return fileName;
+	}
+	
+	
+	
 	
 	//update
 	public int setUpdate(ProductVO productVO, MultipartFile file) throws Exception {
