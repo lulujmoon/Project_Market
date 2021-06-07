@@ -11,8 +11,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Product Insert Page</h2>
-	<form action="./insert" method="POST" enctype="multipart/form-data">
+	<h2>Social Insert Page</h2>
+	<form class="form" action="./insert" method="POST"
+		enctype="multipart/form-data">
 
 		<div class="form-group">
 			<label>제목</label> <input type="text" name="socialTitle">
@@ -23,7 +24,6 @@
 		</div>
 
 		<div>
-			<label>카테고리</label>
 			<div class="form-group">
 				<label for="category">카테고리</label> <select class="form-control"
 					id="socialCategory" name="categoryCode">
@@ -39,14 +39,18 @@
 		</div>
 
 		<div class="form-group">
-			<label>글 내용</label> <input type="text" name="socialContent">
+			<label>글 내용</label>
+			<textarea class="form-control" id="socialContent" rows="5"
+				name="socialContent"></textarea>
 		</div>
 
 		<div>
-			<input type="file" name="files">
+			<input type="file" name="file">
 		</div>
 
-		<button class="btn btn-outline-secondary">작성</button>
+		<input type="hidden" name="socialNum">
+
+		<button id="insertBtn" class="btn btn-outline-secondary">작성</button>
 	</form>
 </body>
 </html>

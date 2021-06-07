@@ -68,15 +68,16 @@
 	</div>
 	<div class="side__socials">
 		<h3>우리동네</h3>
-		<ul>
-			<li><a href="#">일상</a></li>
-			<li><a href="#">같이해요</a></li>
-			<li><a href="#">해주세요</a></li>
-			<li><a href="#">동네맛집</a></li>
-			<li><a href="#">동네소식</a></li>
-			<li><a href="#">취미생활</a></li>
-			<li><a href="#">고양이</a></li>
-			<li><a href="3">강아지</a></li>				
+		<ul class="category-list">
+			<c:forEach items="${categories}" var="category">
+				<li><a href="../social/list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
+				<li><a href="../social/list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
+				<li><a href="../social/list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
+				<li><a href="../social/list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
+				<li><a href="../social/list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
+				<li><a href="../social/list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
+				<li><a href="../social/list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
+			</c:forEach>
 		</ul>
 	</div>
 </div>

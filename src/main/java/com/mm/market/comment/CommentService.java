@@ -11,20 +11,24 @@ public class CommentService {
 	@Autowired
 	private CommentMapper commentMapper;
 	
-	public List<CommentVO> commentList() throws Exception {
-		return commentMapper.commentList();
+	public List<CommentVO> getList(CommentVO commentVO) throws Exception {
+		return commentMapper.getList(commentVO);
 	}
 
-	public int commentInsert(CommentVO commentVO) throws Exception {
-		return commentMapper.commentInsert(commentVO);
+	public CommentVO getSelect(CommentVO commentVO) throws Exception{
+		return commentMapper.getSelect(commentVO);
 	}
 
-	public int commentUpdate(CommentVO commentVO) throws Exception {
-		return commentMapper.commentInsert(commentVO);
+	public int setInsert(CommentVO commentVO) throws Exception {
+		return commentMapper.setInsert(commentVO);
 	}
 
-	public int commentDelete(long commentNum) throws Exception {
-		return commentMapper.commentDelete(commentNum);
+	public int setUpdate(CommentVO commentVO) throws Exception {
+		return commentMapper.setUpdate(commentVO);
+	}
+
+	public int setDelete(CommentVO commentVO) throws Exception {
+		return commentMapper.setDelete(commentVO);
 	}
 
 }

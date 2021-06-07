@@ -13,28 +13,17 @@
 <body>
 	<div class="container">
 		<h2>Select Page</h2>
-		<table class="table">
-			<thead class="thead-dark">
-				<tr>
-					<th>번호</th>
-					<th>카테고리</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>내용</th>
-					<th>작성 날짜</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>${vo.socialNum}</td>
-					<td>${vo.categoryCode}</td>
-					<td>${vo.socialTitle}</td>
-					<td>${vo.username}</td>
-					<td>${vo.socialContent}</td>
-					<td>${vo.socialDate}</td>
-				</tr>
-			</tbody>
-		</table>
+		<h3>번호 : ${vo.socialNum}</h3>
+		<h3>카테고리 : ${vo.categoryCode}</h3>
+		<h3>제목 : ${vo.socialTitle}</h3>
+		<h3>작성자 : ${vo.username}</h3>
+		<h3>
+			내용 : ${vo.socialContent}
+			<c:forEach items="${vo.files}" var="file">
+				<img src="/resources/upload/social/${file.fileName}">
+			</c:forEach>
+		</h3>
+		<h3>작성 날짜 : ${vo.socialDate}</h3>
 
 		<a href="./delete?socialNum=${vo.socialNum}" class="btn btn-primary"
 			role="button">삭제</a> <a href="./update?socialNum=${vo.socialNum}"
@@ -43,22 +32,35 @@
 
 	<!--  댓글  -->
 	<div class="container">
-		<label for="content">댓글</label>
-		<form name="commentInsert">
-			<div class="input-group">
-				<input type="hidden" name="socialNum" value="${social.socialNum}" />
-				<input type="text" class="form-control" id="content" name="content"
-					placeholder=""> <span class="input-group-btn">
-					<button class="btn btn-primary" type="button"
-						name="commentInsertBtn">등록</button>
-				</span>
-			</div>
+		<label for="comment">댓글</label>
+		<form id="form"
+			action="../comment/commentInsert?socialNum=${vo.socialNum}"
+			method="post">
+			<input type="hidden" id="socialNum" name="socialNum">
+			<textarea class="form-control myCheck" id="commentContent"
+				name="commentContent" placeholder="내용을 입력하세요."></textarea>
+			<input type="text" readonly="readonly" value="${vo.username}" name="username">
+
+			<input type="submit" value="작성" />
 		</form>
-	</div>
 
-	<div class="container">
-		<div class="commentList"></div>
-	</div>
+			<c:forEach items="${list}" var="comment">
+				<ul>
+					<li>
+						<div class="container">
+							<div class="container">
+								${vo.username}<br>${vo.commentDate}
+							</div>
+							<a class="insert-button"
+								href="./update?commentNum=${vo.commentNum}">수정</a> <a
+								class="insert-button"
+								href="./delete?commentNum=${vo.commentNum}">삭제</a>
+						</div>
+					</li>
 
-	<script type="text/javascript" src="../comment/commentInsert.js"></script>
+					<li>${comment.commentContent}</li>
+				</ul>
+			</c:forEach>
+	</div>
+</body>
 </html>
