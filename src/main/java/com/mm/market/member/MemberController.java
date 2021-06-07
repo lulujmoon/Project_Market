@@ -43,6 +43,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
 
+import ch.qos.logback.classic.Logger;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
@@ -65,9 +67,8 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	
-	  @PostMapping("login") public String getLogin(HttpServletRequest
-	 request)throws Exception{
+	  @PostMapping("login") 
+	  public String getLogin(HttpServletRequest request)throws Exception{
 		  //포워딩된 어트리뷰트를 포스트형식으로 받아줌
 	  System.out.println(request.getAttribute("message"));
 	  
@@ -81,7 +82,7 @@ public class MemberController {
 	}
 
 	@GetMapping("loginResult")
-	public String loginResult(HttpSession session, Authentication auth2)throws Exception{
+	public String memberLoginResult(HttpSession session, Authentication auth2)throws Exception{
 
 		Enumeration<String> en = session.getAttributeNames();
 		MemberVO memberVO = new MemberVO();
@@ -144,6 +145,20 @@ public class MemberController {
 
 		return "redirect:../";
 
+	}
+	
+	@ResponseBody
+	@PostMapping("idCheck")
+	public int idCheck(HttpServletRequest req)throws Exception{
+		
+		String username = req.getParameter("username");
+		MemberVO idCheck = memberService.idCheck(username);
+		
+		int result =0;
+		if(idCheck != null) {
+			result =1;
+		}
+		return result;
 	}
 	
 	@GetMapping("info")
@@ -291,26 +306,45 @@ public class MemberController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		
-		return "redirect:/";
+		return "redirect:./store";
 	}
 		
 	//-----------------shop	
 			
 		@GetMapping("store")
-		public ModelAndView store(MemberFileVO memberFileVO, Authentication authentication)throws Exception{
+		public ModelAndView store(MemberFileVO memberFileVO,Authentication authentication)throws Exception{
 			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
 			memberFileVO = memberService.selectFile(memberVO);
-	
 		
-			
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("file",memberFileVO);
 			mv.setViewName("member/store");
 			
-			System.out.println(memberVO.isOauth());
-			
 			return mv;
 		};
+		
+		
+		@GetMapping("profileUpdate")
+		public ModelAndView setUpdateFile(MemberFileVO memberFileVO,Authentication authentication) throws Exception{
+			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
+			memberFileVO = memberService.selectFile(memberVO);
+			
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("file",memberFileVO);
+			mv.setViewName("member/profileUpdate");
+			
+			return mv;
+		}
+		
+		@PostMapping("profileUpdate")
+		public String setUpdateFile(MemberFileVO memberFileVO,MultipartFile avatar,MemberVO memberVO,Authentication authentication) throws Exception{
+		
+			
+			int result = memberService.setUpdateFile(avatar, memberVO,authentication);
+	
+			return "redirect:/member/store";
+		}
+		
 
 
 }
