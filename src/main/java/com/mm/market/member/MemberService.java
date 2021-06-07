@@ -70,13 +70,17 @@ public class MemberService implements UserDetailsService{
 		result = true; }
 
 		//username 중복
-		MemberVO checkMember = memberMapper.getUsername(memberVO);
-		if(checkMember != null) {errors.rejectValue("username", "memberVO.id.equal");
-		result = true;
-		} 
+		//MemberVO checkMember = memberMapper.getUsername(memberVO);
+		//if(checkMember != null) {errors.rejectValue("username", "memberVO.id.equal");
+		//result = true;
+		//} 
 		return result;
 		}
 
+	public MemberVO idCheck(String username)throws Exception{
+		return memberMapper.idCheck(username);
+	
+	}
 
 	//예외가 발생했으면 자동으로 rollback
 	@Transactional(rollbackFor = Exception.class)
@@ -148,5 +152,33 @@ public class MemberService implements UserDetailsService{
 		return memberMapper.selectFile(memberVO);
 	}
 	
+	public int setUpdateFile(MultipartFile multipartFile,MemberVO memberVO, Authentication authentication)throws Exception{
+		int result=0;
+		memberVO =(MemberVO)authentication.getPrincipal();
+		
+		if(multipartFile.getOriginalFilename().length()!=0) {
+			MemberFileVO memberFileVO = memberMapper.selectFile(memberVO);
+			
+			if(memberFileVO!=null) {
+				String delFileName = memberFileVO.getFileName();
+				boolean check = fileManager.delete("magazineT", delFileName, session);
+
+				memberFileVO.setFileName(delFileName);
+				memberMapper.setDeleteFile(memberFileVO);				
+			}
+
+			String filePath="upload/member/";
+			String fileName= fileManager.save(filePath, multipartFile, session);
+			System.out.println(fileName);
+			MemberFileVO memberFileVO2 = new MemberFileVO();
+			memberFileVO.setFileName(fileName);
+			memberFileVO.setOriginName(multipartFile.getOriginalFilename());
+
+			
+			result = memberMapper.setJoinFile(memberFileVO);
+				
+	}
+		return result;
+	}
 
 }

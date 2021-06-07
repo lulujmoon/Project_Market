@@ -13,14 +13,16 @@
 </head>
 <body>
 <h1> 마이샵 </h1>
-<h1>${principal.oauth}</h1>
 
-<!--기본이미지 -->
+<!--카카오 멤버일경우 기본이미지출력 -->
+<c:if test="${principal.oauth eq true}">
 <img src="../resources/upload/upload/member/default.jpg">
-
+</c:if>
+<!-- 일반멤버일경우 input된 이미지출력 -->
+<c:if test="${principal.oauth eq false}">
 <img src="../resources/upload/upload/member/${file.fileName}">
-
-
+<a href="./profileUpdate">프로필수정</a>
+</c:if>
 
 </body>
 </html>
