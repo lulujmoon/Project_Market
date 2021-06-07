@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface CategoryMapper {
 
 	public List<CategoryVO> getList() throws Exception;
-	
+
 }

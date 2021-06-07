@@ -26,14 +26,19 @@
 		<dependency>
     <groupId>javax.validation</groupId>
     <artifactId>validation-api</artifactId>
-    <version>2.0.1.Final</version>
-</dependency>
+    </dependency>
 		<!-- web socket -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
 		</dependency>
-		<!-- JSON -->
+		<!-- MessageBrokerRegistry -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+		</dependency>
+		
+		<!-- JSON 데이터 자동처리 -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
@@ -94,11 +99,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!-- 		<dependency>
+ 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency> -->
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -11,5 +11,5 @@
 	<select id="getList" resultType="CategoryVO">
 		select * from category order by categoryCode asc
 	</select>
-
+	
 </mapper>

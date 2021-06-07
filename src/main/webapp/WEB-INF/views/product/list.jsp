@@ -11,6 +11,7 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+
 <div class="container">
 	<div class="category-container">
 		<ul class="category-list">
@@ -25,12 +26,13 @@
 	<div class="list-container">		
 				<c:forEach items="${list}" var="dto">
 					<div class="prd__card" onclick="goSelect(${dto.productNum})">
-						<img class="card__img" src="/images/바탕화면.jpg">
+						<img class="card__img" src="/resources/upload/product/${dto.files[0].fileName}">
 						<div class="card__info">
 							<div class="info__name"> ${dto.productName}</div>
 							<div class="info__price">${dto.productPrice}</div>
 							<div class="info__date">${dto.productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${dto.location.locationName}</div>
+
 						</div>
 					</div>
 				</c:forEach>

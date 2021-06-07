@@ -3,6 +3,7 @@ package com.mm.market.product;
 import java.sql.Timestamp;
 import java.util.List;
 
+
 import com.mm.market.category.CategoryVO;
 import com.mm.market.location.LocationVO;
 
@@ -21,12 +22,13 @@ public class ProductVO {
 	private String productContent;
 	private String productStatus;
 	private Long productPrice;
-	private boolean productNego;
+	private Boolean productNego;
 	private Long locationCode;
-
+	
 	private List<ProductFileVO> files;
+
 	private CategoryVO category;
 	private LocationVO location;
-
+	private ProductFileVO thumbnail;
 	
 }
