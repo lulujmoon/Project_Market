@@ -2,11 +2,11 @@
  * 
  */
 
-let count = $("#file").attr("title");
+let count = 1;
 
 $("#add").click(function(){	
 	
-	if(count<8) {
+	if(count<7) {
 	$("#file").append('<div class="inputimg"><input type="file" name="file" class="img" onchange="addFileForm(); setThumbnail(event);"><input type="button" id="del" value="Delete"></div>');
 	count++;
 	} else {
@@ -28,6 +28,7 @@ $("#file").on("click", "#del", function(){
 
 
 
+
 //파일 입력시 이미지 미리보기
 function setThumbnail(event){
 	var reader = new FileReader();
@@ -40,4 +41,27 @@ function setThumbnail(event){
 	
 	reader.readAsDataURL(event.target.files[0]);
 };
+
+
+//빈파일 저장되지 않게
+const btnSubmit = document.querySelector('#insertbtn');
+const form = document.querySelector('.form');
+ 
+ btnSubmit.addEventListener('click', ()=>{
+   let files = document.querySelectorAll('.img');
+   for(file of files){
+		console.log(file.value);
+		console.log(typeof(file.value));
+      if(file.value == ""){
+		console.log(file.parentNode);
+        file.parentNode.innerHTML = "";
+      }
+   }
+
+   form.submit();
+});
+
+
+
+
 

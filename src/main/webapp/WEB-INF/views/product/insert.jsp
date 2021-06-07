@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +23,7 @@
 </head>
 <body>
 <h2>Product Insert Page</h2>
-	<form action="./insert" method="POST" enctype="multipart/form-data">
+	<form class="form" action="./insert" method="POST" enctype="multipart/form-data">
 		
 <!-- 		<div>
 			<div id="thumbnail">
@@ -36,24 +40,23 @@
 		</div> -->
 		
 		
-		<div> 
-		
+	
 			<input type="button" id="add" value="ADD" class="add">
-			<div id="file" title="0"> </div>
-				
-		</div>
-		
-		
-		
-		
-		
+			<div id="file" title="1">
+				<div class="inputimg">
+						<input type="file" name="file" required class="img" multiple onchange="addFileForm(); setThumbnail(event);">
+						<img src="">
+						<input type="button" id="del" value="Delete">
+			 </div>
+			</div>
+	
 		<div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" name="productName">
 	  </div>
 	    <div class="form-group">
 	    <label>판매자</label>
-	    <input type="text" name="username">
+	    <input readonly="readonly" type="text" name="username" value="${principal.username}">
 	  </div>
 	  	<div>
 		  <div class="form-group">
