@@ -39,6 +39,7 @@ function manageBtns(){
 	 newForm.method = 'post';
 	 newForm.id = 'location-insert-form';
 	
+	 let inputUsername = document.createElement('input');
 	 let inputLocationCode = document.createElement('input');
 	 
 	 inputLocationCode.type = "hidden";
@@ -74,7 +75,7 @@ function manageBtns(){
 
 
 /* 내 지역 저장 */
-function insertLocation(){
+function insertLocation(btnNum){
     new daum.Postcode({
         oncomplete: function(data) {
 					makeInsertForm(data.bcode);
@@ -85,7 +86,7 @@ function insertLocation(){
 };
 
 /* 내 지역 삭제 */
-function deleteLocation(locationNum){
+function deleteLocation(btnNum, locationNum){
 	makeDeleteForm(locationNum);
 	let deleteForm = document.querySelector('#location-delete-form');
 	deleteForm.submit();
@@ -101,12 +102,17 @@ const btnAdd = document.querySelector('.btn-add');
 const infoContents = document.querySelectorAll('.info__content');
 const infoInputs = document.querySelectorAll('.info__input');
 
+const btnInserts = document.querySelectorAll('.btn-insert');
+const btnDeletes = document.querySelectorAll('.btn-delete');
 
 btnEdit.classList.toggle('active');
 for(content of infoContents){
 	content.classList.toggle('active');
 }
 
+for(btnInsert of btnInserts){
+	btnInsert.classList.toggle('active');
+}
 /* 초기 설정 끝 */
 
 
