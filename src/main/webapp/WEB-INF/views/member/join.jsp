@@ -54,7 +54,7 @@
 			
 			<div class="form-group">
 				<label for="avatar">Avatar</label> 
-				<input type="file" class="form-control etc"	id="avatar" name="avatar" required="required">
+				<input type="file" class="form-control etc"	id="avatar" name="avatar">
 			</div>
 			<div class="join-btn">
 				<button type="submit" class="btn-wide btn-submit">Join</button>
