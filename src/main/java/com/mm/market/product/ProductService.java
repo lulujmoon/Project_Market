@@ -55,9 +55,12 @@ public class ProductService {
 	}
 
 	public int setFileDelete(ProductFileVO productFileVO) throws  Exception {
-		
+		//fileName print
+		//1. 조회
 		productFileVO = productMapper.setFileSelect(productFileVO);
+		//2. table 삭제
 		int result = productMapper.setFileDelete(productFileVO);
+		//3. HDD 삭제
 		if(result>0) {
 			boolean deleted = fileManager.delete("product", productFileVO.getFileName(), session);
 			System.out.println(deleted);

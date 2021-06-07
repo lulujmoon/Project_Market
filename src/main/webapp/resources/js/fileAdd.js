@@ -5,17 +5,20 @@
 //초기 개수
 let count = 1;
 
-
-//add 버튼 클릭하면 파일 입력 칸 추가
-$("#add").click(function(){
-	if(count < 7){	
-		let image = $("#inputimg").html();
-		$("#thumbnail").append(image);
-		count++;
-	}else {
-		alert("사진은 최대 7장까지 가능합니다.");
-	}
-});
+function addFileForm(){
+	var valimg = $(".img").val();
+	if(count < 8){
+		if(valimg != null){
+			$("#imgform").append(
+				'<div class="inputimg"><input type="file" name="file" class="img" multiple onchange="addFileForm(); setThumbnail(event);"><input type="button" id="del" value="Delete"></div>'
+				);
+			count++;
+			}
+		}else {
+			alert("사진은 최대 7장까지 가능합니다.");
+			$("#del").trigger("click");
+		}
+};
 
 //delete 버튼 클릭하면 파일 입력칸 삭제
 $("#thumbnail").on("click", "#del", function(){
@@ -30,7 +33,7 @@ function setThumbnail(event){
 	reader.onload = function(event){
 		var img = document.createElement("img");
 		img.setAttribute("src", event.target.result);
-		document.querySelector("div#img_container").appendChild(img);
+		document.querySelector("div.inputimg").appendChild(img);
 	};
 	
 	reader.readAsDataURL(event.target.files[0]);
@@ -39,15 +42,6 @@ function setThumbnail(event){
 
 $(document).ready(function(){
 	(function(){
-		let productNum = $("#productNum").attr("title");
-		
-	
-		
-		
-		
-		
+		let productNum = $("#productNum").attr("title");		
 	})
-
-
-	
 })

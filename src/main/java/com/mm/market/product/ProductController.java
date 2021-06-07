@@ -124,7 +124,8 @@ public class ProductController {
 
 		return mv;
 	}
-
+	
+	@GetMapping("fileDelete")
 	public ModelAndView setFileDelete(ProductFileVO productFileVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = productService.setFileDelete(productFileVO);
