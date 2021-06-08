@@ -26,3 +26,10 @@
 		}
 	}
 }
+
+/** @function goSelect()
+ */
+ 
+ function goSelect(productNum){
+	location.href = './select/'+productNum;
+}
