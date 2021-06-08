@@ -47,12 +47,11 @@ img {
 		</div>
 	-->
 	
-			<div>
+			<div id=file>
 			<input type="button" id="add" value="ADD">
 			<div id="thumb">
 				<div class="inputimg">
 						<input type="file" name="file" required class="img" onchange="setThumbnail(event);">
-						<input type="button" id="del" value="Delete">
 					</div>
 
 			 </div>

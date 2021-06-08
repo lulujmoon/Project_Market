@@ -7,7 +7,7 @@ let count = 1;
 $("#add").click(function(){	
 	
 	if(count<7) {
-	$("#file").append('<div class="inputimg"><input type="file" name="file" class="img" onchange="setThumbnail(event);"><input type="button" id="del" value="Delete"></div>');
+	$("#file").append('<div class="inputimg"><input type="file" name="file" class="img" onchange="setThumbnail(event);"><input type="button" class="del" value="Delete"></div>');
 	count++;
 	} else {
 		alert("최대 7개까지만 첨부가능합니다");
@@ -15,25 +15,16 @@ $("#add").click(function(){
 	
 })
 
-$(".del").click(function(){
+$("#del").click(function(){
 		$("#file").empty();
 })
 	
 //이벤트 위임
-$("#file").on("click", "#del", function(){
+$("#file").on("click", ".del", function(){
 	console.log($(this).parent());
 	$(this).parent().remove();
 	count--;
 });
-
-
-$("#thumbnail").on("click", ".del", function(){
-	$(this).parent().remove();
-	count--;
-});
-
-
-
 
 
 
