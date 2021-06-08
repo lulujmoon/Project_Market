@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,9 @@
 <body>
 <h1>NoticeList</h1>
 
+<sec:authorize access="hasRole('ADMIN')">
 <a href="./insert">글작성</a>
+</sec:authorize>
 
 <c:forEach items="${list}" var="dto">
 <div class="num"> ${dto.noticeNum}</div> <br>
