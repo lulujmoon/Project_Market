@@ -3,12 +3,14 @@
  */
 
 let count = 1;
+let index = 0;
 
 $("#add").click(function(){	
 	
 	if(count<7) {
 	$("#file").append('<div class="inputimg"><input type="file" name="file" class="img" onchange="previewImage(this)""><input type="button" class="del" value="Delete"></div><div id="preview"></div>');
 	count++;
+	index++;
 	} else {
 		alert("최대 7개까지만 첨부가능합니다");
 	}
