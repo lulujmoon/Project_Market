@@ -3,7 +3,7 @@
  */
 
 let count = 1;
-let index = 0;
+let index = 1;
 
 $("#add").click(function(){	
 	
