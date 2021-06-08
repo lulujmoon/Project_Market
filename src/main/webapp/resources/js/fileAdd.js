@@ -9,7 +9,7 @@ $("#add").click(function(){
 	
 	if(count<7) {
 	/*$("#file").append('<div class="inputimg"><input type="file" name="file" class="img" onchange="previewImage(this'+count+')"><input type="button" class="del" value="Delete"></div><div id="preview"></div>');*/
-	$("#file").append('<div class="inputimg"><input type="file" name="file" class="img" onchange="previewImage(this, '+count+')"><input type="button" class="del" value="Delete"></div><div id="preview'+index+'"></div>'
+	$("#file").append('<div class="inputimg"><input type="file" name="file" class="img" onchange="previewImage(this, '+count+')"><input type="button" class="del" value="Delete"><div id="preview'+index+'"></div></div>'
 );
 
 	count++;
