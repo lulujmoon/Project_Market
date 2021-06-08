@@ -61,7 +61,7 @@ $(document).ready(function(){
 
 
 //파일 입력시 이미지 미리보기
-function previewImage(f) {
+function previewImage(f,idx) {
 	
 	let file = f.files;
 	
