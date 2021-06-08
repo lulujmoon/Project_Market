@@ -52,6 +52,12 @@
 	flex-direction: column;
 }
 
+.zero-container{
+	width: 100%;
+	padding-top: 30px;
+	text-align: center;
+}
+
 .order-container{
 	width: 1210px;
 	margin-left: 30px;

@@ -53,48 +53,54 @@
 			</c:forEach>
 		</ul>
 	</div>
-
 	<div class="list-container">
-		<div class="order-container">
-			<div class="hidden order-value">${pager.order}</div>
-			<a class="order-content" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=date">최신순</a>
-			<a class="order-content" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=lowPrice">저가순</a>
-			<a class="order-content" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=highPrice">고가순</a>
-		</div>
-		<div class="product-container">
-			<c:forEach items="${products}" var="product">
-				<div class="prd__card" onclick="goSelect(${product.productNum})">
-					<c:if test="${product.files[0].fileName != null}">
-						<img class="card__img" src="/resources/upload/product/${product.files[0].fileName}">
-					</c:if>
-					<c:if test="${product.files[0].fileName == null}">
-						<img class="card__img" src="/resources/images/productDefault.jpg">
-					</c:if>
-					<div class="card__info">
-						<div class="info__name"> ${product.productName}</div>
-						<div class="info__price">${product.productPrice}</div>
-						<div class="info__date">${product.productDate}</div>
-						<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
+		<c:if test="${products.size()>0}">
+			<div class="order-container">
+				<div class="hidden order-value">${pager.order}</div>
+				<a class="order-content" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=date">최신순</a>
+				<a class="order-content" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=lowPrice">저가순</a>
+				<a class="order-content" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=highPrice">고가순</a>
+			</div>
+			<div class="product-container">
+				<c:forEach items="${products}" var="product">
+					<div class="prd__card" onclick="goSelect(${product.productNum})">
+						<c:if test="${product.files[0].fileName != null}">
+							<img class="card__img" src="/resources/upload/product/${product.files[0].fileName}">
+						</c:if>
+						<c:if test="${product.files[0].fileName == null}">
+							<img class="card__img" src="/resources/images/productDefault.jpg">
+						</c:if>
+						<div class="card__info">
+							<div class="info__name"> ${product.productName}</div>
+							<div class="info__price">${product.productPrice}</div>
+							<div class="info__date">${product.productDate}</div>
+							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
+						</div>
 					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<ul class="page-container">
-			<c:if test="${pager.pre}">
-				<li><a class="page-item arrow" href="./list?page=${pager.startNum-1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-left"></i></a></li>
-			</c:if>
-			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<c:if test="${pager.page == i}">
-					<li><a class="page-item current-page" href="./list?page=${i}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}">${i}</a></li>
+				</c:forEach>
+			</div>
+			<ul class="page-container">
+				<c:if test="${pager.pre}">
+					<li><a class="page-item arrow" href="./list?page=${pager.startNum-1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-left"></i></a></li>
 				</c:if>
-				<c:if test="${pager.page != i}">
-					<li><a class="page-item" href="./list?page=${i}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}">${i}</a></li>
+				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+					<c:if test="${pager.page == i}">
+						<li><a class="page-item current-page" href="./list?page=${i}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}">${i}</a></li>
+					</c:if>
+					<c:if test="${pager.page != i}">
+						<li><a class="page-item" href="./list?page=${i}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}">${i}</a></li>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pager.next}">
+					<li><a class="page-item arrow" href="./list?page=${pager.lastNum+1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-right"></i></a></li>
 				</c:if>
-			</c:forEach>
-			<c:if test="${pager.next}">
-				<li><a class="page-item arrow" href="./list?page=${pager.lastNum+1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-right"></i></a></li>
-			</c:if>
-		</ul>
+			</ul>
+		</c:if>
+		<c:if test="${products.size() == 0}">
+			<div class="zero-container">
+				일치하는 상품이 없습니다.
+			</div>
+		</c:if>
 	</div>
 
 </div>
