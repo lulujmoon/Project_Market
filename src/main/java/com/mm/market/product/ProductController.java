@@ -152,13 +152,13 @@ public class ProductController {
 		return mv;
 	}
 	
-	@GetMapping("fileDelete")
+	@PostMapping("fileDelete")
 	public ModelAndView setFileDelete(ProductFileVO productFileVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = productService.setFileDelete(productFileVO);
 		mv.addObject("result", result);
 		mv.addObject("msg", "정말 삭제하시겠습니까?");
-		mv.setViewName("common/commonResult");
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}
