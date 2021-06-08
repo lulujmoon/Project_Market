@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication property="principal" var="principal" />
 <!-- 헤더 -->
 <header>
 	<nav class="navbar nav">
@@ -14,21 +15,22 @@
 		</div>
 		<div class="nav__search">	
 			<form id="frm" action="${pageContext.request.contextPath}/product/list" class="nav__search-form">
-				<input type="hidden" name="curPage" value="1" id="curPage">
-				<input type="text" class="nav__searchbox" name="search" id="search" placeholder="상품명 또는 지역명을 검색하세요" value="${pager.search}">
+				<input type="hidden" name="page" value="1" id="page">
+				<input type="text" class="nav__searchbox" name="keyword" id="keyword" placeholder="상품명을 검색하세요" value="${pager.keyword}">
 				<button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
 			</form>	
 		</div>
 		<ul class="nav__personal">
-			<c:if test="${member == null}">
-				<li><a href="${pageContext.request.contextPath}/member/memberLogin">로그인</a>&nbsp;|&nbsp;</li>
-				<li><a href="${pageContext.request.contextPath}/member/memberJoin">회원가입</a></li>
-			</c:if>
-			<c:if test="${member != null}">
-				<li><a href="#">마이페이지</a>&nbsp;|&nbsp;</li>
+			<sec:authorize access="isAnonymous()">
+				<li><a href="${pageContext.request.contextPath}/member/login">로그인</a>&nbsp;|&nbsp;</li>
+				<li><a href="${pageContext.request.contextPath}/member/approve">회원가입</a></li>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<li><a href="${pageContext.request.contextPath}/store/${principal.code}/products">내 상점</a>&nbsp;|&nbsp;</li>
+				<li><a href="${pageContext.request.contextPath}/member/info">내 정보</a>&nbsp;|&nbsp;</li>
 				<li><a href="#">알림</a>&nbsp;|&nbsp;</li>
 				<li><a href="#">메세지</a></li>
-			</c:if>
+			</sec:authorize>
 		</ul>
 	</nav>
 </header>
@@ -36,12 +38,12 @@
 <div class="side side-menu">
 	<div class="side__user">
 		<h3>
-			<c:if test="${member == null}">
-				<a href="${pageContext.request.contextPath}/member/memberLogin"><i class="fas fa-unlock-alt"></i> 로그인</a>
-			</c:if>
-			<c:if test="${member != null}">
-				<a href="#">${member.name} 님</a>
-			</c:if>
+			<sec:authorize access="isAnonymous()">
+				<a href="${pageContext.request.contextPath}/member/login"><i class="fas fa-unlock-alt"></i> 로그인</a>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<a href="${pageContext.request.contextPath}/member/logout"><sec:authentication property="principal.name"/> 님</a>
+			</sec:authorize>
 		</h3>
 	</div>
 	<div class="side__categories">

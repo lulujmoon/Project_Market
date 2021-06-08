@@ -1,0 +1,166 @@
+@charset "UTF-8";
+
+.container{
+	padding-top: 125px;
+	width: 1210px;
+	min-height: 55vh;
+	margin: 30px auto;
+}
+
+.profile-container{
+	width: 100%;
+	height: 220px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	background-color: white;
+}
+
+.divide{
+	display: flex;
+	flex-direction: row;
+}
+
+.profile__photo{
+	width: 160px;
+	height: 160px;
+	border-radius: 70%;
+	padding: 30px;
+	display: flex;
+	overflow: visible;
+	cursor: pointer;
+}
+
+.profile__img{
+	position: absolute;
+	top: 185px;
+	z-index: 0;
+	width: 160px;
+	height: 160px;
+	border-radius: 70%;
+}
+
+.profile-hover{
+	position: absolute;
+	top: 185px;
+	z-index: 1;
+	width: 160px;
+	height: 160px;
+	text-align: center;
+	line-height: 160px;
+	border-radius: 70%;
+	opacity: 0;
+}
+
+.profile-hover:hover{
+	display: block;
+	background-color: black;
+	opacity: 0.4;
+	color: white;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.profile__form{
+	display: none;
+}
+
+.profile__info{
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-right: 20px;
+}
+
+.profile__name{
+	font-size: 1.7em;
+	font-weight: 800;
+	padding: 20px;
+}
+
+.profile__location{
+	font-size: 0.9em;
+	padding: 4px 20px;
+}
+
+.profile__joinDate{
+	font-size: 0.9em;	
+	padding: 4px 20px;
+}
+
+.profile__rating{
+		width: 23%;
+		padding: 0 20px;
+		font-size: 0.9em;
+}
+
+.rating__notice{
+	padding: 8px 20px;
+	border-bottom: 1px solid grey;
+	margin-bottom: 10px;
+}
+
+.rating__content{
+	padding: 5px 20px;
+	display: flex;
+	flex-direction: row;
+}
+
+.rating__title{
+	width: 30%;
+}
+
+.rate{
+	width: 40%;
+}
+
+.rate i{
+	color: #fadd85;
+}
+
+.board-container{
+	width: 100%;
+	min-height: 40vh;
+	margin-top: 30px;
+		background-color: white;
+}
+
+.board__nav{
+	width: 100%;
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	border-bottom: none;
+}
+
+.nav__item{
+	width: 20%;
+	height: 100%;
+	background-color: white;
+	border-right: 1px solid #e6e6e6;
+	font-size: 1.2em;
+	font-weight: bold;
+	line-height: 60px;
+	text-align: center;
+	cursor: pointer;
+}
+
+/*
+.nav__selected{
+	background-color: #fadd85;
+	color: white;
+}
+*/
+
+.board__contents{
+	width: 100%;
+	min-height: 500px;
+	padding: 25px 0;
+	border: 1px solid #e6e6e6;
+	display: flex;
+}

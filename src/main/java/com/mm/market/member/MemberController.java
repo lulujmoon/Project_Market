@@ -1,6 +1,8 @@
 package com.mm.market.member;
 
+import java.security.Principal;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.UUID;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -13,8 +15,14 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -26,11 +34,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mm.market.memberLocation.MemberLocationService;
+import com.mm.market.memberLocation.MemberLocationVO;
+
+import ch.qos.logback.classic.Logger;
 
 @Controller
 @RequestMapping("/member/**")
@@ -39,32 +52,36 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private MemberLocationService memberLocationService;
 
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
 	 */
 
-	@GetMapping("memberLogin")
+	@GetMapping("login")
 	public String getLogin()throws Exception{
-		return "member/memberLogin";
+		return "member/login";
 	}
 	
-	
-	  @PostMapping("memberLogin") public String getLogin(HttpServletRequest
-	 request)throws Exception{
+	  @PostMapping("login") 
+	  public String getLogin(HttpServletRequest request)throws Exception{
 		  //포워딩된 어트리뷰트를 포스트형식으로 받아줌
 	  System.out.println(request.getAttribute("message"));
 	  
-	  return "member/memberLogin"; 
+	  return "member/login"; 
 	  }
 	 
 
-	@GetMapping("memberLoginFail")
+	@GetMapping("loginFail")
 	public String loginFail()throws Exception{
-		return "redirect:/member/memberLogin";
+		return "redirect:/member/login";
 	}
 
-	@GetMapping("memberLoginResult")
+	@GetMapping("loginResult")
 	public String memberLoginResult(HttpSession session, Authentication auth2)throws Exception{
 
 		Enumeration<String> en = session.getAttributeNames();
@@ -81,20 +98,6 @@ public class MemberController {
 									//저장되는 session의 타입
 		Authentication auth = sc.getAuthentication();
 
-		System.out.println("===================================");
-		System.out.println("Name : "+auth.getName());
-		System.out.println("Details : "+auth.getDetails());
-		System.out.println("Principal : "+auth.getPrincipal());
-		System.out.println("Authorities : "+auth.getAuthorities());
-		System.out.println("===================================");
-
-		System.out.println("===================================");
-		System.out.println("Name : "+auth2.getName());
-		System.out.println("Details : "+auth2.getDetails());
-		System.out.println("Principal : "+auth2.getPrincipal());
-		System.out.println("Authorities : "+auth2.getAuthorities());
-		System.out.println("===================================");
-
 		System.out.println("obj : "+obj);
 
 		System.out.println("login 성공");
@@ -103,7 +106,7 @@ public class MemberController {
 
 	}
 
-	@GetMapping("memberLogout")
+	@GetMapping("logout")
 	public String logout(HttpSession session)throws Exception{
 		System.out.println("로그아웃");
 		session.invalidate();
@@ -112,40 +115,83 @@ public class MemberController {
 	}
 
 
-	@GetMapping("memberJoin")
+	@GetMapping("join")
 	public String setJoin(@ModelAttribute MemberVO memberVO) throws Exception {
-		return "member/memberJoin";
+		return "member/join";
 	}
 
-	@GetMapping("memberApprove")
+	@GetMapping("approve")
 	public void setApprove()throws Exception{
 			
 	}
 
-	@PostMapping("memberApprove")
+	@PostMapping("approve")
 	public String setApprove(Model model)throws Exception{
 			
-		return "redirect:/member/memberJoin";
+		return "redirect:/member/join";
 	}
 	
-	@PostMapping("memberJoin")
-	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv)throws Exception{
+	@PostMapping("join")
+	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv,MultipartFile avatar)throws Exception{
 		System.out.println("Join process"+ memberVO.getName().length());
 
 		  if(memberService.memberError(memberVO, errors)) { 
-			  System.out.println("에러났어");
-		  return"member/memberJoin"; 
+			  
+		  return"member/join"; 
 		  
 		  }
 
-		int result = memberService.setJoin(memberVO); 
+		int result = memberService.setJoin(memberVO, avatar);
 
 		return "redirect:../";
 
 	}
+	
+	@ResponseBody
+	@PostMapping("idCheck")
+	public int idCheck(HttpServletRequest req)throws Exception{
+		
+		String username = req.getParameter("username");
+		MemberVO idCheck = memberService.idCheck(username);
+		
+		int result =0;
+		if(idCheck != null) {
+			result =1;
+		}
+		return result;
+	}
+	
+	@GetMapping("info")
+	public void infomation(Authentication authentication, HttpSession session)throws Exception{
+		
+		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
+
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		memberLocationVO.setUsername(userDetails.getUsername());
+		List<MemberLocationVO> list = memberLocationService.getList(memberLocationVO);
+		
+		session.setAttribute("locations", list);
+	}
+	
+	@PostMapping("update")
+	public String setUpdate(MemberVO memberVO, HttpSession session, Authentication authentication) throws Exception{
+
+		int result = memberService.setUpdate(memberVO);
+		//db값 변경됐지만 session값 변경안됨
+
+		MemberVO old =(MemberVO)authentication.getPrincipal();
+		
+		old.setPassword(memberVO.getPassword());
+		old.setName(memberVO.getName());
+		old.setPhone(memberVO.getPhone());
+		old.setEmail(memberVO.getEmail());
+		
+		return "redirect:./info";
+	}
+
 		
 	@GetMapping("auth/kakao/callback")
-	public String kakaoCallback(String code) throws Exception {
+	public String kakaoCallback(String code,MultipartFile avatar) throws Exception {
 		
 		
 		//post방식으로 key=value 데이터를 요청(카카오쪽으로)
@@ -212,7 +258,6 @@ public class MemberController {
 				);
 		System.out.println(response2.getBody());
 		
-		System.out.println("여기까지!!!!!!!!!!!");
 		
 		
 		ObjectMapper objectMapper2 = new ObjectMapper();
@@ -229,52 +274,55 @@ public class MemberController {
 		System.out.println("카카오 아이디(번호):"+kakaoProfile.getId());
 		System.out.println("카카오 이메일(번호):"+kakaoProfile.getKakao_account().getEmail());
 		
-		System.out.println("마켓서버 유저네임:" + kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		System.out.println("마켓서버 유저네임:" + kakaoProfile.getKakao_account().getEmail());
 		System.out.println("마켓서버 이메일:" + kakaoProfile.getKakao_account().getEmail());
 		
 		System.out.println("마켓서버 패스워드:"+kakaoProfile.getId());
 
 		MemberVO KakaomemberVO = new MemberVO();
-		KakaomemberVO.setUsername(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		KakaomemberVO.setUsername(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setPassword(kakaoProfile.getId().toString());
 		KakaomemberVO.setEmail(kakaoProfile.getKakao_account().getEmail());
 		KakaomemberVO.setName(kakaoProfile.getProperties().getNickname());
+		KakaomemberVO.setOauth(true);
 		
+				
 		//가입자 혹은 비가입자 체크해서 처리
 		MemberVO originmemberVO = memberService.findMember(KakaomemberVO);
 		
 		if(originmemberVO==null) {
 			try {
 				System.out.println("기존회원아님->회원가입진행");
-				memberService.setJoin(KakaomemberVO);
+				memberService.setKakaoJoin(KakaomemberVO);
+			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
 		}
-				
-		RestTemplate rt3 = new RestTemplate();
-			
-			
-		  MultiValueMap<String,String> kakaoProfileRequest3 = new LinkedMultiValueMap<String, String>();
-		  kakaoProfileRequest3.add("username",kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		  kakaoProfileRequest3.add("password", kakaoProfile.getId().toString());
-		  
-		  ResponseEntity<String> response3 =rt3.postForEntity(
-				  "http://localhost/member/memberLogin", 		  
-				  kakaoProfileRequest3, 
-				  String.class	  
-		  );
-	
-		  System.out.println("아이디"+kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
-		  System.out.println("비번"+kakaoProfile.getId().toString());
-		
-		return "redirect:/";
+						
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(KakaomemberVO.getUsername(),KakaomemberVO.getPassword() ));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		
-		
-		
+		return "redirect:./store";
 	}
+		
+	//-----------------shop	
+			
+		@GetMapping("store")
+		public ModelAndView store(MemberFileVO memberFileVO,Authentication authentication)throws Exception{
+			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
+			memberFileVO = memberService.selectFile(memberVO);
+		
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("file",memberFileVO);
+			mv.setViewName("member/store");
+			
+			return mv;
+		};
+		
 
 
 }
