@@ -9,8 +9,6 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 
-
-
 public class AlarmHandler extends TextWebSocketHandler{
 	List<WebSocketSession> sessions = new ArrayList<>();
 	

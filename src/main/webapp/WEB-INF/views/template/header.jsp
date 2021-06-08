@@ -26,6 +26,7 @@
 				<li><a href="${pageContext.request.contextPath}/member/approve">회원가입</a></li>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
+				<li><a href="${pageContext.request.contextPath}/notice/list">공지</a>&nbsp;|&nbsp;</li>
 				<li><a href="${pageContext.request.contextPath}/store/${principal.code}/products">내 상점</a>&nbsp;|&nbsp;</li>
 				<li><a href="${pageContext.request.contextPath}/member/info">내 정보</a>&nbsp;|&nbsp;</li>
 				<li><a href="${pageContext.request.contextPath}/member/alarm">알림</a>&nbsp;|&nbsp;</li>

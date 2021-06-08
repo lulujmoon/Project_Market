@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/member/**").permitAll()
+		.antMatchers("/notice/**").permitAll()
 		.antMatchers("/member/auth/kakao/callback").permitAll()
 		.anyRequest().authenticated()
 		.and()
