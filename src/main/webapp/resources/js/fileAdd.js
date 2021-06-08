@@ -20,8 +20,8 @@ $("#add").click(function(){
 	
 })
 
-$("#del").click(function(){
-		$("#file").empty();
+$(".del").click(function(){
+		$(this).parent().remove();
 })
 	
 //이벤트 위임
