@@ -31,11 +31,21 @@ public class NoticeController {
 	
 	@GetMapping("select")
 	public ModelAndView getSelect(NoticeVO noticeVO)throws Exception{
-		noticeVO =noticeService.getSelect(noticeVO);
+		noticeVO =noticeService.getSelect(noticeVO);		
+		
+		NoticeVO noticeVO2 = new NoticeVO();
+		noticeVO2.setNoticeNum(noticeService.getPre(noticeVO));
+		noticeVO2 = noticeService.getSelect(noticeVO2);
+		
+		NoticeVO noticeVO3 = new NoticeVO();
+		noticeVO3.setNoticeNum(noticeService.getNext(noticeVO));
+		noticeVO3=noticeService.getSelect(noticeVO3);
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("dto",noticeVO);
-		mv.setViewName("notice/select");
-		
+		mv.addObject("pre",noticeVO2);
+		mv.addObject("next",noticeVO3);
+		mv.setViewName("notice/select");	
 		return mv;
 	}
 	
@@ -72,6 +82,7 @@ public class NoticeController {
 		
 		return "redirect:./list";
 	}
+	
 
 }
 

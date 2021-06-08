@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +15,12 @@
 <h2>${dto.noticeContent}</h2>
 
 <div>
-<a href="#">이전글</a>
-<a href="#">다음글</a>
+
+이전글 :<a href="./select?noticeNum=${pre.noticeNum}">${pre.noticeTitle} </a><br>
+
+
+다음글 : <a href="./select?noticeNum=${next.noticeNum}">${next.noticeTitle}</a>
+
 </div>
 <br>
 <a href="./update?noticeNum=${dto.noticeNum}"> 수정 </a>

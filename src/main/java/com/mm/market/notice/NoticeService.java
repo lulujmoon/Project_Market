@@ -36,4 +36,12 @@ public class NoticeService {
 	public int setDelete(NoticeVO noticeVO)throws Exception{
 		return noticeMapper.setDelete(noticeVO);
 	}
+	
+	public Long getPre(NoticeVO noticeVO)throws Exception{
+		return noticeMapper.getPre(noticeVO);
+	}
+	
+	public Long getNext(NoticeVO noticeVO)throws Exception{
+		return noticeMapper.getNext(noticeVO);
+	}
 }

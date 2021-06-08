@@ -46,4 +46,12 @@
 <delete id="setDelete" parameterType="NoticeVO">
 	delete from notice where noticeNum=#{noticeNum}
 </delete>
+
+<select id="getPre" parameterType="NoticeVO" resultType="java.lang.Long">
+	SELECT max(noticeNum) FROM notice WHERE noticeNum <![CDATA[ < ]]>#{noticeNum};
+</select>
+
+<select id="getNext" parameterType="NoticeVO" resultType="java.lang.Long">
+	SELECT min(noticeNum) FROM notice WHERE noticeNum <![CDATA[ > ]]>#{noticeNum};
+</select>
 </mapper>  
