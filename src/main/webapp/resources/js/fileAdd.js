@@ -30,26 +30,6 @@ $("#file").on("click", ".del", function(){
 
 
 
-
-
-
-
-//파일 입력시 이미지 미리보기
-/*
-onchange="setThumbnail(event);"
-function setThumbnail(event){
-	var reader = new FileReader();
-	
-	reader.onload = function(event){
-		var img = document.createElement("img");
-		img.setAttribute("src", event.target.result);
-		document.querySelector("div.inputimg").appendChild(img);
-	};
-	
-	reader.readAsDataURL(event.target.files[0]);
-};
-*/
-
 //빈파일 저장되지 않게
 const btnSubmit = document.querySelector('#insertbtn');
 const form = document.querySelector('.form');
@@ -76,8 +56,7 @@ $(document).ready(function(){
 })
 
 
-
-
+//파일 입력시 이미지 미리보기
 function previewImage(f) {
 	
 	let file = f.files;
