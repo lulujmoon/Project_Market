@@ -205,10 +205,10 @@ public class ProductController {
 
 		for(int i=0;i<file.size();i++) {
 			file.get(i).setProductNum(productVO.getProductNum());
-		}
 
 		model.addAttribute("vo", productVO);
 		model.addAttribute("files", file);
+		}
 
 		System.out.println(file);
 

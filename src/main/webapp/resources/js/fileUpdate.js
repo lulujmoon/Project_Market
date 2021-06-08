@@ -87,7 +87,7 @@ function previewImage(f,idx) {
 
 //파일 삭제
 $(".del").click(function(){
-	let check = confirm("정말 삭제하실 것입니까?");
+	let check = confirm("정말 삭제합니까?");
 	
 	if(check){
 		
