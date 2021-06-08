@@ -17,13 +17,13 @@
 		<h3>카테고리</h3>
 		<ul class="top__list">
 			<c:forEach items="${categories}" var="category">
-				<li class="top__item"><a href="#" onclick="goListByCategory(${category.categoryCode}, '${pager.keyword}')">${category.categoryName}</a></li>
+				<li class="top__item"><a href="./list?page=1&categoryCode=${category.categoryCode}&keyword=${pager.keyword}&myLocation=${myLocation}">${category.categoryName}</a></li>
 			</c:forEach>
 		</ul>
 		
 		<h3>지역</h3>
 		<ul class="top__list">
-			<li class="top__item-all"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=-1&keyword=${pager.keyword}">전체</a></li>
+			<li class="top__item-all"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>
 			<c:forEach begin="0" end="2" var="i">
 				<li class="top__item"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
 			</c:forEach>
