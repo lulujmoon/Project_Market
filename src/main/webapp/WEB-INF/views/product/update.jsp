@@ -37,12 +37,12 @@ img {
 						<div id="preview0"></div>
 					</div>
 					
-			<c:forEach items="${files}" var="files" varStatus="status">
+			<c:forEach items="${files}" var="file" varStatus="status">
 				<div class="inputimg">
-					<input type="file" name="file" accept="image/*" class="img" value="/resources/upload/product/${files.fileName}">
-					<input type="button" class="del" value="Delete" title="${files.fileNum}">
+					<input type="file" name="file" accept="image/*" class="img" value="${file.fileName}">
+					<input type="button" class="del" value="Delete" title="${file.fileNum}">
 					<div id="preview${status.count}">
-						<img src="/resources/upload/product/${files.fileName}">
+						<img src="/resources/upload/product/${file.fileName}">
 					</div>
 				</div>
 			</c:forEach>
@@ -81,7 +81,7 @@ img {
 		</div>
 	    <div class="form-group">
 	    <label for="productContents">상품 설명</label>
-	    <textarea id="productContent" rows="5" name="productContent" value="${vo.productContent}"></textarea>
+	    <textarea id="productContent" rows="5" name="productContent">${vo.productContent}</textarea>
 	  </div>
 	    <div class="form-group">
 	    <label>상품 가격</label>
