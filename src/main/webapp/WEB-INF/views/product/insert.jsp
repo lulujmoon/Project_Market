@@ -14,10 +14,6 @@
 <c:import url="../template/setting.jsp"></c:import>
 
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<!-- summernote -->
-  <!--   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> -->
-<!-- ---------- -->
 <title>Hello, world!</title>
 <style>
 img {
@@ -28,7 +24,7 @@ img {
 </head>
 <body>
 <h2>Product Insert Page</h2>
-	<form class="form" id="uploadFrom" action="./insert" method="POST" enctype="multipart/form-data">
+	<form class="form" id="uploadFrom" action="./insert" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
 	
 	
 			<div id=file>
@@ -36,6 +32,7 @@ img {
 			<div id="thumb">
 				<div class="inputimg">
 						<input type="file" name="file" accept="image/*" required class="img" onchange="previewImage(this,0)">
+						<input type="button" class="del" value="Delete">
 						<div id="preview0"></div>
 					</div>
 
@@ -45,7 +42,7 @@ img {
 		
 		<div class="form-group">
 	    <label>상품 명</label>
-	    <input type="text" name="productName">
+	    <input type="text" name="productName" required>
 	  </div>
 	    <div class="form-group">
 	    <label>판매자</label>
@@ -72,11 +69,11 @@ img {
 		</div>
 	    <div class="form-group">
 	    <label for="productContents">상품 설명</label>
-	    <textarea id="productContent" rows="5" name="productContent"></textarea>
+	    <textarea id="productContent" rows="5" name="productContent" required></textarea>
 	  </div>
 	    <div class="form-group">
 	    <label>상품 가격</label>
-	    <input type="text" name="productPrice">
+	    <input type="text" name="productPrice" required>
 	  </div>
 	  
 	   <input type="hidden" name="productNum">
@@ -87,6 +84,5 @@ img {
 </form>
 
 <script type="text/javascript" src="../resources/js/fileAdd.js"></script>
-<!-- <script type="text/javascript" src="../resources/js/summerFile.js"></script> -->
 </body>
 </html>

@@ -18,16 +18,18 @@ $("#add").click(function(){
 	}
 	
 })
-
+/*
 $(".del").click(function(){
 		$(this).parent().remove();
 })
-	
+*/	
 //이벤트 위임
 $("#file").on("click", ".del", function(){
 	console.log($(this).parent());
 	$(this).parent().remove();
 	count--;
+	index--;
+	console.log(count);
 });
 
 
@@ -84,3 +86,16 @@ function previewImage(f,idx) {
 	}
 	
 }
+
+
+
+
+function submitCheck() {
+
+	if(count>0) {
+		return true;
+	}
+	
+	return false;
+}
+
