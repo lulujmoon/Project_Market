@@ -18,5 +18,7 @@
 <div class="content">${dto.noticeContent}</div>
 </c:forEach>
 <br>
+
+
 </body>
 </html>

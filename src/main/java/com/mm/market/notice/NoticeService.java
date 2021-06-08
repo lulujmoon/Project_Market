@@ -5,14 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mm.market.util.NoticePager;
+import com.mm.market.util.Pager;
+
 @Service
 public class NoticeService {
 	
 	@Autowired
 	NoticeMapper noticeMapper;
 
-	public List<NoticeVO> getList()throws Exception{
-		return noticeMapper.getList();
+	public List<NoticeVO> getList(NoticePager noticePager)throws Exception{
+		noticePager.makeRow();
+		Long totalCount = noticeMapper.getTotalCount(noticePager);
+		noticePager.makeNum(totalCount);
+		return noticeMapper.getList(noticePager);
 	}
 	
 	public NoticeVO getSelect(NoticeVO noticeVO)throws Exception{
