@@ -31,22 +31,6 @@ img {
 	<form class="form" id="uploadFrom" action="./insert" method="POST" enctype="multipart/form-data">
 	
 	
-	<!-- 
-		<div>
-			<label>상품 이미지</label>
-			<div id="thumbnail">
-				<div id="img_container">
-				</div>
-				<div id="imgform">
-					<div class="inputimg">
-						<input type="file" name="file" class="img" multiple onchange="addFileForm(); setThumbnail(event);"> 
-						<input type="button" id="del" value="Delete">
-					</div>
-				</div>
-			</div>
-		</div>
-	-->
-	
 			<div id=file>
 			<input type="button" id="add" value="ADD">
 			<div id="thumb">
