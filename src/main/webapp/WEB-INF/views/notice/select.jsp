@@ -21,8 +21,8 @@
 <div>
 
 이전글 :<a href="./select?noticeNum=${pre.noticeNum}">${pre.noticeTitle} </a><br>
+<a href="${pageContext.request.contextPath}/notice/list">목록</a><br>
 다음글 : <a href="./select?noticeNum=${next.noticeNum}">${next.noticeTitle}</a>
-
 </div>
 <br>
 

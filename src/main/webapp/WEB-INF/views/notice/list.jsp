@@ -18,7 +18,7 @@
 <c:forEach items="${list}" var="dto">
 <div class="num"> ${dto.noticeNum}</div> <br>
 <div class="title"><a href="./select?noticeNum=${dto.noticeNum}">${dto.noticeTitle}</a></div><br>
-<div class="content">${dto.noticeContent}</div>
+
 </c:forEach>
 <br>
 
