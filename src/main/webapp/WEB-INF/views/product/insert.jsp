@@ -19,15 +19,22 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script> -->
 <!-- ---------- -->
 <title>Hello, world!</title>
-
+<style>
+img {
+	width: 100px;
+	height: 100px;
+}
+</style>
 </head>
 <body>
 <h2>Product Insert Page</h2>
-	<form class="form" action="./insert" method="POST" enctype="multipart/form-data">
-		
-<!-- 		<div>
+	<form class="form" id="uploadFrom" action="./insert" method="POST" enctype="multipart/form-data">
+	
+	
+	<!-- 
+		<div>
+			<label>상품 이미지</label>
 			<div id="thumbnail">
-						<label>상품 이미지</label>
 				<div id="img_container">
 				</div>
 				<div id="imgform">
@@ -37,19 +44,21 @@
 					</div>
 				</div>
 			</div>
-		</div> -->
-		
-		
+		</div>
+	-->
 	
-			<input type="button" id="add" value="ADD" class="add">
-			<div id="file" title="1">
+			<div>
+			<input type="button" id="add" value="ADD">
+			<div id="thumb">
 				<div class="inputimg">
-						<input type="file" name="file" required class="img" multiple onchange="addFileForm(); setThumbnail(event);">
-						<img src="">
+						<input type="file" name="file" required class="img" onchange="setThumbnail(event);">
 						<input type="button" id="del" value="Delete">
+					</div>
+
 			 </div>
 			</div>
-	
+		
+		
 		<div class="form-group">
 	    <label>상품 명</label>
 	    <input type="text" name="productName">
@@ -93,9 +102,7 @@
 	 <button id="insertbtn" class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
 
+<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
 <!-- <script type="text/javascript" src="../resources/js/summerFile.js"></script> -->
-<script type="text/javascript" src="../resources/js/fileAdd2.js"></script>
-
-
 </body>
 </html>
