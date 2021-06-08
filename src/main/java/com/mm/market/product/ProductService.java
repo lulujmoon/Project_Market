@@ -60,18 +60,15 @@ public class ProductService {
 	}
 
 	public int setFileDelete(ProductFileVO productFileVO) throws  Exception {
-		//fileName print
+		//filename print
 		//1. 조회
-		productFileVO = productMapper.setFileSelect(productFileVO);
-		//2. table 삭제
+		productFileVO = productMapper.getFileSelect(productFileVO);
+		//2. db에서 삭제
 		int result = productMapper.setFileDelete(productFileVO);
 		//3. HDD 삭제
-		if(result>0) {
-			boolean deleted = fileManager.delete("product", productFileVO.getFileName(), session);
-			System.out.println("delete : "+deleted);
-			System.out.println("fileName : "+productFileVO.getFileName());
+		if(result > 0) {
+			fileManager.delete("product", productFileVO.getFileName(), session);
 		}
-		
 		return result;
 	}
 	
@@ -116,35 +113,40 @@ public class ProductService {
 	
 	
 	//update
-	public int setUpdate(ProductVO productVO, MultipartFile file) throws Exception {
+	public int setUpdate(ProductVO productVO, MultipartFile [] file) throws Exception {
 		int result = 0;
-		
-		if(file.getOriginalFilename().length()!=0) {
-			ProductVO productVO2 = productMapper.getSelect(productVO);
-			
-			if(productVO2.getThumbnail()!=null) {
-				String delFileName = productVO2.getThumbnail().getFileName();
-				boolean check = fileManager.delete("product", delFileName, session);
-				
-				ProductFileVO productFileVO = new ProductFileVO();
-				productFileVO.setFileNum(productVO2.getThumbnail().getFileNum());
-				productMapper.setFileDelete(productFileVO);
+		if(file != null) {
+			for(MultipartFile f:file) {
+				if(f.getOriginalFilename().length()!=0) {
+					ProductVO productVO2 = productMapper.getSelect(productVO);
+
+					if(productVO2.getThumbnail()!=null) {
+						String delFileName = productVO2.getThumbnail().getFileName();
+						boolean check = fileManager.delete("product", delFileName, session);
+
+						ProductFileVO productFileVO = new ProductFileVO();
+						productFileVO.setFileNum(productVO2.getThumbnail().getFileNum());
+						productMapper.setFileDelete(productFileVO);
+					}
+
+					String fileName = fileManager.save("product", f, session);
+
+					ProductFileVO productFileVO = new ProductFileVO();
+					productFileVO.setProductNum(productVO.getProductNum());
+					productFileVO.setFileName(fileName);
+					productFileVO.setOriginName(f.getOriginalFilename());
+
+					result = productMapper.setUpdate(productVO);
+					result = productMapper.setFileInsert(productFileVO);
+				}
+
 			}
-			
-			String fileName = fileManager.save("product", file, session);
-			
-			ProductFileVO productFileVO = new ProductFileVO();
-			productFileVO.setProductNum(productVO.getProductNum());
-			productFileVO.setFileName(fileName);
-			productFileVO.setOriginName(file.getOriginalFilename());
-			
-			result = productMapper.setUpdate(productVO);
-			result = productMapper.setFileInsert(productFileVO);
-		} else {
-			result = productMapper.setUpdate(productVO);
 		}
-		return result;
 		
+		result = productMapper.setUpdate(productVO);
+		
+		return result;
+
 	}
 	
 	

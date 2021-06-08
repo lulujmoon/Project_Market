@@ -39,7 +39,7 @@ img {
 					
 			<c:forEach items="${files}" var="files" varStatus="status">
 				<div class="inputimg">
-					<input type="file" name="file" accept="image/*" class="img" value="/resources/upload/product/${file.fileName}"  required>
+					<input type="file" name="file" accept="image/*" class="img" value="/resources/upload/product/${files.fileName}">
 					<input type="button" class="del" value="Delete" title="${files.fileNum}">
 					<div id="preview${status.count}">
 						<img src="/resources/upload/product/${files.fileName}">
@@ -67,19 +67,21 @@ img {
 		      <option value="3">유아동/유아도서</option>
 		      <option value="4">생활/가공식품</option>
 		      <option value="5">스포츠/레저</option>
-		      <option value="6">여성의류/잡화</option>
-		      <option value="7">남성의류/잡화</option>
-		      <option value="8">게임/취미</option>
-		      <option value="9">뷰티/미용</option>
-		      <option value="10">반려동물용품</option>
-		      <option value="11">도서/티켓/음반</option>
-		      <option value="12">삽니다</option>
+		      <option value="6">여성의류</option>
+		      <option value="7">여성잡화</option>
+		      <option value="8">남성의류</option>
+		      <option value="9">남성잡화</option>
+		      <option value="10">게임/취미</option>
+		      <option value="11">뷰티/미용</option>
+		      <option value="12">반려동물용품</option>
+		      <option value="13">도서/티켓/음반</option>
+		      <option value="14">삽니다</option>
 		    </select>
 		  </div>
 		</div>
 	    <div class="form-group">
 	    <label for="productContents">상품 설명</label>
-	    <textarea id="productContent" rows="5" name="productContent" value="${vo.productContent}" required></textarea>
+	    <textarea id="productContent" rows="5" name="productContent" value="${vo.productContent}"></textarea>
 	  </div>
 	    <div class="form-group">
 	    <label>상품 가격</label>

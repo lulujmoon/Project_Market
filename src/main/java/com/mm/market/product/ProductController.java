@@ -157,8 +157,7 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		int result = productService.setFileDelete(productFileVO);
 		mv.addObject("result", result);
-		mv.addObject("msg", "정말 삭제하시겠습니까?");
-		mv.setViewName("common/commonResult");
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}
@@ -216,7 +215,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(ProductVO productVO, MultipartFile file)throws Exception{
+	public String setUpdate(ProductVO productVO, MultipartFile [] file)throws Exception{
 		productService.setUpdate(productVO, file);
 		productVO = productService.getSelect(productVO);
 				
