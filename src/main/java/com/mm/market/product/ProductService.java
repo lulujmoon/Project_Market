@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.util.FileManager;
 import com.mm.market.util.Pager;
+import com.mm.market.util.ProductPager;
 
 @Service
 public class ProductService {
@@ -28,20 +29,14 @@ public class ProductService {
 	@Autowired
 	private HttpSession session;
 	
-	public List<ProductVO> getList(Pager pager)throws Exception{
-		Long perPage = 20L;
-		Long perBlock = 5L;
+	public List<ProductVO> getList(ProductPager productPager, Long perPage, Long perBlock)throws Exception{
+		productPager.setPerPage(perPage);
+		productPager.makeRow(perPage);
+		Long totalCount = productMapper.getTotalCount(productPager);
+		productPager.makeNum(totalCount, perPage, perBlock);
 		
-		pager.makeRow(perPage);
-		Long totalCount = productMapper.getTotalCount(pager);
-		pager.makeNum(totalCount, perPage, perBlock);
-	
 		
-		return productMapper.getList(pager);
-	}
-	
-	public List<ProductVO> getCateList(Pager pager)throws Exception {
-		return productMapper.getCateList(pager);
+		return productMapper.getList(productPager);
 	}
 	
 	

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.mm.market.product.ProductService;
 import com.mm.market.product.ProductVO;
 import com.mm.market.util.Pager;
+import com.mm.market.util.ProductPager;
 
 @Controller
 public class HomeController {
@@ -20,9 +21,9 @@ public class HomeController {
 	private ProductService productService;
 	
 	@GetMapping("/")
-	public ModelAndView home(Pager pager, ModelAndView mv)throws Exception {
+	public ModelAndView home(ProductPager productPager, ModelAndView mv)throws Exception {
 		
-		List<ProductVO> list = productService.getList(pager);
+		List<ProductVO> list = productService.getList(productPager, 8L, 5L);
 		
 		mv.addObject("products", list);
 		mv.setViewName("home");

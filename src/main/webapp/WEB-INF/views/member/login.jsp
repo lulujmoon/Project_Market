@@ -28,20 +28,20 @@
 				</div>
 				<div class="login-btn">
 					<button type="submit" class="btn-wide btn-submit">Login</button>
+				</div>
+			<div class="login-btn">
+			  <button type="button" class="btn-wide btn-kakao">Login with Kakao</button>
+			</div>
+			<div class="login-option">
 					<a href="./join">회원가입</a>
 					<a href="#">아이디/비밀번호 찾기</a>
-				</div>
+			</div>
 			</form>
-			<div class="login-btn">
-				<button type="button" class="btn-wide btn-naver">Login with Naver</button>
-			</div>
-			<div class="login-btn">
-				<a href="https://kauth.kakao.com/oauth/authorize?client_id=bdf85067bd67f89b950ae22189274a9c&redirect_uri=http://localhost/member/auth/kakao/callback&response_type=code"><button type="button" class="btn-wide btn-kakao">Login with Kakao</button></a>
-			</div>
 		</div>
 	</div>
 	
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/login.js"></script>
 </body>
 </html>

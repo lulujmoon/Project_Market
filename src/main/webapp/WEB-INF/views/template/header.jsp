@@ -15,8 +15,8 @@
 		</div>
 		<div class="nav__search">	
 			<form id="frm" action="${pageContext.request.contextPath}/product/list" class="nav__search-form">
-				<input type="hidden" name="curPage" value="1" id="curPage">
-				<input type="text" class="nav__searchbox" name="search" id="search" placeholder="상품명 또는 지역명을 검색하세요" value="${pager.search}">
+				<input type="hidden" name="page" value="1" id="page">
+				<input type="text" class="nav__searchbox" name="keyword" id="keyword" placeholder="상품명을 검색하세요" value="${pager.keyword}">
 				<button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
 			</form>	
 		</div>

@@ -36,7 +36,12 @@
 			<div class="section-contents">
 				<c:forEach var="i" begin="0" end="7">
 					<div class="prd__card" onclick="goSelect(${products[i].productNum})">
-						<img class="card__img" src="../resources/images/test01.jpg">
+						<c:if test="${product.files[0].fileName != null}">
+							<img class="card__img" src="/resources/upload/product/${product.files[0].fileName}">
+						</c:if>
+						<c:if test="${product.files[0].fileName == null}">
+							<img class="card__img" src="/resources/images/productDefault.jpg">
+						</c:if>
 						<div class="card__info">
 							<div class="info__name">${products[i].productName}</div>
 							<div class="info__price">${products[i].productPrice}</div>

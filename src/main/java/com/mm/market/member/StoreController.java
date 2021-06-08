@@ -16,6 +16,7 @@ import com.mm.market.memberLocation.MemberLocationVO;
 import com.mm.market.product.ProductService;
 import com.mm.market.product.ProductVO;
 import com.mm.market.util.Pager;
+import com.mm.market.util.ProductPager;
 
 @Controller
 @RequestMapping("/store/**")
@@ -46,8 +47,8 @@ public class StoreController {
 		/* 나중에 getListByUsername으로 변경하기*/
 		ProductVO productVO = new ProductVO();
 		productVO.setUsername(memberVO.getUsername());
-		Pager pager = new Pager();
-		List<ProductVO> productList = productService.getList(pager);
+		ProductPager productPager = new ProductPager();
+		List<ProductVO> productList = productService.getList(productPager, 12L, 5L);
 		
 		mv.addObject("member", memberVO);
 		mv.addObject("file", memberFileVO);
