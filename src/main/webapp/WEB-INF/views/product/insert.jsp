@@ -35,7 +35,8 @@ img {
 			<input type="button" id="add" value="ADD">
 			<div id="thumb">
 				<div class="inputimg">
-						<input type="file" name="file" required class="img" onchange="setThumbnail(event);">
+						<input type="file" name="file" accept="image/*" required class="img" onchange="previewImage(this)">
+						<div id="preview"></div>
 					</div>
 
 			 </div>

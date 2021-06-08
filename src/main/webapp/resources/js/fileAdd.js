@@ -7,7 +7,7 @@ let count = 1;
 $("#add").click(function(){	
 	
 	if(count<7) {
-	$("#file").append('<div class="inputimg"><input type="file" name="file" class="img" onchange="setThumbnail(event);"><input type="button" class="del" value="Delete"></div>');
+	$("#file").append('<div class="inputimg"><input type="file" name="file" class="img" onchange="previewImage(this)""><input type="button" class="del" value="Delete"></div><div id="preview"></div>');
 	count++;
 	} else {
 		alert("최대 7개까지만 첨부가능합니다");
@@ -28,7 +28,15 @@ $("#file").on("click", ".del", function(){
 
 
 
+
+
+
+
+
+
 //파일 입력시 이미지 미리보기
+/*
+onchange="setThumbnail(event);"
 function setThumbnail(event){
 	var reader = new FileReader();
 	
@@ -40,7 +48,7 @@ function setThumbnail(event){
 	
 	reader.readAsDataURL(event.target.files[0]);
 };
-
+*/
 
 //빈파일 저장되지 않게
 const btnSubmit = document.querySelector('#insertbtn');
@@ -66,3 +74,30 @@ $(document).ready(function(){
 		let productNum = $("#productNum").attr("title");		
 	})
 })
+
+
+
+
+function previewImage(f) {
+	
+	let file = f.files;
+	
+	//확장자 체크
+	if(!/\.(gif|jpg|jpeg|png)$/i.test(file[0].name)) {
+		alert('gif, jpg, png 파일을 선택해 주세요. \n\n현재 파일 : '+file[0].name);
+		
+		//선택한 파일 초기화
+		f.outerHTML = f.outerHTML;
+		document.getElementById('preview').innerHTML='';
+	} else {
+		let reader = new FileReader();
+		
+		//파일 읽기가 완료되었을때 실행
+		reader.onload = function(rst) {
+			document.getElementById('preview').innerHTML = '<img src="' +rst.target.result+'">';
+		}
+		//파일 읽기
+		reader.readAsDataURL(file[0]);
+	}
+	
+}
