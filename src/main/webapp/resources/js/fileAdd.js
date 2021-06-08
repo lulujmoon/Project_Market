@@ -71,13 +71,13 @@ function previewImage(f,idx) {
 		
 		//선택한 파일 초기화
 		f.outerHTML = f.outerHTML;
-		document.getElementById('preview').innerHTML='';
+		document.getElementById('preview'+idx).innerHTML='';
 	} else {
 		let reader = new FileReader();
 		
 		//파일 읽기가 완료되었을때 실행
 		reader.onload = function(rst) {
-			document.getElementById('preview').innerHTML = '<img src="' +rst.target.result+'">';
+			document.getElementById('preview'+idx).innerHTML = '<img src="' +rst.target.result+'">';
 		}
 		//파일 읽기
 		reader.readAsDataURL(file[0]);
