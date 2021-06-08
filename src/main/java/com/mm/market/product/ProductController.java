@@ -19,8 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
+import com.mm.market.member.MemberVO;
+import com.mm.market.memberLocation.MemberLocationService;
+import com.mm.market.memberLocation.MemberLocationVO;
 import com.mm.market.util.FileManager;
 import com.mm.market.util.Pager;
+import com.mm.market.util.ProductPager;
 
 @Controller
 @RequestMapping("/product/**")
@@ -32,15 +36,38 @@ public class ProductController {
 	@Autowired
 	private CategoryMapper categoryMapper;
 	
+	@Autowired
+	private MemberLocationService memberLocationService;
+	
 	@GetMapping("list")
-	public String getList(Pager pager, Model model) throws Exception {
+	public String getList(ProductPager productPager, Long myLocation, Authentication authentication, Model model) throws Exception {
 		
-		List<ProductVO> ar = productService.getList(pager);
+		if(myLocation == null) {
+			myLocation = -1L;
+		}
+		
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		memberLocationVO.setUsername(memberVO.getUsername());
+		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		List<ProductVO> productList = null;
+		
+		if(myLocation>=0L) {			
+			productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
+			productList = productService.getList(productPager, 16L, 5L);			
+		}else {
+			productPager.setLocationCode(0L);
+			productList = productService.getList(productPager, 16L, 5L);			
+		}
+		
 		List<CategoryVO> categories = categoryMapper.getList();
 		
-		model.addAttribute("list", ar);
-		model.addAttribute("pager", pager);
+		
+		model.addAttribute("products", productList);
+		model.addAttribute("pager", productPager);
+		model.addAttribute("myLocation", myLocation);
 		model.addAttribute("categories", categories);
+		model.addAttribute("locations", locationList);
 		
 		return "product/list";
 	}

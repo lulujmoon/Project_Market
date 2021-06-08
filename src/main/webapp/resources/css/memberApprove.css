@@ -1,0 +1,34 @@
+@charset "UTF-8";
+
+.terms__check__all{
+	padding: 0 18px 30px 18px;
+	display: flex;
+	line-height: 2em;
+	align-items: flex-start;
+}
+
+#checkAll, .checkEach{
+	margin: 0.7em 0.5em 0 0;
+}
+
+.input__check{
+	display: flex;
+}
+ 
+.terms__box{
+	padding: 30px 18px;	
+}
+
+.terms__content{
+	height: 250px;
+	overflow-y : scroll;
+}
+
+.terms__list{
+	width: 100%;
+	padding: 0;
+}
+
+.btn-submit{
+	margin: 0 18px;
+}

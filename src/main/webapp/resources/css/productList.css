@@ -2,30 +2,58 @@
 
 .container{
 	padding-top: 125px;
-	width: 100%;
-	margin-bottom: 30px;
+	width: 1252px;
+	min-height: 55vh;
+	margin: 30px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-.category-container{
-	width: 100%;
-	max-width: 1170px;
+
+.top-container{
+	width: 1170px;
 	margin: 40px auto;
-	padding: 0 10px 0 20px;
+	padding: 0 20px;
 	border: 1px solid #b4b4b4;
 }
 
-.category-list{
+.top__list{
+	padding-left: 100px;
 	display: flex;
 	flex-flow: row wrap;
 }
 
-.category__item{
-	padding: 0 5px;
+.top__item{
+	width: 220px;
+	padding: 0 15px;
+}
+
+.top__item-all{
+	width: 60px;
+	padding: 0 15px;	
 }
 
 .list-container{
 	width: 100%;
-	max-width: 1220px;
+	display: flex;
+	flex-direction: column;
+}
+
+.order-container{
+	width: 1210px;
+	margin-left: 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.order-content{
+	padding: 0 5px;
+}
+
+.product-container{
+	width: 1240px;
 	margin: auto;
 	display: flex;
 	flex-flow: row wrap;
@@ -34,9 +62,9 @@
 }
 
 .prd__card {
-	width: 285px;
-	height: 285px;
-	padding: 10px;
+	width: 280px;
+	height: 280px;
+	padding: 15px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -48,7 +76,7 @@
 
 .card__img {
 	width: 100%;
-	height: 62%;
+	height: 68%;
 	background-color: white;
 	border: 1px solid #e6e6e6;
 }
@@ -70,6 +98,9 @@
 
 .info__name {
 	width: 100%;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .info__price {
@@ -87,7 +118,7 @@
 	font-size: 0.8em;
 }
 
-.page-list{
+.page-container{
 	width: 1230px;
 	margin: 0 auto;
 	display: flex;
@@ -111,7 +142,7 @@
 /* 섹션 사이즈 줄이는 구간 1 */
 @media screen and (max-width: 85rem) {
 	
-	.list-container {
+	.product-container {
 		max-width: 906px;
 	}
 	
@@ -127,7 +158,7 @@
 /* 섹션 사이즈 줄이는 구간 2 */
 @media screen and (max-width: 60rem) {
 	
-	.list-container {
+	.product-container {
 		max-width: 85vw;
 		justify-content: center;
 	}

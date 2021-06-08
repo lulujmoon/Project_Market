@@ -5,16 +5,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mm.market.util.Pager;
+import com.mm.market.util.ProductPager;
 
 @Mapper
 public interface ProductMapper {
 	
 	//List
-	public List<ProductVO> getList(Pager pager)throws Exception;
+	public List<ProductVO> getList(ProductPager productPager)throws Exception;
 	
-	public List<ProductVO> getCateList(Pager pager)throws Exception;
-	
-	public Long getTotalCount(Pager pager)throws Exception;
+	public Long getTotalCount(ProductPager productPager) throws Exception;
 	
 	//Select
 	public ProductVO getSelect(ProductVO productVO)throws Exception;

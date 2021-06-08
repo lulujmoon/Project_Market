@@ -8,5 +8,5 @@ public class MemberLocationVO {
 	private Long locationNum;
 	private String username;
 	private Long locationCode;
-	
+	private String locationName;
 }

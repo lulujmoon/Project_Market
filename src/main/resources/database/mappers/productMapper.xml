@@ -6,23 +6,51 @@
 
 <mapper namespace="com.mm.market.product.ProductMapper">
 		
-		<select id="getList" resultMap="selectResult" parameterType="Pager">
-			SELECT C.*, P.*, PF.*, L.*
-			FROM product P LEFT JOIN productFile PF
-			ON P.productNum = PF.productNum
-			INNER JOIN category C
-			ON C.categoryCode = P.categoryCode
-			LEFT JOIN Location L
-			ON P.locationCode = L.locationCode
+		<select id="getList" resultMap="selectResult" parameterType="ProductPager">
+		 SELECT P.*, C.*, L.*, PF.*
+		 FROM product P
+		 INNER JOIN category C
+		 ON P.categoryCode = C.categoryCode
+		 INNER JOIN location L
+		 ON P.locationCode = L.locationCode
+		 LEFT JOIN productfile PF
+		 ON P.productNum = PF.productNum
+		 WHERE 
+			 <if test="categoryCode != 0L">
+			 	P.categoryCode = #{categoryCode} AND 
+			 </if>
+			 <if test="locationCode != 0L">
+			 	P.locationCode = #{locationCode} AND
+			 </if>
+		 P.productName LIKE CONCAT ('%', #{keyword}, '%')
+		 ORDER BY 
+			 <choose>
+			 	<when test="order == 'lowPrice'">
+			 		P.productPrice asc
+			 	</when>
+			 	<when test="order == 'highPrice'">
+			 		P.productPrice desc
+			 	</when>
+			 	<otherwise>
+			 		P.productNum DESC
+			 	</otherwise>
+			 </choose>
+		 limit #{startRow}, #{perPage}
+		</select>
+		
+				<select id="getTotalCount" resultType="Long" parameterType="ProductPager">
+			SELECT count(productNum)
+			FROM product P
 			WHERE 
-			<if test="categoryCode != 0L">
-				C.categoryCode=#{categoryCode} AND 		
-			</if>
-      (P.productName LIKE CONCAT('%', #{search}, '%') OR 
-      P.locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%')))
-      ORDER BY P.productNum desc
-      limit #{startRow}, 20
-    </select>
+				<if test="categoryCode != 0L">
+					categoryCode = #{categoryCode} AND 
+				</if>
+				<if test="locationCode != 0L">
+					locationCode = #{locationCode} AND
+				</if>
+			productName LIKE CONCAT ('%', #{keyword}, '%')		   
+			AND productNum > 0
+		</select>
 		
 		<select id="getSelect" parameterType="ProductVO" resultMap="selectResult">
 			SELECT C.*, P.*, PF.*, L.*
@@ -66,13 +94,6 @@
 		
 		<select id="getProductNum" resultType="Long">
 			SELECT LAST_INSERT_ID()
-		</select>
-		
-		<select id="getTotalCount" resultType="Long" parameterType="Pager">
-			SELECT count(productNum) FROM product
-		    WHERE productName LIKE CONCAT('%', #{search}, '%') OR 
-		    locationCode IN (SELECT locationCode FROM location WHERE locationName LIKE concat('%', #{search}, '%'))
-		    AND productNum > 0
 		</select>
 		
 		<update id="setHitUpdate" parameterType="ProductVO">

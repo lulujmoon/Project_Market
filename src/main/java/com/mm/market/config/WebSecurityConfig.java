@@ -2,6 +2,7 @@ package com.mm.market.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -43,9 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		//로그인관련
 		.formLogin()
-		.loginPage("/member/memberLogin")
+		.loginPage("/member/login")
 		//로그인 성공시
-		.defaultSuccessUrl("/member/memberLoginResult")
+		.defaultSuccessUrl("/member/loginResult")
 		//로그인 실패시 처리
 		.failureHandler(new LoginFail())
 		.permitAll()
@@ -53,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		//로그아웃관련
 		.logout()
-		.logoutUrl("/member/memberLogout")
+		.logoutUrl("/member/logout")
 		.logoutSuccessUrl("/")
 		.invalidateHttpSession(true)
 		.deleteCookies("JESSIONID")
@@ -63,5 +64,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 	}
 
+@Bean
+@Override
+public AuthenticationManager authenticationManagerBean() throws Exception {
+	// TODO Auto-generated method stub
+	return super.authenticationManagerBean();
+}
 
 }

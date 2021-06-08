@@ -6,9 +6,22 @@
  <mapper namespace="com.mm.market.member.MemberMapper">  
  
 <insert id="setJoin" parameterType="MemberVO">
- 	insert into member(username,password,name,phone,email,enabled,joinDate)
- 	values(#{username},#{password},#{name},#{phone},#{email},#{enabled},now())
+ 	insert into member(username,password,name,phone,email,enabled,oauth,joinDate,code)
+ 	values(#{username},#{password},#{name},#{phone},#{email},#{enabled},#{oauth},now(),NEXTVAL(code_seq))
  </insert>
+ 
+ <insert id="setJoinFile" parameterType="MemberFileVO">
+ 	insert into memberfile(username,fileName,originName)
+ 	values(#{username},#{fileName},#{originName})
+ </insert>
+ 
+ <select id="selectFile" resultType="MemberFileVO" parameterType="MemberVO">
+ 	select * from memberfile where username=#{username}
+ </select>
+ 
+<delete id="setDeleteFile" parameterType="MemberFileVO">
+	delete from memberfile where fileNum=#{fileNum}
+</delete>
  
  <insert id="setMemberRole" parameterType="java.util.Map">
  	insert into member_role (username, id)
@@ -32,6 +45,8 @@
  <result column="email" property="email"/>
  <result column="joinDate" property="joinDate"/>
  <result column="enabled" property="enabled"/>
+ <result column="oauth" property="oauth"/>
+ <result column="code" property="code"/>
  <collection property="roles" javaType="java.util.List" ofType="roleVO">
  	<id column="id" property="id"/>
  	<result column="roleName" property="roleName"/>
@@ -40,9 +55,20 @@
  
  </resultMap>
  
- <select id="getUsername" parameterType="MemberVO" resultType="MemberVO">
+ <select id="getSelectByUsername" parameterType="MemberVO" resultType="MemberVO">
  	select * from member where username=#{username}
  </select>
  
+ <select id="getSelectByCode" parameterType="MemberVO" resultType="MemberVO">
+ 	select * from member where code=#{code}
+ </select>
+ 
+ <update id="setUpdate" parameterType="MemberVO">
+ 	update member set password=#{password}, name=#{name}, phone=#{phone}, email=#{email} where username=#{username}
+ </update>
+ 
+ <select id="idCheck" resultType="MemberVO">
+ 	select username from member where username =#{username}
+ </select>
  
  </mapper>  
