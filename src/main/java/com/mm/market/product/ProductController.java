@@ -158,7 +158,7 @@ public class ProductController {
 		int result = productService.setFileDelete(productFileVO);
 		mv.addObject("result", result);
 		mv.addObject("msg", "정말 삭제하시겠습니까?");
-		mv.setViewName("common/ajaxResult");
+		mv.setViewName("common/commonResult");
 		
 		return mv;
 	}
