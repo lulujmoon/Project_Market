@@ -44,22 +44,19 @@ public class ProductController {
 	public String getList(ProductPager productPager, Long myLocation, Authentication authentication, Model model) throws Exception {
 		
 		if(myLocation == null) {
-			myLocation = -1L;
+			myLocation = 0L;
 		}
 		
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(memberVO.getUsername());
-		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
-		List<ProductVO> productList = null;
 		
-		if(myLocation>=0L) {			
-			productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
-			productList = productService.getList(productPager, 16L, 5L);			
-		}else {
-			productPager.setLocationCode(0L);
-			productList = productService.getList(productPager, 16L, 5L);			
-		}
+		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		memberLocationVO.setLocationCode(0L);
+		locationList.add(0, memberLocationVO);
+		
+		productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
+		List<ProductVO> productList  = productService.getList(productPager, 16L, 5L);
 		
 		List<CategoryVO> categories = categoryMapper.getList();
 		

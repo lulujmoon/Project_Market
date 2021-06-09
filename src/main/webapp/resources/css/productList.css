@@ -160,7 +160,7 @@
 	border: none;
 }
 
-.current-page{
+.page-item.selected{
 	background-color: #b4b4b4;
 	color: white;
 }

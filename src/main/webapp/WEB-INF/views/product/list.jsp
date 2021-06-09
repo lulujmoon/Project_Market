@@ -11,55 +11,34 @@
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
+<div class="hidden">${pager.categoryCode}</div>
+<div class="hidden">${myLocation}</div>
+<div class="hidden">${pager.order}</div>
+<div class="hidden">${pager.page}</div>
 
 <div class="container">
 	<div class="top-container">
 		<h3 class="top__title">카테고리</h3>
-		<ul class="top__list">
-			<c:choose>
-				<c:when test="${pager.categoryCode != 0}">
-					<li class="top__item-category"><a href="./list?page=1&keyword=${pager.keyword}">전체</a></li>
-				</c:when>
-				<c:otherwise>
-					<li class="top__item-category selected"><a href="./list?page=1&keyword=${pager.keyword}">전체</a></li>
-				</c:otherwise>
-			</c:choose>
-			<c:forEach items="${categories}" var="category">
-				<c:if test="${category.categoryCode == pager.categoryCode}">
-					<li class="top__item-category selected"><a href="./list?page=1&categoryCode=${category.categoryCode}&keyword=${pager.keyword}&myLocation=${myLocation}">${category.categoryName}</a></li>
-				</c:if>
-				<c:if test="${category.categoryCode != pager.categoryCode}">
-					<li class="top__item-category"><a href="./list?page=1&categoryCode=${category.categoryCode}&keyword=${pager.keyword}&myLocation=${myLocation}">${category.categoryName}</a></li>
-				</c:if>
+		<ul class="top__list list-category">
+			<li class="top__item-category code_0"><a href="./list?page=1&keyword=${pager.keyword}">전체</a></li>
+			<c:forEach begin="0" end="${categories.size()-1}" var="i">
+				<li class="top__item-category code_${i+1}"><a href="./list?page=1&categoryCode=${categories[i].categoryCode}&keyword=${pager.keyword}&myLocation=${myLocation}">${categories[i].categoryName}</a></li>
 			</c:forEach>
 		</ul>
 		<h3 class="top__title">지역</h3>
-		<ul class="top__list">
-			<c:choose>
-				<c:when test="${myLocation >= 0}">
-					<li class="top__item-location"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>
-				</c:when>
-				<c:otherwise>				
-					<li class="top__item-location selected"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>
-				</c:otherwise>
-			</c:choose>
-			<c:forEach begin="0" end="2" var="i">
-				<c:if test="${myLocation == i}">
-					<li class="top__item-location selected"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
-				</c:if>			
-				<c:if test="${myLocation != i}">
-					<li class="top__item-location"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
-				</c:if>
+		<ul class="top__list list-myLocation">
+			<li class="top__item-location code_0"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>		
+			<c:forEach begin="1" end="3" var="i">
+				<li class="top__item-location code_${i}"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
 			</c:forEach>
 		</ul>
 	</div>
 	<div class="list-container">
 		<c:if test="${products.size()>0}">
-			<div class="order-container">
-				<div class="hidden order-value">${pager.order}</div>
-				<a class="order-content" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=date">최신순</a>
-				<a class="order-content" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=lowPrice">저가순</a>
-				<a class="order-content" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=highPrice">고가순</a>
+			<div class="order-container list-order">
+				<a class="order-content code_date" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=date">최신순</a>
+				<a class="order-content code_lowPrice" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=lowPrice">저가순</a>
+				<a class="order-content code_highPrice" href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=highPrice">고가순</a>
 			</div>
 			<div class="product-container">
 				<c:forEach items="${products}" var="product">
@@ -79,17 +58,12 @@
 					</div>
 				</c:forEach>
 			</div>
-			<ul class="page-container">
+			<ul class="page-container list-page">
 				<c:if test="${pager.pre}">
 					<li><a class="page-item arrow" href="./list?page=${pager.startNum-1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-left"></i></a></li>
 				</c:if>
 				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-					<c:if test="${pager.page == i}">
-						<li><a class="page-item current-page" href="./list?page=${i}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}">${i}</a></li>
-					</c:if>
-					<c:if test="${pager.page != i}">
-						<li><a class="page-item" href="./list?page=${i}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}">${i}</a></li>
-					</c:if>
+						<li><a class="page-item code_${i}" href="./list?page=${i}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pager.next}">
 					<li><a class="page-item arrow" href="./list?page=${pager.lastNum+1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-right"></i></a></li>
