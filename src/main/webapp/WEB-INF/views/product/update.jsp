@@ -55,18 +55,20 @@
 			<div class="form-group">
 				<label for="category">카테고리</label> <select class="form-control"
 					id="category" name="categoryCode" value="${vo.categoryCode}">
-					<option value="1">디지털/가전</option>
-					<option value="2">가구/인테리어</option>
-					<option value="3">유아동/유아도서</option>
-					<option value="4">생활/가공식품</option>
-					<option value="5">스포츠/레저</option>
-					<option value="6">여성의류/잡화</option>
-					<option value="7">남성의류/잡화</option>
-					<option value="8">게임/취미</option>
-					<option value="9">뷰티/미용</option>
-					<option value="10">반려동물용품</option>
-					<option value="11">도서/티켓/음반</option>
-					<option value="12">삽니다</option>
+					  <option value="1">디지털/가전</option>
+				      <option value="2">가구/인테리어</option>
+				      <option value="3">유아동/유아도서</option>
+				      <option value="4">생활/가공식품</option>
+				      <option value="5">스포츠/레저</option>
+				      <option value="6">여성의류</option>
+				      <option value="7">여성잡화</option>
+				      <option value="8">남성의류</option>
+				      <option value="9">남성잡화</option>
+				      <option value="10">게임/취미</option>
+				      <option value="11">뷰티/미용</option>
+				      <option value="12">반려동물용품</option>
+				      <option value="13">도서/티켓/음반</option>
+				      <option value="14">삽니다</option>
 				</select>
 			</div>
 		</div>
