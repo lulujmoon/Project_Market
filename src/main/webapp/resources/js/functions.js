@@ -73,7 +73,7 @@
 		result = Math.floor(seconds/60)+'분 전';
 	}else if(seconds>=3600 && seconds<86400){
 		result = Math.floor(seconds/3600)+'시간 전';
-	}else if(seconds>=86400 && seconds<604,800){
+	}else if(seconds>=86400 && seconds<604800){
 		result = Math.floor(seconds/86400)+'일 전';
 	}else{
 		result = datetime.getFullYear()+'년 '+(datetime.getMonth()+1)+'월 '+datetime.getDate()+'일';

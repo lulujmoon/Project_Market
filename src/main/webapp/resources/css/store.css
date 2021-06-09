@@ -159,8 +159,7 @@
 
 .board__contents{
 	width: 100%;
-	min-height: 500px;
-	padding: 25px 0;
+	min-height: 400px;
 	border: 1px solid #e6e6e6;
 	display: flex;
 }
