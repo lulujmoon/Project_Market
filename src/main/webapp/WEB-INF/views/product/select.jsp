@@ -26,11 +26,12 @@
 				<div class="top__status">${product.productStatus}</div>
 			</div>
 			<div class="top__hitNheart">
-				<div class="top__hit"><i class="far fa-eye"></i> ${product.productHit}</div>
-				<div class="top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
+				<div class="top__small top__hit"><i class="far fa-eye"></i> ${product.productHit}</div>
+				<div class="top__small top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
 			</div>
-			<div class="top__productDate"><i class="fas fa-clock"></i> ${product.productDate}</div>
-			<div class="top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
+			<div class="top__small top__productDate"><i class="fas fa-clock"></i> ${product.productDate}</div>
+			<div class="top__small top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
+			<div class="top__small top__nego">${product.productNego}</div>
 			<div class="top__btns">
 				<div class="top-btn btn-contact">연락하기</div>
 				<div class="top-btn btn-nego">가격 제안하기</div>

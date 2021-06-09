@@ -24,7 +24,7 @@ img {
 </head>
 <body>
 <h2>Product Insert Page</h2>
-	<form class="form" id="uploadFrom" action="./insert" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
+	<form class="form" id="uploadForm" action="./insert" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
 	
 	
 			<div id=file>
@@ -79,19 +79,11 @@ img {
 	  </div>
 	  
 	   <input type="hidden" name="productNum">
-	   
-	  
-	 <input type="button" value="체크" class="btn-check">
-	 <button id="insertbtn" class="btn btn-outline-secondary">Write</button><br><br><br>
+
+	 <button class="btn-insert">Write</button><br><br><br>
 </form>
 
 <script type="text/javascript" src="../resources/js/fileAdd.js"></script>
-<script type="text/javascript">
-	const content = document.querySelector('#productContent');
-	content.addEventListener('blur', ()=>{
-		console.log(content.value);
-		content.value = content.value.replace("\r\n","<br>");
-	});
-</script>
+<script type="text/javascript" src="../resources/js/productInsert.js"></script>
 </body>
 </html>

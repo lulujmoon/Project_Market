@@ -77,13 +77,9 @@
 	flex-direction: row;
 }
 
-.top__hit, .top__heart{
-	padding: 10px;
-}
-
-.top__productDate, .top__location{
-	width: 100%;
-	padding: 10px;
+.top__small {
+	padding: 8px;
+	color: #4d4d4d;
 }
 
 .top__btns{

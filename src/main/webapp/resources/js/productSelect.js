@@ -69,6 +69,11 @@ function confirm() {
 	setRateInStar(rate);
 }
 
- 
- 
- 
+/** 초기설정 3. 가격제안 표시
+ */
+ const top__nego = document.querySelector('.top__nego');
+ if(top__nego.innerText == 'true'){
+	top__nego.innerHTML = '<i class="fas fa-comment-dollar"></i> 가격 제안 가능';
+}else{
+	top__nego.innerHTML = '<i class="fas fa-comment-dollar"></i> 가격 제안 불가';
+}
