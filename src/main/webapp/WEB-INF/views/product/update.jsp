@@ -37,12 +37,12 @@ img {
 						<div id="preview0"></div>
 					</div>
 					
-			<c:forEach items="${files}" var="file" varStatus="status">
+			<c:forEach items="${files}" var="files" varStatus="status">
 				<div class="inputimg">
-					<input type="file" name="file" accept="image/*" class="img" value="${file.fileName}">
-					<input type="button" class="del" value="Delete" title="${file.fileNum}">
+					<input type="file" name="file" accept="image/*" class="img" value="/resources/upload/product/${files.fileName}">>
+					<input type="button" class="del" value="Delete" title="${files.fileNum}">
 					<div id="preview${status.count}">
-						<img src="/resources/upload/product/${file.fileName}">
+						<img src="/resources/upload/product/${files.fileName}">
 					</div>
 				</div>
 			</c:forEach>
