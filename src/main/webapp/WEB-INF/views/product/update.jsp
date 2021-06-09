@@ -39,7 +39,6 @@ img {
 					
 			<c:forEach items="${files}" var="files" varStatus="status">
 				<div class="inputimg">
-					<input type="file" name="file" accept="image/*" class="img" value="/resources/upload/product/${files.fileName}">>
 					<input type="button" class="del" value="Delete" title="${files.fileNum}">
 					<div id="preview${status.count}">
 						<img src="/resources/upload/product/${files.fileName}">
