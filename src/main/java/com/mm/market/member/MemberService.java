@@ -192,4 +192,8 @@ public class MemberService implements UserDetailsService{
 	public MemberVO getSelectByCode(MemberVO memberVO) throws Exception {
 		return memberMapper.getSelectByCode(memberVO);
 	}
+	
+	public int setDelete(MemberVO memberVO)throws Exception{
+		return memberMapper.setDelete(memberVO);
+	}
 }

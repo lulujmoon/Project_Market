@@ -71,4 +71,8 @@
  	select username from member where username =#{username}
  </select>
  
+ <delete id="setDelete" parameterType="MemberVO">
+ 	delete from member where username=#{username}
+ </delete>
+ 
  </mapper>  
