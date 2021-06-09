@@ -52,8 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		//로그인 실패시 처리
 		.failureHandler(new LoginFail())
 		.permitAll()
-		.and()
-		
+		.and()	
 		//로그아웃관련
 		.logout()
 		.logoutUrl("/member/logout")
