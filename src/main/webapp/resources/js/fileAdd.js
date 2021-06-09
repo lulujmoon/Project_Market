@@ -88,14 +88,3 @@ function previewImage(f,idx) {
 }
 
 
-
-
-function submitCheck() {
-
-	if(count>0) {
-		return true;
-	}
-	
-	return false;
-}
-

@@ -159,7 +159,15 @@ public class ProductController {
 	
 	
 	@GetMapping("insert")
-	public void setInsert() throws Exception {}
+	public void setInsert(Authentication authentication, Model model) throws Exception {
+		
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		memberLocationVO.setUsername(memberVO.getUsername());
+		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		
+		model.addAttribute("location", locationList);
+	}
 	
 	@PostMapping("insert")
 	public String setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
