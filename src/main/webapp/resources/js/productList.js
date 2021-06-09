@@ -21,3 +21,11 @@
  function goSelect(productNum){
 	location.href = './select/'+productNum;
 }
+
+/** 초기설정 2. 날짜 표시
+ */
+ const info__dates = document.querySelectorAll('.info__date');
+ for(date of info__dates){
+	 let datetime = date.innerText;
+	 date.innerText = calculateTime(datetime);	
+}

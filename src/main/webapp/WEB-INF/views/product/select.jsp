@@ -25,28 +25,38 @@
 				<div class="top__price">${product.productPrice}</div>
 				<div class="top__status">${product.productStatus}</div>
 			</div>
-			<div class="top__hitNheart">
-				<div class="top__small top__hit"><i class="far fa-eye"></i> ${product.productHit}</div>
-				<div class="top__small top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
+			<div class="top__smalls">
+				<div class="top__hitNheart">
+					<div class="top__small top__hit"><i class="far fa-eye"></i> ${product.productHit}</div>
+					<div class="top__small top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
+					<div class="top__small top__productDate">${product.productDate}</div>
+				</div>
+				<div class="top__small top__category"><i class="fas fa-tag"></i> ${product.category.categoryName}</div>
+				<div class="top__small top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
+				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
-			<div class="top__small top__productDate"><i class="fas fa-clock"></i> ${product.productDate}</div>
-			<div class="top__small top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
-			<div class="top__small top__nego">${product.productNego}</div>
 			<div class="top__btns">
 				<div class="top-btn btn-contact">연락하기</div>
 				<div class="top-btn btn-nego">가격 제안하기</div>
-				<div class="heart" onclick="confirm()"><img id="heart" src="" width="50px" height="50px"></div>
+				<div class="btn-heart" onclick="confirm()"></div>
+				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 			</div>
 			<div class="hidden">
-				<input id="heartNumber" type="hidden" title="${heart}">
-				<input id="productNum" type="hidden" title="${product.productNum}">
+				<input type="hidden" class="heartValue" value="${heart}">
+				<input type="hidden" class="productNum" value="${product.productNum}">
 			</div>
 		</div>
 	</div>
 		<div class="seller-container">
-			<div class="seller__photo"><img src="/resources/images/productDefault.jpg"></div>
-			<div class="seller_name">${product.username}</div>
-			<div class="seller_rating">
+			<div class="seller-left">
+				<div class="seller__photo"><img src="/resources/images/productDefault.jpg"></div>
+				<div class="seller__name">${product.username}</div>
+			</div>
+			<div class="seller_locNdate">
+				<div class="seller__location">세종특별시 아름동</div>
+				<div class="seller__joinDate">2016년 1월 2일 가입</div>
+			</div>
+			<div class="seller__rating">
 				<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">6</div> (15)</div>
 				<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">7</div> (23)</div>
 				<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">8</div> (23)</div>

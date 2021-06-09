@@ -49,3 +49,34 @@
 		rate.innerHTML = rateInStar;
 			
 }
+
+
+/** @function calculateTime(datetime)
+ *	-- 매개변수로 datetime을 받아서 'n분 전', 'n시간 전' 등으로 바꿔 반환한다.
+ *	1. datetime과 현재시각의 차이를 계산한다.
+ *	2. 차이가 1시간 미만이면 'n분 전'
+ *	3. 차이가 1시간 이상 24시간 미만이면 'n시간 전'
+ *	4. 차이가 1일 이상 7일 미만이면 'n일 전'
+ *	5. 차이가 7일 이상이면 'yyyy일 mm월 dd일'
+ */
+ 
+ function calculateTime(datetime){
+	datetime = new Date(datetime);
+	var now = new Date();
+	var gap = now - datetime;
+	var seconds = Math.floor(gap/1000);
+	var result;
+	
+	if(seconds<60){
+		result = '방금 전';
+	}else if(seconds>=60 && seconds<3600){
+		result = Math.floor(seconds/60)+'분 전';
+	}else if(seconds>=3600 && seconds<86400){
+		result = Math.floor(seconds/3600)+'시간 전';
+	}else if(seconds>=86400 && seconds<604,800){
+		result = Math.floor(seconds/86400)+'일 전';
+	}else{
+		result = datetime.getFullYear()+'년 '+(datetime.getMonth()+1)+'월 '+datetime.getDate()+'일';
+	}
+	return result;
+}

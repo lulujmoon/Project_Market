@@ -3,26 +3,19 @@
  */
  
 /* 찜 */
-let heartval = $("#heartNumber").attr("title");
-let productNum = $("#productNum").attr("title");
+const btnHeart = document.querySelector('.btn-heart');
+let heartValue = Number(document.querySelector('.heartValue').value);
+let productNum = Number(document.querySelector('.productNum').value);
+
 $(document).ready(function(){
 	
-	
-	if(heartval>0) {
-		console.log("heart : "+heartval);
-		$("#heart").prop("src", "/resources/images/빨강.png");
-		$(".heart").attr("name", heartval);
-		
+	if(heartValue>0) {
+		btnHeart.innerHTML = '<i class="fas fa-heart"></i>';
 	} else {
-		console.log("heart : "+heartval);
-		$("#heart").prop("src", "/resources/images/검정.png");
-		$(".heart").attr("name", heartval);
+		btnHeart.innerHTML = '<i class="far fa-heart"></i>';
 	}
 	
-	$(".heart").on("click", function(){
-		
-		let that = $(".heart");
-		
+	btnHeart.addEventListener('click', ()=>{
 		let sendData = {'productNum' : productNum, 'heart' : that.prop('name')};
 		$.ajax({
 			url : '/product/heart',
@@ -41,6 +34,8 @@ $(document).ready(function(){
 		});
 	});
 });
+		
+
 
 function heart_reload() {
 	$("#heart").load(window.location.href='/product/select?productNum='+productNum);
@@ -77,3 +72,10 @@ function confirm() {
 }else{
 	top__nego.innerHTML = '<i class="fas fa-comment-dollar"></i> 가격 제안 불가';
 }
+
+/** 초기설정 4. 판매일자 표시
+ *	<i class="fas fa-clock"></i> 
+ */
+ const top__productDate = document.querySelector('.top__productDate');
+ var datetime = top__productDate.innerText;
+  top__productDate.innerHTML = '<i class="fas fa-clock"></i> '+calculateTime(datetime);	
