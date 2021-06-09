@@ -16,43 +16,11 @@
   profile_joinDate.innerText = joinDate;
  
  /** 초기 설정 2. 받은 평가
-  * 1. .rate에서 수로 된 평가값을 받아온다.
-  * 2. 홀수인지 짝수인지 구분한다.
-  * 3. 2로 나눈 값을 구하고 새로 작성한 텍스트 안에 꽉찬 별을 그 값만큼 넣어준다.
-  * 4. 홀수이면 반 별을 텍스트 안에 넣어준다.
-  * 5. 나머지는 빈 별로 채운다.
-  * 6. .rate 안에 텍스트를 대체한다.
   */
- 
   const rates = document.querySelectorAll('.rate');
-  const fullStar = '<i class="fas fa-star"></i>';
-  const halfStar = '<i class="fas fa-star-half-alt"></i>';
-  const emptyStar = '<i class="far fa-star"></i>'
-
   for(rate of rates){
-		let rateInNum = Number(rate.innerText);
-		let rateInStar = '';
-		
-		if(rateInNum%2!=0){
-			for(let i=0;i<rateInNum/2-1;i++){
-				rateInStar = rateInStar + fullStar;
-			}
-			rateInStar = rateInStar + halfStar;
-			for(let i=0;i<4-rateInNum/2;i++){
-				rateInStar = rateInStar + emptyStar;
-			}		
-		}else{
-			for(let i=0;i<rateInNum/2;i++){
-				rateInStar = rateInStar + fullStar;
-			}
-			for(let i=0;i<5-rateInNum/2;i++){
-				rateInStar = rateInStar + emptyStar;
-			}
-		}
-		
-		rate.innerHTML = rateInStar;
-		
-}
+		setRateInStar(rate);
+	}	
  
  
  

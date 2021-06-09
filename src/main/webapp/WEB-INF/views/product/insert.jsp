@@ -89,7 +89,8 @@ img {
 <script type="text/javascript">
 	const content = document.querySelector('#productContent');
 	content.addEventListener('blur', ()=>{
-		console.log(content.innerText);
+		console.log(content.value);
+		content.value = content.value.replace("\r\n","<br>");
 	});
 </script>
 </body>

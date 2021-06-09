@@ -25,16 +25,20 @@
 				<div class="top__price">${product.productPrice}</div>
 				<div class="top__status">${product.productStatus}</div>
 			</div>
-			<div class="top__icons">
-				<div class="top__icon">${product.productHit}</div>
-				<div class="top__icon">${product.productHeart}</div>
-				<div class="top__icon">${product.productDate}</div>
+			<div class="top__hitNheart">
+				<div class="top__hit"><i class="far fa-eye"></i> ${product.productHit}</div>
+				<div class="top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
 			</div>
-			<div class="top__location">${product.location.locationName}</div>
+			<div class="top__productDate"><i class="fas fa-clock"></i> ${product.productDate}</div>
+			<div class="top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 			<div class="top__btns">
 				<div class="top-btn btn-contact">연락하기</div>
 				<div class="top-btn btn-nego">가격 제안하기</div>
-				<div class="top-btn btn-heart">찜하기</div>
+				<div class="heart" onclick="confirm()"><img id="heart" src="" width="50px" height="50px"></div>
+			</div>
+			<div class="hidden">
+				<input id="heartNumber" type="hidden" title="${heart}">
+				<input id="productNum" type="hidden" title="${product.productNum}">
 			</div>
 		</div>
 	</div>
@@ -53,7 +57,8 @@
 </div>
 
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/productSelect.js"></script>
 </body>
 </html>
