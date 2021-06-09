@@ -81,10 +81,16 @@ img {
 	   <input type="hidden" name="productNum">
 	   
 	  
-
+	 <input type="button" value="체크" class="btn-check">
 	 <button id="insertbtn" class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
 
 <script type="text/javascript" src="../resources/js/fileAdd.js"></script>
+<script type="text/javascript">
+	const content = document.querySelector('#productContent');
+	content.addEventListener('blur', ()=>{
+		console.log(content.innerText);
+	});
+</script>
 </body>
 </html>

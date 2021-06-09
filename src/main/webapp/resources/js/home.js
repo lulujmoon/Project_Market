@@ -83,5 +83,5 @@ const start = setInterval(carousel, 3000);
  
 /* 상품 페이지로 가기 */
  function goSelect(productNum){
-	location.href = '../product/select?productNum='+productNum;
+	location.href = '../product/select/'+productNum;
 }

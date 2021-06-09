@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,22 +44,19 @@ public class ProductController {
 	public String getList(ProductPager productPager, Long myLocation, Authentication authentication, Model model) throws Exception {
 		
 		if(myLocation == null) {
-			myLocation = -1L;
+			myLocation = 0L;
 		}
 		
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(memberVO.getUsername());
-		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
-		List<ProductVO> productList = null;
 		
-		if(myLocation>=0L) {			
-			productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
-			productList = productService.getList(productPager, 16L, 5L);			
-		}else {
-			productPager.setLocationCode(0L);
-			productList = productService.getList(productPager, 16L, 5L);			
-		}
+		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		memberLocationVO.setLocationCode(0L);
+		locationList.add(0, memberLocationVO);
+		
+		productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
+		List<ProductVO> productList  = productService.getList(productPager, 16L, 5L);
 		
 		List<CategoryVO> categories = categoryMapper.getList();
 		
@@ -73,27 +71,23 @@ public class ProductController {
 	}
 	
 	
-	@GetMapping("select")
-	public String getSelect(@RequestParam("productNum") Long productNum ,ProductVO productVO, Model model, Authentication auth)throws Exception {
-		productVO = productService.getSelect(productVO);
-		System.out.println(productVO);
-		
-		int startInx = auth.getPrincipal().toString().indexOf("=");
-		int lastInx = auth.getPrincipal().toString().indexOf(",");
-		
-		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
-		System.out.println(username);
-		
+	@GetMapping("select/{productNum}")
+	public String getSelect(@PathVariable("productNum") Long productNum, Model model, Authentication auth)throws Exception {
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNum(productNum);
+		productVO =	productService.getSelect(productVO);
+
+		MemberVO memberVO = (MemberVO)auth.getPrincipal();
+		String username = memberVO.getUsername();
+
 		HeartVO heartVO = new HeartVO();
 		heartVO.setProductNum(productNum);
 		heartVO.setUsername(username);
 		
 		Long heart = productService.getHeart(heartVO);
-		System.out.println("Heart : "+heart);
-		
-		
+
 		model.addAttribute("heart", heart);
-		model.addAttribute("vo", productVO);
+		model.addAttribute("product", productVO);
 		return "product/select";
 	}
 	

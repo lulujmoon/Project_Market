@@ -171,10 +171,16 @@ public class ProductPager {
 	}
 
 	public String getOrder() {
+		if(order == null || order == "") {
+			order = "date";
+		}
 		return order;
 	}
 
 	public void setOrder(String order) {
+		if(order == null || order == "") {
+			order = "date";
+		}
 		this.order = order;
 	}
 
