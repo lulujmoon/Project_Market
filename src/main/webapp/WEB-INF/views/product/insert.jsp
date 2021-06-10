@@ -32,7 +32,6 @@ img {
 			<div id="thumb">
 				<div class="inputimg">
 						<input type="file" name="file" accept="image/*" required class="img" onchange="previewImage(this,0)">
-						<input type="button" class="del" value="Delete">
 						<div id="preview0"></div>
 					</div>
 
@@ -76,6 +75,14 @@ img {
 	    <div class="form-group">
 	    <label>상품 가격</label>
 	    <input type="text" name="productPrice" required>
+	  </div>
+	   <div class="form-group">
+	    <label>판매 지역</label>
+	    <select class="form-control" id="locationCode" name="locationCode">
+	   		 <c:forEach items="${location}" var="vo">
+		      	<option value="${vo.locationCode}">${vo.locationName}</option>
+		     </c:forEach>
+		    </select>
 	  </div>
 	  
 	   <input type="hidden" name="productNum">
