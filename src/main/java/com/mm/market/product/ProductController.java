@@ -172,13 +172,12 @@ public class ProductController {
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
-		
+				
 		model.addAttribute("location", locationList);
 	}
 	
 	@PostMapping("insert")
 	public String setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
-		
 		int result = productService.setInsert(productVO, file);
 
 		return "redirect:./list";
