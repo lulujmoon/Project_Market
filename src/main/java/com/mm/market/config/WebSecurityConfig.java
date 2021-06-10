@@ -38,6 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/member/**").permitAll()
+		.antMatchers("/notice/list","/notice/select").permitAll()
+		.antMatchers("/notice/**").hasAnyRole("ADMIN")
 		.antMatchers("/member/auth/kakao/callback").permitAll()
 		.anyRequest().authenticated()
 		.and()
@@ -50,8 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		//로그인 실패시 처리
 		.failureHandler(new LoginFail())
 		.permitAll()
-		.and()
-		
+		.and()	
 		//로그아웃관련
 		.logout()
 		.logoutUrl("/member/logout")

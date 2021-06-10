@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+ <mapper namespace="com.mm.market.notice.NoticeMapper">  
+
+<sql id="searcher">
+<where>
+	<choose>
+		<when test="kind=='noticeTitle'">
+			noticeTitle like concat('%', #{search}, '%')
+		</when>
+		<otherwise>
+			noticeContent like concat('%', #{search}, '%')
+		</otherwise>	
+	</choose>
+</where>
+</sql>
+ 
+ <select id="getList" parameterType="NoticePager" resultType="NoticeVO">
+ 	select * from notice
+ 	<include refid="searcher"></include>
+ 	order by noticeNum desc
+ 	limit #{startRow}, #{perPage}
+ </select>
+ 
+ <select id="getTotalCount" parameterType="NoticePager" resultType="java.lang.Long">
+   	select count(noticeNum) from notice
+   <include refid="searcher"></include>
+ </select>
+ 
+ <select id="getSelect" parameterType="NoticeVO" resultType="NoticeVO">
+ 	select * from notice where noticeNum=#{noticeNum}
+ </select>
+
+<insert id="setInsert" parameterType="NoticeVO">
+ 	insert into notice(username,noticeTitle,noticeContent,noticeDate)
+ 	values(#{username},#{noticeTitle},#{noticeContent},now())
+</insert>
+
+<update id="setUpdate" parameterType="NoticeVO">
+	update notice set noticeTitle=#{noticeTitle}, noticeContent=#{noticeContent} where noticeNum=#{noticeNum}
+</update>
+
+<delete id="setDelete" parameterType="NoticeVO">
+	delete from notice where noticeNum=#{noticeNum}
+</delete>
+
+<select id="getPre" parameterType="NoticeVO" resultType="java.lang.Long">
+	SELECT max(noticeNum) FROM notice WHERE noticeNum <![CDATA[ < ]]>#{noticeNum};
+</select>
+
+<select id="getNext" parameterType="NoticeVO" resultType="java.lang.Long">
+	SELECT min(noticeNum) FROM notice WHERE noticeNum <![CDATA[ > ]]>#{noticeNum};
+</select>
+</mapper>  

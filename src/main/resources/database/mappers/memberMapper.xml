@@ -28,7 +28,7 @@
  	values(#{username},(select id from role where roleName=#{roleName}))
  </insert>
  
- <select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
+ <select id="getSelectByUsername" parameterType="MemberVO" resultMap="getLoginResult">
  	select M.*, R.*
  	from member M left join member_role MR
  	on M.username=MR.username
@@ -38,26 +38,20 @@
  </select>
  
  <resultMap type="MemberVO" id="getLoginResult">
- <id column="username" property="username"/>
- <result column="password" property="password"/>
- <result column="name" property="name"/>
- <result column="phone" property="phone"/>
- <result column="email" property="email"/>
- <result column="joinDate" property="joinDate"/>
- <result column="enabled" property="enabled"/>
- <result column="oauth" property="oauth"/>
- <result column="code" property="code"/>
- <collection property="roles" javaType="java.util.List" ofType="roleVO">
- 	<id column="id" property="id"/>
- 	<result column="roleName" property="roleName"/>
- 
- </collection>
- 
+	 <id column="username" property="username"/>
+	 <result column="password" property="password"/>
+	 <result column="name" property="name"/>
+	 <result column="phone" property="phone"/>
+	 <result column="email" property="email"/>
+	 <result column="joinDate" property="joinDate"/>
+	 <result column="enabled" property="enabled"/>
+	 <result column="oauth" property="oauth"/>
+	 <result column="code" property="code"/>
+	 <collection property="roles" javaType="java.util.List" ofType="roleVO">
+	 	<id column="id" property="id"/>
+	 	<result column="roleName" property="roleName"/>
+	 </collection>
  </resultMap>
- 
- <select id="getSelectByUsername" parameterType="MemberVO" resultType="MemberVO">
- 	select * from member where username=#{username}
- </select>
  
  <select id="getSelectByCode" parameterType="MemberVO" resultType="MemberVO">
  	select * from member where code=#{code}
@@ -70,5 +64,9 @@
  <select id="idCheck" resultType="MemberVO">
  	select username from member where username =#{username}
  </select>
+ 
+ <delete id="setDelete" parameterType="MemberVO">
+ 	delete from member where username=#{username}
+ </delete>
  
  </mapper>  

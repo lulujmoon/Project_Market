@@ -23,7 +23,7 @@ public class HomeController {
 	@GetMapping("/")
 	public ModelAndView home(ProductPager productPager, ModelAndView mv)throws Exception {
 		
-		List<ProductVO> list = productService.getList(productPager, 8L, 5L);
+		List<ProductVO> list = productService.getList(productPager, 11L, 5L);
 		
 		mv.addObject("products", list);
 		mv.setViewName("home");
@@ -31,5 +31,4 @@ public class HomeController {
 		return mv;
 	}
 	
-
 }
