@@ -11,7 +11,6 @@
 <body>
 	
 <c:import url="./template/header.jsp"></c:import>
-	
 	<div class="container">
 		<div class="carousel-container">
 			<div class="carousel__btn">
@@ -36,16 +35,16 @@
 			<div class="section-contents">
 				<c:forEach var="i" begin="0" end="7">
 					<div class="prd__card" onclick="goSelect(${products[i].productNum})">
-						<c:if test="${product.files[0].fileName != null}">
-							<img class="card__img" src="/resources/upload/product/${product.files[0].fileName}">
+						<c:if test="${products[i].files[0].fileName != null}">
+							<img class="card__img" src="/resources/upload/product/${products[i].files[0].fileName}">
 						</c:if>
-						<c:if test="${product.files[0].fileName == null}">
+						<c:if test="${products[i].files[0].fileName == null}">
 							<img class="card__img" src="/resources/images/productDefault.jpg">
 						</c:if>
 						<div class="card__info">
 							<div class="info__name">${products[i].productName}</div>
 							<div class="info__price">${products[i].productPrice}</div>
-							<div class="info__date">9분 전</div>
+							<div class="info__date">${products[i].productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${products[i].location.locationName}</div>
 						</div>
 					</div>
