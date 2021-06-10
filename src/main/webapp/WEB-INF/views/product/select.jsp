@@ -49,7 +49,7 @@
 			<div class="top__btns">
 				<div class="top-btn btn-contact">연락하기</div>
 				<div class="top-btn btn-nego">가격 제안하기</div>
-				<div class="btn-heart" onclick="confirm()"></div>
+				<div class="btn-heart"></div>
 				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 			</div>
 			<div class="hidden">
