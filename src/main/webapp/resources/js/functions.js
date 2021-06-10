@@ -80,3 +80,13 @@
 	}
 	return result;
 }
+
+/** @function setJoinDate(joinDate)
+ *	-- yyyy-mm-dd 형식의 데이터를 받아 yyyy년 mm월 dd일 형식으로 바꿔준다.
+ */
+ function setJoinDate(joinDate){
+  var dateArray = joinDate.split('-'); 
+  joinDate = dateArray[0]+'년 '+dateArray[1]+'월 '+dateArray[2]+'일 가입';
+
+  return joinDate;
+}

@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
+import com.mm.market.member.MemberFileVO;
+import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
@@ -36,6 +38,9 @@ public class ProductController {
 
 	@Autowired
 	private CategoryMapper categoryMapper;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	@Autowired
 	private MemberLocationService memberLocationService;
@@ -85,9 +90,22 @@ public class ProductController {
 		heartVO.setUsername(username);
 		
 		Long heart = productService.getHeart(heartVO);
+		
+		//판매자 정보
+		MemberVO sellerVO = new MemberVO();
+		sellerVO.setUsername(productVO.getUsername());
+		sellerVO = memberService.getSeletByUsername(memberVO);
+		MemberFileVO sellerFileVO = new MemberFileVO();
+		sellerFileVO = memberService.selectFile(sellerVO);
+		MemberLocationVO sellerLocationVO = new MemberLocationVO();
+		sellerLocationVO.setUsername(sellerVO.getUsername());
+		List<MemberLocationVO> sellerLocations = memberLocationService.getList(sellerLocationVO);
 
 		model.addAttribute("heart", heart);
 		model.addAttribute("product", productVO);
+		model.addAttribute("seller", sellerVO);
+		model.addAttribute("sellerFile", sellerFileVO);
+		model.addAttribute("sellerLocation", sellerLocations.get(0));
 		return "product/select";
 	}
 	

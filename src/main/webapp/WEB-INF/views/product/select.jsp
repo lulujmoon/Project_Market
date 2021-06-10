@@ -47,14 +47,14 @@
 			</div>
 		</div>
 	</div>
-		<div class="seller-container">
+		<div class="seller-container" onclick="goSellerPage(${seller.code})">
 			<div class="seller-left">
-				<div class="seller__photo"><img src="/resources/images/productDefault.jpg"></div>
-				<div class="seller__name">${product.username}</div>
+				<div class="seller__photo"><img src="/resources/upload/member/${sellerFile.fileName}"></div>
+				<div class="seller__name">${seller.name}</div>
 			</div>
 			<div class="seller_locNdate">
-				<div class="seller__location">세종특별시 아름동</div>
-				<div class="seller__joinDate">2016년 1월 2일 가입</div>
+				<div class="seller__location">${sellerLocation.locationName}</div>
+				<div class="seller__joinDate">${seller.joinDate}</div>
 			</div>
 			<div class="seller__rating">
 				<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">6</div> (15)</div>

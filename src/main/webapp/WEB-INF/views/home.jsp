@@ -6,7 +6,7 @@
 <head>
 <c:import url="./template/setting.jsp"></c:import>
 <link rel="stylesheet" href="../resources/css/home.css">
-<title>Home</title>
+<title>레몬 마켓</title>
 </head>
 <body>
 	

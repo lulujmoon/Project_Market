@@ -3,16 +3,13 @@
  */
  
  /** 초기 설정 1. 가입날짜
- 	* 1. .profile__joinDate 안의 텍스트를 가져온다.
- 	* 2. yyyy년 mm월 dd일 로 작성한다.
- 	* 3. 작성한 텍스트를 다시 .joinDate 안에 넣어준다.
   */
   
   var profile_joinDate = document.querySelector('.profile__joinDate');
   var joinDate = profile_joinDate.innerText;
-  var dateArray = joinDate.split('-');
   
-  joinDate = dateArray[0]+'년 '+dateArray[1]+'월 '+dateArray[2]+'일 가입';
+  joinDate = setJoinDate(joinDate);
+  
   profile_joinDate.innerText = joinDate;
  
  /** 초기 설정 2. 받은 평가

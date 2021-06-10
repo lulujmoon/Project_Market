@@ -78,4 +78,18 @@ function confirm() {
  */
  const top__productDate = document.querySelector('.top__productDate');
  var datetime = top__productDate.innerText;
-  top__productDate.innerHTML = '<i class="fas fa-clock"></i> '+calculateTime(datetime);	
+  top__productDate.innerHTML = '<i class="fas fa-clock"></i> '+calculateTime(datetime);
+  
+/** 초기설정 5. 판매자 가입일 표시
+ */
+ const seller__joinDate = document.querySelector('.seller__joinDate');
+ joinDate = seller__joinDate.innerText;
+ joinDate = setJoinDate(joinDate);
+ seller__joinDate.innerText = joinDate;
+ 
+/** @function goSellerPage(sellerCode)
+ *	-- 멤버코드를 받아 store/products 페이지로 이동한다.
+ */
+ function goSellerPage(sellerCode){
+	location.href = '/store/'+sellerCode+'/products/';
+}
