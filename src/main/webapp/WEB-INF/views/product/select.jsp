@@ -14,10 +14,21 @@
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
 	<div class="top-container">
-		<div class="top__images">
-			<c:forEach items="${product.files}" var="file">
-				<img class="image" src="/resources/upload/product/${file.fileName}">
-			</c:forEach>		
+		<div class="carousel-container">
+			<div class="carousel-slide">
+				<img src="/resources/upload/product/${product.files[product.files.size()-1].fileName}" class="carousel-images" id="last-clone"/>
+				<c:forEach items="${product.files}" var="file">
+				<img class="carousel-images" src="/resources/upload/product/${file.fileName}">
+				</c:forEach>
+				<img src="/resources/upload/product/${product.files[0].fileName}" class="carousel-images" id="first-clone"/>	
+			</div>	
+			<div class="carousel-btn">
+				<i class="fas fa-chevron-left" id="prev-btn"></i>
+				<c:forEach begin="0" end="${product.files.size()-1}" var="i">
+					<div class="circle" id="circle_${i}"></div>
+				</c:forEach>
+				<i class="fas fa-chevron-right" id="next-btn"></i>
+			</div>
 		</div>
 		<div class="top__info">
 			<div class="top__productName">${product.productName}</div>

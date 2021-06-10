@@ -19,13 +19,13 @@
 				<i class="fas fa-chevron-right" id="next-btn"></i>
 			</div>
 			<div class="carousel-slide">
-				<img src="../resources/images/635788502.jpg" class="carousel-images" id="lastClone">
+				<img src="../resources/images/635788502.jpg" class="carousel-images" id="last-clone">
 				<img src="../resources/images/641634667.jpg" class="carousel-images">
 				<img src="../resources/images/639509788.jpg" class="carousel-images">
 				<img src="../resources/images/641827905.jpg" class="carousel-images">
 				<img src="../resources/images/617974702.jpg" class="carousel-images">
 				<img src="../resources/images/635788502.jpg" class="carousel-images">
-				<img src="../resources/images/641634667.jpg" class="carousel-images" id="firstClone">			
+				<img src="../resources/images/641634667.jpg" class="carousel-images" id="first-clone">			
 			</div>
 		</div>
 		<section class="home__products">

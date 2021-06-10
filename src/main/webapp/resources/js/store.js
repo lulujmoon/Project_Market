@@ -4,12 +4,9 @@
  
  /** 초기 설정 1. 가입날짜
   */
-  
   var profile_joinDate = document.querySelector('.profile__joinDate');
   var joinDate = profile_joinDate.innerText;
-  
   joinDate = setJoinDate(joinDate);
-  
   profile_joinDate.innerText = joinDate;
  
  /** 초기 설정 2. 받은 평가
@@ -18,8 +15,6 @@
   for(rate of rates){
 		setRateInStar(rate);
 	}	
- 
- 
  
  /** const btnAvatar
 	* 1. 클릭하면 file 팝업을 띄운다.
@@ -37,4 +32,6 @@
 		});
 });
 
-
+function goSelect(productNum){
+	location.href = '/product/select/'+productNum;
+}

@@ -1,55 +1,3 @@
-/**
- * 
- */
- 
-/* 찜 */
-const btnHeart = document.querySelector('.btn-heart');
-let heartValue = Number(document.querySelector('.heartValue').value);
-let productNum = Number(document.querySelector('.productNum').value);
-
-$(document).ready(function(){
-	
-	if(heartValue>0) {
-		btnHeart.innerHTML = '<i class="fas fa-heart"></i>';
-	} else {
-		btnHeart.innerHTML = '<i class="far fa-heart"></i>';
-	}
-	
-	btnHeart.addEventListener('click', ()=>{
-		let sendData = {'productNum' : productNum, 'heart' : that.prop('name')};
-		$.ajax({
-			url : '/product/heart',
-			type : 'POST',
-			data : sendData,
-			success : function(data) {
-				that.prop('name', data);
-				if(data==1) {
-					$("heart").prop("src","/resources/images/빨강.png");
-					heart_reload();
-				} else {
-					$("heart").prop("src","/resources/images/검정.png");
-					heart_reload();
-				}
-			}
-		});
-	});
-});
-		
-
-
-function heart_reload() {
-	$("#heart").load(window.location.href='/product/select?productNum='+productNum);
-}
-
-
-function confirm() {
-	if(heartval==1) {
-		if(confirm('찜하기 취소')== false) {return false;};
-	} else {
-		if(confirm('찜하기')== false) {return false;};
-	}
-
-}
 
 
 /** 초기설정 1. 가격 표시 방법
@@ -92,4 +40,63 @@ function confirm() {
  */
  function goSellerPage(sellerCode){
 	location.href = '/store/'+sellerCode+'/products/';
+}
+
+/** 초기설정 6. 캐러셀
+ */
+ window.addEventListener('load', ()=>{
+	 setCarousel();	
+});
+
+/** 초기설정 7. 판매상태
+ */
+ const top__status = document.querySelector('.top__status');
+ const status = top__status.innerText;
+ if(status == '판매 중'){
+	top__status.style.backgroundColor = 'green';
+}else if(status == '판매완료'){
+	top__status.style.backgroundColor = '#b4b4b4';
+}else if(status == '예약 중'){
+	top__status.style.backgroundColor = '#f7bd11';
+}
+
+
+
+
+/** 기능 1. 찜
+ */
+const btnHeart = document.querySelector('.btn-heart');
+let heartValue = Number(document.querySelector('.heartValue').value);
+let productNum = Number(document.querySelector('.productNum').value);
+
+$(document).ready(function(){
+	
+	if(heartValue>0) {
+		btnHeart.innerHTML = '<i class="fas fa-heart"></i>';
+	} else {
+		btnHeart.innerHTML = '<i class="far fa-heart"></i>';
+	}
+	
+	btnHeart.addEventListener('click', ()=>{
+		let sendData = {'productNum' : productNum, 'heart' : heartValue};
+		$.ajax({
+			url : '/product/heart',
+			type : 'POST',
+			data : sendData,
+			success : function(data) {
+				$(".heartValue").val(data);
+				if(data==1) {
+					$(".heartValue").html('<i class="fas fa-heart"></i>');
+					heart_reload();
+				} else {
+					$(".heartValue").html('<i class="far fa-heart"></i>');
+					heart_reload();
+				}
+			}
+		});
+	});
+});
+		
+function heart_reload() {
+	$("#heart").load(window.location.href='/product/select/'+productNum);
 }

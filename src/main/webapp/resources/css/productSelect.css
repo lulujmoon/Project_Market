@@ -22,18 +22,6 @@
 	justify-content: center;
 }
 
-.top__images{
-	width: 400px;
-	height: 400px;
-	padding: 40px;
-}
-
-.image{
-	width: 400px;
-	height: 400px;
-	cursor: pointer;
-}
-
 .top__info{
 	width: 430px;
 	padding: 40px;
@@ -64,11 +52,10 @@
 }
 
 .top__status{
-	width: 60px;
+	width: 65px;
 	height: 25px;
 	padding: 2px 3px;
 	border-radius: 5px;
-	background-color: green;
 	opacity: 0.7;
 	color: white;
 	font-weight: 400;
@@ -204,4 +191,57 @@
 	width: 910px;
 	min-height: 200px;
 	padding: 40px;
+}
+
+/* 캐러셀 */
+
+.carousel-container{
+	width: 400px;
+	height: 440px;
+	margin: 40px;
+	overflow: hidden;
+}
+
+.carousel-slide{
+	display: flex;
+	flex-direction: row;
+}
+
+.carousel-images{
+	width: 400px;
+	height: 400px;
+	cursor: pointer;
+}
+
+.carousel-btn{
+	width: 400px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #b4b4b4;
+}
+
+#prev-btn, #next-btn{
+	padding: 0 10px;
+	cursor: pointer;
+}
+
+.circle{
+	width: 7px;
+	height: 7px;
+	margin: 0 3px;
+	border-radius: 70%;
+	border: 1.5px solid #b4b4b4;
+	font-size: 0.3em;
+	cursor: pointer;
+}
+
+.circle:hover{
+	background-color: #c6c6c6;
+	opacity: 0.6;
+}
+
+.circle.selected{
+	background-color: #b4b4b4;
 }

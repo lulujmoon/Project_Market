@@ -24,7 +24,7 @@
 		<div class="board__contents">
 				<div class="list-container">		
 				<c:forEach items="${products}" var="product">
-					<div class="prd__card" onclick="goSelect(${dto.productNum})">
+					<div class="prd__card" onclick="goSelect(${product.productNum})">
 						<c:if test="${product.files[0].fileName != null}">
 							<img class="card__img" src="/resources/upload/product/${product.files[0].fileName}">
 						</c:if>
