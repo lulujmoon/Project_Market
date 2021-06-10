@@ -5,8 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mm.market.util.FileManager;
@@ -14,15 +14,18 @@ import com.mm.market.util.Pager;
 
 @Service
 public class SocialService {
-	
+
 	@Autowired
 	private SocialMapper socialMapper;
-	
+
 	@Autowired
 	private FileManager fileManager;
-	
+
 	@Autowired
 	private HttpSession session;
+
+	@Value("${social.filePath}")
+	private String filePath;
 
 	public List<SocialVO> getList(Pager pager) throws Exception {
 		Long perPage = 20L;
@@ -43,71 +46,46 @@ public class SocialService {
 		return socialMapper.getSelect(socialVO);
 	}
 
-	@Transactional(rollbackFor = Exception.class)
-	public int setInsert(SocialVO socialVO, MultipartFile [] file) throws Exception {
+	public int setInsert(SocialVO socialVO, MultipartFile [] files) throws Exception {
 		int result = socialMapper.setInsert(socialVO);
-		
-		long socialNum = socialMapper.getSocialNum();
-		socialVO.setSocialNum(socialNum);
 
-		for(MultipartFile mf:file) {
-			SocialFileVO socialFileVO = new SocialFileVO();
+		String filePath = this.filePath;
+
+		for(MultipartFile mf:files) {
+
+			if(mf.getSize() == 0) {
+				continue;
+			}
+
 			String fileName = fileManager.save("social", mf, session);
 
-			socialFileVO.setSocialNum(socialNum);
+			SocialFileVO socialFileVO = new SocialFileVO();
 			socialFileVO.setFileName(fileName);
 			socialFileVO.setOriginName(mf.getOriginalFilename());
+			socialFileVO.setSocialNum(socialVO.getSocialNum());
 
 			socialMapper.setFileInsert(socialFileVO);
 		}
-		
+
 		return result; 
 	}
 
-	public int setUpdate(SocialVO socialVO, MultipartFile file) throws Exception {
-		int result = 0;
-		
-		if(file.getOriginalFilename().length()!=0) {
-			String fileName = fileManager.save("social", file, session);
-			
-			SocialFileVO socialFileVO = new SocialFileVO();
-			socialFileVO.setSocialNum(socialVO.getSocialNum());
-			socialFileVO.setFileName(fileName);
-			socialFileVO.setOriginName(file.getOriginalFilename());
-			
-			result = socialMapper.setUpdate(socialVO);
-			result = socialMapper.setFileInsert(socialFileVO);
-		} else {
-			result = socialMapper.setUpdate(socialVO);
-		}
+	public int setUpdate(SocialVO socialVO) throws Exception {
 		return socialMapper.setUpdate(socialVO);
 	}
 
 	public int setDelete(SocialVO socialVO) throws Exception {
-		socialVO = socialMapper.getSelect(socialVO);
-		
-		if(socialVO.getFiles().size()!=0) {
-			for(int i=0;i<socialVO.getFiles().size();i++) {
-				SocialFileVO socialFileVO = socialVO.getFiles().get(i);
-				boolean deleted = fileManager.delete("social", socialVO.getFiles().get(i).getFileName(), session);
-				System.out.println("delete : "+deleted);
-			}
-		}
-		
 		return socialMapper.setDelete(socialVO);
 	}
-	
-	public int setFileDelete(SocialFileVO socialFileVO) throws Exception {
-		socialFileVO = socialMapper.setFileSelect(socialFileVO);
 
-		int result = socialMapper.setFileDelete(socialFileVO);
+	public String setSummerFileUpload(MultipartFile file) throws Exception {
+		String fileName = fileManager.save("social", file, session);
+		return fileName;
 
-		if(result>0) {
-			boolean deleted = fileManager.delete("social", socialFileVO.getFileName(), session);
-			System.out.println("delete : "+deleted);
-			System.out.println("fileName : "+socialFileVO.getFileName());
-		}
-		
+	}
+
+	public Boolean setSummerFileDelete(String fileName) throws Exception {
+		boolean result = fileManager.delete("social", fileName, session);
 		return result;
 	}
 }

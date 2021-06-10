@@ -1,6 +1,6 @@
 package com.mm.market.comment;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -11,6 +11,9 @@ public class CommentVO {
 	private Long socialNum;
 	private String commentContent;
 	private String username;
-	private Date commentDate;
+	private Timestamp commentDate;
+	private Long ref;
+	private Long step;
+	private Long depth;
 
 }

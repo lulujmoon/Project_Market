@@ -7,7 +7,7 @@
 
 	<!-- 댓글 list -->
 	<select id="getList" parameterType="CommentVO" resultType="CommentVO">
-		select * from comment where socialNum=#{socialNum}
+		select * from comment where socialNum=#{socialNum} order by ref asc
 	</select>
 
 	<!-- 댓글 select -->
@@ -17,8 +17,8 @@
 
 	<!-- 댓글 insert -->
 	<insert id="setInsert" parameterType="CommentVO" useGeneratedKeys="true" keyProperty="commentNum">
-		insert into comment (socialNum, commentContent, username, commentDate)
-		values (#{socialNum}, #{commentContent}, #{username}, now())
+		insert into comment (socialNum, commentContent, username, ref, commentDate)
+		values (#{socialNum}, #{commentContent}, #{username}, 0, now())
 	</insert>
 	
 	<!-- 댓글 update -->
@@ -29,7 +29,18 @@
 
 	<!-- 댓글 delete -->
 	<delete id="setDelete" parameterType="CommentVO">
-		delete comment where commentNum=#{commentNum}
+		delete from comment where commentNum=#{commentNum}
 	</delete>
+
+	<!-- 댓글 setReply -->
+	<insert id="setReply" parameterType="CommentVO">
+		insert into comment(socialNum, commentContent, username, ref, step, depth, commentDate) 
+		values(#{socialNum}, #{commentContent}, #{username}, #{ref}, #{step}, #{depth}, now())
+	</insert>
+
+	<!-- 댓글 setReplyUpdate -->
+	<update id="setReplyUpdate" parameterType="CommentVO">
+		update comment set step=step+1 where ref=#{ref} and step>#{step}
+	</update>
 
 </mapper>

@@ -19,7 +19,7 @@
 		<h3>작성자 : ${vo.username}</h3>
 		<h3>
 			내용 : ${vo.socialContent}
-			<c:forEach items="${vo.files}" var="file">
+			<c:forEach items="${vo.file}" var="file">
 				<img src="/resources/upload/social/${file.fileName}">
 			</c:forEach>
 		</h3>
@@ -39,28 +39,24 @@
 			<input type="hidden" id="socialNum" name="socialNum">
 			<textarea class="form-control myCheck" id="commentContent"
 				name="commentContent" placeholder="내용을 입력하세요."></textarea>
-			<input type="text" readonly="readonly" value="${vo.username}" name="username">
-
-			<input type="submit" value="작성" />
+			<input type="text" readonly="readonly" value="${vo.username}"
+				name="username"> <input type="submit" value="작성" />
 		</form>
 
+		<c:if test="${comment ne null}">
 			<c:forEach items="${list}" var="comment">
 				<ul>
+					<li>${comment.commentContent}</li>
 					<li>
 						<div class="container">
-							<div class="container">
-								${vo.username}<br>${vo.commentDate}
-							</div>
-							<a class="insert-button"
-								href="./update?commentNum=${vo.commentNum}">수정</a> <a
-								class="insert-button"
-								href="./delete?commentNum=${vo.commentNum}">삭제</a>
+							${comment.username}<br> ${comment.commentDate}
+							<a class="insert-button" href="../comment/commentUpdate?commentNum=${comment.commentNum}">수정</a>
+							<a class="insert-button" href="../comment/commentDelete?commentNum=${comment.commentNum}">삭제</a>
+							<a class="insert-button" href="../comment/reply?socialNum=${vo.socialNum}&commentNum=${comment.commentNum}">답글</a>
 						</div>
-					</li>
-
-					<li>${comment.commentContent}</li>
 				</ul>
 			</c:forEach>
+		</c:if>
 	</div>
 </body>
 </html>

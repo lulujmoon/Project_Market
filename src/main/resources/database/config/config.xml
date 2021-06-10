@@ -22,6 +22,8 @@
 		<typeAlias type="com.mm.market.category.CategoryVO" alias="CategoryVO"/>
 	  	<typeAlias type="com.mm.market.socialCategory.SocialCategoryVO" alias="SocialCategoryVO"/>
 		<typeAlias type="com.mm.market.util.Pager" alias="Pager"/>
+		
+		<typeAlias type="java.lang.Long" alias="Long"/>
   	</typeAliases>
   
   </configuration>

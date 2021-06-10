@@ -36,7 +36,7 @@
 			<id property="categoryCode" column="categoryCode" />
 			<result property="categoryName" column="categoryName" />
 		</association>
-		<collection property="files" javaType="java.util.List" ofType="SocialFileVO">
+		<collection property="file" javaType="java.util.List" ofType="SocialFileVO">
 			<id column="fileNum" property="fileNum" />
 			<result column="socialNum" property="socialNum" />
 			<result column="fileName" property="fileName" />

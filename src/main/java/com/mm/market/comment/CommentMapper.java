@@ -17,5 +17,11 @@ public interface CommentMapper {
 	public int setUpdate(CommentVO commentVO) throws Exception;
 	//Delete
 	public int setDelete(CommentVO commentVO) throws Exception;
+	
+	//답글
+	//Insert
+	public int setReply(CommentVO commentVO) throws Exception;
+	//Update
+	public int setReplyUpdate(CommentVO commentVO) throws Exception;
 
 }

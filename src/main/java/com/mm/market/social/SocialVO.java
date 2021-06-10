@@ -17,7 +17,7 @@ public class SocialVO {
 	private String socialContent;
 	private Date socialDate;
 	
-	private List<SocialFileVO> files;
+	private List<SocialFileVO> file;
 	private SocialCategoryVO socialCategory;
 
 }

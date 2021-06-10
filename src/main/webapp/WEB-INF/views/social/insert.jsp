@@ -9,11 +9,26 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>Insert title here</title>
+
+<!-- summernote -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 <body>
 	<h2>Social Insert Page</h2>
 	<form class="form" action="./insert" method="POST"
 		enctype="multipart/form-data">
+
+		<input type="hidden" name="socialNum">
 
 		<div class="form-group">
 			<label>제목</label> <input type="text" name="socialTitle">
@@ -40,17 +55,13 @@
 
 		<div class="form-group">
 			<label>글 내용</label>
-			<textarea class="form-control" id="socialContent" rows="5"
-				name="socialContent"></textarea>
+			<textarea class="form-control myCheck" cols="30" rows="5"
+				id="socialContent" name="socialContent"></textarea>
+
+			<input type="submit" value="작성">
 		</div>
-
-		<div>
-			<input type="file" name="file">
-		</div>
-
-		<input type="hidden" name="socialNum">
-
-		<button id="insertBtn" class="btn btn-outline-secondary">작성</button>
 	</form>
+
+	<script type="text/javascript" src="/jquery/summerFile.js"></script>
 </body>
 </html>

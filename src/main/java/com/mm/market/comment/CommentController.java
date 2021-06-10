@@ -1,16 +1,10 @@
 package com.mm.market.comment;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -21,7 +15,7 @@ public class CommentController {
 	private CommentService commentService;
 	
 	@GetMapping("commentInsert")
-	public ModelAndView commentInsert() throws Exception {
+	public ModelAndView setInsert() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		CommentVO commentVO = new CommentVO();
 		
@@ -33,6 +27,7 @@ public class CommentController {
 
 	@PostMapping("commentInsert")
 	public ModelAndView setInsert(CommentVO commentVO) throws Exception {
+
 		ModelAndView mv = new ModelAndView();
 		int result = commentService.setInsert(commentVO);
 		
@@ -40,8 +35,9 @@ public class CommentController {
 		
 		return mv;
 	}
+	
 	@GetMapping("commentUpdate") //댓글 수정
-	public ModelAndView commentUpdate(CommentVO commentVO) throws Exception {
+	public ModelAndView setUpdate(CommentVO commentVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		commentVO = commentService.getSelect(commentVO);
@@ -52,7 +48,7 @@ public class CommentController {
 		return mv;
 	}
 	
-	@PostMapping("socialUpdate")
+	@PostMapping("commentUpdate")
 	public ModelAndView setUpdate(CommentVO commentVO, ModelAndView mv) throws Exception {
 		int result = commentService.setUpdate(commentVO);
 		System.out.println("result : "+result);
@@ -88,4 +84,24 @@ public class CommentController {
 		return mv;
 	}
 
+	@GetMapping("reply")
+	public ModelAndView setReply() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		CommentVO commentVO = new CommentVO();
+		
+		mv.setViewName("comment/reply");
+		
+		return mv;
+	}
+
+	@PostMapping("reply")
+	public ModelAndView setReply(CommentVO commentVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int result = commentService.setReply(commentVO);
+		
+		mv.setViewName("redirect:../social/list");
+		
+		return mv;
+	}
 }
