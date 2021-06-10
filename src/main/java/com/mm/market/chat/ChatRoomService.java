@@ -14,10 +14,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ChatRoomService implements ChatRoomMapper {
+public class ChatRoomService implements ChatMapper {
 
 	@Autowired
-	private ChatRoomMapper chatRoomMapper;
+	private ChatMapper chatMapper;
 
 	@Value("${chat.filePath.txt}")
 	private String filePath;
@@ -27,7 +27,7 @@ public class ChatRoomService implements ChatRoomMapper {
 	public void addChatRoom(ChatRoom chatRoom) throws Exception {
 		Timestamp createdDate = Timestamp.valueOf(LocalDateTime.now());
 		chatRoom.setCreatedDate(createdDate);
-		chatRoomMapper.addChatRoom(chatRoom);
+		chatMapper.addChatRoom(chatRoom);
 		
 	}
 	
@@ -82,7 +82,7 @@ public class ChatRoomService implements ChatRoomMapper {
 		Long productNum = chatRoom.getProductNum();
 		String buyerId = chatRoom.getBuyerId();
 		
-		ChatRoom chatRoomAppend = chatRoomMapper.findByChatNum(productNum, buyerId);
+		ChatRoom chatRoomAppend = chatMapper.findByChatNum(productNum, buyerId);
 		
 		String pathName = filePath + chatRoomAppend.getFileName();
 		
@@ -115,22 +115,22 @@ public class ChatRoomService implements ChatRoomMapper {
 
 	@Override
 	public ChatRoom findByChatNum(Long productNum, String buyerId) {
-		return chatRoomMapper.findByChatNum(productNum, buyerId);
+		return chatMapper.findByChatNum(productNum, buyerId);
 	}
 
 	@Override
 	public List<ChatList> findByUsername(String username) {
-		return chatRoomMapper.findByUsername(username);
+		return chatMapper.findByUsername(username);
 	}
 
 	@Override
 	public Long countByChatNum(Long chatNum, String buyerId) {
-		return chatRoomMapper.countByChatNum(chatNum, buyerId);
+		return chatMapper.countByChatNum(chatNum, buyerId);
 	}
 
 	@Override
 	public Long getChatNum(Long productNum, String buyerId) {
-		return chatRoomMapper.getChatNum(productNum, buyerId);
+		return chatMapper.getChatNum(productNum, buyerId);
 	}
 	
 	
@@ -142,33 +142,33 @@ public class ChatRoomService implements ChatRoomMapper {
 		//로컬경로에 파일 생성
 		txtFile.createNewFile();
 		
-		chatRoomMapper.updateFileName(chatNum, fileName);
+		chatMapper.updateFileName(chatNum, fileName);
 	}
 
 	@Override
 	public void updateFileName(Long chatNum, String fileName) {
-		chatRoomMapper.updateFileName(chatNum, fileName);
+		chatMapper.updateFileName(chatNum, fileName);
 	}
 
 	@Override
 	public void updateChatReadBuy(Long chatNum, int chatReadBuy) {
-		chatRoomMapper.updateChatReadBuy(chatNum, chatReadBuy);
+		chatMapper.updateChatReadBuy(chatNum, chatReadBuy);
 		
 	}
 
 	@Override
 	public void updateChatReadSell(Long chatNum, int chatReadSell) {
-		chatRoomMapper.updateChatReadSell(chatNum, chatReadSell);
+		chatMapper.updateChatReadSell(chatNum, chatReadSell);
 	}
 
 	@Override
 	public int getUnreadMessage(String username) {
-		return chatRoomMapper.getUnreadMessage(username);
+		return chatMapper.getUnreadMessage(username);
 	}
 
 	@Override
 	public List<Integer> getUnreadChatRoom(String username) {
-		List<Integer> unread = chatRoomMapper.getUnreadChatRoom(username);
+		List<Integer> unread = chatMapper.getUnreadChatRoom(username);
 		return unread;
 	}
 	
