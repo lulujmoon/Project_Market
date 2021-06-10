@@ -14,10 +14,21 @@
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
 	<div class="top-container">
-		<div class="top__images">
-			<c:forEach items="${product.files}" var="file">
-				<img class="image" src="/resources/upload/product/${file.fileName}">
-			</c:forEach>		
+		<div class="carousel-container">
+			<div class="carousel-slide">
+				<img src="/resources/upload/product/${product.files[product.files.size()-1].fileName}" class="carousel-images" id="last-clone"/>
+				<c:forEach items="${product.files}" var="file">
+				<img class="carousel-images" src="/resources/upload/product/${file.fileName}">
+				</c:forEach>
+				<img src="/resources/upload/product/${product.files[0].fileName}" class="carousel-images" id="first-clone"/>	
+			</div>	
+			<div class="carousel-btn">
+				<i class="fas fa-chevron-left" id="prev-btn"></i>
+				<c:forEach begin="0" end="${product.files.size()-1}" var="i">
+					<div class="circle" id="circle_${i}"></div>
+				</c:forEach>
+				<i class="fas fa-chevron-right" id="next-btn"></i>
+			</div>
 		</div>
 		<div class="top__info">
 			<div class="top__productName">${product.productName}</div>
@@ -25,23 +36,38 @@
 				<div class="top__price">${product.productPrice}</div>
 				<div class="top__status">${product.productStatus}</div>
 			</div>
-			<div class="top__icons">
-				<div class="top__icon">${product.productHit}</div>
-				<div class="top__icon">${product.productHeart}</div>
-				<div class="top__icon">${product.productDate}</div>
+			<div class="top__smalls">
+				<div class="top__hitNheart">
+					<div class="top__small top__hit"><i class="far fa-eye"></i> ${product.productHit}</div>
+					<div class="top__small top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
+					<div class="top__small top__productDate">${product.productDate}</div>
+				</div>
+				<div class="top__small top__category"><i class="fas fa-tag"></i> ${product.category.categoryName}</div>
+				<div class="top__small top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
+				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
-			<div class="top__location">${product.location.locationName}</div>
 			<div class="top__btns">
 				<div class="top-btn btn-contact">연락하기</div>
 				<div class="top-btn btn-nego">가격 제안하기</div>
-				<div class="top-btn btn-heart">찜하기</div>
+				<div class="btn-heart"></div>
+				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i> 신고</div>
+			</div>
+			<div class="hidden">
+				<input type="hidden" class="heartValue" value="${heart}">
+				<input type="hidden" class="productNum" value="${product.productNum}">
 			</div>
 		</div>
 	</div>
-		<div class="seller-container">
-			<div class="seller__photo"><img src="/resources/images/productDefault.jpg"></div>
-			<div class="seller_name">${product.username}</div>
-			<div class="seller_rating">
+		<div class="seller-container" onclick="goSellerPage(${seller.code})">
+			<div class="seller-left">
+				<div class="seller__photo"><img src="/resources/upload/member/${sellerFile.fileName}"></div>
+				<div class="seller__name">${seller.name}</div>
+			</div>
+			<div class="seller_locNdate">
+				<div class="seller__location">${sellerLocation.locationName}</div>
+				<div class="seller__joinDate">${seller.joinDate}</div>
+			</div>
+			<div class="seller__rating">
 				<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">6</div> (15)</div>
 				<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">7</div> (23)</div>
 				<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">8</div> (23)</div>
@@ -53,7 +79,8 @@
 </div>
 
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/productSelect.js"></script>
 </body>
 </html>

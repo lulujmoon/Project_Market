@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
-<link rel="stylesheet" href="../resources/css/productList.css">
+<link rel="stylesheet" href="/resources/css/productList.css">
 <title>상품 목록</title>
 </head>
 <body>
@@ -79,7 +79,8 @@
 
 </div>
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
-<script type="text/javascript" src="../resources/js/productList.js"></script>
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/functions.js"></script>
+<script type="text/javascript" src="/resources/js/productList.js"></script>
 </body>
 </html>

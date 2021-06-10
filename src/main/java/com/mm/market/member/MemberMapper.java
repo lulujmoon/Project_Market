@@ -15,9 +15,7 @@ public interface MemberMapper {
 	
 	public int setMemberRole(Map<String, String> map) throws Exception;
 	
-	public MemberVO getLogin(MemberVO memberVO);
-	
-	public MemberVO getSelectByUsername(MemberVO memberVO) throws Exception;
+	public MemberVO getSelectByUsername(MemberVO memberVO);
 	
 	public MemberVO getSelectByCode(MemberVO memberVO) throws Exception;
 	
