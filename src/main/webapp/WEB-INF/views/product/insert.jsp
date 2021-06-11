@@ -12,7 +12,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/productNote.css"> 
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>판매상품 등록</title>
 </head>
 <body>

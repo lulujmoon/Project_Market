@@ -20,7 +20,7 @@
 		<div class="logo">
 			<i class="fas fa-lemon"></i><span>&nbsp;Join</span>
 		</div>
-		<form:form modelAttribute="memberVO" id="frm" action="./join" method="post" enctype="multipart/form-data">
+		<form:form modelAttribute="memberVO"  id="frm" action="./join" method="post" enctype="multipart/form-data">
 				<div class="form-group username">
 					<span><label for="username" class="form-title">Username</label></span>
 					<form:input class="form-control myCheck" type="text" id="username" name="username" path="username"/>	
@@ -29,12 +29,12 @@
 			</div>
 			<div class="form-group">
 				<label for="password" class="form-title">Password</label> 
-				<form:input type="text"	class="form-control myCheck" id="password" name="password" path="password"/>
+				<form:input type="password"	class="form-control myCheck" id="password" name="password" path="password"/>
 				<small class="form-notice"><form:errors path="password"></form:errors></small>
 			</div>
 			<div class="form-group" class="form-title">			
 				<label for="password1">Check Password</label> 
-				<form:input type="text" class="form-control myCheck" id="password1" name="password1" path="password1"/>
+				<form:input type="password" class="form-control myCheck" id="password1" name="password1" path="password1"/>
 				<small class="form-notice"><form:errors path="password1"></form:errors></small>
 			</div>
 			<div class="form-group">
@@ -57,7 +57,7 @@
 				<input type="file" class="form-control etc"	id="avatar" name="avatar" required="required">
 			</div>
 			<div class="join-btn">
-				<button type="submit" class="btn-wide btn-submit">Join</button>
+				<input type="button" class="btn-wide btn-submit" value="Join"></button>
 			</div>
 		</form:form>
 	</div>
@@ -65,5 +65,6 @@
 	
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/memberJoin.js"></script>
 </body>
 </html>

@@ -29,33 +29,38 @@
 				<button class="btn btn-cancel">취소</button>
 			</div>
 		</div>
-		<form id="info-form" action="./update" method="post">
+		<form:form modelAttribute="memberVO" id="info-form" action="./update" method="post">
 			<div class="info-group">
 				<div class="info__title">Username</div>
 				<div class="info__content">${principal.username}</div>
-				<input class="info__input username" type="text" name="username" value="${principal.username}">
+				<form:input class="info__input username" type="text" name="username" value="${principal.username}" path="username" readonly="readonly"/>
+				<small class="form-notice"><form:errors path="username"></form:errors></small>
 			</div>
 			<div class="info-group">
 				<div class="info__title">Password</div>
 				<div class="info__content">********</div>
-				<input class="info__input" type="password" name="password" placeholder="변경 시에만 입력하세요.">
+				<form:input class="info__input" type="password" name="password" placeholder="변경 시에만 입력하세요." path="password"/>
+				<small class="form-notice"><form:errors path="password"></form:errors></small>
 			</div>
 			<div class="info-group">
 				<div class="info__title">Name</div>
 				<div class="info__content">${principal.name}</div>
-				<input class="info__input" type="text" name="name" value="${principal.name}">
+				<form:input class="info__input" type="text" name="name" value="${principal.name}" path="name"/>
+				<small class="form-notice"><form:errors path="name"></form:errors></small>
 			</div>
 			<div class="info-group">
 				<div class="info__title">Phone</div>
 				<div class="info__content">${principal.phone}</div>
-				<input class="info__input" type="text" name="phone" value="${principal.phone}">
+				<form:input class="info__input" type="text" name="phone" value="${principal.phone}" path="phone"/>
+				<small class="form-notice"><form:errors path="phone"></form:errors></small>
 			</div>
 			<div class="info-group">
 				<div class="info__title">Email</div>
 				<div class="info__content">${principal.email}</div>
-				<input class="info__input" type="text" name="email" value="${principal.email}">
+				<form:input class="info__input" type="text" name="email" value="${principal.email}" path="email"/>
+				<small class="form-notice"><form:errors path="email"></form:errors></small>
 			</div>
-		</form>
+		</form:form>
 	</div>
 	<div class="location-container">
 		<div class="location__header">
