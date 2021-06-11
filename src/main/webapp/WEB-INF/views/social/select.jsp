@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal" />
+</sec:authorize>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -17,12 +22,7 @@
 		<h3>카테고리 : ${vo.categoryCode}</h3>
 		<h3>제목 : ${vo.socialTitle}</h3>
 		<h3>작성자 : ${vo.username}</h3>
-		<h3>
-			내용 : ${vo.socialContent}
-			<c:forEach items="${vo.file}" var="file">
-				<img src="/resources/upload/social/${file.fileName}">
-			</c:forEach>
-		</h3>
+		<h3>내용 : ${vo.socialContent}</h3>
 		<h3>작성 날짜 : ${vo.socialDate}</h3>
 
 		<a href="./delete?socialNum=${vo.socialNum}" class="btn btn-primary"
@@ -49,10 +49,10 @@
 					<li>${comment.commentContent}</li>
 					<li>
 						<div class="container">
-							${comment.username}<br> ${comment.commentDate}
-							<a class="insert-button" href="../comment/commentUpdate?commentNum=${comment.commentNum}">수정</a>
-							<a class="insert-button" href="../comment/commentDelete?commentNum=${comment.commentNum}">삭제</a>
-							<a class="insert-button" href="../comment/reply?socialNum=${vo.socialNum}&commentNum=${comment.commentNum}">답글</a>
+							${comment.username}<br>${comment.commentDate}
+							<a href="../comment/commentUpdate?socialNum=${vo.socialNum}&commentNum=${comment.commentNum}">수정</a>
+							<a href="../comment/commentDelete?commentNum=${comment.commentNum}">삭제</a>
+							<a href="../comment/reply?socialNum=${vo.socialNum}&commentNum=${comment.commentNum}">답글</a>
 						</div>
 				</ul>
 			</c:forEach>

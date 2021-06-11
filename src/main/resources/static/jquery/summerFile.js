@@ -4,26 +4,34 @@
 
 $("#socialContent").summernote({
 			height:500,
-			minHeight: null,
-			maxHeight: null,
-			focus: true,
-			placeholder: '내용을 작성해주세요!',
+			minHeight:null,
+			maxHeight:null,
+			focus:true,
+			placeholder: '내용을 작성해주세요.',
 			callbacks: {
 				onImageUpload: function(file) {
-				   uploadFile(file);
-				   
-				 },
+				   uploadFile(file[0]);
+
+				},
 				onMediaDelete: function(file){
 					deleteFile(file);
+
 				}
-					
 			}
+					
 });
 
+function deleteFile(file){
+	let fileName = $(file[0]).attr("src");
+	fileName = fileName.substring(fileName.lastIndexOf('/')+1);
+	$.post("summerFileDelete", {fileName:fileName}, function(result){
+		console.log(result);
+	});
+}
 
 function uploadFile(file) {
-	const formData = new FormData();//Form 태그 생성
-	formData.append('file', file[0]); //input type="file" name="file"
+	const formData = new FormData();
+	formData.append('file', file);
 	let fileName="";
 	$.ajax({
 		type: "POST",
@@ -55,12 +63,3 @@ function uploadFile(file) {
 		
 	})
 };
-
-
-function deleteFile(file){
-	let fileName = $(file[0]).attr("src");
-	fileName = fileName.substring(fileName.lastIndexOf('/')+1);
-	$.post("summerFileDelete", {fileName:fileName}, function(result){
-		console.log(result);
-	});
-}

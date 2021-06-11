@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +38,7 @@
 		</div>
 
 		<div class="form-group">
-			<label>작성자</label> <input type="text" name="username">
+			<label>작성자</label> <input type="text" name="username" value="${principal.username}" readonly="readonly">
 		</div>
 
 		<div>
@@ -58,7 +61,7 @@
 			<textarea class="form-control myCheck" cols="30" rows="5"
 				id="socialContent" name="socialContent"></textarea>
 
-			<input type="submit" value="작성">
+			<input type="submit" value="작성" />
 		</div>
 	</form>
 

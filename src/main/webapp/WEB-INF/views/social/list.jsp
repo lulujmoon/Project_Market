@@ -27,7 +27,6 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>번호</th>
-						<th>카테고리</th>
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성 날짜</th>
@@ -37,7 +36,6 @@
 					<c:forEach items="${list}" var="dto">
 						<tr>
 							<td>${dto.socialNum}</td>
-							<td>${dto.categoryCode}</td>
 							<td><a href="./select?socialNum=${dto.socialNum}">
 									${dto.socialTitle}</a></td>
 							<td>${dto.username}</td>
