@@ -306,7 +306,7 @@ public class MemberController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		
-		return "redirect:./store";
+		return "redirect:/";
 	}
 	
 	@GetMapping("delete")

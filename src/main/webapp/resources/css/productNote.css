@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.container{
+	width: 1050px;
+	min-height: 55vh;
+	margin: 30px auto;
+	margin-top: 155px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: white;
+}

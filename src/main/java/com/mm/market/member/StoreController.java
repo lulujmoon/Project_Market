@@ -44,10 +44,8 @@ public class StoreController {
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
 		
-		/* 나중에 getListByUsername으로 변경하기*/
-		ProductVO productVO = new ProductVO();
-		productVO.setUsername(memberVO.getUsername());
 		ProductPager productPager = new ProductPager();
+		productPager.setUsername(memberVO.getUsername());
 		List<ProductVO> productList = productService.getList(productPager, 12L, 5L);
 		
 		mv.addObject("member", memberVO);

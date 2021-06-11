@@ -8,25 +8,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <c:import url="../template/setting.jsp"></c:import>
-
+<link rel="stylesheet" href="/resources/css/productNote.css"> 
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<title>Hello, world!</title>
-<style>
-img {
-	width: 100px;
-	height: 100px;
-}
-</style>
+<title>판매상품 등록</title>
 </head>
 <body>
-<h2>Product Insert Page</h2>
+<c:import url="../template/header.jsp"></c:import>
+
+<div class="container">
 	<form class="form" id="uploadForm" action="./insert" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
-	
-	
+
+
 			<div id=file>
 			<input type="button" id="add" value="ADD">
 			<div id="thumb">
@@ -88,8 +83,12 @@ img {
 	   <input type="hidden" name="productNum">
 
 	 <button class="btn-insert">Write</button><br><br><br>
-</form>
+	</form>
+</div>
 
+
+<c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="../resources/js/common.js"></script>
 <script type="text/javascript" src="../resources/js/fileAdd.js"></script>
 <script type="text/javascript" src="../resources/js/productInsert.js"></script>
 </body>

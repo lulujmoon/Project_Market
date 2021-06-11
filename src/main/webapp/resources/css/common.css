@@ -6,6 +6,7 @@ body{
 	margin:0;
 	font-family: 'Nanum Gothic', monospace;
 	background-color: #fbfbfb;
+	color: #2e2e2e;
 }
 
 a {
@@ -18,6 +19,10 @@ li {
 	color: #2e2e2e;
 	line-height: 2em;
 	list-style: none;
+}
+
+ul {
+	padding: 0;
 }
 
 /* 헤더 */
@@ -34,7 +39,7 @@ header{
 }
 
 .navbar{
-	width: 1210px;
+	width: 1050px;
 	height: 90px;
 	margin: 0 auto;
 	display: flex;
@@ -73,7 +78,7 @@ header{
 }
 
 .nav__search{
-	width: 38%;
+	width: 40%;
 	height: 40px;
 	margin: 0 1%;
 	display: flex;
@@ -158,7 +163,16 @@ header{
 	font-weight: bold;
 }
 
-
+/* container */
+.container{
+	width: 1050px;
+	min-height: 55vh;
+	margin: 30px auto;
+	margin-top: 125px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
 /* footer */
 
@@ -175,7 +189,7 @@ header{
 }
 
 .footer__contents{
-	width: 1210px;
+	width: 1050px;
 	display: flex;
 	flex-direction: row;
 }

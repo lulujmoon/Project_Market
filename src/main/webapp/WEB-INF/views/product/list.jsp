@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/productList.css">
+<link rel="stylesheet" href="/resources/css/productCard.css">
 <title>상품 목록</title>
 </head>
 <body>
