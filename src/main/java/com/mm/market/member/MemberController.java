@@ -309,7 +309,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("delete")
+	@PostMapping("delete")
 	public String setDelete(MemberVO memberVO,Authentication authentication,HttpSession session)throws Exception{
 		memberVO =(MemberVO)authentication.getPrincipal();
 		

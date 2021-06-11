@@ -1,9 +1,5 @@
-/**
- * 
- */
  
-/**
-	* @function showEdit()
+/** @function showEdit()
 	* 1. 수정 버튼을 누르면 info__content 요소는 display:none, info__input 요소를 보여준다.
 	* 2. 수정 버튼은 사라지고 완료, 취소 버튼을 보여준다.
 	* 3. 완료 버튼을 누르면 '/member/update'로 form을 보낸다.
@@ -25,15 +21,39 @@ function manageBtns(){
 	btnCancel.classList.toggle('active');	
 }
 
-/**
-	* @function makeInsertForm
+/** @function deleteMember(username) 
+ *	-- 회원 탈퇴를 위한 폼을 만들어 제출한다.
+ */
+ function deleteMember(username){
+	let check = confirm('정말 탈퇴하시겠습니까? 탈퇴해도 작성한 글은 삭제되지 않습니다.');
+	if(check){
+		let newForm = document.createElement('form');
+		newForm.action = './delete';
+		newForm.method = 'post';
+		newForm.id = 'member-delete-form';
+		
+		let inputUsername = document.createElement('input');
+		inputUsername.type = 'hidden';
+		inputUsername.name = 'username';
+		inputUsername.value = username;
+		
+		newForm.appendChild(inputUsername);
+		document.body.appendChild(newForm);
+		
+		const form = document.querySelector('#member-delete-form');
+		form.submit();
+	}
+}
+	
+
+/** @function makeLocationInsertForm(locationCode)
 	* 1. username과 법정동코드를 매개변수로 받는다.
 	* 2. form을 만든다.
 	* 3. action="../memberLocation/insert", method="post"
 	* 4. form에 username과 법정동코드를 input으로 담는다.
  */
  
- function makeInsertForm(locationCode){
+ function makeLocationInsertForm(locationCode){
 	 let newForm = document.createElement('form');
 	 newForm.action = '../memberLocation/insert';
 	 newForm.method = 'post';
@@ -50,14 +70,13 @@ function manageBtns(){
 	 document.body.appendChild(newForm);
 }
 
-/*
- * @function makeDeleteForm(locationNum)
- * 1. form을 만든다.
- * 2. action="../memberLocation/delete", method="post"
- * 3. form에 locationNum을 input으로 담는다.
+/** @function makeLocationDeleteForm(locationNum)
+ *  1. form을 만든다.
+ *  2. action="../memberLocation/delete", method="post"
+ *  3. form에 locationNum을 input으로 담는다.
  */
  
- function makeDeleteForm(locationNum){
+ function makeLocationDeleteForm(locationNum){
 	let newForm = document.createElement('form');
 	newForm.action = '../memberLocation/delete';
 	newForm.method = 'post';
@@ -73,20 +92,24 @@ function manageBtns(){
 }
 
 
-/* 내 지역 저장 */
+/** @function insertLocation()
+ *	-- 내 지역 저장 
+ */
 function insertLocation(){
     new daum.Postcode({
         oncomplete: function(data) {
-					makeInsertForm(data.bcode);
+					makeLocationInsertForm(data.bcode);
 					let insertForm = document.querySelector('#location-insert-form');
 					insertForm.submit();
         }
     }).open();
 };
 
-/* 내 지역 삭제 */
+/** @function deleteLocation(locationNum)
+ *	-- 내 지역 삭제 
+ */
 function deleteLocation(locationNum){
-	makeDeleteForm(locationNum);
+	makeLocationDeleteForm(locationNum);
 	let deleteForm = document.querySelector('#location-delete-form');
 	deleteForm.submit();
 }
