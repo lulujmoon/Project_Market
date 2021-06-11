@@ -65,5 +65,6 @@
 	
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/memberJoin.js"></script>
 </body>
 </html>

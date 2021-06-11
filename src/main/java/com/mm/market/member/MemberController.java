@@ -137,11 +137,12 @@ public class MemberController {
 
 		  if(memberService.memberError(memberVO, errors)) { 
 			  
+			  System.out.println("valid테스트");
 		  return"member/join"; 
 		  
 		  }
 
-		int result = memberService.setJoin(memberVO, avatar);
+	//	int result = memberService.setJoin(memberVO, avatar);
 
 		return "redirect:../";
 
@@ -162,7 +163,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("info")
-	public void infomation(Authentication authentication, HttpSession session)throws Exception{
+	public void infomation(Authentication authentication, HttpSession session, @ModelAttribute MemberVO memberVO)throws Exception{
 		
 		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
@@ -174,7 +175,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(MemberVO memberVO, HttpSession session, Authentication authentication) throws Exception{
+	public String setUpdate(@Valid MemberVO memberVO, HttpSession session, Authentication authentication) throws Exception{
 
 		int result = memberService.setUpdate(memberVO);
 		//db값 변경됐지만 session값 변경안됨
