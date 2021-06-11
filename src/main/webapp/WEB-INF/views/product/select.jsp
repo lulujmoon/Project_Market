@@ -47,7 +47,19 @@
 				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
 			<div class="top__btns">
-				<div class="top-btn btn-contact">연락하기</div>
+				<div class="buy_chat">
+				<form id="chatSubmit_form" action="/chatMessage" method="GET">
+				<a href="javascript:{}" onclick="chatSubmit()">
+				<input type="hidden" name="username" value="${seller.username}"/>
+				<input type="hidden" name="name" value="${seller.name}"/>
+				<input type="hidden" name="productNum" value="${product.productNum}"/>
+				<input type="hidden" name="productName" value="${product.productName}"/>
+				<button id="btn_chat">
+					채팅으로 거래하기
+				</button>
+			</a>
+		</form>
+		</div>
 				<div class="top-btn btn-nego">가격 제안하기</div>
 				<div class="btn-heart"></div>
 				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i> 신고</div>
@@ -82,5 +94,11 @@
 <script type="text/javascript" src="/resources/js/common.js"></script>
 <script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/productSelect.js"></script>
+	<script type="text/javascript">
+		
+	 	function chatSubmit() {
+	 		document.getElementById('chatSubmit_form').submit();
+	 	} 
+	</script>
 </body>
 </html>
