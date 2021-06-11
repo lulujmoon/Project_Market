@@ -43,7 +43,7 @@ public class MemberService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername(username);
-		memberVO = memberMapper.getLogin(memberVO);
+		memberVO = memberMapper.getSelectByUsername(memberVO);
 
 		System.out.println("로드유저");
 		System.out.println(memberVO.getAuthorities());
@@ -95,11 +95,17 @@ public class MemberService implements UserDetailsService{
 		int result = memberMapper.setJoin(memberVO);
 
 		//role table
+		if(memberVO.getUsername().contains("admin")) {
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("username", memberVO.getUsername()); //키값 ,밸류값
+			map.put("roleName", "ROLE_ADMIN");
+			result = memberMapper.setMemberRole(map);	
+		}else {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("username", memberVO.getUsername()); //키값 ,밸류값
 		map.put("roleName", "ROLE_MEMBER");
 		result = memberMapper.setMemberRole(map);
-		
+		}
 		//hdd file
 		String filePath="member/";
 		if(multipartFile.getSize() !=0) {
@@ -185,5 +191,15 @@ public class MemberService implements UserDetailsService{
 	
 	public MemberVO getSelectByCode(MemberVO memberVO) throws Exception {
 		return memberMapper.getSelectByCode(memberVO);
+	}
+	
+
+	public MemberVO getSeletByUsername(MemberVO memberVO) throws Exception {
+		return memberMapper.getSelectByUsername(memberVO);
+	}
+
+	public int setDelete(MemberVO memberVO)throws Exception{
+		return memberMapper.setDelete(memberVO);
+
 	}
 }

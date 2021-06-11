@@ -5,122 +5,82 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<c:import url="../template/setting.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/productSelect.css">
+<title>${product.productName}</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<title>Insert title here</title>
 </head>
 <body>
-
-	<div class="container">
-		<h2>Product Select Page</h2>
-		<table class="table">
-			<thead class="thead-dark">
-				<tr>
-					<th>IMAGES</th>
-					<th>NO</th>
-					<th>SUBJECT</th>
-					<th>CATEGORY</th>
-					<th>STATUS</th>
-					<th>NAME</th>
-					
-					<th>DATE</th>
-					<th>HIT</th>
-					<th>HEART</th>
-				</tr>
-			</thead>
-			<tbody>
-
-					<tr>
-						<td>
-						<div>
-							<c:forEach items="${vo.files}" var="file">
-								<a href="/resources/upload/product/${file.fileName}">
-								<img src="/resources/upload/product/${file.fileName}" width="100px" height="100px">
-								</a>
-							</c:forEach>
-						</div>
-						</td>
-						<td>${vo.productNum}</td>
-						<td>${vo.productName}</td>
-						<td>${vo.category.categoryName}</td>
-						<td>${vo.productStatus}</td>
-						<td>${vo.username}</td>
-						<td>${vo.productDate}</td>
-						<td>${vo.location.locationName}</td>
-						<td>${vo.productHeart}</td>
-					</tr>
-			  
-			</tbody>
-		</table>
-
-
-		<div>
-			<input id="heartNumber" type="hidden" title="${heart}">
-			<input id="productNum" type="hidden" title="${vo.productNum}">
-		</div>
-		
-		<div>
-			<a href="./delete?productNum=${vo.productNum}" id="delete" class="btn btn-primary" role="button">Delete</a>
-			<a href="./update?productNum=${vo.productNum}" role="button"> Update </a>
-			<a href="#" class="btn btn-primary" role="button">가격제안</a>
-		<!-- 	<a href="#" class="btn btn-danger" role="button">신고하기</a> -->
-		
-			<a class="heart" onclick="confirm();">
-				<img id="heart" src="" width="50px" height="50px"> 
-			</a>
-			
-
-  <!-- Button to Open the Modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#report">
-    신고하기
-  </button>
-
+<c:import url="../template/header.jsp"></c:import>
 <div class="container">
-  <!-- The Modal -->
-  <div class="modal fade" id="report">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">신고하기</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-         <form action="#" method="post">
-						<div class="form-group">
-							<label>신고 제목</label> 
-							<input type="text"class="form-control" id="reportTitle" name="reportTitle" required>
-						</div>
-						<div class="form-group">
-							<label>신고 내용</label> 
-							<textarea class="form-control" id="reportContent" name="reportContent" required ></textarea>
-						</div>
-					</form>
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-		<button type="submit" class="btn btn-primary">신고하기</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  
-</div>
-		<!-- 신고하기 -->	
-
+	<div class="top-container">
+		<div class="carousel-container">
+			<div class="carousel-slide">
+				<img src="/resources/upload/product/${product.files[product.files.size()-1].fileName}" class="carousel-images" id="last-clone"/>
+				<c:forEach items="${product.files}" var="file">
+				<img class="carousel-images" src="/resources/upload/product/${file.fileName}">
+				</c:forEach>
+				<img src="/resources/upload/product/${product.files[0].fileName}" class="carousel-images" id="first-clone"/>	
+			</div>	
+			<div class="carousel-btn">
+				<i class="fas fa-chevron-left" id="prev-btn"></i>
+				<c:forEach begin="0" end="${product.files.size()-1}" var="i">
+					<div class="circle" id="circle_${i}"></div>
+				</c:forEach>
+				<i class="fas fa-chevron-right" id="next-btn"></i>
+			</div>
 		</div>
-
+		<div class="top__info">
+			<div class="top__productName">${product.productName}</div>
+			<div class="priceNstatus">
+				<div class="top__price">${product.productPrice}</div>
+				<div class="top__status">${product.productStatus}</div>
+			</div>
+			<div class="top__smalls">
+				<div class="top__hitNheart">
+					<div class="top__small top__hit"><i class="far fa-eye"></i> ${product.productHit}</div>
+					<div class="top__small top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
+					<div class="top__small top__productDate">${product.productDate}</div>
+				</div>
+				<div class="top__small top__category"><i class="fas fa-tag"></i> ${product.category.categoryName}</div>
+				<div class="top__small top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
+				<div class="top__small top__nego">${product.productNego}</div>
+			</div>
+			<div class="top__btns">
+				<div class="top-btn btn-contact">연락하기</div>
+				<div class="top-btn btn-nego">가격 제안하기</div>
+				<div class="btn-heart"></div>
+				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i> 신고</div>
+			</div>
+			<div class="hidden">
+				<input type="hidden" class="heartValue" value="${heart}">
+				<input type="hidden" class="productNum" value="${product.productNum}">
+			</div>
+		</div>
 	</div>
+		<div class="seller-container" onclick="goSellerPage(${seller.code})">
+			<div class="seller-left">
+				<div class="seller__photo"><img src="/resources/upload/member/${sellerFile.fileName}"></div>
+				<div class="seller__name">${seller.name}</div>
+			</div>
+			<div class="seller_locNdate">
+				<div class="seller__location">${sellerLocation.locationName}</div>
+				<div class="seller__joinDate">${seller.joinDate}</div>
+			</div>
+			<div class="seller__rating">
+				<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">6</div> (15)</div>
+				<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">7</div> (23)</div>
+				<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">8</div> (23)</div>
+			</div>
+		</div>
+		<div class="product-content">
+			${product.productContent}
+		</div>
+</div>
 
-
-
-
+<c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/productSelect.js"></script>
 </body>
 </html>

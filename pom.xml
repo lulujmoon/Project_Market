@@ -32,6 +32,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
 		</dependency>
+
 		<!-- MessageBrokerRegistry -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -66,16 +67,26 @@
 		
 		
 		<!-- JSON 데이터 자동처리 -->
+
+		
+		<!-- JSON -->
+
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
 		</dependency>			
 	
-			<dependency>
+		
+		<dependency>
 		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-validation</artifactId>
+		    <artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 
+		<!-- oauth2.0 -->
+			<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		</dependency>
 
 		<!--tomcat-jasper for JSP in Sprng boot -->
 		<dependency>

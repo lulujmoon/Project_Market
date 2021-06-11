@@ -7,26 +7,32 @@
 
 
 <configuration>
+
 	<typeAliases>
 	  <typeAlias type="com.mm.market.member.MemberVO" alias="MemberVO"/>
-  	  <typeAlias type="com.mm.market.member.MemberFileVO" alias="MemberFileVO"/>
-  	  <typeAlias type="com.mm.market.member.RoleVO" alias="RoleVO"/>
-	  <typeAlias type="com.mm.market.location.LocationVO" alias="LocationVO"/>
-	  <typeAlias type="com.mm.market.memberLocation.MemberLocationVO" alias="MemberLocationVO"/>
-	  <typeAlias type="com.mm.market.product.ProductVO" alias="ProductVO"/>
-	  <typeAlias type="com.mm.market.product.ProductFileVO" alias="ProductFileVO"/>
-	  <typeAlias type="com.mm.market.category.CategoryVO" alias="CategoryVO"/>
-	  <typeAlias type="com.mm.market.product.HeartVO" alias="HeartVO"/>
-	  <typeAlias type="com.mm.market.review.ReviewVO" alias="ReviewVO"/>
+  	<typeAlias type="com.mm.market.member.MemberFileVO" alias="MemberFileVO"/>
+  	<typeAlias type="com.mm.market.member.RoleVO" alias="RoleVO"/>
+		<typeAlias type="com.mm.market.location.LocationVO" alias="LocationVO"/>
+		<typeAlias type="com.mm.market.memberLocation.MemberLocationVO" alias="MemberLocationVO"/>
+
+  		<typeAlias type="com.mm.market.notice.NoticeVO" alias="NoticeVO"/>
+		<typeAlias type="com.mm.market.product.ProductVO" alias="ProductVO"/>
+		<typeAlias type="com.mm.market.product.ProductFileVO" alias="ProductFileVO"/>
+		<typeAlias type="com.mm.market.category.CategoryVO" alias="CategoryVO"/>
+		<typeAlias type="com.mm.market.product.HeartVO" alias="HeartVO"/>
+		<typeAlias type="com.mm.market.review.ReviewVO" alias="ReviewVO"/>
+
 	  <typeAlias type="com.mm.market.social.SocialVO" alias="SocialVO"/>
 	  <typeAlias type="com.mm.market.social.SocialFileVO" alias="SocialFileVO"/>
 	  <typeAlias type="com.mm.market.socialCategory.SocialCategoryVO" alias="SocialCategoryVO"/>
 	  <typeAlias type="com.mm.market.comment.CommentVO" alias="CommentVO"/>
 	  <typeAlias type="com.mm.market.util.Pager" alias="Pager"/>
 	  <typeAlias type="com.mm.market.util.ProductPager" alias="ProductPager"/>
+		<typeAlias type="com.mm.market.util.NoticePager" alias="NoticePager"/>
 	  <typeAlias type="com.mm.market.chat.ChatRoom" alias="ChatRoom"/>
 	  <typeAlias type="com.mm.market.chat.ChatList" alias="ChatList"/>
 	  
   </typeAliases>
  </configuration>
+
 

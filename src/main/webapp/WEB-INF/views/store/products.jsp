@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/store.css">
-<link rel="stylesheet" href="/resources/css/productList.css">
+<link rel="stylesheet" href="/resources/css/storeProducts.css">
 <title>내 상점</title>
 </head>
 <body>
@@ -24,7 +24,7 @@
 		<div class="board__contents">
 				<div class="list-container">		
 				<c:forEach items="${products}" var="product">
-					<div class="prd__card" onclick="goSelect(${dto.productNum})">
+					<div class="prd__card" onclick="goSelect(${product.productNum})">
 						<c:if test="${product.files[0].fileName != null}">
 							<img class="card__img" src="/resources/upload/product/${product.files[0].fileName}">
 						</c:if>
@@ -47,6 +47,7 @@
 
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/store.js"></script>
 </body>
 </html>

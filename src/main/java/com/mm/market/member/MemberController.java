@@ -308,6 +308,16 @@ public class MemberController {
 		
 		return "redirect:./store";
 	}
+	
+	@GetMapping("delete")
+	public String setDelete(MemberVO memberVO,Authentication authentication,HttpSession session)throws Exception{
+		memberVO =(MemberVO)authentication.getPrincipal();
+		
+		int result = memberService.setDelete(memberVO);
+		session.invalidate();
+		
+		return "redirect:../";
+	}
 		
 	//-----------------shop	
 			
@@ -322,7 +332,5 @@ public class MemberController {
 			
 			return mv;
 		};
-		
-
 
 }

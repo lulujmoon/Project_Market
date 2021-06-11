@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
+import com.mm.market.member.MemberFileVO;
+import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
@@ -37,28 +40,28 @@ public class ProductController {
 	private CategoryMapper categoryMapper;
 	
 	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
 	private MemberLocationService memberLocationService;
 	
 	@GetMapping("list")
 	public String getList(ProductPager productPager, Long myLocation, Authentication authentication, Model model) throws Exception {
 		
 		if(myLocation == null) {
-			myLocation = -1L;
+			myLocation = 0L;
 		}
 		
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(memberVO.getUsername());
-		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
-		List<ProductVO> productList = null;
 		
-		if(myLocation>=0L) {			
-			productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
-			productList = productService.getList(productPager, 16L, 5L);			
-		}else {
-			productPager.setLocationCode(0L);
-			productList = productService.getList(productPager, 16L, 5L);			
-		}
+		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		memberLocationVO.setLocationCode(0L);
+		locationList.add(0, memberLocationVO);
+		
+		productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
+		List<ProductVO> productList  = productService.getList(productPager, 16L, 5L);
 		
 		List<CategoryVO> categories = categoryMapper.getList();
 		
@@ -73,27 +76,36 @@ public class ProductController {
 	}
 	
 	
-	@GetMapping("select")
-	public String getSelect(@RequestParam("productNum") Long productNum ,ProductVO productVO, Model model, Authentication auth)throws Exception {
-		productVO = productService.getSelect(productVO);
-		System.out.println(productVO);
-		
-		int startInx = auth.getPrincipal().toString().indexOf("=");
-		int lastInx = auth.getPrincipal().toString().indexOf(",");
-		
-		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
-		System.out.println(username);
-		
+	@GetMapping("select/{productNum}")
+	public String getSelect(@PathVariable("productNum") Long productNum, Model model, Authentication auth)throws Exception {
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNum(productNum);
+		productVO =	productService.getSelect(productVO);
+
+		MemberVO memberVO = (MemberVO)auth.getPrincipal();
+		String username = memberVO.getUsername();
+
 		HeartVO heartVO = new HeartVO();
 		heartVO.setProductNum(productNum);
 		heartVO.setUsername(username);
 		
 		Long heart = productService.getHeart(heartVO);
-		System.out.println("Heart : "+heart);
 		
-		
+		//판매자 정보
+		MemberVO sellerVO = new MemberVO();
+		sellerVO.setUsername(productVO.getUsername());
+		sellerVO = memberService.getSeletByUsername(memberVO);
+		MemberFileVO sellerFileVO = new MemberFileVO();
+		sellerFileVO = memberService.selectFile(sellerVO);
+		MemberLocationVO sellerLocationVO = new MemberLocationVO();
+		sellerLocationVO.setUsername(sellerVO.getUsername());
+		List<MemberLocationVO> sellerLocations = memberLocationService.getList(sellerLocationVO);
+
 		model.addAttribute("heart", heart);
-		model.addAttribute("vo", productVO);
+		model.addAttribute("product", productVO);
+		model.addAttribute("seller", sellerVO);
+		model.addAttribute("sellerFile", sellerFileVO);
+		model.addAttribute("sellerLocation", sellerLocations.get(0));
 		return "product/select";
 	}
 	
@@ -152,13 +164,12 @@ public class ProductController {
 		return mv;
 	}
 	
-	@GetMapping("fileDelete")
+	@PostMapping("fileDelete")
 	public ModelAndView setFileDelete(ProductFileVO productFileVO)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = productService.setFileDelete(productFileVO);
 		mv.addObject("result", result);
-		mv.addObject("msg", "정말 삭제하시겠습니까?");
-		mv.setViewName("common/commonResult");
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 	}
@@ -212,10 +223,10 @@ public class ProductController {
 
 		for(int i=0;i<file.size();i++) {
 			file.get(i).setProductNum(productVO.getProductNum());
-		}
 
 		model.addAttribute("vo", productVO);
 		model.addAttribute("files", file);
+		}
 
 		System.out.println(file);
 
@@ -223,7 +234,7 @@ public class ProductController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(ProductVO productVO, MultipartFile file)throws Exception{
+	public String setUpdate(ProductVO productVO, MultipartFile [] file)throws Exception{
 		productService.setUpdate(productVO, file);
 		productVO = productService.getSelect(productVO);
 				
