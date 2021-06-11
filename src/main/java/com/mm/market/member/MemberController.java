@@ -137,7 +137,6 @@ public class MemberController {
 
 		  if(memberService.memberError(memberVO, errors)) { 
 			  
-			  System.out.println("valid테스트");
 		  return"member/join"; 
 		  
 		  }
@@ -175,7 +174,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(@Valid MemberVO memberVO, HttpSession session, Authentication authentication) throws Exception{
+	public String setUpdate(@Valid MemberVO memberVO, HttpSession session, Authentication authentication, Errors errors) throws Exception{
 
 		int result = memberService.setUpdate(memberVO);
 		//db값 변경됐지만 session값 변경안됨
