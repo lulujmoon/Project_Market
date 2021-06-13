@@ -21,7 +21,7 @@ $("#socialContent").summernote({
 					
 });
 
-function deleteFile(file){
+function deleteFile(file) {
 	let fileName = $(file[0]).attr("src");
 	fileName = fileName.substring(fileName.lastIndexOf('/')+1);
 	$.post("summerFileDelete", {fileName:fileName}, function(result){

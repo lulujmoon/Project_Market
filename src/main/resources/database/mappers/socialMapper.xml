@@ -55,7 +55,7 @@
 	<insert id="setInsert" parameterType="SocialVO" useGeneratedKeys="true" keyProperty="socialNum">
 		insert into social
 		(socialNum, socialTitle, categoryCode, username, socialContent, socialDate)
-		values(#{socialNum}, #{socialTitle}, #{categoryCode}, #{username}, #{socialContent}, now())
+		values (#{socialNum}, #{socialTitle}, #{categoryCode}, #{username}, #{socialContent}, now())
 	</insert>
 
 	<insert id="setFileInsert" parameterType="SocialFileVO">

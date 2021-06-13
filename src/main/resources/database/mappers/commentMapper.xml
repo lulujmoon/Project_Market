@@ -7,7 +7,7 @@
 
 	<!-- 댓글 list -->
 	<select id="getList" parameterType="CommentVO" resultType="CommentVO">
-		select * from comment where socialNum=#{socialNum} order by step desc
+		select * from comment where socialNum=#{socialNum} order by ref desc
 	</select>
 
 	<!-- 댓글 select -->
@@ -18,7 +18,7 @@
 	<!-- 댓글 insert -->
 	<insert id="setInsert" parameterType="CommentVO" useGeneratedKeys="true" keyProperty="commentNum">
 		insert into comment (commentNum, socialNum, commentContent, username, ref, commentDate)
-		values (#{commentNum}, #{socialNum}, #{commentContent}, #{username}, 0, now())
+		values (#{commentNum}, #{socialNum}, #{commentContent}, #{username}, #{commentNum}, now())
 	</insert>
 	
 	<!-- 댓글 update -->

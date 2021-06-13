@@ -14,7 +14,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-	@GetMapping("commentInsert")
+	@GetMapping("insert")
 	public ModelAndView setInsert() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		CommentVO commentVO = new CommentVO();
@@ -25,7 +25,7 @@ public class CommentController {
 		return mv;
 	}
 
-	@PostMapping("commentInsert")
+	@PostMapping("insert")
 	public ModelAndView setInsert(CommentVO commentVO) throws Exception {
 
 		ModelAndView mv = new ModelAndView();
@@ -36,35 +36,36 @@ public class CommentController {
 		return mv;
 	}
 	
-	@GetMapping("commentUpdate") //댓글 수정
+	@GetMapping("update") //댓글 수정
 	public ModelAndView setUpdate(CommentVO commentVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		commentVO = commentService.getSelect(commentVO);
 
-		mv.addObject("vo", commentVO);
-		mv.setViewName("social/select");
+		mv.addObject("comment", commentVO);
+		mv.setViewName("comment/update");
 
 		return mv;
 	}
 	
-	@PostMapping("commentUpdate")
+	@PostMapping("update")
 	public ModelAndView setUpdate(CommentVO commentVO, ModelAndView mv) throws Exception {
 		int result = commentService.setUpdate(commentVO);
-		System.out.println("result : "+result);
 
 		if(result>0) {
 			System.out.println("수정 완료!");
-			mv.setViewName("redirect:./list");
-		} else {
+			mv.setViewName("redirect:../social/list");
+		}
+		
+		else {
 			System.out.println("수정 실패");
-			mv.setViewName("redirect:./list");
+			mv.setViewName("redirect:../social/list");
 		}
 		
 		return mv;
 	}
 
-	@GetMapping("commentDelete")
+	@GetMapping("delete")
 	public ModelAndView commentDelete(CommentVO commentVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		

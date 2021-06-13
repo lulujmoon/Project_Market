@@ -14,7 +14,7 @@
 <body>
 	<h1>Comment Update</h1>
 
-	<form id="form" action="./commentUpdate" method="post">
+	<form id="form" action="./update" method="post">
 		<div>
 			<input type="hidden" id="commentNum" name="commentNum"
 				value="${param.commentNum}" /> <input type="text"

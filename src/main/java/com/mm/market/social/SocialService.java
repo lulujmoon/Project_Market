@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mm.market.util.FileManager;
 import com.mm.market.util.Pager;
-import com.mm.market.util.SocialFileManager;
 
 @Service
 public class SocialService {
@@ -19,7 +19,7 @@ public class SocialService {
 	private SocialMapper socialMapper;
 
 	@Autowired
-	private SocialFileManager fileManager;
+	private FileManager fileManager;
 
 	@Autowired
 	private HttpSession session;

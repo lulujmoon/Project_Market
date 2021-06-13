@@ -33,7 +33,7 @@ public class CommentService {
 	
 	public int setReply(CommentVO commentVO) throws Exception{
 		
-		//부모글의 ref, step depth 조회
+		//부모 글의 ref, step, depth 조회
 		CommentVO parent = commentMapper.getSelect(commentVO);
 		
 		commentVO.setRef(parent.getRef());

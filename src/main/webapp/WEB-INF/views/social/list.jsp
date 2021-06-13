@@ -5,15 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
 	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
 	crossorigin="anonymous">
 <title>Insert title here</title>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 	<div class="container">
-		<h2>Social Page</h2>
+		<h2>우리동네</h2>
 		<div class="category-container">
 			<ul class="category-list">
 				<c:forEach items="${categories}" var="category">
@@ -80,5 +82,8 @@
 		</div>
 		<a href="./insert" class="btn btn-primary" role="button">작성</a>
 	</div>
+<c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/functions.js"></script>
 </body>
 </html>
