@@ -57,7 +57,7 @@
 				<input type="file" class="form-control etc"	id="avatar" name="avatar" required="required">
 			</div>
 			<div class="join-btn">
-				<button type="submit" class="btn-wide btn-submit">Join</button>
+				<button type="button" class="btn-wide btn-submit">Join</button>
 			</div>
 		</form:form>
 	</div>
@@ -65,6 +65,6 @@
 	
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
-<!-- <script type="text/javascript" src="../resources/js/memberJoin.js"></script> -->
+<script type="text/javascript" src="../resources/js/memberJoin.js"></script>
 </body>
 </html>
