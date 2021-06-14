@@ -50,7 +50,8 @@
 				<div class="top-btn btn-contact">연락하기</div>
 				<div class="top-btn btn-nego">가격 제안하기</div>
 				<div class="btn-heart"></div>
-				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i> 신고</div>
+				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i>
+					<a href="/report/report?productNum=${product.productNum}">신고</a></div>
 			</div>
 			<div class="hidden">
 				<input type="hidden" class="heartValue" value="${heart}">
