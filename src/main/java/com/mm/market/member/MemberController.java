@@ -141,7 +141,7 @@ public class MemberController {
 		  
 		  }
 
-	//	int result = memberService.setJoin(memberVO, avatar);
+		int result = memberService.setJoin(memberVO, avatar);
 
 		return "redirect:../";
 
