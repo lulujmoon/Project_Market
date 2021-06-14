@@ -1,5 +1,6 @@
 package com.mm.market.report;
 
+import com.mm.market.member.MemberVO;
 import com.mm.market.product.ProductVO;
 
 import lombok.Getter;

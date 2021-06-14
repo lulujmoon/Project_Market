@@ -15,7 +15,7 @@
 
     <form action="/report" method="post">
     
-        <input readonly="readonly" name="address" value="${member.email}"><br>
+        <input readonly="readonly" name="address" value=""><br>
         <input readonly="readonly" name="productNum" value="${product.productNum}"><br>
         <input readonly="readonly" name="title" value="${product.productNum}번 상품을 신고합니다."><br>
         <textarea name="message" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"></textarea>
