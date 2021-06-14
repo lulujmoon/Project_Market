@@ -10,7 +10,7 @@
 <c:import url="../template/setting.jsp"></c:import>
 
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<title>Insert title here</title>
+<title>우리동네</title>
 
 <!-- summernote -->
 <link
@@ -27,7 +27,7 @@
 </head>
 <body>
 	<div class="container">
-		<h2>우리동네 글 수정</h2>
+		<h2>글 수정</h2>
 		<br>
 		<form class="form" action="./update" method="POST"
 			enctype="multipart/form-data">

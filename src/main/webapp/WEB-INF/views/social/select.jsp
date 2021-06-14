@@ -11,30 +11,108 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-	integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
-	crossorigin="anonymous">
-<title>${vo.socialTitle}</title>
+<title>우리동네</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<style type="text/css">
+.main-container {
+	padding-top: 125px;
+	width: 1252px;
+	min-height: 55vh;
+	margin: 30px auto;
+	display: flex;
+	flex-direction: column;
+}
+
+h2 {
+	text-align: center;
+}
+
+.button {
+	padding-top: 25px;
+	width: 1252px;
+	margin: 30px auto;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.table-box {
+	border: 3px solid #f8cb45;
+	width: 80%;
+	height: auto;
+	margin-left: 10%;
+	margin-bottom: 2%;
+	padding: 0 0 0;
+	color: black;
+	text-align: center;
+	font-size: 12pt;
+}
+
+.table-box2 {
+	border: 3px solid white;
+	width: 80%;
+	height: auto;
+	margin-left: 10%;
+	margin-bottom: 2%;
+	padding: 0 0 0;
+	color: black;
+	text-align: center;
+	font-size: 12pt;
+}
+
+.comment-container {
+	border: 1px solid black;
+	width: 95%;
+	margin-top: 2%;
+	margin-left: 2%;
+}
+</style>
 </head>
 <body>
-	<div class="container">
-		<h4>Select Page</h4>
-		<h5>번호 : ${vo.socialNum}</h5>
-		<h5>카테고리 : ${vo.categoryCode}</h5>
-		<h5>제목 : ${vo.socialTitle}</h5>
-		<h5>작성자 : ${vo.username}</h5>
-		<h5>내용 : ${vo.socialContent}</h5>
-		<h5>작성 날짜 : ${vo.socialDate}</h5>
-
-		<a href="./delete?socialNum=${vo.socialNum}" class="btn btn-primary"
-			role="button">삭제</a> <a href="./update?socialNum=${vo.socialNum}"
-			class="btn btn-primary" role="button">수정</a><br><br><br><br>
+	<c:import url="../template/header.jsp"></c:import>
+	<div class="main-container">
+		<h2>${vo.socialTitle}</h2>
+		<table class="table-box">
+			<thead class="thead-dark">
+				<tr>
+					<th>번호</th>
+					<th>작성자</th>
+					<th>작성 날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>${vo.socialNum}</td>
+					<td>${vo.username}</td>
+					<td>${vo.socialDate}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="table-box2">
+			<thead class="thead-dark">
+				<tr>
+					<th>내용</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>${vo.socialContent}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
+	<a class="insert-button" href="./update?socialNum=${vo.socialNum}"
+		class="btn btn-primary" role="button">수정</a>
+	<a class="insert-button" href="./delete?socialNum=${vo.socialNum}"
+		class="btn btn-primary" role="button">삭제</a>
+	<br>
+	<br>
+	<br>
+	<br>
+
 	<!--  댓글  -->
-	<div class="container">
+	<div class="table-box2">
 		<label for="comment">댓글</label>
 		<form id="form" action="../comment/insert?socialNum=${vo.socialNum}"
 			method="post">
@@ -43,30 +121,31 @@
 				name="commentContent" placeholder="내용을 입력하세요."></textarea>
 			<input type="text" readonly="readonly" value="${vo.username}"
 				name="username"> <input type="submit" value="작성" />
-		</form><br>
-
-		<c:if test="${comment ne null}">
-			<c:forEach items="${list}" var="comment">
-				<ul>
-					<li><c:catch>
-							<c:forEach begin="1" end="${comment.depth}">
-								&ensp;→
-							</c:forEach>
-						</c:catch> ${comment.commentContent}</li>
-					<li>
-						<div class="container">
-							${comment.username}<br>${comment.commentDate} <a
-								href="../comment/update?commentNum=${comment.commentNum}">수정</a>
-							<a href="../comment/delete?commentNum=${comment.commentNum}">삭제</a>
-							<a
-								href="../comment/reply?socialNum=${vo.socialNum}&commentNum=${comment.commentNum}">답글</a>
-						</div>
-				</ul>
-			</c:forEach>
-		</c:if>
+		</form>
 	</div>
-<c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="/resources/js/common.js"></script>
-<script type="text/javascript" src="/resources/js/functions.js"></script>
+	<br>
+
+	<c:if test="${comment ne null}">
+		<c:forEach items="${list}" var="comment">
+			<ul class="table-box2">
+				<li><c:catch>
+						<c:forEach begin="1" end="${comment.depth}">
+								&ensp;>
+							</c:forEach>
+					</c:catch> ${comment.commentContent}</li>
+				<li>
+					<div class="container">
+						${comment.username}<br>${comment.commentDate} <a
+							href="../comment/update?commentNum=${comment.commentNum}">수정</a>
+						<a href="../comment/delete?commentNum=${comment.commentNum}">삭제</a>
+						<a
+							href="../comment/reply?socialNum=${vo.socialNum}&commentNum=${comment.commentNum}">답글</a>
+					</div>
+			</ul>
+		</c:forEach>
+	</c:if>
+	<c:import url="../template/footer.jsp"></c:import>
+	<script type="text/javascript" src="/resources/js/common.js"></script>
+	<script type="text/javascript" src="/resources/js/functions.js"></script>
 </body>
 </html>

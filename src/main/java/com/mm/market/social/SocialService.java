@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.mm.market.util.FileManager;
-import com.mm.market.util.Pager;
+import com.mm.market.util.SocialPager;
 
 @Service
 public class SocialService {
@@ -27,25 +27,25 @@ public class SocialService {
 	@Value("${social.filePath}")
 	private String filePath;
 
-	public List<SocialVO> getList(Pager pager) throws Exception {
-		Long perPage = 20L;
-		Long perBlock = 5L;
+	//List
+	public List<SocialVO> getList(SocialPager socialPager) throws Exception {
+		socialPager.makeRow();
+		Long totalCount = socialMapper.getTotalCount(socialPager);
+		socialPager.makeNum(totalCount);
 
-		pager.makeRow(perPage);
-		Long totalCount = socialMapper.getTotalCount(pager);
-		pager.makeNum(totalCount, perPage, perBlock);
-
-		return socialMapper.getList(pager);
+		return socialMapper.getList(socialPager);
 	}
 
-	public List<SocialVO> getCategoryList(Pager pager) throws Exception {
-		return socialMapper.getCategoryList(pager);
+	public List<SocialVO> getCategoryList(SocialPager socialPager) throws Exception {
+		return socialMapper.getCategoryList(socialPager);
 	}
 
+	//Select
 	public SocialVO getSelect(SocialVO socialVO) throws Exception {
 		return socialMapper.getSelect(socialVO);
 	}
 
+	//Insert
 	public int setInsert(SocialVO socialVO, MultipartFile [] files) throws Exception {
 		int result = socialMapper.setInsert(socialVO);
 
@@ -70,14 +70,17 @@ public class SocialService {
 		return result; 
 	}
 
+	//Update
 	public int setUpdate(SocialVO socialVO) throws Exception {
 		return socialMapper.setUpdate(socialVO);
 	}
 
+	//Delete
 	public int setDelete(SocialVO socialVO) throws Exception {
 		return socialMapper.setDelete(socialVO);
 	}
 
+	//SummerFile
 	public String setSummerFileUpload(MultipartFile file) throws Exception {
 		String fileName = fileManager.save("social", file, session);
 		return fileName;
@@ -88,4 +91,5 @@ public class SocialService {
 		boolean result = fileManager.delete("social", fileName, session);
 		return result;
 	}
+	
 }

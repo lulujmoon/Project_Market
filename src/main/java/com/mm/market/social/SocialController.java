@@ -15,7 +15,7 @@ import com.mm.market.comment.CommentService;
 import com.mm.market.comment.CommentVO;
 import com.mm.market.socialCategory.SocialCategoryMapper;
 import com.mm.market.socialCategory.SocialCategoryVO;
-import com.mm.market.util.Pager;
+import com.mm.market.util.SocialPager;
 
 @Controller
 @RequestMapping("/social/**")
@@ -31,12 +31,12 @@ public class SocialController {
 	private SocialCategoryMapper socialCategoryMapper;
 
 	@GetMapping("list")
-	public String getList(Pager pager, Model model) throws Exception {
-		List<SocialVO> ar = socialService.getList(pager);
+	public String getList(SocialPager socialPager, Model model) throws Exception {
+		List<SocialVO> ar = socialService.getList(socialPager);
 		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
 
 		model.addAttribute("list", ar);
-		model.addAttribute("pager", pager);
+		model.addAttribute("pager", socialPager);
 		model.addAttribute("categories", categories);
 		
 		return "social/list";

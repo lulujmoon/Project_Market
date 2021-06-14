@@ -5,7 +5,7 @@
 
 <mapper namespace="com.mm.market.social.SocialMapper">
 
-	<select id="getList" resultMap="selectResult" parameterType="Pager">
+	<select id="getList" resultMap="selectResult" parameterType="SocialPager">
 		select S.*, SC.*, SF.*
 		from social S left join socialFile SF
 		on S.socialNum = SF.socialNum
@@ -48,7 +48,7 @@
 		select last_insert_id()
 	</select>
 
-	<select id="getTotalCount" resultType="Long" parameterType="Pager">
+	<select id="getTotalCount" resultType="Long" parameterType="SocialPager">
 		select count(socialNum) from social
 	</select>
 
