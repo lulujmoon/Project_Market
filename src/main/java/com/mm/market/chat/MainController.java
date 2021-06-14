@@ -40,13 +40,14 @@ public class MainController {
 	 * @param params
 	 * @return
 	 */
-	@GetMapping("createRoom")
+	@RequestMapping("createRoom")
 	public @ResponseBody List<RoomVO> createRoom(@RequestParam HashMap<Object, Object> params) {
 		String roomName = (String)params.get("roomName");
 		if(roomName!=null && !roomName.trim().equals("")) {
 			RoomVO roomVO = new RoomVO();
 			roomVO.setRoomNumber(++roomNumber);
 			roomVO.setRoomName(roomName);
+			System.out.println("create : "+roomVO);
 			roomList.add(roomVO);
 		}
 		return roomList; 
@@ -57,15 +58,16 @@ public class MainController {
 	 * @param params
 	 * @return
 	 */
-	@GetMapping("getRoom")
+	@RequestMapping("getRoom")
 	 public @ResponseBody List<RoomVO> getRoom(@RequestParam HashMap<Object, Object> params) {
+		System.out.println(roomList);
 		 return roomList;
 	 }
 	
 	/** 채팅방
 	 * @return
 	 */
-	@GetMapping("moveChating")
+	@RequestMapping("moveChating")
 	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
 		ModelAndView mv = new ModelAndView();
 		int roomNumber = Integer.parseInt((String)params.get("roomNumber"));
@@ -74,9 +76,9 @@ public class MainController {
 		if(new_list != null && new_list.size()>0) {
 			mv.addObject("roomName", params.get("roomName"));
 			mv.addObject("roomNumber", params.get("roomNumber"));
-			mv.setViewName("chatPage");
+			mv.setViewName("chat/chatPage");
 		} else {
-			mv.setViewName("room");
+			mv.setViewName("chat/room");
 		}
 		return mv;
 	}
