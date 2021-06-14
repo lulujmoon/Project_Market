@@ -3,6 +3,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +83,6 @@
 					if(si !='') {
 						$("#sessionId").val(si);
 					}
-
 				} else if(d.type=="message") {
 					if(d.sessionId == $("#sessionId").val()){
 						$("#chating").append("<p class='me'>나 : " + d.msg + "</p>");
@@ -138,7 +141,7 @@
 			<table class="inputTable">
 				<tr>
 					<th>사용자명</th>
-					<th><input type="text" name="userName" id="userName"></th>
+					<th><input type="text" name="userName" id="userName" value="${principal.username}"></th>
 					<th><button onclick="chatName()" id="startBtn">이름 등록</button></th>
 				</tr>
 			</table>

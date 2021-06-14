@@ -42,7 +42,7 @@ public class ChatController {
 			RoomVO roomVO = new RoomVO();
 			roomVO.setRoomNumber(++roomNumber);
 			roomVO.setRoomName(roomName);
-			System.out.println("create : "+roomVO);
+			System.out.println("createRoom : "+roomVO);
 			roomList.add(roomVO);
 		}
 		return roomList; 
