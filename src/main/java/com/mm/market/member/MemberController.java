@@ -174,11 +174,14 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(@Valid MemberVO memberVO, HttpSession session, Authentication authentication, Errors errors) throws Exception{
+	public String setUpdate(@Valid MemberVO memberVO,Errors errors, HttpSession session, Authentication authentication) throws Exception{
 
 		int result = memberService.setUpdate(memberVO);
 		//db값 변경됐지만 session값 변경안됨
 
+		if(errors.hasErrors()) {
+			return "member/info";
+		}
 		MemberVO old =(MemberVO)authentication.getPrincipal();
 		
 		old.setPassword(memberVO.getPassword());
