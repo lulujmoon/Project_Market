@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/chat/**")
-public class MainController {
+public class ChatController {
 	
 	List<RoomVO> roomList = new ArrayList<RoomVO>();
 	static int roomNumber = 0;
@@ -26,9 +26,7 @@ public class MainController {
 		return mv;
 	}
 	
-	/**방페이지
-	 * @return
-	 */
+	/** 방 페이지 **/
 	@GetMapping("room")
 	public ModelAndView room() {
 		ModelAndView mv = new ModelAndView();
@@ -36,10 +34,7 @@ public class MainController {
 		return mv;
 	}
 	
-	/** 방 생성하기 
-	 * @param params
-	 * @return
-	 */
+	/** 방 생성하기 **/
 	@RequestMapping("createRoom")
 	public @ResponseBody List<RoomVO> createRoom(@RequestParam HashMap<Object, Object> params) {
 		String roomName = (String)params.get("roomName");
@@ -54,19 +49,14 @@ public class MainController {
 	}
 	
 	
-	/** 방 정보 가져오기
-	 * @param params
-	 * @return
-	 */
+	/** 방 정보 가져오기 **/
 	@RequestMapping("getRoom")
 	 public @ResponseBody List<RoomVO> getRoom(@RequestParam HashMap<Object, Object> params) {
 		System.out.println(roomList);
 		 return roomList;
 	 }
 	
-	/** 채팅방
-	 * @return
-	 */
+	/** 채팅방 **/
 	@RequestMapping("moveChating")
 	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
 		ModelAndView mv = new ModelAndView();

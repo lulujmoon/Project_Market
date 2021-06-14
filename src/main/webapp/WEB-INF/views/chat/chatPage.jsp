@@ -79,6 +79,7 @@
 					if(si !='') {
 						$("#sessionId").val(si);
 					}
+
 				} else if(d.type=="message") {
 					if(d.sessionId == $("#sessionId").val()){
 						$("#chating").append("<p class='me'>나 : " + d.msg + "</p>");
