@@ -28,4 +28,6 @@ public interface MemberMapper {
 	public int setDeleteFile (MemberFileVO memberFileVO) throws Exception;
 	
 	public int setDelete(MemberVO memberVO) throws Exception;
+	
+	public MemberVO getEmail(MemberVO memberVO) throws Exception;
 }

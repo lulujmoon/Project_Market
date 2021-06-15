@@ -3,8 +3,16 @@ package com.mm.market.member;
 import java.security.Principal;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,6 +31,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -40,6 +49,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mm.market.mail.MailController;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
 
@@ -58,6 +68,8 @@ public class MemberController {
 	@Autowired
 	private MemberLocationService memberLocationService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
 	 */
@@ -321,7 +333,66 @@ public class MemberController {
 		
 		return "redirect:../";
 	}
+	
+	@GetMapping("search")
+	public void getEmail()throws Exception{
 		
+	}
+	
+	@PostMapping("search")
+	public ModelAndView getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
+		memberVO = memberService.getEmail(memberVO);		
+
+		mv.addObject("dto",memberVO);
+		mv.setViewName("member/search");
+				
+		String uuid = UUID.randomUUID().toString();
+		
+		memberVO.setPassword(uuid);
+		
+		memberService.setUpdate(memberVO);
+		
+		
+		//smtp서버명
+		  String host     = "smtp.naver.com";
+		  final String user   = "test4913@naver.com";
+		  final String password  = "Test4913@";
+		  
+		  //받는사람메일주소
+		  String to = memberVO.getEmail();
+		  
+		  // Get the session object
+		  Properties props = new Properties();
+		  props.put("mail.smtp.host", host);
+		  props.put("mail.smtp.auth", "true");
+
+		  Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		   protected PasswordAuthentication getPasswordAuthentication() {
+		    return new PasswordAuthentication(user, password);
+		   }
+		  });
+
+		  // Compose the message
+		  try {
+		   MimeMessage message = new MimeMessage(session);
+		   message.setFrom(new InternetAddress(user));
+		   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+		   // Subject
+
+		   message.setSubject("market 임시 비밀번호 발급");	   
+		   // Text
+		   message.setContent("아이디:"+memberVO.getUsername()+"임시비밀번호:"+uuid,"text/html; charset=UTF-8");
+		   // send the message
+		   Transport.send(message);
+		   System.out.println("message sent successfully...");
+		  } catch (MessagingException e) {
+		   e.printStackTrace();
+		  }	  
+		
+		
+		return mv;
+	}
+
 	//-----------------shop	
 			
 		@GetMapping("store")

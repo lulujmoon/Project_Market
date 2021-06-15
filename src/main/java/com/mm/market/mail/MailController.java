@@ -11,18 +11,26 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mm.market.member.MemberController;
+import com.mm.market.member.MemberService;
+import com.mm.market.member.MemberVO;
 
 
 @Controller
 @RequestMapping("/mail/**")
 public class MailController {
 
+	@Autowired
+	MemberService memberService;
+	
 	@GetMapping("sendMail")
-	public String sendMail(MailDTO mailDTO, ModelAndView mv)throws Exception{
+	public String sendMail(MemberVO memberVO)throws Exception{
 		
 	//smtp서버명
 	  String host     = "smtp.naver.com";
