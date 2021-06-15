@@ -65,7 +65,7 @@ public class StoreController {
 	public String socials(@PathVariable("code") Long code) throws Exception {
 		return "/store/socials";
 	}
-	
+		
 	@GetMapping("profileUpdate")
 	public ModelAndView setUpdateFile(MemberFileVO memberFileVO, Authentication authentication) throws Exception{
 		MemberVO memberVO =(MemberVO)authentication.getPrincipal();

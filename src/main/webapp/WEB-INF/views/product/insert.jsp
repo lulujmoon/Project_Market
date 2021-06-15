@@ -18,29 +18,22 @@
 <c:import url="../template/header.jsp"></c:import>
 
 <div class="container">
+	<h2>상품 등록</h2>
 	<form class="form" id="uploadForm" action="./insert" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
-
-
-			<div id=file>
+		<div class="file-container">
 			<input type="button" id="add" value="ADD">
 			<div id="thumb">
 				<div class="inputimg">
 						<input type="file" name="file" accept="image/*" required class="img" onchange="previewImage(this,0)">
 						<div id="preview0"></div>
-					</div>
-
-			 </div>
+				</div>
 			</div>
-		
-		
+		</div>
 		<div class="form-group">
-	    <label>상품 명</label>
+	    <label>상품명</label>
 	    <input type="text" name="productName" required>
 	  </div>
-	    <div class="form-group">
-	    <label>판매자</label>
-	    <input readonly="readonly" type="text" name="username" value="${principal.username}">
-	  </div>
+	    <input type="hidden" name="username" value="${principal.username}">
 	  	<div>
 		  <div class="form-group">
 		    <label for="category">카테고리</label>
