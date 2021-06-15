@@ -16,7 +16,7 @@
 <body>
 	<div class="container">
 		<div class="title_text">
-			<h2>${chatRoomInfo.pr_title}</h2>
+			<h2>${chatRoomInfo.productName}</h2>
 		</div>
 		<div class="row">	
 				<%--chatHistory와 member가 실시간 입력하는 메시지 출력 --%>
@@ -35,12 +35,12 @@
 						<input type="text" placeholder="Message" id="message" class="form_control"/>
 						<div class="input_group_append">
 							<button id="send" class="btn btn-primary" onclick="send()">보내기</button>
-							<input type="hidden" value="${login.getNickName()}" id="buyerName"/>
-							<input type="hidden" value="${login.getEmail()}" id="buyerId"/>
-							<input type="hidden" value="${chatRoomInfo.pr_id}" id="pr_id"/>
+							<input type="hidden" value="${principal.username}" id="buyerName"/>
+							<input type="hidden" value="${principal.username}" id="buyerId"/>
+							<input type="hidden" value="${chatRoomInfo.productNum}" id="productNum"/>
 							<input type="hidden" value="${chatRoomInfo.sellerId}" id="sellerId"/>
 							<input type="hidden" value="${chatRoomInfo.sellerName}" id="sellerName"/>						
-							<input type="hidden" value="${chatRoomInfo.id}" id="id"/>						
+							<input type="hidden" value="${chatRoomInfo.chatNum}" id="chatNum"/>						
 						</div>					
 					</div>				
 				</div>
@@ -56,11 +56,11 @@
 		var stompClient = null;
 		var buyerName = $('#buyerName').val();
 		var buyerId = $('#buyerId').val();
-		var pr_id = $('#pr_id').val();
+		var productNum = $('#productNum').val();
 		var sellerName = $('#sellerName').val();
 		var sellerId = $('#sellerId').val();	
 		var senderName = $('#buyerName').val();
-		var id = $('#id').val();
+		var chatNum = $('#chatNum').val();
 		
 		<%-- invoke when DOM(Documents Object Model; HTML(<head>, <body>...etc) is ready --%>
 		$(document).ready(connect());
@@ -103,11 +103,11 @@
 		function send() {
 			var content = $('#message').val();
 			sendBroadcast({
-				'id': id,
+				'chatNum': chatNum,
 				'buyerName': buyerName, 'content': content,
 				'sellerName': sellerName,
 				'buyerId': buyerId, 'sellerId': sellerId,
-				'pr_id': pr_id,
+				'productNum': productNum,
 				'senderName': senderName,
 				'senderId': buyerId
 				});
@@ -154,7 +154,7 @@
 				url:'/chatread/product/ajax',
 				type: 'POST',
 				data: JSON.stringify({
-					id: id,
+					chatNum: chatNum,
 					buyerId: buyerId
 				}),
 				dataType: 'json',

@@ -75,7 +75,7 @@
         function connect() {
             <%-- map URL using SockJS--%>
             var socket = new SockJS('/broadcast');
-            var url = '/user/' + id + '/queue/messages';
+            var url = '/user/' + chatNum + '/queue/messages';
             <%-- webSocket 대신 SockJS을 사용하므로 Stomp.client()가 아닌 Stomp.over()를 사용함--%>
             stompClient = Stomp.over(socket);
             
@@ -105,11 +105,11 @@
         function send() {
             var content = $('#message').val();
             sendBroadcast({
-                'id': id,
+                'chatNum': chatNum,
                 'buyerName': buyerName, 'content': content,
                 'sellerName': sellerName,
                 'buyerId': buyerId, 'sellerId': sellerId,
-                'pr_id': pr_id,
+                'productNum': productNum,
                 'senderName': senderName
                 });
             $('#message').val("");
