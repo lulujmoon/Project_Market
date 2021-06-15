@@ -12,8 +12,9 @@
 
 <form action="./search" method="post">
 
-가입한 이름<input type="text" class="name" name="name"/>
-가입한 폰번호<input type="text" class="phone" name="phone"/>
+<h2>가입시 입력한 정보를 입력해주세요.</h2>
+이름<input type="text" class="name" name="name"/>
+전화번호<input type="text" class="phone" name="phone"/>
 
 <button type="submit">입력</button>
 </form>
