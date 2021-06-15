@@ -166,6 +166,9 @@ public class ProductService {
 		return productMapper.getHeart(heartVO);
 	}
 	
+	public List<ProductVO> getHeartList(HeartVO heartVO)throws Exception{
+		return productMapper.getHeartList(heartVO);
+	}
 	
 	
 	

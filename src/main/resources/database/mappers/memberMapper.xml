@@ -69,4 +69,6 @@
  	delete from member where username=#{username}
  </delete>
  
+ 
+ 
  </mapper>  

@@ -42,6 +42,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
+import com.mm.market.product.HeartVO;
+import com.mm.market.product.ProductService;
 
 import ch.qos.logback.classic.Logger;
 
@@ -57,6 +59,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberLocationService memberLocationService;
+	
+	@Autowired
+	private ProductService productService;
 
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
@@ -325,6 +330,7 @@ public class MemberController {
 		public ModelAndView store(MemberFileVO memberFileVO,Authentication authentication)throws Exception{
 			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
 			memberFileVO = memberService.selectFile(memberVO);
+		
 		
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("file",memberFileVO);

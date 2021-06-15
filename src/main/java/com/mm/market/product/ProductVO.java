@@ -35,5 +35,6 @@ public class ProductVO {
 	private CategoryVO category;
 	private LocationVO location;
 	private ProductFileVO thumbnail;
+	private HeartVO heart;
 	
 }
