@@ -7,6 +7,7 @@ const btnAdd = document.querySelector('.btn-add');
 const infoContents = document.querySelectorAll('.info__content');
 const infoInputs = document.querySelectorAll('.info__input');
 const formNotice = document.querySelectorAll('.form-notice');
+const infoForm = document.querySelector('#info-form');
  
 /** @function manageEdit(), @function manageBtns()
 	* 1. 수정 버튼을 누르면 info__content 요소는 display:none, info__input 요소를 보여준다.
@@ -208,25 +209,7 @@ btnSubmit.addEventListener('click', ()=>{
 			alert('이메일을 확인하세요.');
 			break;
 		case 0:
-			const formData = new FormData();
-			for(input of infoInputs){
-				formData.append(input.name, input.value);
-			}
-			
-			$.ajax({
-				type: 'POST', 
-				url: './update',
-				data: formData, 
-				processData: false,
-				success: (result)=>{			
-					if(result){
-						alert('수정되었습니다.');
-						location.reload;
-					}}
-				});
+			infoForm.submit();
 			break;
 	}
-	
-
-
 });

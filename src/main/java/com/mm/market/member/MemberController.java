@@ -186,7 +186,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(@Valid MemberVO memberVO,Errors errors, HttpSession session, Authentication authentication) throws Exception{
+	public String setUpdate(MemberVO memberVO,Errors errors, HttpSession session, Authentication authentication) throws Exception{
 
 		int result = memberService.setUpdate(memberVO);
 		//db값 변경됐지만 session값 변경안됨
