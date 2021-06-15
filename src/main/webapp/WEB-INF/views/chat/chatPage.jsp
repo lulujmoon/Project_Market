@@ -69,6 +69,8 @@
 		
 	function wsEvt() {
 		ws.onopen = function(data){
+			console.log('Info: connetion opened.');
+
 			//소켓이 열리면 초기화 세팅하기
 		}
 		

@@ -25,6 +25,8 @@ public class SocketHandler extends TextWebSocketHandler {
 
 	@Override	//현재 방번호를 가져오고 방정보+세션정보를 관리하는 rls리스트 컬랙션에서 데이터를 조회한 후  해당 Hashmap을 임시 맵에 파밍하여 roomNumber의 키 값을 제외한 모든 세션키값들을 웹소켓을 통해 메시지를 보냄(방구분)
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) {
+		
+		System.out.println("handleTextMessage : " + session + " : " + message);
 		// 메시지 발송 (메시지를 수신하면 실행됨)
 		String msg = message.getPayload();
 		JSONObject obj = jsonToObjectParser(msg);
@@ -62,6 +64,7 @@ public class SocketHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		// 소켓 연결
+		System.out.println("afterConnectionEstablishd : " + session);
 		super.afterConnectionEstablished(session);
 		boolean flag = false;
 		String url = session.getUri().toString();
@@ -101,6 +104,7 @@ public class SocketHandler extends TextWebSocketHandler {
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		System.out.println("afterConnectionClosed : " + session + " : " + status);
 		// 소켓 종료
 		if(rls.size()>0) { //소켓이 종료되면 해당 세션값들을 찾아서 지움
 			for(int i=0;i<rls.size();i++) {
