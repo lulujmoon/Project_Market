@@ -191,9 +191,9 @@ public class MemberController {
 		int result = memberService.setUpdate(memberVO);
 		//db값 변경됐지만 session값 변경안됨
 
-		if(errors.hasErrors()) {
-			return "member/info";
-		}
+		/*
+		 * if(errors.hasErrors()) { return "member/info"; }
+		 */
 		MemberVO old =(MemberVO)authentication.getPrincipal();
 		
 		old.setPassword(memberVO.getPassword());
@@ -340,16 +340,14 @@ public class MemberController {
 	}
 	
 	@PostMapping("search")
-	public ModelAndView getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
+	public String getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
 		memberVO = memberService.getEmail(memberVO);		
 
 		mv.addObject("dto",memberVO);
 		mv.setViewName("member/search");
 				
-		String uuid = UUID.randomUUID().toString();
-		
-		memberVO.setPassword(uuid);
-		
+		String uuid = UUID.randomUUID().toString();		
+		memberVO.setPassword(uuid);		
 		memberService.setUpdate(memberVO);
 		
 		
@@ -387,10 +385,9 @@ public class MemberController {
 		   System.out.println("message sent successfully...");
 		  } catch (MessagingException e) {
 		   e.printStackTrace();
-		  }	  
+		  }	  		
 		
-		
-		return mv;
+		return "redirect:./login" ;
 	}
 
 	//-----------------shop	
