@@ -23,44 +23,39 @@
 		<div class="info__header">
 			<h2>내 정보</h2>
 			<div class="btn-group">
-				<button class="btn btn-edit" class="active">수정</button>
-				<a href="./delete">탈퇴</a>
+				<button class="btn btn-edit">수정</button>
 				<button class="btn btn-submit">완료</button>
 				<button class="btn btn-cancel">취소</button>
+				<button class="btn btn-delete active" onclick="deleteMember('${principal.username}')">탈퇴</button>
 			</div>
 		</div>
-		<form:form modelAttribute="memberVO" id="info-form" action="./update" method="post">
+		<form id="info-form" action="./update" method="post">
 			<div class="info-group">
 				<div class="info__title">Username</div>
 				<div class="info__content">${principal.username}</div>
-				<form:input class="info__input username" type="text" name="username" value="${principal.username}" path="username"/>
-				<small class="form-notice"><form:errors path="username"></form:errors></small>
+				<input class="info__input username" type="text" name="username" value="${principal.username}"/>
 			</div>
 			<div class="info-group">
 				<div class="info__title">Password</div>
 				<div class="info__content">********</div>
-				<form:input class="info__input" type="password" name="password" placeholder="변경 시에만 입력하세요." path="password"/>
-				<small class="form-notice"><form:errors path="password"></form:errors></small>
+				<input class="info__input" type="password" name="password"/>
 			</div>
 			<div class="info-group">
 				<div class="info__title">Name</div>
 				<div class="info__content">${principal.name}</div>
-				<form:input class="info__input" type="text" name="name" value="${principal.name}" path="name"/>
-				<small class="form-notice"><form:errors path="name"></form:errors></small>
+				<input class="info__input" type="text" name="name" value="${principal.name}"/>
 			</div>
 			<div class="info-group">
 				<div class="info__title">Phone</div>
 				<div class="info__content">${principal.phone}</div>
-				<form:input class="info__input" type="text" name="phone" value="${principal.phone}" path="phone"/>
-				<small class="form-notice"><form:errors path="phone"></form:errors></small>
+				<input class="info__input" type="text" name="phone" value="${principal.phone}" placeholder="-를 제외한 숫자만 입력하세요."/>
 			</div>
 			<div class="info-group">
 				<div class="info__title">Email</div>
 				<div class="info__content">${principal.email}</div>
-				<form:input class="info__input" type="text" name="email" value="${principal.email}" path="email"/>
-				<small class="form-notice"><form:errors path="email"></form:errors></small>
+				<input class="info__input" type="text" name="email" value="${principal.email}"/>
 			</div>
-		</form:form>
+		</form>
 	</div>
 	<div class="location-container">
 		<div class="location__header">

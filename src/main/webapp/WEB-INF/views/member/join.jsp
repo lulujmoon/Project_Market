@@ -16,11 +16,12 @@
 <c:import url="../template/header.jsp"></c:import>
 
 <div class="join">
+<div class="hidden checked">${checked}</div>
 	<div class="container">
 		<div class="logo">
 			<i class="fas fa-lemon"></i><span>&nbsp;Join</span>
 		</div>
-		<form:form modelAttribute="memberVO"  id="frm" action="./join" method="post" enctype="multipart/form-data">
+		<form:form modelAttribute="memberVO"  id="form-submit" action="./join" method="post" enctype="multipart/form-data">
 				<div class="form-group username">
 					<span><label for="username" class="form-title">Username</label></span>
 					<form:input class="form-control myCheck" type="text" id="username" name="username" path="username"/>	
@@ -57,7 +58,7 @@
 				<input type="file" class="form-control etc"	id="avatar" name="avatar" required="required">
 			</div>
 			<div class="join-btn">
-				<input type="button" class="btn-wide btn-submit" value="Join"></button>
+				<input type="button" class="btn-wide btn-submit" value="Join">
 			</div>
 		</form:form>
 	</div>

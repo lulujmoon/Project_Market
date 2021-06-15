@@ -132,16 +132,16 @@ public class MemberController {
 	}
 	
 	@PostMapping("join")
-	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv,MultipartFile avatar)throws Exception{
+	public String setJoin(@Valid MemberVO memberVO, Errors errors, Model model, MultipartFile avatar)throws Exception{
 		System.out.println("Join process"+ memberVO.getName().length());
 
 		  if(memberService.memberError(memberVO, errors)) { 
-			  
-		  return"member/join"; 
-		  
+			  //에러 발생했을 때 중복확인은 이미 거친 것이므로 속성에 담아서 알려준다.
+			  model.addAttribute("checked", true);
+			  return"member/join"; 
 		  }
-
-	//	int result = memberService.setJoin(memberVO, avatar);
+		  
+		  int result = memberService.setJoin(memberVO, avatar);
 
 		return "redirect:../";
 
@@ -176,12 +176,13 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(@Valid MemberVO memberVO,Errors errors, HttpSession session, Authentication authentication) throws Exception{
+	public String setUpdate(@Valid MemberVO memberVO,Errors errors, HttpSession session, Authentication authentication, Model model) throws Exception{
 
 		int result = memberService.setUpdate(memberVO);
 		//db값 변경됐지만 session값 변경안됨
 
 		if(errors.hasErrors()) {
+			model.addAttribute("result", false);
 			return "member/info";
 		}
 		MemberVO old =(MemberVO)authentication.getPrincipal();
@@ -191,7 +192,9 @@ public class MemberController {
 		old.setPhone(memberVO.getPhone());
 		old.setEmail(memberVO.getEmail());
 		
-		return "redirect:./info";
+		model.addAttribute("result", true);
+		
+		return "common/ajaxResult";
 	}
 
 		
@@ -316,10 +319,11 @@ public class MemberController {
 	
 	@PostMapping("delete")
 	public String setDelete(MemberVO memberVO,Authentication authentication,HttpSession session)throws Exception{
-		memberVO =(MemberVO)authentication.getPrincipal();
-		
-		int result = memberService.setDelete(memberVO);
-		session.invalidate();
+		//사용자가 임의로 스크립트를 수정해서 다른 사용자를 탈퇴시키는 것을 방지하기 위해 일치하는지 확인
+		if(memberVO.getUsername() == ((MemberVO)authentication.getPrincipal()).getUsername()) {
+			int result = memberService.setDelete(memberVO);
+			session.invalidate();			
+		};
 		
 		return "redirect:../";
 	}

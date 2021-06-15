@@ -25,6 +25,10 @@ ul {
 	padding: 0;
 }
 
+.hidden{
+	display: none;
+}
+
 /* 헤더 */
 
 header{

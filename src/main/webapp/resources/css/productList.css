@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-.hidden{
-	display: none;
-}
-
 .top-container{
 	width: 1010px;
 	margin: 40px auto;
