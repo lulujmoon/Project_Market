@@ -3,6 +3,7 @@ package com.mm.market.chat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -12,8 +13,6 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.fasterxml.jackson.core.JsonParser;
-
 import lombok.extern.log4j.Log4j2;
 
 @Component
@@ -22,9 +21,12 @@ public class SocketHandler extends TextWebSocketHandler {
 	
 	//HashMap<String, WebSocketSession> sessionMap = new HashMap<>(); //웹소켓 세션을 답아둘 맵
 	List<HashMap<String, Object>> rls = new ArrayList<>();  //웹소켓 세션을 담아둘 리스트 -- roomListSessions
-
+	
+	List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
+	Map<String, WebSocketSession> userSessions = new HashMap<>();
+	
 	@Override	//현재 방번호를 가져오고 방정보+세션정보를 관리하는 rls리스트 컬랙션에서 데이터를 조회한 후  해당 Hashmap을 임시 맵에 파밍하여 roomNumber의 키 값을 제외한 모든 세션키값들을 웹소켓을 통해 메시지를 보냄(방구분)
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) {
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		System.out.println("handleTextMessage : " + session + " : " + message);
 		// 메시지 발송 (메시지를 수신하면 실행됨)
@@ -58,6 +60,7 @@ public class SocketHandler extends TextWebSocketHandler {
 			}
 		}
 	}
+
 	
 	//컴파일러가 알려주는 노란색 경고표시 없애줌 -- unchecked : 검증되지 않은 연산자 관련 경고를 표시 안함
 	@SuppressWarnings("unchecked")
@@ -126,6 +129,5 @@ public class SocketHandler extends TextWebSocketHandler {
 		
 		return obj;
 	}
-
 
 }

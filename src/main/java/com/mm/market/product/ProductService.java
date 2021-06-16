@@ -150,6 +150,43 @@ public class ProductService {
 	}
 	
 	
+	public int setRewrite(ProductVO productVO, MultipartFile [] file) throws Exception {
+		int result = 0;
+		if(file != null) {
+			for(MultipartFile f:file) {
+				if(f.getOriginalFilename().length()!=0) {
+					ProductVO productVO2 = productMapper.getSelect(productVO);
+
+					if(productVO2.getThumbnail()!=null) {
+						String delFileName = productVO2.getThumbnail().getFileName();
+						boolean check = fileManager.delete("product", delFileName, session);
+
+						ProductFileVO productFileVO = new ProductFileVO();
+						productFileVO.setFileNum(productVO2.getThumbnail().getFileNum());
+						productMapper.setFileDelete(productFileVO);
+					}
+
+					String fileName = fileManager.save("product", f, session);
+
+					ProductFileVO productFileVO = new ProductFileVO();
+					productFileVO.setProductNum(productVO.getProductNum());
+					productFileVO.setFileName(fileName);
+					productFileVO.setOriginName(f.getOriginalFilename());
+
+					result = productMapper.setRewrite(productVO);
+					result = productMapper.setFileInsert(productFileVO);
+				}
+
+			}
+		}
+		
+		result = productMapper.setRewrite(productVO);
+		
+		return result;
+
+	}
+	
+	
 	//heart
 	public void setHeart(HeartVO heartVO)throws Exception{
 		productMapper.setHeart(heartVO);

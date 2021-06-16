@@ -23,8 +23,9 @@ img {
 </style>
 </head>
 <body>
-<h2>Product Insert Page</h2>
-	<form class="form" id="uploadForm" action="./insert" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
+<h2>Product Rewrite Page</h2>
+	<form class="form" id="uploadFrom" title="${vo.files.size()}" action="./rewrite" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
+	<input type="hidden" name="productNum" value="${vo.productNum}">
 	
 	
 			<div id=file>
@@ -32,16 +33,25 @@ img {
 			<div id="thumb">
 				<div class="inputimg">
 						<input type="file" name="file" accept="image/*" required class="img" onchange="previewImage(this,0)">
+						<input type="button" class="del" value="Delete">
 						<div id="preview0"></div>
 					</div>
-
+					
+			<c:forEach items="${files}" var="files" varStatus="status">
+				<div class="inputimg">
+					<input type="button" class="del" value="Delete" title="${files.fileNum}">
+					<div id="preview${status.count}">
+						<img src="/resources/upload/product/${files.fileName}">
+					</div>
+				</div>
+			</c:forEach>
+			
 			 </div>
 			</div>
-		
-		
+
 		<div class="form-group">
 	    <label>상품 명</label>
-	    <input type="text" name="productName" required>
+	    <input type="text" name="productName" value="${vo.productName}" required>
 	  </div>
 	    <div class="form-group">
 	    <label>판매자</label>
@@ -50,7 +60,7 @@ img {
 	  	<div>
 		  <div class="form-group">
 		    <label for="category">카테고리</label>
-		    <select class="form-control" id="category" name="categoryCode">
+		    <select class="form-control" id="category" name="categoryCode" value="${vo.categoryCode}">
 		      <option value="1">디지털/가전</option>
 		      <option value="2">가구/인테리어</option>
 		      <option value="3">유아동/유아도서</option>
@@ -70,26 +80,17 @@ img {
 		</div>
 	    <div class="form-group">
 	    <label for="productContents">상품 설명</label>
-	    <textarea id="productContent" rows="5" name="productContent" required></textarea>
+	    <textarea id="productContent" rows="5" name="productContent">${vo.productContent}</textarea>
 	  </div>
 	    <div class="form-group">
 	    <label>상품 가격</label>
-	    <input type="text" name="productPrice" required>
-	  </div>
-	   <div class="form-group">
-	    <label>판매 지역</label>
-	    <select class="form-control" id="locationCode" name="locationCode">
-	   		 <c:forEach items="${location}" var="vo">
-		      	<option value="${vo.locationCode}">${vo.locationName}</option>
-		     </c:forEach>
-		    </select>
+	    <input type="text" name="productPrice" value="${vo.productPrice}" required>
 	  </div>
 	  
 
-	 <button class="btn-insert">Write</button><br><br><br>
+	 <button id="insertbtn" class="btn btn-outline-secondary">Write</button><br><br><br>
 </form>
 
-<script type="text/javascript" src="../resources/js/fileAdd.js"></script>
-<script type="text/javascript" src="../resources/js/productInsert.js"></script>
+<script type="text/javascript" src="../resources/js/fileUpdate.js"></script>
 </body>
 </html>

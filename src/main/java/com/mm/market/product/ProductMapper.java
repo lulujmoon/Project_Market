@@ -29,7 +29,6 @@ public interface ProductMapper {
 
 	//insert
 	public int setInsert(ProductVO productVO) throws Exception;
-	
 
 	//file Insert
 	public int setFileInsert(ProductFileVO productFileVO)throws Exception;
@@ -42,6 +41,9 @@ public interface ProductMapper {
 	
 	//update
 	public int setUpdate(ProductVO productVO) throws Exception;
+	
+	//rewrite
+	public int setRewrite(ProductVO productVO) throws Exception;
 	
 
 	

@@ -27,5 +27,4 @@ public class WebSocketConfig implements WebSocketConfigurer { //웹소켓 연결
 	}
 	
 	
-	
 }

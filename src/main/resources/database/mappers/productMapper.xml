@@ -32,7 +32,7 @@
 			 		P.productPrice desc
 			 	</when>
 			 	<otherwise>
-			 		P.productNum DESC
+			 		P.productDate DESC
 			 	</otherwise>
 			 </choose>
 		 limit #{startRow}, #{perPage}
@@ -136,6 +136,20 @@
 			productPrice=#{productPrice}
 			where productNum=#{productNum}
 		</update>
+		
+		
+		<update id="setRewrite" parameterType="ProductVO">
+			update product set
+			productName=#{productName}, 
+			categoryCode=#{categoryCode}, 
+			productContent=#{productContent}, 
+			productDate=NOW(),
+			productPrice=#{productPrice}
+			where productNum=#{productNum}
+		</update>
+		
+		
+		
 		
 		<!-- heart -->
 		<insert id="setHeart" parameterType="HeartVO">

@@ -1,6 +1,11 @@
 package com.mm.market.product;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -235,9 +240,58 @@ public class ProductController {
 	
 	@PostMapping("update")
 	public String setUpdate(ProductVO productVO, MultipartFile [] file)throws Exception{
+	
 		productService.setUpdate(productVO, file);
 		productVO = productService.getSelect(productVO);
 				
 		return "redirect:./list";
 	}
+	
+	
+	@GetMapping("rewrite")
+	public String setRewrite(ProductVO productVO, Model model) throws Exception{
+		productVO = productService.getSelect(productVO);
+		
+		List<ProductFileVO> file = productVO.getFiles();
+
+		for(int i=0;i<file.size();i++) {
+			file.get(i).setProductNum(productVO.getProductNum());
+
+		model.addAttribute("vo", productVO);
+		model.addAttribute("files", file);
+		}
+		
+		long write = productVO.getProductDate().getTime();
+		
+		long end = System.currentTimeMillis();
+		Timestamp dateEnd = new Timestamp(end);
+		Timestamp dateWrite = new Timestamp(write);
+		
+		
+		System.out.println("작성시간 : " +dateWrite);
+		System.out.println("현재시간 : " +dateEnd);
+		
+		long gap = (end - write)/1000;
+		System.out.println("write : "+write);
+		System.out.println("end : "+end);
+		System.out.println("글쓰고 초 :" + gap);
+		
+		Timestamp gap2 = new Timestamp(gap);
+		System.out.println("글쓰고 :" + gap2);
+		
+
+		System.out.println(file);
+		
+		return "product/rewrite";
+	}
+	
+	@PostMapping("rewrite")
+	public String setRewrite(ProductVO productVO, MultipartFile [] file)throws Exception{
+		productService.setRewrite(productVO, file);
+		productVO = productService.getSelect(productVO);
+		
+		return "redirect:./list";
+	}
+	
+	
 }

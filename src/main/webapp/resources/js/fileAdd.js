@@ -55,12 +55,6 @@ const form = document.querySelector('.form');
 });
 
 
-$(document).ready(function(){
-	(function(){
-		let productNum = $("#productNum").attr("title");		
-	})
-})
-
 
 //파일 입력시 이미지 미리보기
 function previewImage(f,idx) {
