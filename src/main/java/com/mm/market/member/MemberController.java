@@ -379,7 +379,10 @@ public class MemberController {
 
 		   message.setSubject("market 임시 비밀번호 발급");	   
 		   // Text
-		   message.setContent("아이디:"+memberVO.getUsername()+"임시비밀번호:"+uuid,"text/html; charset=UTF-8");
+		   message.setContent(
+				   "<h1>"+"안녕하세요 "+memberVO.getName()+"님,<br> MARKET 계정 로그인을 위한 임시 비밀번호입니다. "+"</h1>"+
+				   "<h3>"+"아이디:"+memberVO.getUsername()+"<br>"+"임시비밀번호:"+uuid+"</h3>"+
+				   "<h5>"+"* 임시비밀번호로 로그인 후에는 비밀번호를 반드시 변경해주세요."+"</h5>","text/html; charset=UTF-8");
 		   // send the message
 		   Transport.send(message);
 		   System.out.println("message sent successfully...");

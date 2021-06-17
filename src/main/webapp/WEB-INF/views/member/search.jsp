@@ -11,14 +11,14 @@
 
 <form action="./search" method="post">
 
-<h2>가입시 입력한 정보를 입력해주세요.</h2>
+<h2>정보를 입력해주세요.</h2>
 이름<input type="text" class="name" name="name"/>
 전화번호<input type="text" class="phone" name="phone"/>
 
-<button type="button" onclick="sendMail()">입력</button>
+<button type="submit" onclick="sendMail()">입력</button>
 </form>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 var name = document.getElementById("name");
 var phone = document.getElementById("phone");
@@ -38,9 +38,8 @@ function sendMail(){
 		form.submit();
 	}
 }
-	
 
-</script>
+</script> -->
 
 </body>
 </html>
