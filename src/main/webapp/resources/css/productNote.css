@@ -1,20 +1,36 @@
 @charset "UTF-8";
 
 .container{
-	background-color: white;	
+	width: 950px;
+	padding: 50px;
 	margin-top: 165px;
+	background-color: white;
+	align-items: flex-start;
 }
 
 .title-container{
-	width: 100%;
+	width: 900px;
+	padding: 20px 0;
+	margin: 0 auto;
+	border-bottom: 1px solid #2e2e2e;
 	font-size: 2em;
-	font-weight: bold;
+}
+
+#upload-form{
+	margin: 0 auto;
+}
+
+.preview-container{
+	width: 700px;
+	margin: 30px 0 30px 25px;
+	display: flex;
+	flex-flow: row wrap;
 }
 
 .add{
-	width: 225px;
-	height: 225px;
-	margin: 8px;
+	width: 163px;
+	height: 163px;
+	margin: 5px;
 	background: #f4f4f4;
 	border: 1px solid #b4b4b4;
 	display: flex;
@@ -33,22 +49,28 @@
 	display: none;
 }
 
-.preview-container{
-	width: 1070px;
-	display: flex;
-	flex-flow: row wrap;
-}
-
 .preview, .preview > img{
-	width: 225px;
-	height: 225px;
+	width: 165px;
+	height: 165px;
 	border: none;
 }
 
 .preview{
-	margin: 10px;
+	margin: 5px;
 	display: flex;
 	flex-direction: row;
+}
+
+.btn-del{
+	width: 20px;
+	height: 20px;
+	background-color: grey;
+	opacity: 0.5;
+	border-radius: 70%;
+}
+
+.preview-info{
+	margin-left: 175px;
 }
 
 .btn-submit{
@@ -56,26 +78,57 @@
 }
 
 .form-group{
-	width: 1000px;
-	margin: auto;
-	padding: 10px;
+	width: 900px;
+	margin: 0 auto;
 	display: flex;
 	flex-flow: row wrap;
+	align-items: center;
 }
 
 .form-title{
-	width: 200px;
+	width: 120px;
 	font-size: 1.2em;
-	padding-right: 20px;
+	margin: 30px 0 30px 25px;
 }
 
 .form-content{
-	width: 700px;
-	height: 30px;
+	all: unset;
+	width: 668px;
+	height: 40px;
+	margin: 30px;
+	padding: 10px;
+	border: 1px solid #c6c6c6;
+}
+
+.form-content-select{
+	width: 300px;
+	margin-right: 20px;
+}
+
+.form-select{
+	all: unset;
+	width: 100%;
+	line-height: 40px;
+	cursor: pointer;
+}
+
+.form-content-select > i{
+	position: relative;
+	top: -32px;
+	left: 280px;
+	z-index: 2;
+	font-size: 1.3em;
+	color: #b4b4b4;
+	pointer-events: none;
 }
 
 #productContent{
 	min-height: 200px;
+	line-height: 1.6em;
+}
+
+.product-price{
+	width: 300px;
 }
 
 .btn-wrapper{
@@ -88,11 +141,11 @@
 	all: unset;
 	width: 100px;
 	height: 50px;
-	margin: 40px;
+	margin: 20px 50px;
 	border-radius: 5px;
 	background-color: #fadd85;
 	color: white;
-	font-size: 1.5em;
+	font-size: 1.3em;
 	font-weight: bold;
 	cursor: pointer;
 	text-align: center;
