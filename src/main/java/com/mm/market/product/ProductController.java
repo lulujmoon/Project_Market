@@ -99,7 +99,7 @@ public class ProductController {
 		//판매자 정보
 		MemberVO sellerVO = new MemberVO();
 		sellerVO.setUsername(productVO.getUsername());
-		sellerVO = memberService.getSeletByUsername(memberVO);
+		sellerVO = memberService.getSeletByUsername(sellerVO);
 		MemberFileVO sellerFileVO = new MemberFileVO();
 		sellerFileVO = memberService.selectFile(sellerVO);
 		MemberLocationVO sellerLocationVO = new MemberLocationVO();
@@ -153,7 +153,6 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
-	//	System.out.println(productVO);
 			
 		String message="삭제 실패";
 		String path = "./list";
