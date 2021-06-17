@@ -43,7 +43,7 @@ function checkFiles(files){
 }
 
 /** @function makePreview(file)
- *	-- 이미지를 추가하면 preview를 생성한다.
+ *	-- 이미지를 추가하면 preview와 삭제 버튼을 생성한다.
  */
 function makePreview(file){
 	let preview = document.createElement('div');
@@ -56,8 +56,17 @@ function makePreview(file){
 	}
 	reader.readAsDataURL(file);
 	preview.appendChild(image);
+	let btnDel = document.createElement('div');
+	btnDel.classList.add('btn-del');
+	btnDel.innerText = "X";
+	preview.append(btnDel);
+	
 }
 
+/** 초기설정 1. productContent의 <br>을 /n으로 변경한다.
+ */
+productContent.value = productContent.value.replace(/<br>/gm, "\n");
+productContent.value = productContent.value.replace(/\t/gm,"");
 /** 이벤트 1. 이미지 추가 버튼 클릭
  *	1. input type="file"을 생성하고 클릭 이벤트를 발생시킨다.
  *	2. 해당 input에 change 이벤트가 발생하면 파일을 읽고 미리보기를 생성한다.

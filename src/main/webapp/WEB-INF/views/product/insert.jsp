@@ -23,53 +23,66 @@
 	</div>
 	<form action="./insert" method="POST" enctype="multipart/form-data" id="upload-form">
 		<input type="hidden" name="username" value="${principal.username}">
-		<div class="form-title">상품 이미지</div>
-		<div class="preview-container">
-			<div class="add">
-				<i class="fas fa-camera"></i>
-				이미지 추가
+		<div class="form-group">
+			<div class="form-title">상품 이미지</div>
+			<div class="preview-container">
+				<div class="add">
+					<i class="fas fa-camera"></i>
+					이미지 추가
+				</div>
+				<div class="inputs"></div>
 			</div>
-			<div class="inputs"></div>
 		</div>
+		<div class="preview-info">최대 7장까지 추가할 수 있습니다.</div>
 		<div class="form-group">
 			<div class="form-title">상품명</div>
-			<input type="text" name="productName" class="form-content" required>				
+			<input type="text" name="productName" class="form-content" required placeholder="상품명을 입력해주세요.">				
 		</div>
 		<div class="form-group">		
 			<div class="form-title">카테고리</div>
-			<select class="form-content" id="category" name="categoryCode">
-			  <option value="1">디지털/가전</option>
-			  <option value="2">가구/인테리어</option>
-			  <option value="3">유아동/유아도서</option>
-			  <option value="4">생활/가공식품</option>
-			  <option value="5">스포츠/레저</option>
-			  <option value="6">여성의류</option>
-			  <option value="7">여성잡화</option>
-			  <option value="8">남성의류</option>
-			  <option value="9">남성잡화</option>
-			  <option value="10">게임/취미</option>
-			  <option value="11">뷰티/미용</option>
-			  <option value="12">반려동물용품</option>
-			  <option value="13">도서/티켓/음반</option>
-			  <option value="14">삽니다</option>
-			</select>		
+			<div class="form-content form-content-select">
+				<select class="form-select" id="category" name="categoryCode">
+				  <option value="1">디지털/가전</option>
+				  <option value="2">가구/인테리어</option>
+				  <option value="3">유아동/유아도서</option>
+				  <option value="4">생활/가공식품</option>
+				  <option value="5">스포츠/레저</option>
+				  <option value="6">여성의류</option>
+				  <option value="7">여성잡화</option>
+				  <option value="8">남성의류</option>
+				  <option value="9">남성잡화</option>
+				  <option value="10">게임/취미</option>
+				  <option value="11">뷰티/미용</option>
+				  <option value="12">반려동물용품</option>
+				  <option value="13">도서/티켓/음반</option>
+				  <option value="14">삽니다</option>
+				</select>
+				<i class="fas fa-sort-down"></i>
+			</div>
+			<div class="form-info">카테고리를 선택해주세요.</div>
 		</div>
 		<div class="form-group">
 			<div class="form-title">상품 설명</div>
-			<textarea class="form-content" id="productContent" rows="5" name="productContent" required></textarea>
+			<textarea class="form-content" id="productContent" rows="5" name="productContent" required placeholder="상품 설명을 입력해주세요."></textarea>
 		</div>
 		<div class="form-group">
 			<div class="form-title">가격</div>
-			<input type="text" name="productPrice" class="product-price form-content" required>
+			<input type="text" name="productPrice" class="product-price form-content" required placeholder="숫자만 입력해주세요.">
+			<div class="form-title">가격 제안</div>
+			<input type="radio" name="productNego" value="enabled" id="nego-enabled">&nbsp;<label for="nego-enabled">가능</label>&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="productNego" value="disabled" id="nego-disabled">&nbsp;<label for="nego-disabled">불가</label>
 		</div>
 		<div class="form-group">
 			<div class="form-title">지역</div>
-			<select class="form-content" id="locationCode" name="locationCode">
-				<c:forEach items="${location}" var="vo">
-			   <option value="${vo.locationCode}">${vo.locationName}</option>
-			  </c:forEach>
-			</select>
-			<small>내 동네로 설정한 지역 중에 선택할 수 있습니다.</small>
+			<div class="form-content form-content-select">
+				<select class="form-select" id="locationCode" name="locationCode">
+					<c:forEach items="${location}" var="vo">
+				   <option value="${vo.locationCode}">${vo.locationName}</option>
+				  </c:forEach>
+				</select>
+				<i class="fas fa-sort-down"></i>
+			</div>
+			<div class="form-info">내 지역으로 저장한 지역을 선택할 수 있습니다.</div>
 		</div>
 		<div class="btn-wrapper">
 			<input type="button" class="btn-presubmit" value="등록">
