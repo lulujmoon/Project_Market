@@ -249,40 +249,51 @@ public class ProductController {
 	
 	
 	@GetMapping("rewrite")
-	public String setRewrite(ProductVO productVO, Model model) throws Exception{
+	public ModelAndView setRewrite(ProductVO productVO, ModelAndView mv) throws Exception{
 		productVO = productService.getSelect(productVO);
-		
-		List<ProductFileVO> file = productVO.getFiles();
-
-		for(int i=0;i<file.size();i++) {
-			file.get(i).setProductNum(productVO.getProductNum());
-
-		model.addAttribute("vo", productVO);
-		model.addAttribute("files", file);
-		}
 		
 		long write = productVO.getProductDate().getTime();
 		
 		long end = System.currentTimeMillis();
-		Timestamp dateEnd = new Timestamp(end);
-		Timestamp dateWrite = new Timestamp(write);
-		
-		
-		System.out.println("작성시간 : " +dateWrite);
-		System.out.println("현재시간 : " +dateEnd);
-		
+		/*
+		 * Timestamp dateEnd = new Timestamp(end); Timestamp dateWrite = new
+		 * Timestamp(write); System.out.println("작성시간 : " +dateWrite);
+		 * System.out.println("현재시간 : " +dateEnd);
+		 */
 		long gap = (end - write)/1000;
-		System.out.println("write : "+write);
-		System.out.println("end : "+end);
-		System.out.println("글쓰고 초 :" + gap);
+		/*
+		 * System.out.println("write : "+write); System.out.println("end : "+end);
+		 * System.out.println("글쓰고 초 :" + gap);
+		 */
 		
-		Timestamp gap2 = new Timestamp(gap);
-		System.out.println("글쓰고 :" + gap2);
+		long day = gap/(60*60*24);
+		long hour = (gap - day *60*60*24) / (60*60);
+		long minute = (gap - day  * 60*60*24 - hour*3600) / 60;
+		long second = gap%60;
+		
+		System.out.println(day+"일"+hour+"시간"+minute+"분"+second+"초");
+		
+		
+		if(day>3) {
+		List<ProductFileVO> file = productVO.getFiles();
+		
+		for(int i=0;i<file.size();i++) {
+			file.get(i).setProductNum(productVO.getProductNum());
+			
+			mv.addObject("vo", productVO);
+			mv.addObject("files", file);
+		}
+		
+		
+			mv.setViewName("product/rewrite");
+		} else {
+			mv.addObject("msg", "글 작성 후 3일이 지나야 가능합니다! 지금은"+day+"일"+hour+"시간"+minute+"분"+second+"초 지났어요");
+			mv.addObject("path", "select/"+productVO.getProductNum());
+			mv.setViewName("common/commonResult");
+		}
 		
 
-		System.out.println(file);
-		
-		return "product/rewrite";
+		return mv;
 	}
 	
 	@PostMapping("rewrite")
