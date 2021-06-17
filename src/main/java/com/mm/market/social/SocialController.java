@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,12 +49,15 @@ public class SocialController {
 	}
 
 	@GetMapping("select")
-	public String getSelect(@RequestParam("socialNum") Long socialNum, Model model, HttpServletRequest request) throws Exception {
+	public String getSelect(@RequestParam("socialNum") Long socialNum, Model model, Authentication auth) throws Exception {
 		SocialVO socialVO = new SocialVO();
 		socialVO.setSocialNum(socialNum);
 		socialVO = socialService.getSelect(socialVO);
 		
-		String username = String.valueOf(request.getSession().getAttribute("username"));
+		int startInx = auth.getPrincipal().toString().indexOf("=");
+		int lastInx = auth.getPrincipal().toString().indexOf(",");
+
+		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
 		
 		GoodVO goodVO = new GoodVO();
 		goodVO.setSocialNum(socialNum);
@@ -163,10 +165,14 @@ public class SocialController {
 	
 	@ResponseBody
 	@PostMapping(value="good", produces = "application/json")
-	public Long like(HttpServletRequest request) throws Exception {
+	public Long good(HttpServletRequest request, Authentication auth) throws Exception {
 		Long good = Long.parseLong(request.getParameter("good"));
 		Long socialNum = Long.parseLong(request.getParameter("socialNum"));
-		String username = String.valueOf(request.getSession().getAttribute("username"));
+
+		int startInx = auth.getPrincipal().toString().indexOf("=");
+		int lastInx = auth.getPrincipal().toString().indexOf(",");
+
+		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
 
 		GoodVO goodVO = new GoodVO();
 		

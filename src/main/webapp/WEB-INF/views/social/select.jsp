@@ -78,6 +78,7 @@ h2 {
 					<th>번호</th>
 					<th>작성자</th>
 					<th>작성 날짜</th>
+					<th>공감 수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -85,6 +86,7 @@ h2 {
 					<td>${social.socialNum}</td>
 					<td>${social.username}</td>
 					<td>${social.socialDate}</td>
+					<td>${social.socialGood}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -102,13 +104,14 @@ h2 {
 		</table>
 	</div>
 
-	<a class="good">
+	<a class="good" onclick="if ( confirm('공감 하시겠습니까?')==false ){return false;}">
 		<img id="good" src="" width="50px" height="50px">
 	</a>
 	<a class="insert-button" href="./update?socialNum=${social.socialNum}"
 		class="btn btn-primary" role="button">수정</a>
 	<a class="insert-button" href="./delete?socialNum=${social.socialNum}"
 		class="btn btn-primary" role="button">삭제</a>
+	<a href="#" class="btn btn-danger" role="button">신고</a>
 	<br>
 	<br>
 	<br>
@@ -151,42 +154,6 @@ h2 {
 	<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
 	<script type="text/javascript" src="/resources/js/functions.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function() {
-
-			let goodval = ${good}
-
-			if (goodval>0) {
-				console.log("good : "+goodval);
-				$("#good").prop("src", "/resources/images/빨강.png");
-				$(".good").prop("name", goodval);
-			} else {
-				console.log("good : "+goodval);
-				$("#good").prop("src", "/resources/images/검정.png");
-				$(".good").prop("name", goodval);
-			}
-
-			$(".good").on("click", function() {
-
-				let that = $(".good");
-
-				let sendData = {'socialNum' : '${socialVO.socialNum}', 'good' : that.prop('name')};
-				$.ajax({
-					url : '/social/good',
-					type : 'POST',
-					data : sendData,
-					success : function(data) {
-						that.prop('name', data);
-						if (data == 1) {
-							$("good").prop("src", "/resources/images/빨강.png");
-						} else {
-							$("good").prop("src", "/resources/images/검정.png");
-						}
-
-					}
-				})
-			})
-		})
-	</script>
+	<script type="text/javascript" src="/resources/js/socialSelect.js"></script>
 </body>
 </html>
