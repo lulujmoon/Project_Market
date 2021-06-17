@@ -31,5 +31,15 @@ public interface SocialMapper {
 	public int setUpdate(SocialVO socialVO) throws Exception;
 	//Delete
 	public int setDelete(SocialVO socialVO) throws Exception;
+	
+	//good
+	public void setGood(GoodVO goodVO) throws Exception;
+
+	public Long getGood(GoodVO goodVO) throws Exception;
+
+	public void updateGood(Long socialNum) throws Exception;
+
+	public void deleteGood(GoodVO goodVO) throws Exception;
+	
 
 }

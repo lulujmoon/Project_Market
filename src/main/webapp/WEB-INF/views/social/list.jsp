@@ -73,6 +73,7 @@
 				<thead class="thead-dark">
 					<tr>
 						<th>번호</th>
+						<th>카테고리</th>
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성 날짜</th>
@@ -82,6 +83,9 @@
 					<c:forEach items="${list}" var="dto">
 						<tr>
 							<td>${dto.socialNum}</td>
+							<td><a
+								href="./list?categoryCode=${dto.categoryCode}&categoryName=${category.categoryName}">
+									${category.categoryName}</a></td>
 							<td><a href="./select?socialNum=${dto.socialNum}">
 									${dto.socialTitle}</a></td>
 							<td>${dto.username}</td>
@@ -97,13 +101,12 @@
 					title="${pager.startNum-1}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<li class="page-item "><a class="page-link p"
-					href="./list?curPage=${i}&kind=${pager.kind}&search=${pager.search}"
-					title="${i}">${i}</a></li>
+				<li class="page-item "><a class="page-link p" href="#"
+					title="goPage('${pager.search}', ${i})">${i}</a></li>
 			</c:forEach>
 			<c:if test="${pager.next}">
 				<li class="page-item"><a class="page-link p" href="#"
-					title="${pager.lastNum+1}">다음</a></li>
+					title="goPage(${pager.search}, ${pager.lastNum+1})">다음</a></li>
 			</c:if>
 		</ul>
 		<div class="input-group mt-3 mb-3">

@@ -2,17 +2,24 @@ package com.mm.market.social;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.comment.CommentService;
 import com.mm.market.comment.CommentVO;
+import com.mm.market.member.MemberVO;
 import com.mm.market.socialCategory.SocialCategoryMapper;
 import com.mm.market.socialCategory.SocialCategoryVO;
 import com.mm.market.util.SocialPager;
@@ -43,20 +50,28 @@ public class SocialController {
 	}
 
 	@GetMapping("select")
-	public ModelAndView getSelect(SocialVO socialVO, CommentVO commentVO) throws Exception {
-		ModelAndView mv = new ModelAndView();
-
+	public String getSelect(@RequestParam("socialNum") Long socialNum, Model model, HttpServletRequest request) throws Exception {
+		SocialVO socialVO = new SocialVO();
+		socialVO.setSocialNum(socialNum);
 		socialVO = socialService.getSelect(socialVO);
+		
+		String username = String.valueOf(request.getSession().getAttribute("username"));
+		
+		GoodVO goodVO = new GoodVO();
+		goodVO.setSocialNum(socialNum);
+		goodVO.setUsername(username);
+		
+		Long like = socialService.getGood(goodVO);
 
+		CommentVO commentVO = new CommentVO();
 		List<CommentVO> ar = commentService.getList(commentVO);
+		
+		model.addAttribute("like", like);
+		model.addAttribute("social", socialVO);
+		model.addAttribute("comment", commentVO);
+		model.addAttribute("list", ar);
 
-		mv.addObject("vo", socialVO);
-		mv.addObject("comment", commentVO);
-		mv.addObject("list", ar);
-
-		mv.setViewName("social/select");
-
-		return mv;
+		return "social/select";
 	}
 
 	@GetMapping("insert")
@@ -144,6 +159,29 @@ public class SocialController {
 		mv.setViewName("common/commonResult");
 
 		return mv;
+	}
+	
+	@ResponseBody
+	@PostMapping(value="good", produces = "application/json")
+	public Long like(HttpServletRequest request) throws Exception {
+		Long good = Long.parseLong(request.getParameter("good"));
+		Long socialNum = Long.parseLong(request.getParameter("socialNum"));
+		String username = String.valueOf(request.getSession().getAttribute("username"));
+
+		GoodVO goodVO = new GoodVO();
+		
+		goodVO.setSocialNum(socialNum);
+		goodVO.setUsername(username);
+		
+		if(good>=1) {
+			socialService.deleteGood(goodVO);
+			good=0L;
+		} else {
+			socialService.insertGood(goodVO);
+			good=1L;
+		}
+
+		return good;
 	}
 
 	//summerfile upload	

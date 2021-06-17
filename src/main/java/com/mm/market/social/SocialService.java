@@ -80,6 +80,21 @@ public class SocialService {
 		return socialMapper.setDelete(socialVO);
 	}
 
+	//good
+	public void insertGood(GoodVO goodVO) throws Exception {
+		socialMapper.setGood(goodVO);
+		socialMapper.updateGood(goodVO.getSocialNum());
+	}
+	
+	public Long getGood(GoodVO goodVO) throws Exception {
+		return socialMapper.getGood(goodVO);
+	}
+	
+	public void deleteGood(GoodVO goodVO) throws Exception {
+		socialMapper.deleteGood(goodVO);
+		socialMapper.updateGood(goodVO.getSocialNum());
+	}
+	
 	//SummerFile
 	public String setSummerFileUpload(MultipartFile file) throws Exception {
 		String fileName = fileManager.save("social", file, session);

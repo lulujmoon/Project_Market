@@ -5,23 +5,34 @@
 
 <mapper namespace="com.mm.market.social.SocialMapper">
 
-	<select id="getList" resultMap="selectResult" parameterType="SocialPager">
+	<select id="getList" resultMap="selectResult"
+		parameterType="SocialPager">
 		select S.*, SC.*, SF.*
 		from social S left join socialFile SF
-		on S.socialNum = SF.socialNum
+		on
+		S.socialNum = SF.socialNum
 		inner join socialCategory SC
-		on S.categoryCode = SC.categoryCode
-		where SC.categoryCode=#{categoryCode}
-		order by S.socialNum desc
+		on
+		S.categoryCode = SC.categoryCode
+		where
+		<if test="categoryCode != 0L">
+			S.categoryCode=#{categoryCode} and
+		</if>
+		S.socialTitle like concat('%', #{search}, '%')
+		order by S.socialNum
+		desc
 		limit #{startRow}, 20
 	</select>
 
-	<select id="getSelect" resultMap="selectResult" parameterType="SocialVO">
+	<select id="getSelect" resultMap="selectResult"
+		parameterType="SocialVO">
 		select S.*, SC.*, SF.*
-		from social S left join socialFile SF
+		from social S left join socialFile
+		SF
 		on S.socialNum = SF.socialNum
 		inner join socialCategory SC
-		on S.categoryCode = SC.categoryCode
+		on
+		S.categoryCode = SC.categoryCode
 		where S.socialNum=#{socialNum}
 	</select>
 
@@ -32,51 +43,94 @@
 		<result column="username" property="username" />
 		<result column="socialContent" property="socialContent" />
 		<result column="socialDate" property="socialDate" />
+		<result column="socialGood" property="socialGood" />
 		<association property="socialCategory" javaType="SocialCategoryVO">
 			<id property="categoryCode" column="categoryCode" />
 			<result property="categoryName" column="categoryName" />
 		</association>
-		<collection property="file" javaType="java.util.List" ofType="SocialFileVO">
+		<collection property="file" javaType="java.util.List"
+			ofType="SocialFileVO">
 			<id column="fileNum" property="fileNum" />
 			<result column="socialNum" property="socialNum" />
 			<result column="fileName" property="fileName" />
 			<result column="originName" property="originName" />
 		</collection>
+		<collection property="good" javaType="GoodVO">
+			<id column="goodNum" property="goodNum"/>
+			<result column="socialNum" property="socialNum"/>
+			<result column="username" property="username"/>
+		</collection>
 	</resultMap>
-	
+
 	<select id="getSocialNum" resultType="Long">
 		select last_insert_id()
 	</select>
 
-	<select id="getTotalCount" resultType="Long" parameterType="SocialPager">
+	<select id="getTotalCount" resultType="Long"
+		parameterType="SocialPager">
 		select count(socialNum) from social
 	</select>
 
-	<insert id="setInsert" parameterType="SocialVO" useGeneratedKeys="true" keyProperty="socialNum">
+	<insert id="setInsert" parameterType="SocialVO"
+		useGeneratedKeys="true" keyProperty="socialNum">
 		insert into social
-		(socialNum, socialTitle, categoryCode, username, socialContent, socialDate)
-		values (#{socialNum}, #{socialTitle}, #{categoryCode}, #{username}, #{socialContent}, now())
+		(socialNum,
+		socialTitle, categoryCode, username, socialContent, socialDate)
+		values
+		(#{socialNum}, #{socialTitle}, #{categoryCode}, #{username},
+		#{socialContent}, now())
 	</insert>
 
 	<insert id="setFileInsert" parameterType="SocialFileVO">
-		insert into socialFile (socialNum, fileName, originName)
-		values (#{socialNum}, #{fileName}, #{originName})
+		insert into socialFile
+		(socialNum, fileName, originName)
+		values (#{socialNum}, #{fileName},
+		#{originName})
 	</insert>
-	
+
 	<delete id="setFileDelete" parameterType="SocialFileVO">
-		delete socialFile where fileNum=#{fileNum}
+		delete socialFile where
+		fileNum=#{fileNum}
 	</delete>
 
-	<select id="getFileSelect" parameterType="SocialFileVO" resultType="SocialFileVO">
+	<select id="getFileSelect" parameterType="SocialFileVO"
+		resultType="SocialFileVO">
 		select * from socialFile where fileNum=#{fileNum}
-	</select> 
+	</select>
 
 	<update id="setUpdate" parameterType="SocialVO">
-		update social set socialTitle=#{socialTitle}, categoryCode=#{categoryCode}, socialContent=#{socialContent}
+		update social set
+		socialTitle=#{socialTitle}, categoryCode=#{categoryCode},
+		socialContent=#{socialContent}
 		where socialNum=#{socialNum}
 	</update>
 
 	<delete id="setDelete" parameterType="SocialVO">
-		delete from social where socialNum=#{socialNum}
+		delete from social where
+		socialNum=#{socialNum}
+	</delete>
+
+	<!-- good -->
+	<select id="getGood" parameterType="GoodVO" resultType="Long">
+		select count(goodNum) from good
+		where socialNum=#{socialNum} and username=#{username}
+	</select>
+
+	<insert id="insertGood" parameterType="GoodVO">
+		insert into good
+		(socialNum, username)
+		values (#{socialNum}, #{username})
+	</insert>
+
+	<select id="updateGood" parameterType="GoodVO">
+		update social set
+		socialGood = (select count(*) from good
+		where socialNum=#{socialNum})
+		where socialNum=#{socialNum}
+	</select>
+	
+	<delete id="deleteGood" parameterType="GoodVO">
+		delete from good
+		where socialNum=#{socialNum} and username=#{username}
 	</delete>
 </mapper>

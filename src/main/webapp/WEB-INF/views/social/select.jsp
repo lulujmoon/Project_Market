@@ -71,7 +71,7 @@ h2 {
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<div class="main-container">
-		<h2>${vo.socialTitle}</h2>
+		<h2>${social.socialTitle}</h2>
 		<table class="table-box">
 			<thead class="thead-dark">
 				<tr>
@@ -82,9 +82,9 @@ h2 {
 			</thead>
 			<tbody>
 				<tr>
-					<td>${vo.socialNum}</td>
-					<td>${vo.username}</td>
-					<td>${vo.socialDate}</td>
+					<td>${social.socialNum}</td>
+					<td>${social.username}</td>
+					<td>${social.socialDate}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -96,15 +96,18 @@ h2 {
 			</thead>
 			<tbody>
 				<tr>
-					<td>${vo.socialContent}</td>
+					<td>${social.socialContent}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 
-	<a class="insert-button" href="./update?socialNum=${vo.socialNum}"
+	<a class="good">
+		<img id="good" src="" width="50px" height="50px">
+	</a>
+	<a class="insert-button" href="./update?socialNum=${social.socialNum}"
 		class="btn btn-primary" role="button">수정</a>
-	<a class="insert-button" href="./delete?socialNum=${vo.socialNum}"
+	<a class="insert-button" href="./delete?socialNum=${social.socialNum}"
 		class="btn btn-primary" role="button">삭제</a>
 	<br>
 	<br>
@@ -114,12 +117,13 @@ h2 {
 	<!--  댓글  -->
 	<div class="table-box2">
 		<label for="comment">댓글</label>
-		<form id="form" action="../comment/insert?socialNum=${vo.socialNum}"
+		<form id="form"
+			action="../comment/insert?socialNum=${social.socialNum}"
 			method="post">
 			<input type="hidden" id="socialNum" name="socialNum">
 			<textarea class="form-control myCheck" id="commentContent"
 				name="commentContent" placeholder="내용을 입력하세요."></textarea>
-			<input type="text" readonly="readonly" value="${vo.username}"
+			<input type="text" readonly="readonly" value="${social.username}"
 				name="username"> <input type="submit" value="작성" />
 		</form>
 	</div>
@@ -139,7 +143,7 @@ h2 {
 							href="../comment/update?commentNum=${comment.commentNum}">수정</a>
 						<a href="../comment/delete?commentNum=${comment.commentNum}">삭제</a>
 						<a
-							href="../comment/reply?socialNum=${vo.socialNum}&commentNum=${comment.commentNum}">답글</a>
+							href="../comment/reply?socialNum=${social.socialNum}&commentNum=${comment.commentNum}">답글</a>
 					</div>
 			</ul>
 		</c:forEach>
@@ -147,5 +151,42 @@ h2 {
 	<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
 	<script type="text/javascript" src="/resources/js/functions.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			let goodval = ${good}
+
+			if (goodval>0) {
+				console.log("good : "+goodval);
+				$("#good").prop("src", "/resources/images/빨강.png");
+				$(".good").prop("name", goodval);
+			} else {
+				console.log("good : "+goodval);
+				$("#good").prop("src", "/resources/images/검정.png");
+				$(".good").prop("name", goodval);
+			}
+
+			$(".good").on("click", function() {
+
+				let that = $(".good");
+
+				let sendData = {'socialNum' : '${socialVO.socialNum}', 'good' : that.prop('name')};
+				$.ajax({
+					url : '/social/good',
+					type : 'POST',
+					data : sendData,
+					success : function(data) {
+						that.prop('name', data);
+						if (data == 1) {
+							$("good").prop("src", "/resources/images/빨강.png");
+						} else {
+							$("good").prop("src", "/resources/images/검정.png");
+						}
+
+					}
+				})
+			})
+		})
+	</script>
 </body>
 </html>
