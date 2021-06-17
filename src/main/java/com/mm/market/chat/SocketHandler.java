@@ -62,7 +62,6 @@ public class SocketHandler extends TextWebSocketHandler {
 	}
 
 	
-	//컴파일러가 알려주는 노란색 경고표시 없애줌 -- unchecked : 검증되지 않은 연산자 관련 경고를 표시 안함
 	@SuppressWarnings("unchecked")
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
