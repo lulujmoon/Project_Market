@@ -19,11 +19,11 @@
 
 <div class="container">
 	<div class="title-container">
-		상품 등록
+		상품 정보 수정
 	</div>
-	<div class="inputs"></div>
 	<form action="./insert" method="POST" enctype="multipart/form-data" id="upload-form">
 		<input type="hidden" name="username" value="${principal.username}">
+		<input type="hidden" name="productNum" value="${vo.productNum}">
 		<div class="form-group">
 			<div class="form-title">상품 이미지</div>
 			<div class="preview-container">
@@ -31,12 +31,23 @@
 					<i class="fas fa-camera"></i>
 					이미지 추가
 				</div>
+				<div class="inputs"></div>
+				<c:forEach items="${files}" var="file" varStatus="status">
+					<div class="preview">
+						<img src="/resources/upload/product/${file.fileName}">
+					</div>
+					<div class="del-wrapper">
+						<div class="btn-del">
+							<i class="fas fa-times"></i>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 		<div class="preview-info">최대 7장까지 추가할 수 있습니다.</div>
 		<div class="form-group">
 			<div class="form-title">상품명</div>
-			<input type="text" name="productName" class="form-content" required placeholder="상품명을 입력해주세요.">				
+			<input type="text" name="productName" class="form-content" value="${vo.productName}" required placeholder="상품명을 입력해주세요.">				
 		</div>
 		<div class="form-group">		
 			<div class="form-title">카테고리</div>
@@ -56,21 +67,20 @@
 				  <option value="12">반려동물용품</option>
 				  <option value="13">도서/티켓/음반</option>
 				  <option value="14">삽니다</option>
-				</select>
+				</select>					
 				<i class="fas fa-sort-down"></i>
 			</div>
 			<div class="form-info">카테고리를 선택해주세요.</div>
 		</div>
 		<div class="form-group">
 			<div class="form-title">상품 설명</div>
-			<textarea class="form-content" id="productContent" rows="5" name="productContent" required placeholder="상품 설명을 입력해주세요."></textarea>
+			<textarea class="form-content" id="productContent" rows="5" name="productContent" required placeholder="상품 설명을 입력해주세요.">
+				${vo.productContent}
+			</textarea>
 		</div>
 		<div class="form-group">
 			<div class="form-title">가격</div>
-			<input type="text" name="productPrice" class="product-price form-content" required placeholder="숫자만 입력해주세요.">
-			<div class="form-title">가격 제안</div>
-			<input type="radio" name="productNego" value="enabled" id="nego-enabled">&nbsp;<label for="nego-enabled">가능</label>&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="productNego" value="disabled" id="nego-disabled">&nbsp;<label for="nego-disabled">불가</label>
+			<input type="text" name="productPrice" class="product-price form-content" value="${vo.productPrice}" required placeholder="숫자만 입력해주세요.">
 		</div>
 		<div class="form-group">
 			<div class="form-title">지역</div>

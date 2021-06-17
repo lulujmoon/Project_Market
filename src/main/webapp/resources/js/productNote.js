@@ -56,17 +56,44 @@ function makePreview(file){
 	}
 	reader.readAsDataURL(file);
 	preview.appendChild(image);
+}
+
+/** @function makeBtnDel()
+ *	-- 이미지 삭제 버튼을 생성하고 이벤트를 부여한다.
+ *	1. 버튼을 클릭하면 preview와 버튼, input을 모두 삭제한다.
+ */
+function makeBtnDel(){
+	let delWrapper = document.createElement('div');
+	delWrapper.classList.add('del-wrapper');
 	let btnDel = document.createElement('div');
 	btnDel.classList.add('btn-del');
-	btnDel.innerText = "X";
-	preview.append(btnDel);
-	
+	btnDel.innerHTML = '<i class="fas fa-times"></i>';
+	previewContainer.append(delWrapper);
+	delWrapper.append(btnDel);
+	btnDel.addEventListener('click', ()=>{
+		btnDel.parentNode.previousSibling.remove();
+		btnDel.parentNode.previousSibling.remove();
+		btnDel.remove();
+	});
 }
 
 /** 초기설정 1. productContent의 <br>을 /n으로 변경한다.
  */
 productContent.value = productContent.value.replace(/<br>/gm, "\n");
 productContent.value = productContent.value.replace(/\t/gm,"");
+
+function addDel(e){
+	 	e.currentTarget.parentNode.previousSibling.previousSibling.remove();
+		e.currentTarget.parentNode.remove();
+}
+
+/** 초기설정 2. 기존 이미지의 del 버튼에 이벤트를 부여한다.
+ */
+const btnDels = document.querySelectorAll('.btn-del');
+for(btnDel of btnDels){
+	btnDel.addEventListener('click', addDel, false);
+}
+
 /** 이벤트 1. 이미지 추가 버튼 클릭
  *	1. input type="file"을 생성하고 클릭 이벤트를 발생시킨다.
  *	2. 해당 input에 change 이벤트가 발생하면 파일을 읽고 미리보기를 생성한다.
@@ -75,8 +102,9 @@ productContent.value = productContent.value.replace(/\t/gm,"");
  */
 btnAdd.addEventListener('click', ()=>{
 	if(counter < 7){
-		let inputFile = makeInputFile();	
-		inputs.appendChild(inputFile);
+		let inputFile = makeInputFile();
+		inputFile.classList.add('input-file');
+		previewContainer.appendChild(inputFile);
 		inputFile.click();
 		
 		inputFile.addEventListener('change', function(){
@@ -85,7 +113,9 @@ btnAdd.addEventListener('click', ()=>{
 				let check = checkFiles(this.files);
 				if(check){
 					for(file of this.files){
+						
 						makePreview(file);
+						makeBtnDel();
 					}
 				}else{
 					alert('첨부할 수 있는 파일 형식은 gif, jpg, jpeg, png입니다. \n현재 파일 형식은 '+file.name+'입니다.');
@@ -118,7 +148,7 @@ btnAdd.addEventListener('click', ()=>{
 	
 	productContent.value = productContent.value.replace(/\n/gm, "<br>");
 	
-	if(inputs.childElementCount == 0){
+	if(document.querySelectorAll('.preview').length == 0){
 		alert('사진을 한 장 이상 등록해주세요.');
 		result = false;
 	}
