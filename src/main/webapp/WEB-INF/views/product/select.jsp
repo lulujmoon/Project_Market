@@ -53,7 +53,7 @@
 			<div class="top__btns">
 				<c:if test="${principal.username == product.username}">
 					<a class="top-btn btn-status">상태 변경</a>
-					<a class="top-btn btn-edit" href="./update/${product.productNum}">수정하기</a>
+					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
 					<div class="top-btn btn-del">삭제하기</div>
 				</c:if>
 				<c:if test="${principal.username != product.username}">

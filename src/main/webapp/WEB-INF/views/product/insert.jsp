@@ -21,7 +21,6 @@
 	<div class="title-container">
 		상품 등록
 	</div>
-	<div class="inputs"></div>
 	<form action="./insert" method="POST" enctype="multipart/form-data" id="upload-form">
 		<input type="hidden" name="username" value="${principal.username}">
 		<div class="form-group">
@@ -31,6 +30,7 @@
 					<i class="fas fa-camera"></i>
 					이미지 추가
 				</div>
+				<div class="inputs"></div>
 			</div>
 		</div>
 		<div class="preview-info">최대 7장까지 추가할 수 있습니다.</div>
