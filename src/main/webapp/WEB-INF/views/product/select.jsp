@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,10 +51,17 @@
 				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
 			<div class="top__btns">
-				<div class="top-btn btn-contact">연락하기</div>
-				<div class="top-btn btn-nego">가격 제안하기</div>
-				<div class="btn-heart"></div>
-				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i> 신고</div>
+				<c:if test="${principal.username == product.username}">
+					<a class="top-btn btn-status">상태 변경</a>
+					<a class="top-btn btn-edit" href="./update/${product.productNum}">수정하기</a>
+					<div class="top-btn btn-del">삭제하기</div>
+				</c:if>
+				<c:if test="${principal.username != product.username}">
+					<div class="top-btn btn-contact">연락하기</div>
+					<div class="top-btn btn-nego">가격 제안하기</div>
+					<div class="btn-heart"></div>
+					<div class="btn-report"><i class="fas fa-exclamation-triangle"></i> 신고</div>
+				</c:if>
 			</div>
 			<div class="hidden">
 				<input type="hidden" class="heartValue" value="${heart}">

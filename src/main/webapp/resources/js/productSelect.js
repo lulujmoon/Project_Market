@@ -69,33 +69,35 @@ const btnHeart = document.querySelector('.btn-heart');
 let heartValue = Number(document.querySelector('.heartValue').value);
 let productNum = Number(document.querySelector('.productNum').value);
 
-$(document).ready(function(){
-	
-	if(heartValue>0) {
-		btnHeart.innerHTML = '<i class="fas fa-heart"></i>';
-	} else {
-		btnHeart.innerHTML = '<i class="far fa-heart"></i>';
-	}
-	
-	btnHeart.addEventListener('click', ()=>{
-		let sendData = {'productNum' : productNum, 'heart' : heartValue};
-		$.ajax({
-			url : '/product/heart',
-			type : 'POST',
-			data : sendData,
-			success : function(data) {
-				$(".heartValue").val(data);
-				if(data==1) {
-					$(".heartValue").html('<i class="fas fa-heart"></i>');
-					heart_reload();
-				} else {
-					$(".heartValue").html('<i class="far fa-heart"></i>');
-					heart_reload();
+if(btnHeart!=null){
+	$(document).ready(function(){
+		
+		if(heartValue>0) {
+			btnHeart.innerHTML = '<i class="fas fa-heart"></i>';
+		} else {
+			btnHeart.innerHTML = '<i class="far fa-heart"></i>';
+		}
+		
+		btnHeart.addEventListener('click', ()=>{
+			let sendData = {'productNum' : productNum, 'heart' : heartValue};
+			$.ajax({
+				url : '/product/heart',
+				type : 'POST',
+				data : sendData,
+				success : function(data) {
+					$(".heartValue").val(data);
+					if(data==1) {
+						$(".heartValue").html('<i class="fas fa-heart"></i>');
+						heart_reload();
+					} else {
+						$(".heartValue").html('<i class="far fa-heart"></i>');
+						heart_reload();
+					}
 				}
-			}
+			});
 		});
 	});
-});
+}
 		
 function heart_reload() {
 	$("#heart").load(window.location.href='/product/select/'+productNum);

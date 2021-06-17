@@ -21,9 +21,9 @@
 	<div class="title-container">
 		상품 정보 수정
 	</div>
-	<form action="./insert" method="POST" enctype="multipart/form-data" id="upload-form">
+	<form action="./update" method="POST" enctype="multipart/form-data" id="upload-form">
 		<input type="hidden" name="username" value="${principal.username}">
-		<input type="hidden" name="productNum" value="${vo.productNum}">
+		<input type="hidden" name="productNum" value="${product.productNum}">
 		<div class="form-group">
 			<div class="form-title">상품 이미지</div>
 			<div class="preview-container">
@@ -47,26 +47,17 @@
 		<div class="preview-info">최대 7장까지 추가할 수 있습니다.</div>
 		<div class="form-group">
 			<div class="form-title">상품명</div>
-			<input type="text" name="productName" class="form-content" value="${vo.productName}" required placeholder="상품명을 입력해주세요.">				
+			<input type="text" name="productName" class="form-content" value="${product.productName}" required placeholder="상품명을 입력해주세요.">				
 		</div>
 		<div class="form-group">		
 			<div class="form-title">카테고리</div>
 			<div class="form-content form-content-select">
-				<select class="form-select" id="category" name="categoryCode" value="${vo.categoryCode}">
-				  <option value="1">디지털/가전</option>
-				  <option value="2">가구/인테리어</option>
-				  <option value="3">유아동/유아도서</option>
-				  <option value="4">생활/가공식품</option>
-				  <option value="5">스포츠/레저</option>
-				  <option value="6">여성의류</option>
-				  <option value="7">여성잡화</option>
-				  <option value="8">남성의류</option>
-				  <option value="9">남성잡화</option>
-				  <option value="10">게임/취미</option>
-				  <option value="11">뷰티/미용</option>
-				  <option value="12">반려동물용품</option>
-				  <option value="13">도서/티켓/음반</option>
-				  <option value="14">삽니다</option>
+				<select class="form-select" id="category" name="categoryCode">
+				  <c:forEach items="${categories}" var="category">
+				  	<option value="${category.categoryCode}"
+				  		<c:if test="${category.categoryCode == product.categoryCode}">selected</c:if>
+				  	>${category.categoryName}</option>
+				  </c:forEach>
 				</select>					
 				<i class="fas fa-sort-down"></i>
 			</div>
@@ -74,20 +65,22 @@
 		</div>
 		<div class="form-group">
 			<div class="form-title">상품 설명</div>
-			<textarea class="form-content" id="productContent" rows="5" name="productContent" required placeholder="상품 설명을 입력해주세요.">
-				${vo.productContent}
+			<textarea class="form-content" id="productContent" name="productContent" required placeholder="상품 설명을 입력해주세요.">
+				${product.productContent}
 			</textarea>
 		</div>
 		<div class="form-group">
 			<div class="form-title">가격</div>
-			<input type="text" name="productPrice" class="product-price form-content" value="${vo.productPrice}" required placeholder="숫자만 입력해주세요.">
+			<input type="text" name="productPrice" class="product-price form-content" value="${product.productPrice}" required placeholder="숫자만 입력해주세요.">
 		</div>
 		<div class="form-group">
 			<div class="form-title">지역</div>
 			<div class="form-content form-content-select">
 				<select class="form-select" id="locationCode" name="locationCode">
-					<c:forEach items="${location}" var="vo">
-				   <option value="${vo.locationCode}">${vo.locationName}</option>
+					<c:forEach items="${locations}" var="location">
+				   <option value="${location.locationCode}"
+				   	<c:if test="${location.locationCode == product.locationCode}">selected</c:if>
+				   >${location.locationName}</option>
 				  </c:forEach>
 				</select>
 				<i class="fas fa-sort-down"></i>
@@ -103,7 +96,7 @@
 
 
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
-<script type="text/javascript" src="../resources/js/productNote.js"></script>
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/productNote.js"></script>
 </body>
 </html>

@@ -86,16 +86,19 @@
 	text-align: center;
 	font-weight: bold;
 	cursor: pointer;
+	color: white;
 }
 
-.btn-contact{
+.btn-contact, .btn-status{
 	background-color: #fadd85;
-	color: white;
 }
 
-.btn-nego{
+.btn-nego, .btn-edit{
 	background-color: #b4b4b4;
-	color: white;
+}
+
+.btn-del{
+	background-color: #ff5151;
 }
 
 .btn-heart{

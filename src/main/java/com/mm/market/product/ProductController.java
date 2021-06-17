@@ -195,7 +195,7 @@ public class ProductController {
 	@PostMapping("insert")
 	public String setInsert(ProductVO productVO, MultipartFile [] file) throws Exception {
 		
-		int result = productService.setInsert(productVO, file);
+		productService.setInsert(productVO, file);
 
 		return "redirect:./list";
 	}
@@ -222,17 +222,19 @@ public class ProductController {
 		return mv;
 	}
 	
-	@GetMapping("update")
-	public String setUpdate(ProductVO productVO, Authentication authentication, Model model)throws Exception{
+	@GetMapping("update/{productNum}")
+	public String setUpdate(@PathVariable("productNum")Long productNum, Authentication authentication, Model model)throws Exception{
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNum(productNum);
 		productVO = productService.getSelect(productVO);
+		
 		List<ProductFileVO> files = productVO.getFiles();
-
 		for(int i=0;i<files.size();i++) {
 			files.get(i).setProductNum(productVO.getProductNum());
 		}
 
 		List<CategoryVO> categories = categoryMapper.getList();
-		
+
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		MemberVO memberVO = new MemberVO();
 		memberVO = (MemberVO)authentication.getPrincipal();
