@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
+import com.mm.market.location.LocationVO;
 import com.mm.market.member.MemberFileVO;
 import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
@@ -222,18 +223,26 @@ public class ProductController {
 	}
 	
 	@GetMapping("update")
-	public String setUpdate(ProductVO productVO, Model model)throws Exception{
+	public String setUpdate(ProductVO productVO, Authentication authentication, Model model)throws Exception{
 		productVO = productService.getSelect(productVO);
-		List<ProductFileVO> file = productVO.getFiles();
+		List<ProductFileVO> files = productVO.getFiles();
 
-		for(int i=0;i<file.size();i++) {
-			file.get(i).setProductNum(productVO.getProductNum());
-
-		model.addAttribute("vo", productVO);
-		model.addAttribute("files", file);
+		for(int i=0;i<files.size();i++) {
+			files.get(i).setProductNum(productVO.getProductNum());
 		}
 
-		System.out.println(file);
+		List<CategoryVO> categories = categoryMapper.getList();
+		
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		MemberVO memberVO = new MemberVO();
+		memberVO = (MemberVO)authentication.getPrincipal();
+		memberLocationVO.setUsername(memberVO.getUsername());
+		List<MemberLocationVO> locations = memberLocationService.getList(memberLocationVO);
+		
+		model.addAttribute("product", productVO);
+		model.addAttribute("files", files);
+		model.addAttribute("categories", categories);
+		model.addAttribute("locations", locations);
 
 		return "product/update";
 	}
