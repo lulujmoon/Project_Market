@@ -22,6 +22,9 @@
 			 <if test="locationCode != 0L">
 			 	P.locationCode = #{locationCode} AND
 			 </if>
+			 <if test="username != null">
+			 	username = #{username} AND
+			 </if>
 		 P.productName LIKE CONCAT ('%', #{keyword}, '%')
 		 ORDER BY 
 			 <choose>
@@ -47,6 +50,9 @@
 				</if>
 				<if test="locationCode != 0L">
 					locationCode = #{locationCode} AND
+				</if>
+				<if test="username != null">
+					username = #{username} AND
 				</if>
 			productName LIKE CONCAT ('%', #{keyword}, '%')		   
 			AND productNum > 0

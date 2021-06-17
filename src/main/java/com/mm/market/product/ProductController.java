@@ -96,21 +96,25 @@ public class ProductController {
 		
 		Long heart = productService.getHeart(heartVO);
 		
-		//판매자 정보
-		MemberVO sellerVO = new MemberVO();
-		sellerVO.setUsername(productVO.getUsername());
-		sellerVO = memberService.getSeletByUsername(sellerVO);
-		MemberFileVO sellerFileVO = new MemberFileVO();
-		sellerFileVO = memberService.selectFile(sellerVO);
-		MemberLocationVO sellerLocationVO = new MemberLocationVO();
-		sellerLocationVO.setUsername(sellerVO.getUsername());
-		List<MemberLocationVO> sellerLocations = memberLocationService.getList(sellerLocationVO);
-
 		model.addAttribute("heart", heart);
 		model.addAttribute("product", productVO);
-		model.addAttribute("seller", sellerVO);
-		model.addAttribute("sellerFile", sellerFileVO);
-		model.addAttribute("sellerLocation", sellerLocations.get(0));
+		
+		//판매자 정보
+		if(productVO.getUsername() != null) {
+			MemberVO sellerVO = new MemberVO();
+			sellerVO.setUsername(productVO.getUsername());
+			sellerVO = memberService.getSeletByUsername(sellerVO);
+			MemberFileVO sellerFileVO = new MemberFileVO();
+			sellerFileVO = memberService.selectFile(sellerVO);
+			MemberLocationVO sellerLocationVO = new MemberLocationVO();
+			sellerLocationVO.setUsername(sellerVO.getUsername());
+			List<MemberLocationVO> sellerLocations = memberLocationService.getList(sellerLocationVO);
+			
+			model.addAttribute("seller", sellerVO);
+			model.addAttribute("sellerFile", sellerFileVO);
+			model.addAttribute("sellerLocation", sellerLocations.get(0));
+		}
+
 		return "product/select";
 	}
 	

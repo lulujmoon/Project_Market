@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+.container{
+	background-color: white;	
+	margin-top: 165px;
+}
+
+.title-container{
+	width: 100%;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.add{
+	width: 225px;
+	height: 225px;
+	margin: 8px;
+	background: #f4f4f4;
+	border: 1px solid #b4b4b4;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.add > i{
+	font-size: 2em;
+	padding: 10px;
+}
+
+.inputs{
+	display: none;
+}
+
+.preview-container{
+	width: 1070px;
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.preview, .preview > img{
+	width: 225px;
+	height: 225px;
+	border: none;
+}
+
+.preview{
+	margin: 10px;
+	display: flex;
+	flex-direction: row;
+}
+
+.btn-submit{
+	display: none;
+}
+
+.form-group{
+	width: 1000px;
+	margin: auto;
+	padding: 10px;
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.form-title{
+	width: 200px;
+	font-size: 1.2em;
+	padding-right: 20px;
+}
+
+.form-content{
+	width: 700px;
+	height: 30px;
+}
+
+#productContent{
+	min-height: 200px;
+}
+
+.btn-wrapper{
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn-presubmit{
+	all: unset;
+	width: 100px;
+	height: 50px;
+	margin: 40px;
+	border-radius: 5px;
+	background-color: #fadd85;
+	color: white;
+	font-size: 1.5em;
+	font-weight: bold;
+	cursor: pointer;
+	text-align: center;
+	line-height: 100%;
+}

@@ -68,7 +68,10 @@
  <delete id="setDelete" parameterType="MemberVO">
  	delete from member where username=#{username}
  </delete>
- 
- 
+
+ <select id="getEmail" parameterType="MemberVO" resultType="MemberVO">
+ 	select * from member where name=#{name} <![CDATA[&&]]> phone=#{phone}
+ </select>
+
  
  </mapper>  

@@ -1,21 +1,7 @@
 @charset "UTF-8";
 
-.container{
-	padding-top: 125px;
-	width: 1252px;
-	min-height: 55vh;
-	margin: 30px auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.hidden{
-	display: none;
-}
-
 .top-container{
-	width: 1170px;
+	width: 1010px;
 	margin: 40px auto;
 	padding: 0 20px;
 	display: flex;
@@ -47,20 +33,13 @@
 }
 
 .list-container{
-	width: 100%;
+	width: 1060px;
 	display: flex;
 	flex-direction: column;
 }
 
-.zero-container{
-	width: 100%;
-	padding-top: 30px;
-	text-align: center;
-}
-
 .order-container{
-	width: 1210px;
-	margin-left: 30px;
+	width: 1060px;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
@@ -71,7 +50,7 @@
 }
 
 .product-container{
-	width: 1240px;
+	width: 1060px;
 	margin: auto;
 	display: flex;
 	flex-flow: row wrap;
@@ -79,65 +58,8 @@
 	align-items: center;
 }
 
-.prd__card {
-	width: 280px;
-	height: 280px;
-	padding: 15px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-end;
-	cursor: pointer;
-	/* 테스트용 */
-	/* background-color: #d2eeff; */
-}
-
-.card__img {
-	width: 100%;
-	height: 68%;
-	background-color: white;
-	border: 1px solid #e6e6e6;
-}
-
-.card__info {
-	width: 100%;
-	height: 32%;
-	border: 1px solid #e6e6e6;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
-	/* 테스트용 */	
-	background-color: white;
-}
-
-.card__info div {
-	padding: 2% 3%;
-}
-
-.info__name {
-	width: 100%;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
-
-.info__price {
-	font-weight: 800;
-}
-
-.info__date {
-	font-size: 0.7em;
-	color: grey;
-}
-
-.info__location {
-	border-top: 1px solid #e6e6e6; 
-	width: 100%;
-	font-size: 0.8em;
-}
-
 .page-container{
-	width: 1210px;
+	width: 1050px;
 	margin: 20px auto;
 	display: flex;
 	flex-direction: row;
