@@ -47,7 +47,7 @@
 		<div class="form-group">		
 			<div class="form-title">카테고리</div>
 			<div class="form-content form-content-select">
-				<select class="form-select" id="category" name="categoryCode">
+				<select class="form-select" id="category" name="categoryCode" value="${vo.categoryCode}">
 				  <option value="1">디지털/가전</option>
 				  <option value="2">가구/인테리어</option>
 				  <option value="3">유아동/유아도서</option>

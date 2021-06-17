@@ -118,7 +118,7 @@
 		<insert id="setInsert" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
 			insert into product 
 			(productNum, productName, username, categoryCode, productDate, productHit, productHeart, productContent, productPrice, productNego, locationCode)
-			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, #{locationCode})
+			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, #{productContent}, #{productPrice}, #{productNego}, #{locationCode})
 		</insert>
 		
 		<insert id="setFileInsert" parameterType="ProductFileVO">

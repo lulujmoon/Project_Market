@@ -69,8 +69,8 @@
 			<div class="form-title">가격</div>
 			<input type="text" name="productPrice" class="product-price form-content" required placeholder="숫자만 입력해주세요.">
 			<div class="form-title">가격 제안</div>
-			<input type="radio" name="productNego" value="enabled" id="nego-enabled">&nbsp;<label for="nego-enabled">가능</label>&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="productNego" value="disabled" id="nego-disabled">&nbsp;<label for="nego-disabled">불가</label>
+			<input type="radio" name="productNego" value="1" id="nego-enabled">&nbsp;<label for="nego-enabled">가능</label>&nbsp;&nbsp;&nbsp;
+			<input type="radio" name="productNego" value="0" id="nego-disabled">&nbsp;<label for="nego-disabled">불가</label>
 		</div>
 		<div class="form-group">
 			<div class="form-title">지역</div>
