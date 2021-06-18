@@ -219,11 +219,11 @@ btnAdd.addEventListener('click', ()=>{
 	}
 	
 	if(result){
-		for(input of inputs.children){
+/*		for(input of inputs.children){
 			for(let file of input.files){
 				console.log(file.name);
 			}
-		}
+		}*/
 		btnSubmit.click();
 	}
 	
