@@ -25,7 +25,8 @@
 			<div class="nav__item">받은 후기</div>
 			<div class="nav__item">동네 생활</div>
 		</div>
-		<div class="board-content">
+		<div class="board__contents">
+			<div class="hidden">${pager.page}</div>
 			<div class="list-container">		
 				<c:forEach items="${products}" var="product">
 					<div class="prd__card" onclick="goSelect(${product.productNum})">

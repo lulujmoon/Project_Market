@@ -26,7 +26,7 @@
 				<button class="btn btn-edit">수정</button>
 				<button class="btn btn-submit">완료</button>
 				<button class="btn btn-cancel">취소</button>
-				<button class="btn btn-delete active" onclick="deleteMember('${principal.username}')">탈퇴</button>
+				<button class="btn btn-delAcc active" onclick="deleteMember('${principal.username}')">탈퇴</button>
 			</div>
 		</div>
 		<form id="info-form" action="./update" method="post">
