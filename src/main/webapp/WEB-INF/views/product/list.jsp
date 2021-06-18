@@ -28,7 +28,7 @@
 		</ul>
 		<h3 class="top__title">지역</h3>
 		<ul class="top__list list-myLocation">
-			<li class="top__item-location code_0"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>		
+			<li class="top__item-location code_0"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>
 			<c:forEach begin="1" end="3" var="i">
 				<li class="top__item-location code_${i}"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
 			</c:forEach>

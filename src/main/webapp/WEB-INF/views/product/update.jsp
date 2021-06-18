@@ -32,7 +32,7 @@
 					이미지 추가
 				</div>
 				<div class="inputs"></div>
-					<c:if test="${files[0].fileNum != null}">
+				<c:if test="${files[0].fileNum != null}">
 					<c:forEach begin="0" end="${files.size()-1}" var="i" varStatus="status">
 						<div class="preview preview_0_${i}">
 							<img src="/resources/upload/product/${files[i].fileName}">
