@@ -54,7 +54,8 @@
 				<div class="top-btn btn-contact"><a type="button" href="/chat/room">연락하기</a></div>
 				<div class="top-btn btn-nego">가격 제안하기</div>
 				<div class="btn-heart"></div>
-				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i> 신고</div>
+				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i>
+					<a href="/report/report?productNum=${product.productNum}">신고</a></div>
 			</div>
 			<c:if test="${principal.username eq product.username}">
 			<div class="top-btn btn-contact"><a type="button" href="/product/update?productNum=${product.productNum}">수정하기</a></div>	
