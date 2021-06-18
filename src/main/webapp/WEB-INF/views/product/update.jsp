@@ -34,11 +34,11 @@
 				<div class="inputs"></div>
 				<c:if test="${files[0].fileNum != null}">
 					<c:forEach begin="0" end="${files.size()-1}" var="i" varStatus="status">
-						<div class="preview preview_0_${i}">
+						<div class="preview preview_0 preview_0_${i}">
 							<img src="/resources/upload/product/${files[i].fileName}">
 						</div>
 						<div class="del-wrapper">
-							<div class="btn-del del_0_${i}" onclick="deleteFileInDB(${files[i].fileNum})">
+							<div class="btn-del del_0 del_0_${i}" onclick="deleteFileInDB(${files[i].fileNum})">
 								<i class="fas fa-times"></i>
 							</div>
 						</div>

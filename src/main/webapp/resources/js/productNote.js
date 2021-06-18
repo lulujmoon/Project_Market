@@ -82,8 +82,6 @@ function makeBtnDel(){
 	let preview = document.querySelector('.preview_'+inputNum+'_'+innerNum);
 	let delWrapper = evt.currentTarget.parentNode;
 	
-	console.log('.preview_'+inputNum+'_'+innerNum);
-	
 	if(inputNum>0){
 		let inputFile = document.querySelector('.file_'+inputNum);
 		const dt = new DataTransfer();
@@ -92,7 +90,7 @@ function makeBtnDel(){
 				dt.items.add(inputFile.files[i]);
 			}
 		}
-		inputFile.files = dt.files;		
+		inputFile.files = dt.files;
 	}
 
 	preview.remove();
@@ -132,9 +130,7 @@ function deleteFileInDB(fileNum){
 		type: "POST",
 		data: {fileNum:fileNum},
 		success:function(result){
-			if(result>0){
-				location.reload();
-			}else{
+			if(result<0){
 				alert('삭제되지 않았습니다. 다시 시도해주세요.');
 			}
 		}
@@ -147,11 +143,12 @@ function deleteFileInDB(fileNum){
 productContent.value = productContent.value.replace(/<br>/gm, "\n");
 productContent.value = productContent.value.replace(/\t/gm,"");
 
-function addDel(e){
-	 	e.currentTarget.parentNode.previousSibling.previousSibling.remove();
-		e.currentTarget.parentNode.remove();
+/** 초기설정 2. 기존 이미지의 del 버튼에 이벤트를 부여한다.
+ */
+const btnDels = document.querySelectorAll('.btn-del');
+for(btnDel of btnDels){
+	btnDel.addEventListener('click', deleteFile);
 }
-
 
 /** 이벤트 1. 이미지 추가 버튼 클릭
  *	1. input type file 추가하고 click()
@@ -222,6 +219,11 @@ btnAdd.addEventListener('click', ()=>{
 	}
 	
 	if(result){
+		for(input of inputs.children){
+			for(let file of input.files){
+				console.log(file.name);
+			}
+		}
 		btnSubmit.click();
 	}
 	
