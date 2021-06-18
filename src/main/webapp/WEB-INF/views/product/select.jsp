@@ -51,11 +51,17 @@
 				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
 			<div class="top__btns">
-				<div class="top-btn btn-contact"><a type="button" href="/chat/room">연락하기</a></div>
-				<div class="top-btn btn-nego">가격 제안하기</div>
-				<div class="btn-heart"></div>
-				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i>
-					<a href="/report/report?productNum=${product.productNum}">신고</a></div>
+				<c:if test="${principal.username == product.username}">
+					<a class="top-btn btn-status">상태 변경</a>
+					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
+					<div class="top-btn btn-del">삭제하기</div>
+				</c:if>
+				<c:if test="${principal.username != product.username}">
+					<div class="top-btn btn-contact"><a type="button" href="/chat/room">연락하기</a></div>
+					<div class="top-btn btn-nego">가격 제안하기</div>
+					<div class="btn-heart"></div>
+					<div class="btn-report"><a href="/report/report?productNum=${product.productNum}"><i class="fas fa-exclamation-triangle"></i> 신고</a></div>
+				</c:if>
 			</div>
 			<c:if test="${principal.username eq product.username}">
 			<div class="top-btn btn-contact"><a type="button" href="/product/update?productNum=${product.productNum}">수정하기</a></div>	

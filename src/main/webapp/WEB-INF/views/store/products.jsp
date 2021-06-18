@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +26,8 @@
 			<div class="nav__item">동네 생활</div>
 		</div>
 		<div class="board__contents">
-				<div class="list-container">		
+			<div class="hidden">${pager.page}</div>
+			<div class="list-container">		
 				<c:forEach items="${products}" var="product">
 					<div class="prd__card" onclick="goSelect(${product.productNum})">
 						<c:if test="${product.files[0].fileName != null}">
@@ -39,7 +44,18 @@
 						</div>
 					</div>
 				</c:forEach>
-	</div>
+			</div>
+			<ul class="page-container list-page">
+				<c:if test="${pager.pre}">
+					<li><a class="page-item arrow" href="./list?page=${pager.startNum-1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-left"></i></a></li>
+				</c:if>
+				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						<li><a class="page-item code_${i}" href="${pageContext.request.contextPath}/store/${principal.code}/products?page=${i}">${i}</a></li>
+				</c:forEach>
+				<c:if test="${pager.next}">
+					<li><a class="page-item arrow" href="./list?page=${pager.lastNum+1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-right"></i></a></li>
+				</c:if>
+			</ul>
 		</div>
 	</div>
 
