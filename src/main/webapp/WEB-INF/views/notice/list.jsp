@@ -7,8 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:import url="../template/setting.jsp"></c:import>
 </head>
 <body>
+<c:import url="../template/header.jsp"></c:import>
+<div class=container>
 <h1>NoticeList</h1>
 
 <sec:authorize access="hasRole('ADMIN')">
@@ -57,6 +60,7 @@
 	 </form> 
 	</div> 
 	</div>
-
+	</div>
+<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>
