@@ -27,7 +27,7 @@
 			 </if>
 		 P.productName LIKE CONCAT ('%', #{keyword}, '%') AND
 		 PF.fileNum = (SELECT MIN(PF.fileNum) FROM productFile PF WHERE productNum = P.productNum)
-		 ORDER BY 
+		 ORDER BY
 			 <choose>
 			 	<when test="order == 'lowPrice'">
 			 		P.productPrice asc
