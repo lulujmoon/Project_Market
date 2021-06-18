@@ -82,7 +82,7 @@ public class SocialService {
 
 	//good
 	public void insertGood(GoodVO goodVO) throws Exception {
-		socialMapper.setGood(goodVO);
+		socialMapper.insertGood(goodVO);
 		socialMapper.updateGood(goodVO.getSocialNum());
 	}
 	

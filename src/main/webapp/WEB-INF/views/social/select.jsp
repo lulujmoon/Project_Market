@@ -78,7 +78,6 @@ h2 {
 					<th>번호</th>
 					<th>작성자</th>
 					<th>작성 날짜</th>
-					<th>공감 수</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -86,7 +85,6 @@ h2 {
 					<td>${social.socialNum}</td>
 					<td>${social.username}</td>
 					<td>${social.socialDate}</td>
-					<td>${social.socialGood}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -104,14 +102,16 @@ h2 {
 		</table>
 	</div>
 
-	<a class="good" onclick="if ( confirm('공감 하시겠습니까?')==false ){return false;}">
-		<img id="good" src="" width="50px" height="50px">
-	</a>
 	<a class="insert-button" href="./update?socialNum=${social.socialNum}"
 		class="btn btn-primary" role="button">수정</a>
 	<a class="insert-button" href="./delete?socialNum=${social.socialNum}"
 		class="btn btn-primary" role="button">삭제</a>
-	<a href="#" class="btn btn-danger" role="button">신고</a>
+	<a class="btn btn-danger" href="#" role="button">신고</a>
+	<div style="text-align: center;">
+		<a class="good">
+			<img id="good" src="" width="50px" height="50px">
+		</a>
+	</div>
 	<br>
 	<br>
 	<br>
@@ -138,7 +138,7 @@ h2 {
 				<li><c:catch>
 						<c:forEach begin="1" end="${comment.depth}">
 								&ensp;>
-							</c:forEach>
+						</c:forEach>
 					</c:catch> ${comment.commentContent}</li>
 				<li>
 					<div class="container">
@@ -148,6 +148,7 @@ h2 {
 						<a
 							href="../comment/reply?socialNum=${social.socialNum}&commentNum=${comment.commentNum}">답글</a>
 					</div>
+				</li>
 			</ul>
 		</c:forEach>
 	</c:if>

@@ -4,21 +4,21 @@
 
 $(document).ready(function() {
 
-	let goodval = ${good}
+	var goodval = ${good};
 
 	if (goodval>0) {
-		console.log("good : "+goodval);
+		console.log(goodval);
 		$("#good").prop("src", "/resources/images/빨강.png");
-		$(".good").prop("name", goodval);
+		$(".good").prop('name', goodval);
 	} else {
-		console.log("good : "+goodval);
+		console.log(goodval);
 		$("#good").prop("src", "/resources/images/검정.png");
-		$(".good").prop("name", goodval);
+		$(".good").prop('name', goodval);
 	}
 
 	$(".good").on("click", function() {
-			let that = $(".good");
-			let sendData = {'socialNum' : '${socialVO.socialNum}', 'good' : that.prop('name')};
+			var that = $(".good");
+			var sendData = {'socialNum' : '${socialVO.socialNum}', 'good' : that.prop('name')};
 		$.ajax({
 			url : '/social/good',
 			type : 'POST',
@@ -26,12 +26,12 @@ $(document).ready(function() {
 			success : function(data) {
 				that.prop('name', data);
 				if (data == 1) {
-					$("good").prop("src", "/resources/images/빨강.png");
+					$("#good").prop("src", "/resources/images/빨강.png");
 				} else {
-					$("good").prop("src", "/resources/images/검정.png");
+					$("#good").prop("src", "/resources/images/검정.png");
 				}
 
 			}
-		})
-	})
-})
+		});
+	});
+});

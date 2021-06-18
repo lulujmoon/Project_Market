@@ -49,8 +49,9 @@ public class SocialController {
 	}
 
 	@GetMapping("select")
-	public String getSelect(@RequestParam("socialNum") Long socialNum, Model model, Authentication auth) throws Exception {
-		SocialVO socialVO = new SocialVO();
+	public ModelAndView getSelect(@RequestParam("socialNum") Long socialNum, SocialVO socialVO, CommentVO commentVO, Authentication auth) throws Exception {
+		ModelAndView mv = new ModelAndView();
+
 		socialVO.setSocialNum(socialNum);
 		socialVO = socialService.getSelect(socialVO);
 		
@@ -58,22 +59,23 @@ public class SocialController {
 		int lastInx = auth.getPrincipal().toString().indexOf(",");
 
 		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
-		
+
 		GoodVO goodVO = new GoodVO();
 		goodVO.setSocialNum(socialNum);
 		goodVO.setUsername(username);
 		
-		Long like = socialService.getGood(goodVO);
+		Long good = socialService.getGood(goodVO);
 
-		CommentVO commentVO = new CommentVO();
 		List<CommentVO> ar = commentService.getList(commentVO);
-		
-		model.addAttribute("like", like);
-		model.addAttribute("social", socialVO);
-		model.addAttribute("comment", commentVO);
-		model.addAttribute("list", ar);
 
-		return "social/select";
+		mv.addObject("good", good);
+		mv.addObject("social", socialVO);
+		mv.addObject("comment", commentVO);
+		mv.addObject("list", ar);
+
+		mv.setViewName("social/select");
+
+		return mv;
 	}
 
 	@GetMapping("insert")
