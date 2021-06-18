@@ -32,7 +32,7 @@ public class StoreController {
 	private ProductService productService;
 	
 	@GetMapping("{code}/products")
-	public ModelAndView products(@PathVariable("code") Long code, Authentication authentication, ModelAndView mv) throws Exception {
+	public ModelAndView products(@PathVariable("code") Long code, ProductPager productPager, Authentication authentication, ModelAndView mv) throws Exception {
 		
 		MemberVO memberVO = new MemberVO();
 		memberVO.setCode(code);
@@ -44,14 +44,14 @@ public class StoreController {
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
 		
-		ProductPager productPager = new ProductPager();
 		productPager.setUsername(memberVO.getUsername());
-		List<ProductVO> productList = productService.getList(productPager, 12L, 5L);
+		List<ProductVO> productList = productService.getList(productPager, 16L, 5L);
 		
 		mv.addObject("member", memberVO);
 		mv.addObject("file", memberFileVO);
 		mv.addObject("locations", locationList);
 		mv.addObject("products", productList);
+		mv.addObject("pager", productPager);
 		mv.setViewName("/store/products");
 		return mv;
 	}
