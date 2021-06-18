@@ -136,7 +136,7 @@ function deleteLocation(locationNum){
  function checkCondition(password, phone, email){
 	let result;
 	
-	const pwCheck = /^(?=.*[a-z])(?=.*[A-Z\d`~!@#$%^&*\-_=+\/]).{8,20}$/;
+	const pwCheck = /^(?=.*[a-zA-Z])(?=.*[\d])(?=.*[`~!@#$%^&*\-_=+\/]).{8,20}$/;
 	const phoneCheck = /\d{10,11}/;
 	const emailCheck = /@+/;
 	
@@ -200,7 +200,7 @@ btnSubmit.addEventListener('click', ()=>{
 	
 	switch(result){
 		case 1: 
-			alert('비밀번호를 확인하세요. 영문 대,소문자와 숫자,특수기호가 적어도 1개이상 포함되어야 하며 글자수는 8~20자여야 합니다.');
+			alert('비밀번호를 확인하세요. 영문, 숫자, 특수기호가 포함되어야 하며 글자수는 8~20자여야 합니다.');
 			break;
 		case 2:
 			alert('전화번호를 확인하세요. 10 ~ 11 자리의 숫자여야 합니다.');

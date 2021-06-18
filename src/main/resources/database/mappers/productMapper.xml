@@ -25,7 +25,8 @@
 			 <if test="username != null">
 			 	username = #{username} AND
 			 </if>
-		 P.productName LIKE CONCAT ('%', #{keyword}, '%')
+		 P.productName LIKE CONCAT ('%', #{keyword}, '%') AND
+		 PF.fileNum = (SELECT MIN(PF.fileNum) FROM productFile PF WHERE productNum = P.productNum)
 		 ORDER BY 
 			 <choose>
 			 	<when test="order == 'lowPrice'">
@@ -35,7 +36,7 @@
 			 		P.productPrice desc
 			 	</when>
 			 	<otherwise>
-			 		P.productNum DESC
+			 		P.productDate DESC
 			 	</otherwise>
 			 </choose>
 		 limit #{startRow}, #{perPage}

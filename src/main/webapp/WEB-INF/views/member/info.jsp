@@ -38,7 +38,7 @@
 			<div class="info-group">
 				<div class="info__title">Password</div>
 				<div class="info__content">********</div>
-				<input class="info__input" type="password" name="password" placeholder="영문 소문자와 숫자/특수기호/영문 대문자 중 1가지 이상 조합, 8-20자">
+				<input class="info__input" type="password" name="password" placeholder="영문, 숫자, 특수기호 조합, 8-20자">
 			</div>
 			<div class="info-group">
 				<div class="info__title">Name</div>
