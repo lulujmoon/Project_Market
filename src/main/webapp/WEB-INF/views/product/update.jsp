@@ -32,16 +32,18 @@
 					이미지 추가
 				</div>
 				<div class="inputs"></div>
-				<c:forEach items="${files}" var="file" varStatus="status">
-					<div class="preview">
-						<img src="/resources/upload/product/${file.fileName}">
-					</div>
-					<div class="del-wrapper">
-						<div class="btn-del">
-							<i class="fas fa-times"></i>
+					<c:if test="${files[0].fileNum != null}">
+					<c:forEach begin="0" end="${files.size()-1}" var="i" varStatus="status">
+						<div class="preview preview_0_${i}">
+							<img src="/resources/upload/product/${files[i].fileName}">
 						</div>
-					</div>
-				</c:forEach>
+						<div class="del-wrapper">
+							<div class="btn-del del_0_${i}" onclick="deleteFileInDB(${files[i].fileNum})">
+								<i class="fas fa-times"></i>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
 			</div>
 		</div>
 		<div class="preview-info">최대 7장까지 추가할 수 있습니다.</div>
@@ -58,7 +60,7 @@
 				  		<c:if test="${category.categoryCode == product.categoryCode}">selected</c:if>
 				  	>${category.categoryName}</option>
 				  </c:forEach>
-				</select>					
+				</select>
 				<i class="fas fa-sort-down"></i>
 			</div>
 			<div class="form-info">카테고리를 선택해주세요.</div>

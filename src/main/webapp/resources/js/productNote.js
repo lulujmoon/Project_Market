@@ -67,9 +67,12 @@ function makeBtnDel(){
  *	-- 이미지 파일을 삭제한다.
  *	1. 클래스명에서 inputNum과 innerNum을 찾는다.
  *	2. 버튼을 클릭하면 preview와 버튼, input을 모두 삭제한다.
+ *	2-1. input이 없는(글 수정 시 불러온 기존의) 파일은 inputNum이 0이므로 조건문으로 제외한다.
  *	3. input이 multiple을 허용하므로 선택한 파일을 따로 삭제하려면
  *	3-1. DataTransfer를 생성해 input 내의 파일을 '선택한 파일만 제외하고' 복사한다.
  *	3-2. input.files에 dataTransfer.files를 대입한다.
+ *	4. 해당 inputNum의 preview와 btnDel의 클래스 번호를 새로 부여한다.
+ *	5. counter를 초기화한다.
  */
  function deleteFile(evt){
 	let className = evt.currentTarget.classList.item(2);
@@ -79,26 +82,31 @@ function makeBtnDel(){
 	let preview = document.querySelector('.preview_'+inputNum+'_'+innerNum);
 	let delWrapper = evt.currentTarget.parentNode;
 	
-	let inputFile = document.querySelector('.file_'+inputNum);
-	const dt = new DataTransfer();
-	for(let i=0;i<inputFile.files.length;i++){
-		if(i!=innerNum){
-			dt.items.add(inputFile.files[i]);
+	console.log('.preview_'+inputNum+'_'+innerNum);
+	
+	if(inputNum>0){
+		let inputFile = document.querySelector('.file_'+inputNum);
+		const dt = new DataTransfer();
+		for(let i=0;i<inputFile.files.length;i++){
+			if(i!=innerNum){
+				dt.items.add(inputFile.files[i]);
+			}
 		}
+		inputFile.files = dt.files;		
 	}
-	inputFile.files = dt.files;
 
 	preview.remove();
 	delWrapper.remove();
-
-	previewGroup = document.querySelectorAll('.preview_'+inputNum);
-	btnDelGroup = document.querySelectorAll('.del_'+inputNum);
+	
+	let previewGroup = document.querySelectorAll('.preview_'+inputNum);
+	let btnDelGroup = document.querySelectorAll('.del_'+inputNum);
 	for(let i=0;i<previewGroup.length;i++){
 		let oldClassName = previewGroup[i].classList.item(2);
 		previewGroup[i].classList.replace(oldClassName, 'preview_'+inputNum+'_'+i);
 		oldClassName = btnDelGroup[i].classList.item(2);
 		btnDelGroup[i].classList.replace(oldClassName, 'del_'+inputNum+'_'+i);
 	}
+	counter = (document.querySelectorAll('.preview')).length;		
 }
 
 /** @function checkFiles(files)
@@ -115,6 +123,24 @@ function checkFiles(files){
 	return true;
 }
 
+/** @function deleteFileInDB(fileNum)
+ *	-- 파일 번호를 받아 DB에서 삭제한다.
+ */
+function deleteFileInDB(fileNum){
+	$.ajax({
+		url:"../fileDelete",
+		type: "POST",
+		data: {fileNum:fileNum},
+		success:function(result){
+			if(result>0){
+				location.reload();
+			}else{
+				alert('삭제되지 않았습니다. 다시 시도해주세요.');
+			}
+		}
+	});
+}
+
 
 /** 초기설정 1. productContent의 <br>을 /n으로 변경한다.
  */
@@ -126,12 +152,6 @@ function addDel(e){
 		e.currentTarget.parentNode.remove();
 }
 
-/** 초기설정 2. 기존 이미지의 del 버튼에 이벤트를 부여한다.
- */
-const btnDels = document.querySelectorAll('.btn-del');
-for(btnDel of btnDels){
-	btnDel.addEventListener('click', deleteFile);
-}
 
 /** 이벤트 1. 이미지 추가 버튼 클릭
  *	1. input type file 추가하고 click()

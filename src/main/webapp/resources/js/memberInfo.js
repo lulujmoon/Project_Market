@@ -127,7 +127,7 @@ function deleteLocation(locationNum){
 /** @function checkCondition(password, phone, email)
  *	-- 정보 수정 폼 제출 전 조건을 확인한다.
  *	0. 비밀번호, 전화번호, 이메일을 매개변수로 받는다.
- *	1. 비밀번호는 영문 대,소문자와 숫자,특수기호가 적어도 1개이상 포함된 8~20자
+ *	1. 비밀번호는 영문 소문자와 대문자, 숫자, 특수기호 중 1개 이상 포함된 8~20자
  *	2. 전화번호는 10 ~ 11 자리의 숫자
  *	3. 이메일은 @ 포함
  *	4. 모든 조건 부합 시 0, 비밀번호 문제는 1, 전화번호 문제는 2, 이메일 문제는 3을 반환한다.
@@ -136,7 +136,7 @@ function deleteLocation(locationNum){
  function checkCondition(password, phone, email){
 	let result;
 	
-	const pwCheck = /^(?=.*[a-zA-Z])(?=.*[\d])(?=.*[`~!@#$%^&*\-_=+\/]).{8,20}$/;
+	const pwCheck = /^(?=.*[a-z])(?=.*[A-Z\d`~!@#$%^&*\-_=+\/]).{8,20}$/;
 	const phoneCheck = /\d{10,11}/;
 	const emailCheck = /@+/;
 	

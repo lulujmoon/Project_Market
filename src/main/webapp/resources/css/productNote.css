@@ -138,6 +138,23 @@
 	pointer-events: none;
 }
 
+.form-info{
+	display: flex;
+	flex-direction: column;
+}
+
+.form-info >a{
+	width: 140px;
+	height: 35px;
+	margin-top: 5px;
+	border-radius: 5px;
+	background-color: #fadd85;
+	line-height: 35px;
+	color: #fbfbfb;
+	text-align: center;
+	font-weight: bold;
+}
+
 #productContent{
 	min-height: 200px;
 	line-height: 1.6em;
@@ -160,7 +177,7 @@
 	margin: 20px 50px;
 	border-radius: 5px;
 	background-color: #fadd85;
-	color: white;
+	color: #fbfbfb;
 	font-size: 1.3em;
 	font-weight: bold;
 	cursor: pointer;

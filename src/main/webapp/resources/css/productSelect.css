@@ -205,6 +205,7 @@
 
 .carousel-images{
 	width: 100%;
+	min-width: 400px;
 	object-fit: contain;
 	cursor: pointer;
 }
