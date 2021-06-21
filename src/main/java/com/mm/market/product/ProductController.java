@@ -318,6 +318,13 @@ public class ProductController {
 
 		return "redirect:./list";
 	}
-
+	
+	
+	@PostMapping("setStatus")
+	public String setStatus(ProductVO productVO)throws Exception{
+		productService.setStatus(productVO);
+		return "redirect:./select/"+productVO.getProductNum();
+	}
+	
 
 }

@@ -52,6 +52,15 @@
 			width: 330px;
 			height: 25px;
 		}
+		button{
+			background-color: #FFBB00;
+			font-size: 14px;
+			color: #000;
+			border: 1px solid #000;
+			border-radius: 5px;
+			padding: 3px;
+			margin: 3px;
+		}
 		#yourMsg{
 			display: none;
 		}
@@ -70,7 +79,7 @@
 	function wsEvt() {
 		ws.onopen = function(data){
 			console.log('Info: connetion opened.');
-
+			
 			//소켓이 열리면 초기화 세팅하기
 		}
 		

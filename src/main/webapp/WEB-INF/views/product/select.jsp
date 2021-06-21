@@ -51,8 +51,21 @@
 				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
 			<div class="top__btns">
-				<c:if test="${principal.username == product.username}">
-					<a class="top-btn btn-status">상태 변경</a>
+				<c:if test="${principal.username eq product.username}">
+					<div class="dropdown"> 
+					<input type="hidden" id="productStatus" value="${product.productStatus}">
+					<form action="/product/setStatus?productNum=${product.productNum}" method="post">
+					<div class="form-group">
+						  <label for="sel1">상태 변경:</label>
+						  <select class="form-control" id="status" name="productStatus" onchange="submit()">
+						    <option>판매 중</option>
+						    <option>예약 중</option>
+						    <option>판매완료</option>
+						  </select>
+						</div>
+						</form>
+					</div>
+					
 					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
 					<div class="top-btn btn-del">삭제하기</div>
 				</c:if>
@@ -96,6 +109,9 @@
 </div>
 
 <c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript">
+
+</script>
 <script type="text/javascript" src="/resources/js/common.js"></script>
 <script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/productSelect.js"></script>

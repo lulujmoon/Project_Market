@@ -102,3 +102,13 @@ if(btnHeart!=null){
 function heart_reload() {
 	$("#heart").load(window.location.href='/product/select/'+productNum);
 }
+
+
+function submit() {
+	document.status.submit();	
+}
+
+$(document).ready(function(){
+	var status = $("#productStatus").val();
+	$("#status").val(status);
+})

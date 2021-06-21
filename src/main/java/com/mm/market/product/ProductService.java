@@ -185,6 +185,11 @@ public class ProductService {
 
 	}
 	
+	public int setStatus(ProductVO productVO)throws Exception {
+		int result = productMapper.setStatus(productVO);
+		return result;
+	}
+	
 	
 	//heart
 	public void setHeart(HeartVO heartVO)throws Exception{

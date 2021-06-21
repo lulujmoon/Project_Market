@@ -29,6 +29,7 @@ public class SocketHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		System.out.println("handleTextMessage : " + session + " : " + message);
+//		System.out.println(message.getPayload());
 		// 메시지 발송 (메시지를 수신하면 실행됨)
 		String msg = message.getPayload();
 		JSONObject obj = jsonToObjectParser(msg);
@@ -101,7 +102,10 @@ public class SocketHandler extends TextWebSocketHandler {
 		//클라이언트단에서는 type값을 통해 메시지와 초기 설정값을 구분
 		obj.put("type", "getId");
 		obj.put("sessionId", session.getId());
-		session.sendMessage(new TextMessage(obj.toJSONString()));
+		TextMessage message = new TextMessage(obj.toJSONString());
+		session.sendMessage(message);
+		System.out.println(message.getPayload());
+		/* session.sendMessage(new TextMessage(session.getId() + "님이 입장했습니다.")); */
 	}
 
 	@Override
@@ -113,9 +117,12 @@ public class SocketHandler extends TextWebSocketHandler {
 				rls.get(i).remove(session.getId());
 			}
 		}
+		/* session.sendMessage(new TextMessage(session.getId() + "님이 퇴장했습니다.")); */
 		super.afterConnectionClosed(session, status);
 	}
 
+	
+	
 	private static JSONObject jsonToObjectParser(String jsonStr){
 		JSONParser parser = new JSONParser();
 		JSONObject obj = null;
