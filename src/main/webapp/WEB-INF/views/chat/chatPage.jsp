@@ -90,7 +90,7 @@
 				var d = JSON.parse(msg);
 				if(d.type=="getId"){
 					var si = d.sessionId != null ? d.sessionId : "";
-					
+					console.log(d.userName + "님이 입장하셨습니다.");
 					if(si !='') {
 						$("#sessionId").val(si);
 					}
@@ -167,5 +167,6 @@
 			</table>
 		</div>
 	</div>
+	
 </body>
 </html>
