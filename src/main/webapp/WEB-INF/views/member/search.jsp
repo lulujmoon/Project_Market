@@ -18,28 +18,5 @@
 <button type="submit" onclick="sendMail()">입력</button>
 </form>
 
-<!-- <script type="text/javascript">
-
-var name = document.getElementById("name");
-var phone = document.getElementById("phone");
-var check = true;
-
-function sendMail(){
-	if(name=null){
-		alert("이름입력");
-		check=false;
-	}
-	if(phone=""){
-		alert("번호입력");
-		check=false;
-	}
-	if(check){
-		alert("전송완료");
-		form.submit();
-	}
-}
-
-</script> -->
-
 </body>
 </html>
