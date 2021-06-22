@@ -88,32 +88,27 @@ public class StoreController {
 
 	@GetMapping("{code}/reviews")
 	public ModelAndView getLists(@PathVariable("code") Long code, ModelAndView mv) throws Exception {
-		MemberVO revieweeVO = new MemberVO();
-		revieweeVO.setCode(code);
-		revieweeVO = memberService.getSelectByCode(revieweeVO);
+		MemberVO memberVO = new MemberVO();
+		memberVO.setCode(code);
+		memberVO = memberService.getSelectByCode(memberVO);
 		
 		ReviewVO reviewVO = new ReviewVO();
-		reviewVO.setReviewee(revieweeVO.getUsername());
+		reviewVO.setReviewee(memberVO.getUsername());
 		reviewVO.setType(true);
 		List<ReviewVO> buyerReviews = reviewService.getListByReviewee(reviewVO);
 		reviewVO.setType(false);
 		List<ReviewVO> sellerReviews = reviewService.getListByReviewee(reviewVO);
 		
-		MemberVO memberVO = new MemberVO();
-		memberVO.setCode(code);
-		memberVO = memberService.getSelectByCode(memberVO);
-		
-		MemberFileVO memberFileVO = memberService.selectFile(memberVO);
+		MemberFileVO revieweeFileVO = memberService.selectFile(memberVO);
 		
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
 
-		
 		mv.addObject("member", memberVO);
-		mv.addObject("file", memberFileVO);
+		mv.addObject("file", revieweeFileVO);
 		mv.addObject("locations", locationList);
-		
+
 		mv.addObject("buyerReviews", buyerReviews);
 		mv.addObject("sellerReviews", sellerReviews);
 		mv.setViewName("store/reviews");

@@ -13,13 +13,48 @@
 		order by reviewNum desc
 	</select>
 	
-	<select id="getListByReviewee" parameterType="ReviewVO" resultType="ReviewVO">
-		select * from review where reviewee=#{reviewee}
+	<select id="getListByReviewee" parameterType="ReviewVO" resultMap="reviewResult">
+		select R.*, P.*, M.*, MF.*
+		from review R
+		left join product P
+		on R.productNum = P.productNum
+		left join member M
+		on R.reviewer = M.username
+		left join memberFile MF
+		on R.reviewer = MF.username
+		where reviewee=#{reviewee}
 		<if test="type != null">
 		 and type=#{type}
 		</if>
 		order by reviewNum desc
 	</select>
+	
+	<resultMap type="ReviewVO" id="reviewResult">
+		<id property="reviewNum" column="reviewNum"/>
+		<result property="productNum" column="productNum"/>
+		<result property="reviewer" column="reviewer"/>
+		<result property="reviewee" column="reviewee"/>
+		<result property="type" column="type"/>
+		<result property="reviewDate" column="reviewDate"/>
+		<result property="locationCode" column="locationCode"/>
+		<result property="state" column="state"/>
+		<result property="manner" column="manner"/>
+		<result property="speed" column="speed"/>
+		<result property="reviewContent" column="reviewContent"/>
+		<association property="product" javaType="ProductVO">
+			<id property="productNum" column="productNum"/>
+			<result property="productName" column="productName"/>
+		</association>
+		<association property="reviewerVO" javaType="MemberVO">
+			<id property="username" column="username"/>
+			<result property="name" column="name"/>
+			<result property="code" column="code"/>
+		</association>
+		<association property="reviewerFile" javaType="MemberFileVO">
+			<id property="username" column="username"/>
+			<result property="fileName" column="fileName"/>
+		</association>
+	</resultMap>
 	
 	<select id="getSelect" parameterType="ReviewVO" resultType="ReviewVO">
 		select * from review where productNum=#{productNum}

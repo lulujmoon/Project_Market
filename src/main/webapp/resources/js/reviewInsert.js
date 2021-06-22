@@ -25,6 +25,9 @@ function setStars(){
 	let container = event.currentTarget;
 	let input = container.firstElementChild;
 	let value = input.value;
+	if(value==""){
+		value = 0;
+	}
 	let type = null;
 	let code = null;
 	
@@ -39,7 +42,9 @@ function setStars(){
 	let rateFront = container.querySelector('.rate-front');
 	
 	setOtherStars(code, rateBack, rateFront);
-	setSelectedStars(type, code, rateBack, rateFront);
+	if(code>0){
+		setSelectedStars(type, code, rateBack, rateFront);		
+	}
 }
  
 /** @function hoverStars() 
@@ -88,7 +93,7 @@ function hoverStars(){
  * 1. 선택한 별이 star-front이면 half를 추가한다.
  * 2. 선택한 별이 star-back이면 full을 추가한다. 
  */ 
-function setSelectedStars(type, code, rateBack, rateFront){ 
+function setSelectedStars(type, code, rateBack, rateFront){
 	let selectedBack = rateBack.querySelector('.star_'+code);
 	let selectedFront = rateFront.querySelector('.star_'+code);
 

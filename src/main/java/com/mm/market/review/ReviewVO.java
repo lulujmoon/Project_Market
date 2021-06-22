@@ -1,6 +1,11 @@
 package com.mm.market.review;
 
+import java.sql.Timestamp;
 import java.util.Date;
+
+import com.mm.market.member.MemberFileVO;
+import com.mm.market.member.MemberVO;
+import com.mm.market.product.ProductVO;
 
 import lombok.Data;
 
@@ -12,11 +17,15 @@ public class ReviewVO {
 	private String reviewer;
 	private String reviewee;
 	private boolean type; //구매자는 true, 판매자는 false
-	private Date reviewDate;
+	private Timestamp reviewDate;
 	private Long locationCode;
 	private Long state;
 	private Long manner;
 	private Long speed;
 	private String reviewContent;
+	
+	private ProductVO product;
+	private MemberVO reviewerVO;
+	private MemberFileVO reviewerFile;
 
 }

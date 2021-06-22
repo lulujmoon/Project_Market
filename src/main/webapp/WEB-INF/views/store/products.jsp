@@ -19,16 +19,9 @@
 
 <div class="container">
 	<c:import url="./storeCommon.jsp"></c:import>
-	<div class="board-container">
-		<div class="board__nav">
-			<a class="nav__item nav__selected" href="./products">판매 상품</a>
-			<a class="nav__item" href="./reviews">받은 후기</a>
-			<a class="nav__item">동네 생활</a>
-			<a class="nav__item">찜한 상품</a>
-		</div>
 		<div class="board__contents">
 			<div class="hidden">${pager.page}</div>
-			<div class="list-container">		
+			<div class="list-container">
 				<c:forEach items="${products}" var="product">
 					<div class="prd__card" onclick="goSelect(${product.productNum})">
 						<c:if test="${product.files[0].fileName != null}">
@@ -60,7 +53,7 @@
 		</div>
 	</div>
 
-</div>
+</div>	<!-- 스타팅 태그는 임포트한 부분에 포함되어 있음 -->
 
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="/resources/js/common.js"></script>
