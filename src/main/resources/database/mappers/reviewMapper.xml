@@ -23,6 +23,9 @@
 	
 	<select id="getSelect" parameterType="ReviewVO" resultType="ReviewVO">
 		select * from review where productNum=#{productNum}
+		<if test="reviewer != null">
+			and reviewer=#{reviewer}
+		</if>
 	</select>
 	
 	<insert id="setInsert" parameterType="ReviewVO">

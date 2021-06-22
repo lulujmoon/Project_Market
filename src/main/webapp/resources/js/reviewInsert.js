@@ -101,13 +101,28 @@ function setSelectedStars(type, code, rateBack, rateFront){
 	}
 };
 
+/** @function goProductSelect()
+ *	-- 클릭하면 상품 셀렉트 페이지를 새 창에 띄운다.
+ */
+ function goProductSelect(productNum){
+	window.open('/product/select/'+productNum, "", "resizable=yes");
+}
+
 /* 함수 끝 */
 
 const stars = document.querySelectorAll('.star');
 const rateContents = document.querySelectorAll('.rate-content');
  
 
-/** @event 1. 별점 설정
+/** 초기 설정 1. 작성한 후기인지 판별
+ */
+const warning = document.querySelector('.warning');
+if(warning.innerText != ""){
+	alert(warning.innerText);
+	history.back();
+}
+
+/** 이벤트 1. 별점 설정
  */
 for(let star of stars){
 	star.addEventListener('click', insertValue);
@@ -118,7 +133,8 @@ for(let content of rateContents){
 	content.addEventListener('mouseout', setStars);
 }
 
-/**
+/** 이벤트 2. 폼 제출
+ *	-- 필수 항목이 입력되었는지 확인하고 confirm한 뒤 폼을 제출한다.
  */
  
 const btnSubmit = document.querySelector('.btn-submit');

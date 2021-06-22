@@ -37,35 +37,45 @@ public class ReviewController {
 	private ProductService productService;
 
 	@GetMapping("insert")
-	public void setInsert(ReservationVO reservationVO, Authentication authentication, Model model) throws Exception {
+	public String setInsert(ReservationVO reservationVO, Authentication authentication, Model model) throws Exception {
 		//ReservationVO에는 productNum만 담기면 된다.
 		reservationVO = reservationService.getSelect(reservationVO);
 		
-		ReviewVO reviewVO = new ReviewVO();
-		
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 		MemberVO counterpart = new MemberVO();
+
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setProductNum(reservationVO.getProductNum());
+		reviewVO.setReviewer(memberVO.getUsername());
+		reviewVO = reviewService.getSelect(reviewVO);
 		
-		if(memberVO.getUsername().equals(reservationVO.getSeller())) {
-			System.out.println("판매자임");
-			reviewVO.setType(true);
-			counterpart.setUsername(reservationVO.getBuyer());
-		}else if(memberVO.getUsername().equals(reservationVO.getBuyer())) {
-			System.out.println("구매자임");
-			reviewVO.setType(false);
-			counterpart.setUsername(reservationVO.getSeller());
+		if(reviewVO != null) {
+			model.addAttribute("warning", "이미 후기를 작성한 거래입니다.");
+			return "review/insert";
 		}else {
-			System.out.println("너 누구야");
+			reviewVO = new ReviewVO();
+			reviewVO.setProductNum(reservationVO.getProductNum());
+			if(memberVO.getUsername().equals(reservationVO.getSeller())) {
+				reviewVO.setType(true);
+				counterpart.setUsername(reservationVO.getBuyer());
+			}else if(memberVO.getUsername().equals(reservationVO.getBuyer())) {
+				reviewVO.setType(false);
+				counterpart.setUsername(reservationVO.getSeller());
+			}else {
+				model.addAttribute("warning", "거래 당사자가 아닙니다.");
+			}
+			counterpart = memberService.getSeletByUsername(counterpart);
+			
+			ProductVO productVO = new ProductVO();
+			productVO.setProductNum(reservationVO.getProductNum());
+			productVO = productService.getSelect(productVO);
+			
+			model.addAttribute("counterpart", counterpart);
+			model.addAttribute("product", productVO);
+			model.addAttribute("dealType", reviewVO.isType());		
 		}
-		counterpart = memberService.getSeletByUsername(counterpart);
 		
-		ProductVO productVO = new ProductVO();
-		productVO.setProductNum(reservationVO.getProductNum());
-		productVO = productService.getSelect(productVO);
-		
-		model.addAttribute("counterpart", counterpart);
-		model.addAttribute("product", productVO);
-		model.addAttribute("dealType", reviewVO.isType());
+		return "review/insert";
 	}
 	
 	@PostMapping("insert")
