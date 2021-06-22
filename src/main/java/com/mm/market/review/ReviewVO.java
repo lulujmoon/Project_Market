@@ -16,7 +16,7 @@ public class ReviewVO {
 	private Long locationCode;
 	private Long state;
 	private Long manner;
-	private Long response;
+	private Long speed;
 	private String reviewContent;
 
 }

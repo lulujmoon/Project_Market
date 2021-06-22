@@ -21,9 +21,10 @@
 	<c:import url="./storeCommon.jsp"></c:import>
 	<div class="board-container">
 		<div class="board__nav">
-			<div class="nav__item nav__selected">판매 상품</div>
-			<div class="nav__item">받은 후기</div>
-			<div class="nav__item">동네 생활</div>
+			<a class="nav__item nav__selected" href="./products">판매 상품</a>
+			<a class="nav__item" href="./reviews">받은 후기</a>
+			<a class="nav__item">동네 생활</a>
+			<a class="nav__item">찜한 상품</a>
 		</div>
 		<div class="board__contents">
 			<div class="hidden">${pager.page}</div>

@@ -10,10 +10,15 @@
 	
 	<select id="getListByReviewer" parameterType="ReviewVO" resultType="ReviewVO">
 		select * from review where reviewer=#{reviewer}
+		order by reviewNum desc
 	</select>
 	
 	<select id="getListByReviewee" parameterType="ReviewVO" resultType="ReviewVO">
-		select * from review where reviewee=#{reviewee} and type=#{type}
+		select * from review where reviewee=#{reviewee}
+		<if test="type != null">
+		 and type=#{type}
+		</if>
+		order by reviewNum desc
 	</select>
 	
 	<select id="getSelect" parameterType="ReviewVO" resultType="ReviewVO">
@@ -21,7 +26,7 @@
 	</select>
 	
 	<insert id="setInsert" parameterType="ReviewVO">
-		insert into review (productNum, reviewer, reviewee, type, locationCode, state, manner, response, reviewContent)
-		values (#{productNum}, #{reviewer}, #{reviewee}, #{type}, #{locationCode}, #{state}, #{manner}, #{response}, #{reviewContent})
+		insert into review (productNum, reviewer, reviewee, type, locationCode, state, manner, speed, reviewContent)
+		values (#{productNum}, #{reviewer}, #{reviewee}, #{type}, #{locationCode}, #{state}, #{manner}, #{speed}, #{reviewContent})
 	</insert>
 </mapper>
