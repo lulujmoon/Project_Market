@@ -41,13 +41,13 @@
 			</div>
 			<ul class="page-container list-page">
 				<c:if test="${pager.pre}">
-					<li><a class="page-item arrow" href="./list?page=${pager.startNum-1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-left"></i></a></li>
+					<li><a class="page-item arrow" href="${pageContext.request.contextPath}/store/${member.code}/products?page=${pager.startNum-1}"><i class="fas fa-angle-double-left"></i></a></li>
 				</c:if>
 				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-						<li><a class="page-item code_${i}" href="${pageContext.request.contextPath}/store/${principal.code}/products?page=${i}">${i}</a></li>
+						<li><a class="page-item code_${i}" href="${pageContext.request.contextPath}/store/${member.code}/products?page=${i}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pager.next}">
-					<li><a class="page-item arrow" href="./list?page=${pager.lastNum+1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-right"></i></a></li>
+					<li><a class="page-item arrow" href="${pageContext.request.contextPath}/store/${member.code}/products?page=${pager.lastNum+1}"><i class="fas fa-angle-double-right"></i></a></li>
 				</c:if>
 			</ul>
 		</div>
