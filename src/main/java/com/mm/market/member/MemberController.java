@@ -339,6 +339,10 @@ public class MemberController {
 		return "redirect:../";
 	}
 	
+	@GetMapping("search")
+	public void getEmail()throws Exception{
+		
+	}
 	
 	@PostMapping("search")
 	public String getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
