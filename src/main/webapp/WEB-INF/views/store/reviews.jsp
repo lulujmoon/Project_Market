@@ -21,6 +21,7 @@
 			<a class="nav__item" href="./reviews">받은 후기</a>
 			<a class="nav__item">동네 생활</a>
 			<a class="nav__item">찜한 상품</a>
+			<a class="nav__item">작성한 후기</a>
 		</div>
 		<div class="board__contents">
 			<c:forEach items="${buyerReviews}" var="review">
@@ -36,6 +37,7 @@
 
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/store.js"></script>
 </body>
 </html>

@@ -66,7 +66,7 @@ class ReviewTest {
 		reviewVO.setType(false);
 		reviewVO.setLocationCode(1111010300L);
 		reviewVO.setManner(10L);
-		reviewVO.setResponse(7L);
+		reviewVO.setSpeed(7L);
 		
 		int result = reviewMapper.setInsert(reviewVO);
 		assertNotEquals(0, result);

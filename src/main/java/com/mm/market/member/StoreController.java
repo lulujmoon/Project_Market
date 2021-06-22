@@ -87,9 +87,13 @@ public class StoreController {
 	}
 
 	@GetMapping("{code}/reviews")
-	public ModelAndView getLists(@PathVariable("code") Long code, String reviewee, ModelAndView mv) throws Exception {
+	public ModelAndView getLists(@PathVariable("code") Long code, ModelAndView mv) throws Exception {
+		MemberVO revieweeVO = new MemberVO();
+		revieweeVO.setCode(code);
+		revieweeVO = memberService.getSelectByCode(revieweeVO);
+		
 		ReviewVO reviewVO = new ReviewVO();
-		reviewVO.setReviewee(reviewee);
+		reviewVO.setReviewee(revieweeVO.getUsername());
 		reviewVO.setType(true);
 		List<ReviewVO> buyerReviews = reviewService.getListByReviewee(reviewVO);
 		reviewVO.setType(false);
