@@ -88,6 +88,7 @@ public class ProductController {
 		productVO.setProductNum(productNum);
 		productVO =	productService.getSelect(productVO);
 
+		
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();
 		String username = memberVO.getUsername();
 
@@ -99,7 +100,6 @@ public class ProductController {
 
 		model.addAttribute("heart", heart);
 		model.addAttribute("product", productVO);
-
 		//판매자 정보
 		if(productVO.getUsername() != null) {
 			MemberVO sellerVO = new MemberVO();
@@ -114,8 +114,8 @@ public class ProductController {
 			model.addAttribute("seller", sellerVO);
 			model.addAttribute("sellerFile", sellerFileVO);
 			model.addAttribute("sellerLocation", sellerLocations.get(0));
+		
 		}
-
 		return "product/select";
 	}
 

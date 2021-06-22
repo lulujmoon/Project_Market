@@ -70,7 +70,7 @@
  </delete>
 
  <select id="getEmail" parameterType="MemberVO" resultType="MemberVO">
- 	select * from member where name=#{name} <![CDATA[&&]]> phone=#{phone}
+ 	select * from member where username=#{username} <![CDATA[&&]]> email=#{email}
  </select>
 
  
