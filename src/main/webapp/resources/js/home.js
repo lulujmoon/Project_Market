@@ -10,7 +10,10 @@
 }
 
 $(document).ready(function(){
+	
+	let size = $("#size").val();
 		
+	for(let i=0;i<size;i++) {
 	let category = $("#category").val();
 	let price = document.getElementById('price').innerText;
 	
@@ -19,4 +22,5 @@ $(document).ready(function(){
 			$("#price").text("무료나눔");
 		}
 	} 
+	}
 });
