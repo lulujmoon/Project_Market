@@ -16,8 +16,10 @@ public class ReportService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(ReportService.FROM_ADDRESS);
         message.setFrom(reportVO.getAddress());
-        message.setSubject(reportVO.getTitle());
+        message.setSubject("신고자: " +reportVO.getUsername()+" / " + reportVO.getTitle());
         message.setText(reportVO.getMessage());
+
+
 
         mailSender.send(message);
     }
