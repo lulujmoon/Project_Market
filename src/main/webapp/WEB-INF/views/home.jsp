@@ -45,7 +45,7 @@
 						</c:if>
 						<div class="card__info">
 							<div class="info__name">${products[i].productName}</div>
-							<div class="info__price" id="price">${products[i].productPrice}</div>
+							<div class="info__price">${products[i].productPrice}</div>
 							<div class="info__date">${products[i].productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${products[i].location.locationName}</div>
 						</div>

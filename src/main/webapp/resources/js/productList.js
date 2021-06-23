@@ -30,23 +30,6 @@
 	 date.innerText = calculateTime(datetime);	
 }
 
-$(document).ready(function(){
-	
-	let size = $("#size").val();
-		
-	for(let i=0;i<size;i++) {
-	let category = $("#category").val();
-	let price = document.getElementById('price').innerText;
-	console.log(category);
-	console.log(price);
-	
-	if(category != 14) {
-		if(price == 0) {
-			$("#price").text("무료나눔");
-		}
-	} 
-	}
-	
-});
+
 
 
