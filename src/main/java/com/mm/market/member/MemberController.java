@@ -1,11 +1,18 @@
 package com.mm.market.member;
 
+import java.net.PasswordAuthentication;
 import java.security.Principal;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 import java.util.UUID;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -333,6 +340,60 @@ public class MemberController {
 	}
 	
 	
+	@PostMapping("search")
+	public String getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
+		memberVO = memberService.getEmail(memberVO);		
+
+		mv.addObject("dto",memberVO);
+		mv.setViewName("member/search");
+				
+		String uuid = UUID.randomUUID().toString();		
+		memberVO.setPassword(uuid);		
+		memberService.setUpdate(memberVO);
+		
+		
+		//smtp서버명
+		  String host     = "smtp.naver.com";
+		  final String user   = "test4913@naver.com";
+		  final String password  = "Test4913@";
+		  
+		  //받는사람메일주소
+		  String to = memberVO.getEmail();
+		  
+		  // Get the session object
+		  Properties props = new Properties();
+		  props.put("mail.smtp.host", host);
+		  props.put("mail.smtp.auth", "true");
+
+		  Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		   protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+		    return new javax.mail.PasswordAuthentication(user, password);
+		   }
+		  });
+
+		  // Compose the message
+		  try {
+		   MimeMessage message = new MimeMessage(session);
+		   message.setFrom(new InternetAddress(user));
+		   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+		   // Subject
+
+		   message.setSubject("market 임시 비밀번호 발급");	   
+		   // Text
+		   message.setContent(
+				   "<h1>"+"안녕하세요 "+memberVO.getName()+"님,<br> MARKET 계정 로그인을 위한 임시 비밀번호입니다. "+"</h1>"+
+				   "<h3>"+"아이디:"+memberVO.getUsername()+"<br>"+"임시비밀번호:"+uuid+"</h3>"+
+				   "<h5>"+"* 임시비밀번호로 로그인 후에는 비밀번호를 반드시 변경해주세요."+"</h5>","text/html; charset=UTF-8");
+		   // send the message
+		   Transport.send(message);
+		   System.out.println("message sent successfully...");
+		  } catch (MessagingException e) {
+		   e.printStackTrace();
+		  }	  		
+		
+		return "redirect:./login" ;
+	}
+
 	//-----------------shop	
 			
 		@GetMapping("store")

@@ -35,7 +35,6 @@ public class ProductService {
 		Long totalCount = productMapper.getTotalCount(productPager);
 		productPager.makeNum(totalCount, perPage, perBlock);
 		
-		
 		return productMapper.getList(productPager);
 	}
 	
@@ -184,6 +183,11 @@ public class ProductService {
 		
 		return result;
 
+	}
+	
+	public int setStatus(ProductVO productVO)throws Exception {
+		int result = productMapper.setStatus(productVO);
+		return result;
 	}
 	
 	

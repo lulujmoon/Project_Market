@@ -13,3 +13,4 @@
 	<a href="${pageContext.request.contextPath}/mail/sendMail">메일테스트</a>
 	</div>
 </footer>
+

@@ -25,8 +25,9 @@
 			 <if test="username != null">
 			 	username = #{username} AND
 			 </if>
-		 P.productName LIKE CONCAT ('%', #{keyword}, '%')
-		 ORDER BY 
+		 P.productName LIKE CONCAT ('%', #{keyword}, '%') AND
+		 PF.fileNum = (SELECT MIN(PF.fileNum) FROM productFile PF WHERE productNum = P.productNum)
+		 ORDER BY
 			 <choose>
 			 	<when test="order == 'lowPrice'">
 			 		P.productPrice asc
@@ -154,7 +155,9 @@
 			where productNum=#{productNum}
 		</update>
 		
-		
+		<update id="setStatus" parameterType="ProductVO">
+			UPDATE product SET productStatus=#{productStatus} WHERE productNum=#{productNum}
+		</update>
 		
 		
 		<!-- heart -->

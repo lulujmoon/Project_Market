@@ -8,16 +8,38 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>아이디 비번찾기</h1>
 
 <form action="./search" method="post">
 
-가입한 이름<input type="text" class="name" name="name"/>
-가입한 폰번호<input type="text" class="phone" name="phone"/>
+<h2>정보를 입력해주세요.</h2>
+이름<input type="text" class="name" name="name"/>
+전화번호<input type="text" class="phone" name="phone"/>
 
-<button type="submit">입력</button>
+<button type="submit" onclick="sendMail()">입력</button>
 </form>
 
+<!-- <script type="text/javascript">
+
+var name = document.getElementById("name");
+var phone = document.getElementById("phone");
+var check = true;
+
+function sendMail(){
+	if(name=null){
+		alert("이름입력");
+		check=false;
+	}
+	if(phone=""){
+		alert("번호입력");
+		check=false;
+	}
+	if(check){
+		alert("전송완료");
+		form.submit();
+	}
+}
+
+</script> -->
 
 </body>
 </html>

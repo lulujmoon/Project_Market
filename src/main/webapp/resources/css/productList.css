@@ -58,40 +58,6 @@
 	align-items: center;
 }
 
-.page-container{
-	width: 1050px;
-	margin: 20px auto;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.list-page{
-	padding: 0;
-}
-
-.page-item{
-	width: 22px;
-	height: 22px;
-	padding: 4px;
-	margin: 0 3px;
-	border: 1px solid #b4b4b4;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	color: #b4b4b4;
-}
-
-.page-item.arrow{
-	border: none;
-}
-
-.page-item.selected{
-	background-color: #b4b4b4;
-	color: white;
-}
-
-
 /* 섹션 사이즈 줄이는 구간 1 */
 @media screen and (max-width: 85rem) {
 	

@@ -16,8 +16,10 @@ public class SocialVO {
 	private String username;
 	private String socialContent;
 	private Date socialDate;
+	private Long socialGood;
 	
-	private List<SocialFileVO> files;
+	private List<SocialFileVO> file;
 	private SocialCategoryVO socialCategory;
+	private GoodVO good;
 
 }

@@ -114,3 +114,12 @@
 	background-color: #c6c6c6;
 	color: white;
 }
+
+.btn-delAcc.active{
+	border: 1px solid #ff5e5e;
+	color: #ff5e5e;
+}
+
+.btn-delAcc.active:hover{
+	background-color: #ff5e5e;
+}
