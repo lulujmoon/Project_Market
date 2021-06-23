@@ -111,4 +111,19 @@ function submit() {
 $(document).ready(function(){
 	var status = $("#productStatus").val();
 	$("#status").val(status);
+	
+	
+		
+	let category = document.getElementById('category').innerText;
+	let price = document.getElementById('price').innerText;
+	price=price.substring(0,1);
+	
+	if(category != '삽니다') {
+		if(price == 0) {
+			$("#price").text("무료나눔");
+		}
+	} 
 })
+
+
+

@@ -46,13 +46,14 @@
 					<div class="prd__card" onclick="goSelect(${product.productNum})">
 						<c:if test="${product.files[0].fileName != null}">
 							<img class="card__img" src="/resources/upload/product/${product.files[0].fileName}">
+							<input type="hidden" id="category" value="${product.categoryCode}">
 						</c:if>
 						<c:if test="${product.files[0].fileName == null}">
 							<img class="card__img" src="/resources/images/productDefault.jpg">
 						</c:if>
 						<div class="card__info">
 							<div class="info__name"> ${product.productName}</div>
-							<div class="info__price">${product.productPrice}</div>
+							<div class="info__price" id="price">${product.productPrice}</div>
 							<div class="info__date">${product.productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 						</div>

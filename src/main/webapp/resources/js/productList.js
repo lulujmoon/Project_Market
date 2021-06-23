@@ -29,3 +29,17 @@
 	 let datetime = date.innerText;
 	 date.innerText = calculateTime(datetime);	
 }
+
+$(document).ready(function(){
+		
+	let category = $("#category").val();
+	let price = document.getElementById('price').innerText;
+	
+	if(category != 14) {
+		if(price == 0) {
+			$("#price").text("무료나눔");
+		}
+	} 
+});
+
+
