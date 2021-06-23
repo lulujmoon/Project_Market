@@ -1,75 +1,70 @@
 package com.mm.market.chat;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.mm.market.member.MemberVO;
+import com.mm.market.product.ProductService;
+import com.mm.market.product.ProductVO;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/chat/**")
+@RequiredArgsConstructor
 public class ChatController {
 	
-	List<RoomVO> roomList = new ArrayList<RoomVO>();
-	static int roomNumber = 0;
-	
-	@GetMapping("chatPage")
-	public ModelAndView chat() throws  Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("chat/chatPage");
-		return mv;
-	}
-	
-	/** 방 페이지 **/
-	@GetMapping("room")
-	public ModelAndView room() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("chat/room");
-		return mv;
-	}
-	
-	/** 방 생성하기 **/
-	@RequestMapping("createRoom")
-	public @ResponseBody List<RoomVO> createRoom(@RequestParam HashMap<Object, Object> params) {
-		String roomName = (String)params.get("roomName");
-		if(roomName!=null && !roomName.trim().equals("")) {
-			RoomVO roomVO = new RoomVO();
-			roomVO.setRoomNumber(++roomNumber);
-			roomVO.setRoomName(roomName);
-			System.out.println("createRoom : "+roomVO);
-			roomList.add(roomVO);
-		}
-		return roomList; 
-	}
-	
-	
-	/** 방 정보 가져오기 **/
-	@RequestMapping("getRoom")
-	 public @ResponseBody List<RoomVO> getRoom(@RequestParam HashMap<Object, Object> params) {
-		System.out.println(roomList);
-		 return roomList;
-	 }
-	
-	/** 채팅방 **/
-	@RequestMapping("moveChating")
-	public ModelAndView chating(@RequestParam HashMap<Object, Object> params) {
-		ModelAndView mv = new ModelAndView();
-		int roomNumber = Integer.parseInt((String)params.get("roomNumber"));
+	private final ChatService chatService;
+	private final ProductService productService;
+
+	@GetMapping("/product/{username}/{productName}/chatting")
+	public String index(Model model, @PathVariable("username") String username, 
+										@PathVariable("productName") String productName, Authentication auth) throws Exception{
 		
-		List<RoomVO> new_list = roomList.stream().filter(o->o.getRoomNumber()==roomNumber).collect(Collectors.toList());
-		if(new_list != null && new_list.size()>0) {
-			mv.addObject("roomName", params.get("roomName"));
-			mv.addObject("roomNumber", params.get("roomNumber"));
-			mv.setViewName("chat/chatPage");
-		} else {
-			mv.setViewName("chat/room");
-		}
-		return mv;
+		ProductVO productVO = new ProductVO();
+		productVO.setUsername(username);
+		productVO.setProductName(productName);
+		productVO = productService.getNum(productVO);
+		Long productNum = productVO.getProductNum();
+		
+		System.out.println("ProductNum : "+productNum);
+			
+		ChatVO chatVO = new ChatVO();
+		chatVO.setProductNum(productNum);
+		
+		List<ChatVO> chatList = chatService.getChatList(chatVO);
+		
+		MemberVO memberVO = (MemberVO)auth.getPrincipal();
+		username = memberVO.getUsername();
+		
+		
+		model.addAttribute("chatList", chatList);
+		model.addAttribute("account", username);
+		model.addAttribute("productNum", productNum);
+		
+		return "product/chatting";
 	}
+	
+	@MessageMapping("/chat/{productNum}") // 메세지가 목적지(/chat)로 전송되면 chat()메서드를 호출 //해당 url로 메세지가 전송되면 메서드를 호출
+	@SendTo("/receive/chat/{productNum}") // 결과를 리턴시키는 목적지
+	public ChatVO chat(@DestinationVariable Long productNum, ChatVO chatVO) throws Exception{
+		chatVO.setSendDateTime(LocalDateTime.now()); // DB에는 자동으로 저장되지만 javaScript에서 출력해주기 위해 값을 한번 넣어줌
+		chatVO.setProductNum(productNum);
+		chatService.saveChat(chatVO); // 전송전 DB저장
+		
+		return chatVO;
+	}
+	
+	
+	
 }

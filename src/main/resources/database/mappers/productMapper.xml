@@ -159,6 +159,9 @@
 			UPDATE product SET productStatus=#{productStatus} WHERE productNum=#{productNum}
 		</update>
 		
+		<select id="getNum" parameterType="ProductVO" resultType="ProductVO">
+			select productNum from product where username=#{username} and productName=#{productName}
+		</select>
 		
 		<!-- heart -->
 		<insert id="setHeart" parameterType="HeartVO">
