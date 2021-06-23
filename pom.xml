@@ -17,13 +17,22 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-	<dependency>
+		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.validation</groupId>
-			<artifactId>validation-api</artifactId>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		</dependency>
+		<!-- web socket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
 		</dependency>
 		<!-- MessageBrokerRegistry -->
 		<dependency>
@@ -31,33 +40,29 @@
 			<artifactId>spring-messaging</artifactId>
 		</dependency>
 		
-		<!-- JSON 데이터 자동처리 -->		
-		<!-- JSON -->
+		<!-- JSON 데이터 자동처리 -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
-		</dependency>
-		<!-- Spring boot JSON -->
+		</dependency>			
+	
+		<!-- json simple  -->
 		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-json</artifactId>
-		    <version>2.5.1</version>
+		  <groupId>com.googlecode.json-simple</groupId>
+		  <artifactId>json-simple</artifactId>
+		  <version>1.1.1</version>
 		</dependency>
-		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1.1</version>
-		</dependency>					
-		<!-- WebSocket -->			
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-websocket</artifactId>
-		</dependency>
-		<!-- oauth2.0 -->
+		<!-- json simple  -->
+	
 			<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-client</artifactId>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
 		<!--tomcat-jasper for JSP in Sprng boot -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>

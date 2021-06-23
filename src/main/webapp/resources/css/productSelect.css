@@ -1,18 +1,8 @@
 @charset "UTF-8";
 
 .container{
-	width: 1050px;
-	min-height: 55vh;
-	margin: 30px auto;
-	margin-top: 155px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	background-color: white;
-}
-
-.hidden{
-	display: none;
+	margin-top: 165px;
 }
 
 .top-container{
@@ -23,8 +13,8 @@
 }
 
 .top__info{
-	width: 430px;
-	padding: 40px;
+	width: 450px;
+	padding: 50px;
 	display: flex;
 	flex-flow: column;
 }
@@ -199,7 +189,7 @@
 .carousel-container{
 	width: 400px;
 	height: 440px;
-	margin: 40px;
+	margin: 50px;
 	overflow: hidden;
 }
 

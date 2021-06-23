@@ -2,13 +2,13 @@
 
 .container{
 	padding-top: 125px;
-	width: 1210px;
+	width: 1050px;
 	min-height: 55vh;
 	margin: 30px auto;
 }
 
 .profile-container{
-	width: 1210px;
+	width: 1050px;
 	height: 220px;
 	display: flex;
 	flex-direction: row;
@@ -91,9 +91,9 @@
 }
 
 .profile__rating{
-		width: 23%;
-		padding: 0 20px;
-		font-size: 0.9em;
+	width: 24%;
+	padding: 0 20px;
+	font-size: 0.9em;
 }
 
 .rating__notice{
@@ -121,7 +121,7 @@
 }
 
 .board-container{
-	width: 1210px;
+	width: 1050px;
 	min-height: 40vh;
 	margin-top: 30px;
 		background-color: white;
@@ -158,8 +158,23 @@
 */
 
 .board__contents{
-	width: 100%;
+	width: 1050px;
 	min-height: 400px;
 	border: 1px solid #e6e6e6;
 	display: flex;
+}
+
+.list-container{
+	width: 1060px;
+	margin: auto;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 5px;
+}
+
+.prd__card{
+	width: 250px;
+	height: 250px;
 }

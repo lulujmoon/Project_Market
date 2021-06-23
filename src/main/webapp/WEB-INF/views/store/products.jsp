@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/productCard.css">
 <link rel="stylesheet" href="/resources/css/store.css">
-<link rel="stylesheet" href="/resources/css/storeProducts.css">
 <title>내 상점</title>
 </head>
 <body>

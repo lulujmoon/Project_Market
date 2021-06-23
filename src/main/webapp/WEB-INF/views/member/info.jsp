@@ -23,10 +23,10 @@
 		<div class="info__header">
 			<h2>내 정보</h2>
 			<div class="btn-group">
-				<button class="btn btn-edit" class="active">수정</button>
-				<a href="./delete">탈퇴</a>
+				<button class="btn btn-edit">수정</button>
 				<button class="btn btn-submit">완료</button>
 				<button class="btn btn-cancel">취소</button>
+				<button class="btn btn-delete active" onclick="deleteMember('${principal.username}')">탈퇴</button>
 			</div>
 		</div>
 		<form id="info-form" action="./update" method="post">
@@ -97,7 +97,7 @@
 
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="../resources/js/memberInfo.js"></script>
 </body>
 </html>

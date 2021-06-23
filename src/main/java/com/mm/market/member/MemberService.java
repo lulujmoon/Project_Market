@@ -148,12 +148,12 @@ public class MemberService implements UserDetailsService{
 			MemberVO memberVO2 = memberMapper.getSelectByUsername(memberVO);
 			memberVO.setPassword(memberVO2.getPassword());
 		}
-
 		
 		int result = memberMapper.setUpdate(memberVO);
 		
 		return result;
 	}
+
 	
 	public MemberFileVO selectFile(MemberVO memberVO) throws Exception{
 		return memberMapper.selectFile(memberVO);
@@ -200,6 +200,11 @@ public class MemberService implements UserDetailsService{
 
 	public int setDelete(MemberVO memberVO)throws Exception{
 		return memberMapper.setDelete(memberVO);
-
 	}
+	
+	public MemberVO getEmail(MemberVO memberVO) throws Exception {
+		return memberMapper.getEmail(memberVO);
+	}
+	
 }
+

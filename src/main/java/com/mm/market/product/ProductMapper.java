@@ -11,7 +11,9 @@ import com.mm.market.util.ProductPager;
 public interface ProductMapper {
 	
 	//List
-	public List<ProductVO> getList(ProductPager productPager)throws Exception;
+	public List<ProductVO> getList(ProductPager productPager) throws Exception;
+	
+	public List<ProductVO> getListByUsername(ProductPager productPager) throws Exception;
 	
 	public Long getTotalCount(ProductPager productPager) throws Exception;
 	
@@ -29,7 +31,6 @@ public interface ProductMapper {
 
 	//insert
 	public int setInsert(ProductVO productVO) throws Exception;
-	
 
 	//file Insert
 	public int setFileInsert(ProductFileVO productFileVO)throws Exception;
@@ -43,6 +44,9 @@ public interface ProductMapper {
 	//update
 	public int setUpdate(ProductVO productVO) throws Exception;
 	
+	//rewrite
+	public int setRewrite(ProductVO productVO) throws Exception;
+	
 
 	
 	//heart
@@ -53,5 +57,7 @@ public interface ProductMapper {
 	public int deleteHeart(HeartVO heartVO)throws Exception;
 	
 	public void updateHeart(Long productNum)throws Exception;
+	
+	public List<ProductVO> getHeartList(HeartVO heartVO)throws Exception;
 	
 }

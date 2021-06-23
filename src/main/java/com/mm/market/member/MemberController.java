@@ -3,6 +3,7 @@ package com.mm.market.member;
 import java.security.Principal;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -23,6 +24,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
@@ -40,8 +42,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mm.market.mail.MailController;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
+import com.mm.market.product.HeartVO;
+import com.mm.market.product.ProductService;
 
 import ch.qos.logback.classic.Logger;
 
@@ -57,7 +62,12 @@ public class MemberController {
 	
 	@Autowired
 	private MemberLocationService memberLocationService;
+	
+	@Autowired
+	private ProductService productService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	/*
 	 * @GetMapping("error") public String error() { return "error/error"; }
 	 */
@@ -162,7 +172,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("info")
-	public void infomation(Authentication authentication, HttpSession session)throws Exception{
+	public void infomation(Authentication authentication, HttpSession session, @ModelAttribute MemberVO memberVO)throws Exception{
 		
 		UserDetails userDetails = (UserDetails)authentication.getPrincipal();
 
@@ -174,11 +184,14 @@ public class MemberController {
 	}
 	
 	@PostMapping("update")
-	public String setUpdate(MemberVO memberVO, HttpSession session, Authentication authentication) throws Exception{
+	public String setUpdate(MemberVO memberVO,Errors errors, HttpSession session, Authentication authentication) throws Exception{
 
 		int result = memberService.setUpdate(memberVO);
 		//db값 변경됐지만 session값 변경안됨
 
+		/*
+		 * if(errors.hasErrors()) { return "member/info"; }
+		 */
 		MemberVO old =(MemberVO)authentication.getPrincipal();
 		
 		old.setPassword(memberVO.getPassword());
@@ -306,7 +319,7 @@ public class MemberController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		
-		return "redirect:./store";
+		return "redirect:/";
 	}
 	
 	@GetMapping("delete")
@@ -318,13 +331,15 @@ public class MemberController {
 		
 		return "redirect:../";
 	}
-		
+	
+	
 	//-----------------shop	
 			
 		@GetMapping("store")
 		public ModelAndView store(MemberFileVO memberFileVO,Authentication authentication)throws Exception{
 			MemberVO memberVO =(MemberVO)authentication.getPrincipal();
 			memberFileVO = memberService.selectFile(memberVO);
+		
 		
 			ModelAndView mv = new ModelAndView();
 			mv.addObject("file",memberFileVO);
