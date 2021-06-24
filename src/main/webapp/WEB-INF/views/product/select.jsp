@@ -56,7 +56,7 @@
 					<input type="hidden" id="productStatus" value="${product.productStatus}">
 					<form action="/product/setStatus?productNum=${product.productNum}" method="post">
 					<div class="form-group">
-						  <label for="sel1">상태 변경:</label>
+						  <label for="sel1">상태 변경</label>
 						  <select class="form-control" id="status" name="productStatus" onchange="submit()">
 						    <option>판매 중</option>
 						    <option>예약 중</option>
@@ -74,7 +74,7 @@
 					<div class="top-btn btn-contact" onclick="location.href='/chat/room'">연락하기</div>
 					<div class="top-btn btn-nego">가격 제안하기</div>
 					<div class="btn-heart"></div>
-					<div class="btn-report"><a href="/report/report?productNum=${product.productNum}"><i class="fas fa-exclamation-triangle"></i> 신고</a></div>
+					<div class="btn-report" onclick="openReport('${product.productNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 				</c:if>
 			</div>
 			<c:if test="${principal.username eq product.username}">

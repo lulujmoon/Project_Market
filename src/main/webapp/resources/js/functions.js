@@ -59,7 +59,6 @@
  *	5. 차이가 7일 이상이면 'yyyy일 mm월 dd일'
  */
  function calculateTime(datetime){
-	console.log(datetime);
 	datetime = new Date(datetime);
 	var now = new Date();
 	var gap = now - datetime;

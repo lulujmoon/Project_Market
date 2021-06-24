@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.container{
+	width: 450px;
+	margin: 20px auto;
+	align-items: flex-start;
+}
+
+.title-container{
+	width: 100%;
+	font-size: 1.5rem;
+	font-weight: bold;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #2e2e2e;
+}
+
+.send-form{
+	width: 450px;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-content{
+	all: unset;
+	width: 438px;
+	height: 15px;
+	margin-top: 15px;
+	padding: 5px;
+	border: 1px solid #c6c6c6;	
+	background-color: white;
+}
+
+.form-content.message{
+	height: 300px;
+}
+
+.btn-report{
+	all: unset;
+	width: 450px;
+	height: 30px;
+	margin-top: 20px;
+	background-color: #fadd85;
+	border-radius: 5px;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
