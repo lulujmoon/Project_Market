@@ -1,7 +1,5 @@
 package com.mm.market.chat;
 
-import com.mm.market.member.MemberFileVO;
-
 import lombok.Data;
 
 @Data

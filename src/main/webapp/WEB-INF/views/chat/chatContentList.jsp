@@ -15,9 +15,9 @@
 		<!-- 받은 메세지 -->
 		<div class="incoming_msg">
 			<div class="incoming_msg_img">
-				<a href="other_profile.do?other_nick=${tmp.sendUser}">
+	<%-- 			<a href="other_profile.do?other_nick=${tmp.sendUser}"> --%>
 					<img src="/resources/upload/member/${tmp.profile}" alt="보낸사람 프로필">
-				</a>
+				<!-- </a> -->
 			</div>
 			<div class="received_msg">
 				<div class="received_withd_msg">

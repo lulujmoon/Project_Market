@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ChatMapper {
 
+	public List<ChatVO> getVO(ChatVO chatVO) throws Exception;
+	
 	public List<ChatVO> chatList(ChatVO chatVO) throws Exception;
 	
 	public String getOtherProfile(ChatVO chatVO) throws Exception;

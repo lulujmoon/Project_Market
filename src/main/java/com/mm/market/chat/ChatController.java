@@ -32,9 +32,10 @@ public class ChatController {
 		
 		ChatVO chatVO = new ChatVO();
 		chatVO.setUsername(username);
-		System.out.println(chatVO);
+		//System.out.println(chatVO);
 		
 		List<ChatVO> list = chatService.chatList(chatVO);
+		System.out.println("chatList : "+list);
 		
 		request.setAttribute("list", list);
 		
@@ -49,6 +50,7 @@ public class ChatController {
 		String username = memberVO.getUsername();
 		ChatVO chatVO = new ChatVO();
 		chatVO.setUsername(username);
+//		System.out.println(chatVO);
 		
 		//메세지 리스트
 		List<ChatVO> list = chatService.chatList(chatVO);
@@ -64,15 +66,24 @@ public class ChatController {
 		
 		System.out.println(request);
 		int room = Integer.parseInt(request.getParameter("room"));
+		//System.out.println(room);
 		
 		ChatVO chatVO = new ChatVO();
 		chatVO.setRoom(room);
 		MemberVO memberVO= (MemberVO)auth.getPrincipal();
 		String username = memberVO.getUsername();
 		chatVO.setUsername(username);
+		System.out.println(chatVO);
+		List<ChatVO> clist = chatService.getVO(chatVO);
+		
+		for(int i=0;i<clist.size();i++) {
+			clist.get(i).setOtherUser(clist.get(i).getRecvUser());
+		}
+		
+		System.out.println(clist);
 		
 		//메세지 내용 가져오기
-		List<ChatVO> clist = chatService.roomContentList(chatVO);
+		clist = chatService.roomContentList(chatVO);
 		
 		request.setAttribute("clist", clist);
 		

@@ -12,11 +12,18 @@ public class ChatService {
 	@Autowired
 	private ChatMapper chatMapper;
 	
+	
+	public List<ChatVO> getVO(ChatVO chatVO) throws Exception {
+		return chatMapper.getVO(chatVO);
+	}
+	
+	
+	
 	public List<ChatVO> chatList(ChatVO chatVO) throws Exception{
 		
 		String username = chatVO.getUsername();
 		
-		List<ChatVO> list = chatMapper.chatList(chatVO);
+		List<ChatVO> list = chatMapper.chatList(chatVO);		
 		
 		for(ChatVO chat : list) {
 			chat.setUsername(username);
@@ -41,6 +48,7 @@ public class ChatService {
 		System.out.println("recv user : " + chatVO.getRecvUser());
 		System.out.println("username : " + chatVO.getUsername());
 		
+		
 		List<ChatVO> clist = (List<ChatVO>)chatMapper.roomContentList(chatVO);
 		
 		chatMapper.chatReadChk(chatVO);
@@ -63,7 +71,6 @@ public class ChatService {
 		int flag = chatMapper.chatSendInList(chatVO);
 		return flag;
 	}
-	
 	
 	
 	
