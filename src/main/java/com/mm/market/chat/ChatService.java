@@ -26,6 +26,7 @@ public class ChatService {
 			chat.setProfile(profile);
 			if(username.equals(chat.getSendUser())) {
 				chat.setOtherUser(chat.getRecvUser());
+				System.out.println("otherUser : "+chat.getOtherUser());
 			} else {
 				chat.setOtherUser(chat.getSendUser());
 			}
@@ -33,7 +34,7 @@ public class ChatService {
 		return list;
 	}
 
-	@SuppressWarnings("unchecked")
+
 	public List<ChatVO> roomContentList(ChatVO chatVO) throws Exception {
 		
 		System.out.println("room : " + chatVO.getRoom());
