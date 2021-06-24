@@ -347,7 +347,10 @@ public class MemberController {
 	@PostMapping("search")
 	public ModelAndView getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
 		memberVO = memberService.getEmail(memberVO);		
-				
+		if(memberVO==null) {
+			mv.addObject("alert", "일치하는 정보가 없습니다.");
+			mv.setViewName("member/search");
+		}else {
 		String uuid = UUID.randomUUID().toString();		
 		memberVO.setPassword(uuid);		
 		memberService.setUpdate(memberVO);
@@ -393,7 +396,7 @@ public class MemberController {
 		  
 		mv.addObject("alert", "이메일이 발송되었습니다. 이메일을 확인해주세요.");
 		mv.setViewName("member/search");
-		
+		}
 		return mv;
 	}
 
