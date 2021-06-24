@@ -42,7 +42,7 @@
 </div>
 <script>
 $(document).ready(function() {
-	$('#summernote').val("${dto.noticeContent}")
+	$('#summernote').val("${dto.noticeContent}") //db값 불러온후 초기화
 	$('#summernote').summernote({
 		  height: 300,                 // 에디터 높이
 		  minHeight: null,             // 최소 높이
