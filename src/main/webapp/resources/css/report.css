@@ -45,3 +45,7 @@
 	text-align: center;
 	cursor: pointer;
 }
+
+.btn-report:hover{
+	background-color: #f9d568;
+}

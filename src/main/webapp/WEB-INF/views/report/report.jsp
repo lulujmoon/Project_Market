@@ -22,8 +22,7 @@
 </div>
 <form action="/report/report" method="post" class="send-form">
   <input type="hidden" name="productNum" value="${product.productNum}">
-  
-	<input readonly="readonly" type="text" class="form-content" name=username value="${principal.username}">
+	<div class="form-content">${principal.name}</div>
   <input readonly="readonly" type="text" class="form-content" name="title" value="상품 신고 : ${product.productName}">
   <textarea name="message" class="form-content message" placeholder="내용을 입력해주세요."></textarea>
   <input type="button" class="btn-report" value="신고하기">
