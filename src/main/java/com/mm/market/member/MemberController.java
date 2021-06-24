@@ -345,13 +345,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("search")
-	public String getEmail(MemberVO memberVO)throws Exception{
+	public ModelAndView getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
 		memberVO = memberService.getEmail(memberVO);		
-
+				
 		String uuid = UUID.randomUUID().toString();		
 		memberVO.setPassword(uuid);		
 		memberService.setUpdate(memberVO);
-		
 		
 		//smtp서버명
 		  String host     = "smtp.naver.com";
@@ -390,9 +389,12 @@ public class MemberController {
 		   System.out.println("message sent successfully...");
 		  } catch (MessagingException e) {
 		   e.printStackTrace();
-		  }	  		
+		  }
+		  
+		mv.addObject("alert", "이메일이 발송되었습니다. 이메일을 확인해주세요.");
+		mv.setViewName("member/search");
 		
-		return "redirect:./login" ;
+		return mv;
 	}
 
 	//-----------------shop	

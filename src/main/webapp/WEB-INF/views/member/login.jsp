@@ -19,17 +19,17 @@
 			<form action="./login" method="post">
 				<div class="form-group">
 					<label for="username">Username</label><br>
-					<input type="text"	class="form-control" id="username" name="username"><br>
+					<input type="text" class="form-control" id="username" name="username"><br>
 				</div>
 				
 				<div class="form-group">
 					<label for="password">Password</label><br> 
 					<input type="password" class="form-control" id="password" name="password">
 				</div>
-				<div class="login-btn">
+				<div class="btn-wrapper">
 					<button type="submit" class="btn-wide btn-submit">Login</button>
 				</div>
-			<div class="login-btn">
+			<div class="btn-wrapper">
 			  <button type="button" class="btn-wide btn-kakao">Login with Kakao</button>
 			</div>
 			<div class="login-option">
