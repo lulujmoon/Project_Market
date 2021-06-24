@@ -57,16 +57,20 @@ public class ProductController {
 		if(myLocation == null) {
 			myLocation = 0L;
 		}
+		
+		if(authentication != null) {
+			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+			MemberLocationVO memberLocationVO = new MemberLocationVO();
+			memberLocationVO.setUsername(memberVO.getUsername());
+			
+			List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+			memberLocationVO.setLocationCode(0L);
+			locationList.add(0, memberLocationVO);
+			
+			productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
+			model.addAttribute("locations", locationList);
+		}
 
-		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-		MemberLocationVO memberLocationVO = new MemberLocationVO();
-		memberLocationVO.setUsername(memberVO.getUsername());
-
-		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
-		memberLocationVO.setLocationCode(0L);
-		locationList.add(0, memberLocationVO);
-
-		productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
 		List<ProductVO> productList  = productService.getList(productPager, 16L, 5L);
 
 		List<CategoryVO> categories = categoryMapper.getList();
@@ -76,29 +80,30 @@ public class ProductController {
 		model.addAttribute("pager", productPager);
 		model.addAttribute("myLocation", myLocation);
 		model.addAttribute("categories", categories);
-		model.addAttribute("locations", locationList);
 
 		return "product/list";
 	}
 
 
 	@GetMapping("select/{productNum}")
-	public String getSelect(@PathVariable("productNum") Long productNum, Model model, Authentication auth)throws Exception {
+	public String getSelect(@PathVariable("productNum") Long productNum, Model model, Authentication authentication)throws Exception {
 		ProductVO productVO = new ProductVO();
 		productVO.setProductNum(productNum);
 		productVO =	productService.getSelect(productVO);
 
+		if(authentication != null) {
+			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+			String username = memberVO.getUsername();
+			
+			HeartVO heartVO = new HeartVO();
+			heartVO.setProductNum(productNum);
+			heartVO.setUsername(username);
+			
+			Long heart = productService.getHeart(heartVO);
+			
+			model.addAttribute("heart", heart);			
+		}
 		
-		MemberVO memberVO = (MemberVO)auth.getPrincipal();
-		String username = memberVO.getUsername();
-
-		HeartVO heartVO = new HeartVO();
-		heartVO.setProductNum(productNum);
-		heartVO.setUsername(username);
-
-		Long heart = productService.getHeart(heartVO);
-
-		model.addAttribute("heart", heart);
 		model.addAttribute("product", productVO);
 		//판매자 정보
 		if(productVO.getUsername() != null) {
