@@ -12,9 +12,9 @@
 	crossorigin="anonymous">
 	<!-- JQuery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<link rel="stylesheet" href="../resources/css/chat.css">
 	<title>Chat List</title>
 </head>
-
 <body>
 <div class="msg-container">
 	
@@ -31,7 +31,7 @@
 	              <div class="stylish-input-group">
 	                <input type="text" class="search-bar"  placeholder="Search" >
 	                <span class="input-group-addon">
-	                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+	                <button type="button" value="button"><i class="fa fa-search" aria-hidden="true"></i></button>
 	                </span> 
 	              </div>
 	            </div>
@@ -39,17 +39,20 @@
 	          
 	          <!-- 메세지 리스트 -->
 	          <div class="inbox_chat">
-		          
+		          <div>메시지 리스트</div>
 	          </div>
 	        </div>
 	        
 	        <!-- 메세지 내용 영역 -->
 	        <div class="mesgs">
+	        <div>내용</div>
 	          <!-- 메세지 내용 목록 -->
 	          <div class="msg_history" name="contentList">
+	          <div>내용</div>
 	            <!-- 메세지 내용이 올 자리 -->
 	          </div>
 	          <div class="send_message">
+	          <div>압력</div>
 	          </div>
 	          <!-- 메세지 입력란이 올자리 -->
 	        </div>

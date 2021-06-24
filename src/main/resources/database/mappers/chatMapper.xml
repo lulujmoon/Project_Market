@@ -14,6 +14,7 @@
 		order by num desc
 	</select>
 	
+
 	<!-- list에서 상대방 profile 가져오기 -->
 	<select id="getOtherProfile" parameterType="ChatVO" resultType="String">
 		select fileName from MemberFile

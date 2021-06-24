@@ -70,7 +70,7 @@
 					<a class="top-btn btn-del" href="../delete/${product.productNum}" onclick="if(confirm('삭제하시겠습니까?')==false){return false;}">삭제하기</a>
 				</c:if>
 				<c:if test="${principal.username != product.username}">
-					<div class="top-btn btn-contact"><a type="button" href="/chat/room">연락하기</a></div>
+					<div class="top-btn btn-contact"><a type="button" href="${pageContext.request.contextPath}/chat/chatList">연락하기</a></div>
 					<div class="top-btn btn-nego">가격 제안하기</div>
 					<div class="btn-heart"></div>
 					<div class="btn-report"><a href="/report/report?productNum=${product.productNum}"><i class="fas fa-exclamation-triangle"></i> 신고</a></div>
