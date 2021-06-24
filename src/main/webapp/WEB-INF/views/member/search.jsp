@@ -19,15 +19,15 @@
 		</div>
 		<div class="info">가입한 이메일로 임시 비밀번호를 발송합니다.</div>
 		<div class="form-group">
-			<label for="username">아이디</label>
+			<label for="username">Username</label>
 			<input type="text" class="form-control" name="username" id="username"/>
 		</div>
 		<div class="form-group">
-			<label for="email">이메일</label>	
+			<label for="email">Email</label>	
 			<input type="text" class="form-control" name="email" id="email"/>
 		</div>
 		<div class="btn-wrapper">
-			<button class="btn-wide btn-submit">비밀번호 찾기</button>
+			<button class="btn-wide btn-submit">Find Password</button>
 		</div>
 	</form>
 </div>
