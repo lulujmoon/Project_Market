@@ -28,9 +28,6 @@ public class ChatVO {
 	//안읽은 메세지 갯수
 	private int unread;
 	
-	private MemberFileVO file;
-	
-	
 	
 	
 }

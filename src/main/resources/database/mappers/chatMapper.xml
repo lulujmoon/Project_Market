@@ -10,13 +10,13 @@
 	<select id="chatList" parameterType="ChatVO" resultType="ChatVO">
 		select num, room, sendUser, recvUser, date_format(sendTime, '%Y_%m_%d %H:%i') sendTime, readTime, content, readChk 
 		from chat
-		where num in (select max(num) from chat group by room) and (sendUser=#{sendUser} or recvUser=#{recvUser}) 
+		where num in (select max(num) from chat group by room) and (sendUser=#{username} or recvUser=#{username}) 
 		order by num desc
 	</select>
 	
 	<!-- list에서 상대방 profile 가져오기 -->
 	<select id="getOtherProfile" parameterType="ChatVO" resultType="String">
-		select fileName from MemberFileVO
+		select fileName from MemberFile
 		<choose>
 			<when test="sendUser == username">
 				where username = #{recvUser}
