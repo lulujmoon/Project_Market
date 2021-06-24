@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<c:import url="../template/setting.jsp"></c:import>
+<link rel="stylesheet" href="../resources/css/sign.css">
 <title>Insert title here</title>
 </head>
 <body>
