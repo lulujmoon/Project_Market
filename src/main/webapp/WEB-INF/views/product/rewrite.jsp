@@ -24,8 +24,8 @@ img {
 </head>
 <body>
 <h2>Product Rewrite Page</h2>
-	<form class="form" id="uploadFrom" title="${vo.files.size()}" action="./rewrite" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
-	<input type="hidden" name="productNum" value="${vo.productNum}">
+	<form class="form" id="uploadFrom" title="${product.files.size()}" action="./rewrite" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
+	<input type="hidden" name="productNum" value="${product.productNum}">
 	
 	
 			<div id=file>
@@ -51,7 +51,7 @@ img {
 
 		<div class="form-group">
 	    <label>상품 명</label>
-	    <input type="text" name="productName" value="${vo.productName}" required>
+	    <input type="text" name="productName" value="${product.productName}" required>
 	  </div>
 	    <div class="form-group">
 	    <label>판매자</label>
@@ -60,7 +60,7 @@ img {
 	  	<div>
 		  <div class="form-group">
 		    <label for="category">카테고리</label>
-		    <select class="form-control" id="category" name="categoryCode" value="${vo.categoryCode}">
+		    <select class="form-control" id="category" name="categoryCode" value="${product.categoryCode}">
 		      <option value="1">디지털/가전</option>
 		      <option value="2">가구/인테리어</option>
 		      <option value="3">유아동/유아도서</option>
@@ -80,11 +80,11 @@ img {
 		</div>
 	    <div class="form-group">
 	    <label for="productContents">상품 설명</label>
-	    <textarea id="productContent" rows="5" name="productContent">${vo.productContent}</textarea>
+	    <textarea id="productContent" rows="5" name="productContent">${product.productContent}</textarea>
 	  </div>
 	    <div class="form-group">
 	    <label>상품 가격</label>
-	    <input type="text" name="productPrice" value="${vo.productPrice}" required>
+	    <input type="text" name="productPrice" value="${product.productPrice}" required>
 	  </div>
 	  
 

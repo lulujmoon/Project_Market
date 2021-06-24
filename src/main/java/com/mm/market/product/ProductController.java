@@ -302,7 +302,7 @@ public class ProductController {
 			for(int i=0;i<file.size();i++) {
 				file.get(i).setProductNum(productVO.getProductNum());
 
-				mv.addObject("vo", productVO);
+				mv.addObject("product", productVO);
 				mv.addObject("files", file);
 
 
