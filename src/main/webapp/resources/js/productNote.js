@@ -225,6 +225,7 @@ btnAdd.addEventListener('click', ()=>{
 		alert('가격은 숫자만 입력 가능합니다.');
 		result = false;
 	}
+
 	
 	if(result){
 /*		for(input of inputs.children){

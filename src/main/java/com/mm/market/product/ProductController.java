@@ -158,9 +158,12 @@ public class ProductController {
 
 
 
-	@GetMapping("delete")
-	public ModelAndView setDelete(ProductVO productVO)throws Exception{
+	@GetMapping("delete/{productNum}")
+	public ModelAndView setDelete(@PathVariable("productNum") Long productNum)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNum(productNum);
+		productVO = productService.getSelect(productVO);
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
 
@@ -330,6 +333,13 @@ public class ProductController {
 
 		return "redirect:./list";
 	}
-
+	
+	
+	@PostMapping("setStatus")
+	public String setStatus(ProductVO productVO)throws Exception{
+		productService.setStatus(productVO);
+		return "redirect:./select/"+productVO.getProductNum();
+	}
+	
 
 }

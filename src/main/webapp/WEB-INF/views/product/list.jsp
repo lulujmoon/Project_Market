@@ -48,18 +48,25 @@
 					<div class="prd__card" onclick="goSelect(${product.productNum})">
 						<c:if test="${product.files[0].fileName != null}">
 							<img class="card__img" src="/resources/upload/product/${product.files[0].fileName}">
+							<input type="hidden" class="category" value="${product.categoryCode}">
 						</c:if>
 						<c:if test="${product.files[0].fileName == null}">
 							<img class="card__img" src="/resources/images/productDefault.jpg">
 						</c:if>
 						<div class="card__info">
 							<div class="info__name"> ${product.productName}</div>
-							<div class="info__price">${product.productPrice}</div>
+							<c:if test="${product.productPrice eq 0 && product.categoryCode != 14}">
+								<div class="info__price">무료나눔</div>
+							</c:if>
+							<c:if test="${product.productPrice ne 0 || product.categoryCode == 14}">
+								<div class="info__price">${product.productPrice}</div>
+							</c:if>
 							<div class="info__date">${product.productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 						</div>
 					</div>
 				</c:forEach>
+				<input type="hidden" id="size" value="${products.size()}">
 			</div>
 			<ul class="page-container list-page">
 				<c:if test="${pager.pre}">

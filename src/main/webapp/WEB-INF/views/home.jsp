@@ -38,6 +38,7 @@
 					<div class="prd__card" onclick="goSelect(${products[i].productNum})">
 						<c:if test="${products[i].files[0].fileName != null}">
 							<img class="card__img" src="/resources/upload/product/${products[i].files[0].fileName}">
+							<input type="hidden" id="category" value="${product[i].categoryCode}">
 						</c:if>
 						<c:if test="${products[i].files[0].fileName == null}">
 							<img class="card__img" src="/resources/images/productDefault.jpg">

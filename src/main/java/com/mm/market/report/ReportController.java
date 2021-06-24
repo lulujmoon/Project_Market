@@ -33,11 +33,11 @@ public class ReportController {
         return "/report/report";
     }
 
-    @PostMapping("/report")
+    @PostMapping("/report/report")
     public String execMail(ReportVO reportVO) {
         reportService.mailSend(reportVO);
         
-        return "redirect:/product/list";
+        return "redirect:/";
     }
 }
 

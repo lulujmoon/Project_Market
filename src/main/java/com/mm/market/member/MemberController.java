@@ -1,5 +1,6 @@
 package com.mm.market.member;
 
+import java.net.PasswordAuthentication;
 import java.security.Principal;
 import java.util.Enumeration;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.UUID;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -329,7 +329,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@PostMapping("delete")
+	@GetMapping("delete")
 	public String setDelete(MemberVO memberVO,Authentication authentication,HttpSession session)throws Exception{
 		memberVO =(MemberVO)authentication.getPrincipal();
 		
@@ -369,8 +369,8 @@ public class MemberController {
 		  props.put("mail.smtp.auth", "true");
 
 		  Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-		   protected PasswordAuthentication getPasswordAuthentication() {
-		    return new PasswordAuthentication(user, password);
+		   protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+		    return new javax.mail.PasswordAuthentication(user, password);
 		   }
 		  });
 

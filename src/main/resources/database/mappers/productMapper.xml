@@ -155,7 +155,9 @@
 			where productNum=#{productNum}
 		</update>
 		
-		
+		<update id="setStatus" parameterType="ProductVO">
+			UPDATE product SET productStatus=#{productStatus} WHERE productNum=#{productNum}
+		</update>
 		
 		
 		<!-- heart -->

@@ -47,6 +47,8 @@ public interface ProductMapper {
 	//rewrite
 	public int setRewrite(ProductVO productVO) throws Exception;
 	
+	//setStatus
+	public int setStatus(ProductVO productVO) throws Exception;
 
 	
 	//heart
