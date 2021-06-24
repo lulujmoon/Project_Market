@@ -15,16 +15,21 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import com.mm.market.chat.SocketHandler;
 
 @Configuration //해당 클래스가 Bean의 설정을 할 것임
-@EnableWebSocket 
-public class WebSocketConfig implements WebSocketConfigurer { //웹소켓 연결을 구성하기 위한 메서드 구현, 제공
-	@Autowired
-	private SocketHandler socketHandler;
+@EnableWebSocketMessageBroker // WebSocket message handling 허용해줌
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer { 
 
 	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(socketHandler, "/chating/{roomNumber}");
-		
+	// MessageBroker는 송신자에게 수신자의 이전 메세지 프로토콜로 변환해주는 모듈 중 하나
+	// 요청이 오면 그에 해당하는 통신 채널로 전송, 응답 또한 같은 경로로 가서 응답한다.
+	public void configureMessageBroker(MessageBrokerRegistry registry) {
+		registry.enableSimpleBroker("/receive"); // 메세지 응답 prefix
+		registry.setApplicationDestinationPrefixes("/send"); // 클라이언트에서 메세지 송신 시 붙여줄 prefix
 	}
 	
+	@Override
+	// 최초 소켓 연결 시 endpoint
+	public void registerStompEndpoints(StompEndpointRegistry registry) {
+		registry.addEndpoint("/teamhash-websocket").withSockJS(); // javascript에서 SockJS생성자를 통해 연결
+	}
 	
 }

@@ -71,7 +71,7 @@ public class ProductController {
 
 		List<CategoryVO> categories = categoryMapper.getList();
 
-
+		
 		model.addAttribute("products", productList);
 		model.addAttribute("pager", productPager);
 		model.addAttribute("myLocation", myLocation);
@@ -100,6 +100,7 @@ public class ProductController {
 		model.addAttribute("heart", heart);
 		model.addAttribute("product", productVO);
 
+		System.out.println(auth.getPrincipal());
 		//판매자 정보
 		if(productVO.getUsername() != null) {
 			MemberVO sellerVO = new MemberVO();
