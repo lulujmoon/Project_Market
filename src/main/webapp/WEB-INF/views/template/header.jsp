@@ -30,7 +30,7 @@
 				<li><a href="${pageContext.request.contextPath}/store/${principal.code}/products">내 상점</a>&nbsp;|&nbsp;</li>
 				<li><a href="${pageContext.request.contextPath}/member/info">내 정보</a>&nbsp;|&nbsp;</li>
 				<li><a href="${pageContext.request.contextPath}/member/alarm">알림</a>&nbsp;|&nbsp;</li>
-				<li><a href="#">메세지</a></li>
+				<li><a href="${pageContext.request.contextPath}/chat/chatList">메세지</a></li>
 			</sec:authorize>
 		</ul>
 	</nav>
