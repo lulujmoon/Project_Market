@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <title>Insert title here</title>
+<script src="../resources/js/summernote/summernote-lite.js"></script>
+<script src="../resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="../resources/css/summernote/summernote-lite.css">
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -22,19 +25,33 @@
 	    <label>작성자</label>
 	    <input type="text" name="username" value="${dto.username}" readonly="readonly">
 	  </div>
-	  <div class="form-group">
-	    <label>제목</label>
-	    <input type="text" name="noticeTitle" value="${dto.noticeTitle}">
-	  </div>
-	    <div class="form-group">
-	    <label>내용</label>
-	    <input type="text" name="noticeContent" value="${dto.noticeContent}">
-	  </div>
+	 <div class="form-group">
+				<label for="title">제목</label> <input type="text"
+					class="form-control myCheck" id="noticeTitle" name="noticeTitle" value="${dto.noticeTitle}">
+			</div>
+
+			<div class="form-group"> 
+				<label for="contents">내용</label>
+				<textarea class="form-control myCheck" rows="5" id="summernote"
+					name="noticeContent"></textarea>
+			</div>
 
 	  
 	<button type="submit">Update</button>
 </form>
 </div>
+<script>
+$(document).ready(function() {
+	$('#summernote').val("${dto.noticeContent}")
+	$('#summernote').summernote({
+		  height: 300,                 // 에디터 높이
+		  minHeight: null,             // 최소 높이
+		  maxHeight: null,             // 최대 높이
+		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+		  lang: "ko-KR",					// 한글 설정     		
+	});
+});
+</script>
 <c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>
