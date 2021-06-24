@@ -345,12 +345,9 @@ public class MemberController {
 	}
 	
 	@PostMapping("search")
-	public String getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
+	public String getEmail(MemberVO memberVO)throws Exception{
 		memberVO = memberService.getEmail(memberVO);		
 
-		mv.addObject("dto",memberVO);
-		mv.setViewName("member/search");
-				
 		String uuid = UUID.randomUUID().toString();		
 		memberVO.setPassword(uuid);		
 		memberService.setUpdate(memberVO);
