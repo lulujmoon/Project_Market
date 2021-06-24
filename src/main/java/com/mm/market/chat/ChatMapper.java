@@ -7,9 +7,22 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ChatMapper {
 
-	public List<ChatVO> getChatList(ChatVO chatVO) throws Exception;
+	public List<ChatVO> chatList(ChatVO chatVO) throws Exception;
 	
-	public int saveChat(ChatVO chatVO) throws Exception;
+	public String getOtherProfile(ChatVO chatVO) throws Exception;
 	
-	public int saveRoom(RoomVO roomVO) throws Exception;
+	public int countUnread(ChatVO chatVO) throws Exception;
+	
+	public ChatVO roomContentList(ChatVO chatVO) throws Exception;
+	
+	public int chatReadChk(ChatVO chatVO) throws Exception;
+	
+	public int chatSendInList(ChatVO chatVO) throws Exception;
+	
+	public int maxRoom(ChatVO chatVO) throws Exception;
+	
+	public int existChat(ChatVO chatVO) throws Exception;
+	
+	public String selectRoom(ChatVO chatVO) throws Exception;
+	
 }

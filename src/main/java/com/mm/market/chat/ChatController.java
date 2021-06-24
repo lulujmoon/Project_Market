@@ -1,70 +1,82 @@
 package com.mm.market.chat;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mm.market.member.MemberVO;
-import com.mm.market.product.ProductService;
-import com.mm.market.product.ProductVO;
-
-import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
+@RequestMapping("/chat/**")
 public class ChatController {
 	
-	private final ChatService chatService;
-	private final ProductService productService;
+	@Autowired
+	private ChatService chatService;
 
-	@GetMapping("/product/{username}/{productName}/chatting")
-	public String index(Model model, @PathVariable("username") String username, 
-										@PathVariable("productName") String productName, Authentication auth) throws Exception{
+	//메세지 목록
+	@RequestMapping("chatList")
+	public String chatList(Authentication auth, HttpServletRequest request) throws Exception {
 		
-		ProductVO productVO = new ProductVO();
-		productVO.setUsername(username);
-		productVO.setProductName(productName);
-		productVO = productService.getNum(productVO);
-		Long productNum = productVO.getProductNum();
+		MemberVO memberVO= (MemberVO)auth.getPrincipal();
+//		System.out.println("auth : "+memberVO.getUsername());
+		System.out.println(memberVO);
+		String username = memberVO.getUsername();
 		
-		System.out.println("ProductNum : "+productNum);
-			
 		ChatVO chatVO = new ChatVO();
-		chatVO.setProductNum(productNum);
+		chatVO.setUsername(username);
+		System.out.println(chatVO);
 		
-		List<ChatVO> chatList = chatService.getChatList(chatVO);
+		List<ChatVO> list = chatService.chatList(chatVO);
+		
+		request.setAttribute("list", list);
+		
+		return "chat/chatList";
+	}
+	
+	
+	//메세지 목록
+	@RequestMapping("chatAjaxList")
+	public String messageAjaxList(HttpServletRequest request, Authentication auth) throws Exception{
 		
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();
-		username = memberVO.getUsername();
+		String username = memberVO.getUsername();
+		ChatVO chatVO = new ChatVO();
+		chatVO.setUsername(username);
 		
+		//메세지 리스트
+		List<ChatVO> list = chatService.chatList(chatVO);
 		
-		model.addAttribute("chatList", chatList);
-		model.addAttribute("account", username);
-		model.addAttribute("productNum", productNum);
+		request.setAttribute("list", list);
 		
-		return "product/chatting";
+		return "chat/chatAjaxList";
 	}
 	
-	@MessageMapping("/chat/{productNum}") // 메세지가 목적지(/chat)로 전송되면 chat()메서드를 호출 //해당 url로 메세지가 전송되면 메서드를 호출
-	@SendTo("/receive/chat/{productNum}") // 결과를 리턴시키는 목적지
-	public ChatVO chat(@DestinationVariable Long productNum, ChatVO chatVO) throws Exception{
-		chatVO.setSendDateTime(LocalDateTime.now()); // DB에는 자동으로 저장되지만 javaScript에서 출력해주기 위해 값을 한번 넣어줌
-		chatVO.setProductNum(productNum);
-		chatService.saveChat(chatVO); // 전송전 DB저장
+	//메세지 리스트에서 메세지 보내기
+	@ResponseBody
+	@RequestMapping("chatSendInList")
+	public int messageSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
+		ChatVO chatVO = new ChatVO();
 		
-		return chatVO;
+		MemberVO memberVO = (MemberVO)auth.getPrincipal();
+		String username = memberVO.getUsername();
+		
+		chatVO.setRoom(room);
+		chatVO.setSendUser(username);
+		chatVO.setRecvUser(otherUser);
+		chatVO.setContent(content);
+		
+		int flag = chatService.chatSendInList(chatVO);
+		
+		return flag;
 	}
-	
 	
 	
 }
