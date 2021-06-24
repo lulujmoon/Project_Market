@@ -55,12 +55,7 @@
 						</c:if>
 						<div class="card__info">
 							<div class="info__name"> ${product.productName}</div>
-							<c:if test="${product.productPrice eq 0 && product.categoryCode != 14}">
-								<div class="info__price">무료나눔</div>
-							</c:if>
-							<c:if test="${product.productPrice ne 0 || product.categoryCode == 14}">
-								<div class="info__price">${product.productPrice}</div>
-							</c:if>
+							<div class="info__price">${product.productPrice}</div>
 							<div class="info__date">${product.productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 						</div>

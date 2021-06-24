@@ -3,7 +3,8 @@
 /** 초기설정 1. 가격 표시 방법
  *	number.toLocaleString(locale, option) 이용
  */
- setPrice('.top__price');
+ const topPrice = document.querySelector('.top__price');
+ setPrice(topPrice);
  
 /** 초기설정 2. 별점 표시
  */

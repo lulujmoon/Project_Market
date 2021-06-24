@@ -2,10 +2,9 @@
 /** @function setPrice(className)
  *  -- 숫자를 '100,000원' 형태로 바꾸는 함수
  *  1. number.toLocaleString(locale, option) 이용
- *  2. 가격 정보가 담긴 선택자를 매개변수로 받는다.
+ *  2. 가격 정보가 담긴 변수를 매개변수로 받는다.
  */
- function setPrice(selector){
-	let priceDiv = document.querySelector(selector);
+ function setPrice(priceDiv){
 	let price = Number(priceDiv.innerText);
 	price = price.toLocaleString('currency');
 	priceDiv.innerText = price+' 원';
