@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항</title>
 <c:import url="../template/setting.jsp"></c:import>
 </head>
 <body>
@@ -62,5 +62,6 @@
 	</div>
 	</div>
 <c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="../resources/js/common.js"></script>
 </body>
 </html>
