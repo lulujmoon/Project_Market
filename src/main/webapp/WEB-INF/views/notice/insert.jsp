@@ -9,12 +9,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <c:import url="../template/setting.jsp"></c:import>
 <script src="../resources/js/summernote/summernote-lite.js"></script>
 <script src="../resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="../resources/css/summernote/summernote-lite.css">
 <link rel="stylesheet" href="../resources/css/noticeNote.css"/>
+<title>공지 등록</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
