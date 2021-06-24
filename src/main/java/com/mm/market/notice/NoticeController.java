@@ -65,7 +65,7 @@ public class NoticeController {
 	@GetMapping("update")
 	public ModelAndView setUpdate(NoticeVO noticeVO,ModelAndView mv)throws Exception{
 		noticeVO =noticeService.getSelect(noticeVO);
-		mv.addObject("dto",noticeVO);
+		mv.addObject("notice",noticeVO);
 		mv.setViewName("notice/update");
 		return mv;
 	}
