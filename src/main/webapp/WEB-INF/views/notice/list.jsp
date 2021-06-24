@@ -18,13 +18,9 @@
 		<div class="top__title">공지사항</div>
 		<form class="top__form-search" id="frm" action="./list" class="form-inline">
 			<input type="text" class="search__input" name="search" id="search" value="${noticePager.search}" placeholder="">
-			<button type="submit" class="btn-search">검색</button>
+			<button type="submit" class="btn btn-search">검색</button>		
 		</form>
 	</div>
-	<sec:authorize access="hasRole('ADMIN')">
-	<a href="./insert">글작성</a>
-	</sec:authorize>
-
 	<div class="notice-container">
 		<c:forEach items="${list}" var="notice">
 			<div class="ntc__card" onclick="manageContent()">
@@ -39,12 +35,21 @@
 				<i class="fas fa-sort-down"></i>
 			</div>
 			<div class="content-wrapper">
+				<div class="ntc__btn">
+					<a href="./update?noticeNum=${notice.noticeNum}" class="btn btn-edit">수정</a>
+					<a href="./delete?noticeNum=${notice.noticeNum}" class="btn btn-del">삭제</a>
+				</div>
 				<div class="ntc__content">
 					${notice.noticeContent}
 				</div>
 			</div>
 		</c:forEach>
 	</div>
+	<sec:authorize access="hasRole('ADMIN')">
+		<div class="btn-insert-wrapper">
+			<a href="./insert" class="btn btn-insert">작성</a>
+		</div>
+	</sec:authorize>
 	<ul class="page-container list-page">
 		<c:if test="${noticePager.pre}">	
 			<li><a class="page-item arrow" href="./list?page=${noticePager.startNum-1}&kind=${noticePager.kind}&search=${noticePager.search}"><i class="fas fa-angle-double-left"></i></a></li>

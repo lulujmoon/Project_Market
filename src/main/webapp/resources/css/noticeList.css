@@ -5,6 +5,16 @@
 	margin-top: 165px;	
 }
 
+.btn{
+	all: unset;
+	display: block;
+	margin-left: 5px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;	
+}
+
 .top-container{
 	width: 950px;
 	display: flex;
@@ -21,6 +31,7 @@
 	width: 300px;
 	display: flex;
 	flex-direction: row;
+	justify-content: flex-end;
 }
 
 .search__input{
@@ -38,17 +49,13 @@
 }
 
 .btn-search{
-	all: unset;
-	display: block;
 	width: 35px;
-	height: 25px;
-	margin-left: 5px;
-	padding: 5px 10px;
 	background-color: #fadd85;
-	border-radius: 5px;
 	color: white;
-	text-align: center;
-	cursor: pointer;
+}
+
+.btn-search:hover{
+	background-color: #f9d568;
 }
 
 .notice-container{
@@ -109,6 +116,51 @@
 	border-bottom: 1px solid #e6e6e6;
 }
 
+.ntc__btn{
+	width: 920px;
+	display: flex;
+	justify-content: flex-end;
+	padding: 15px 15px 0 15px;
+}
+
 .ntc__content{
 	padding: 15px;
+}
+
+.btn-edit{
+	border: 1px solid #c6c6c6;	
+}
+
+.btn-edit:hover{
+	background-color: #c6c6c6;
+	color: white;	
+}
+
+.btn-del{
+	border: 1px solid #ff5e5e;
+	color: #ff5e5e;	
+}
+
+.btn-del:hover{
+	background-color: #ff5e5e;
+	color: white;
+}
+
+.btn-insert-wrapper{
+	width: 950px;
+	padding: 15px 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn-insert{
+	width: 35px;
+	height: 25px;
+	line-height: 25px;
+	background-color: #fadd85;
+	color: white;
+}
+
+.btn-insert:hover{
+	background-color: #f9d568;
 }
