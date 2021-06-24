@@ -41,10 +41,9 @@ public class ChatController {
 		return "chat/chatList";
 	}
 	
-	
 	//메세지 목록
 	@RequestMapping("chatAjaxList")
-	public String messageAjaxList(HttpServletRequest request, Authentication auth) throws Exception{
+	public String chatAjaxList(HttpServletRequest request, Authentication auth) throws Exception{
 		
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();
 		String username = memberVO.getUsername();
@@ -59,10 +58,32 @@ public class ChatController {
 		return "chat/chatAjaxList";
 	}
 	
+	
+	@RequestMapping("chatContentList")
+	public String chatContentList(HttpServletRequest request, Authentication auth) throws Exception {
+		
+		System.out.println(request);
+		int room = Integer.parseInt(request.getParameter("room"));
+		
+		ChatVO chatVO = new ChatVO();
+		chatVO.setRoom(room);
+		MemberVO memberVO= (MemberVO)auth.getPrincipal();
+		String username = memberVO.getUsername();
+		chatVO.setUsername(username);
+		
+		//메세지 내용 가져오기
+		List<ChatVO> clist = chatService.roomContentList(chatVO);
+		
+		request.setAttribute("clist", clist);
+		
+		return "chat/chatContentList";
+	}
+	
+	
 	//메세지 리스트에서 메세지 보내기
 	@ResponseBody
 	@RequestMapping("chatSendInList")
-	public int messageSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
+	public int chatSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
 		ChatVO chatVO = new ChatVO();
 		
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();

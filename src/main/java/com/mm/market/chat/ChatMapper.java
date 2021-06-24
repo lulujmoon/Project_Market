@@ -13,7 +13,7 @@ public interface ChatMapper {
 	
 	public int countUnread(ChatVO chatVO) throws Exception;
 	
-	public ChatVO roomContentList(ChatVO chatVO) throws Exception;
+	public List<ChatVO> roomContentList(ChatVO chatVO) throws Exception;
 	
 	public int chatReadChk(ChatVO chatVO) throws Exception;
 	

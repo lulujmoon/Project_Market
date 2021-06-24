@@ -8,7 +8,7 @@
 	
 	<!-- 메세지 리스트 -->
 	<select id="chatList" parameterType="ChatVO" resultType="ChatVO">
-		select num, room, sendUser, recvUser, date_format(sendTime, '%Y_%m_%d %H:%i') sendTime, readTime, content, readChk 
+		select num, room, sendUser, recvUser, date_format(sendTime, '%Y.%m.%d %H:%i') sendTime, readTime, content, readChk 
 		from chat
 		where num in (select max(num) from chat group by room) and (sendUser=#{username} or recvUser=#{username}) 
 		order by num desc
