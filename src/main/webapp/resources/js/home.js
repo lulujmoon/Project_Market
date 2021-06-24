@@ -15,7 +15,7 @@
 const infoPrices = document.querySelectorAll('.info__price');
 for(infoPrice of infoPrices){
 	setPrice(infoPrice);
-	if(infoPrice.innerText == '0 원'){
+	if(infoPrice.innerText == '0 원' && infoPrice.previousElementSibling.innerText != 14){
 		infoPrice.innerText = '무료나눔';
 	}
 }

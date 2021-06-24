@@ -27,9 +27,6 @@
 					</div>
 					<div class="rv__rate">
 						<div class="rate-title">
-							상품 상태
-						</div><div class="rate">${review.state}</div>
-						<div class="rate-title">
 							거래 매너
 						</div>
 						<div class="rate">${review.manner}</div>

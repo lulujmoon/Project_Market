@@ -4,7 +4,11 @@
  *	number.toLocaleString(locale, option) 이용
  */
  const topPrice = document.querySelector('.top__price');
+ const topCategory = document.querySelector('.top__category');
  setPrice(topPrice);
+ if(topPrice.innerText=='0 원' && topCategory.innerText != '삽니다'){
+	topPrice.innerText = '무료나눔';
+}
  
 /** 초기설정 2. 별점 표시
  */
@@ -107,22 +111,6 @@ function submit() {
  function goSellerPage(sellerCode){
 	location.href = '/store/'+sellerCode+'/products/';
 }
-
-$(document).ready(function(){
-	var status = $("#productStatus").val();
-	$("#status").val(status);
-
-	let category = document.getElementById('category').innerText;
-	let price = document.getElementById('price').innerText;
-	price=price.substring(0,1);
-	
-	if(category != '삽니다') {
-		if(price == 0) {
-			$("#price").text("무료나눔");
-		}
-	} 
-})
-
 
 function openReport(productNum){
 	window.open(

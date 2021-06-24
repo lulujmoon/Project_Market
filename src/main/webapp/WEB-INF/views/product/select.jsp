@@ -37,7 +37,7 @@
 		<div class="top__info">
 			<div class="top__productName">${product.productName}</div>
 			<div class="priceNstatus">
-				<div class="top__price" id="price">${product.productPrice}</div>
+				<div class="top__price">${product.productPrice}</div>
 				<div class="top__status">${product.productStatus}</div>
 			</div>
 			<div class="top__smalls">
@@ -46,7 +46,7 @@
 					<div class="top__small top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
 					<div class="top__small top__productDate">${product.productDate}</div>
 				</div>
-				<div class="top__small top__category" id="category"><i class="fas fa-tag"></i>${product.category.categoryName}</div>
+				<div class="top__small top__category"><i class="fas fa-tag"></i>${product.category.categoryName}</div>
 				<div class="top__small top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
