@@ -20,7 +20,7 @@
 <div class="container">
 	<c:import url="./storeCommon.jsp"></c:import>
 		<div class="board__contents">
-			<div class="hidden">${pager.page}</div>
+			<div class="hidden page-value">${pager.page}</div>
 			<div class="list-container">
 				<c:forEach items="${products}" var="product">
 					<div class="prd__card" onclick="goSelect(${product.productNum})">

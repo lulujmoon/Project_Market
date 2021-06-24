@@ -96,17 +96,19 @@
 	pointer-events: none;
 }
 
-.ntc__content{
+.content-wrapper{
 	max-height: 0;
-	padding: 0 15px;
 	overflow: hidden;
 	transition: max-height 0.2s ease-out;
 }
 
-.ntc__content.active{
+.content-wrapper.active{
 	max-height: 500px;
-	padding: 15px;
 	overflow: auto;
 	transition: max-height 0.2s ease-in;
 	border-bottom: 1px solid #e6e6e6;
+}
+
+.ntc__content{
+	padding: 15px;
 }

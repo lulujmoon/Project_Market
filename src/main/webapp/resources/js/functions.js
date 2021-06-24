@@ -90,6 +90,15 @@
   return joinDate;
 }
 
+/** @function selectPage() 
+ *	-- 현재 페이지에 selected 클래스를 추가한다.
+ */
+ function selectPage(){
+	 const pageVal = document.querySelector('.page-value');
+	 let selectedPage = document.querySelector('.code_'+pageVal.innerText);
+	 selectedPage.classList.add('selected');	
+}
+
 /** @function carousel
  * -- 이미지를 캐러셀 형태로 만든다.
  *	0. 슬라이드, 이미지, 버튼 변수 선언. 첫번째 서클 채우기
