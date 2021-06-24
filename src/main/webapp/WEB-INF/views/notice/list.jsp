@@ -37,7 +37,7 @@
 			<div class="content-wrapper">
 				<div class="ntc__btn">
 					<a href="./update?noticeNum=${notice.noticeNum}" class="btn btn-edit">수정</a>
-					<a href="./delete?noticeNum=${notice.noticeNum}" class="btn btn-del">삭제</a>
+					<div class="btn btn-del" onclick="deleteNotice('${notice.noticeNum}')">삭제</div>
 				</div>
 				<div class="ntc__content">
 					${notice.noticeContent}
