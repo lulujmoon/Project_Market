@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/notice/list","/notice/select").permitAll()
 		.antMatchers("/notice/**").hasAnyRole("ADMIN")
 		.antMatchers("/member/auth/kakao/callback").permitAll()
+		.antMatchers("/mail/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		

@@ -5,7 +5,8 @@
 <html>
 <head>
 <c:import url="./template/setting.jsp"></c:import>
-<link rel="stylesheet" href="../resources/css/home.css">
+<link rel="stylesheet" href="/resources/css/home.css">
+<link rel="stylesheet" href="/resources/css/productCard.css">
 <title>레몬 마켓</title>
 </head>
 <body>
@@ -27,7 +28,7 @@
 				<img src="../resources/images/641634667.jpg" class="carousel-images" id="first-clone">			
 			</div>
 		</div>
-		<section class="home__products">
+		<section class="product-container">
 			<div class="section-title">
 				<h2>새로 올라온 상품</h2>
 				<a href="${pageContext.request.contextPath}/product/list">더 보기</a>
@@ -37,6 +38,7 @@
 					<div class="prd__card" onclick="goSelect(${products[i].productNum})">
 						<c:if test="${products[i].files[0].fileName != null}">
 							<img class="card__img" src="/resources/upload/product/${products[i].files[0].fileName}">
+							<input type="hidden" id="category" value="${product[i].categoryCode}">
 						</c:if>
 						<c:if test="${products[i].files[0].fileName == null}">
 							<img class="card__img" src="/resources/images/productDefault.jpg">
@@ -51,7 +53,7 @@
 				</c:forEach>
 			</div>
 		</section>
-		<section class="home__socials">
+		<section class="social-container">
 			<div class="section-title">
 				<h2>새로 올라온 글</h2>
 				<a href="#">더 보기</a>

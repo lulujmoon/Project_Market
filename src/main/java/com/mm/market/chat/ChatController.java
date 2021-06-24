@@ -1,43 +1,82 @@
 package com.mm.market.chat;
 
-import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import lombok.extern.slf4j.Slf4j;
+import com.mm.market.member.MemberVO;
 
-@Slf4j
-@CrossOrigin
-@RestController
-@RequestMapping(value = "/kafka")
+@Controller
+@RequestMapping("/chat/**")
 public class ChatController {
-    @Autowired
-    private KafkaTemplate<String, Message> kafkaTemplate;
+	
+	@Autowired
+	private ChatService chatService;
 
-    @PostMapping(value = "/publish")
-    public void sendMessage(@RequestBody Message message) {
-        log.info("Produce message : " + message.toString());
-        message.setTimestamp(LocalDateTime.now().toString());
-        try {
-            kafkaTemplate.send(KafkaConstants.KAFKA_TOPIC, message).get();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @MessageMapping("/sendMessage")
-    @SendTo("/topic/group")
-    public Message broadcastGroupMessage(@Payload Message message) {
-        return message;
-    }
-
+	//메세지 목록
+	@RequestMapping("chatList")
+	public String chatList(Authentication auth, HttpServletRequest request) throws Exception {
+		
+		MemberVO memberVO= (MemberVO)auth.getPrincipal();
+//		System.out.println("auth : "+memberVO.getUsername());
+		System.out.println(memberVO);
+		String username = memberVO.getUsername();
+		
+		ChatVO chatVO = new ChatVO();
+		chatVO.setUsername(username);
+		System.out.println(chatVO);
+		
+		List<ChatVO> list = chatService.chatList(chatVO);
+		
+		request.setAttribute("list", list);
+		
+		return "chat/chatList";
+	}
+	
+	
+	//메세지 목록
+	@RequestMapping("chatAjaxList")
+	public String messageAjaxList(HttpServletRequest request, Authentication auth) throws Exception{
+		
+		MemberVO memberVO = (MemberVO)auth.getPrincipal();
+		String username = memberVO.getUsername();
+		ChatVO chatVO = new ChatVO();
+		chatVO.setUsername(username);
+		
+		//메세지 리스트
+		List<ChatVO> list = chatService.chatList(chatVO);
+		
+		request.setAttribute("list", list);
+		
+		return "chat/chatAjaxList";
+	}
+	
+	//메세지 리스트에서 메세지 보내기
+	@ResponseBody
+	@RequestMapping("chatSendInList")
+	public int messageSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
+		ChatVO chatVO = new ChatVO();
+		
+		MemberVO memberVO = (MemberVO)auth.getPrincipal();
+		String username = memberVO.getUsername();
+		
+		chatVO.setRoom(room);
+		chatVO.setSendUser(username);
+		chatVO.setRecvUser(otherUser);
+		chatVO.setContent(content);
+		
+		int flag = chatService.chatSendInList(chatVO);
+		
+		return flag;
+	}
+	
+	
 }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
+import com.mm.market.product.HeartVO;
 import com.mm.market.product.ProductService;
 import com.mm.market.product.ProductVO;
 import com.mm.market.util.Pager;
@@ -32,7 +33,7 @@ public class StoreController {
 	private ProductService productService;
 	
 	@GetMapping("{code}/products")
-	public ModelAndView products(@PathVariable("code") Long code, Authentication authentication, ModelAndView mv) throws Exception {
+	public ModelAndView products(@PathVariable("code") Long code, ProductPager productPager, Authentication authentication, ModelAndView mv) throws Exception {
 		
 		MemberVO memberVO = new MemberVO();
 		memberVO.setCode(code);
@@ -44,17 +45,39 @@ public class StoreController {
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
 		
-		/* 나중에 getListByUsername으로 변경하기*/
-		ProductVO productVO = new ProductVO();
-		productVO.setUsername(memberVO.getUsername());
-		ProductPager productPager = new ProductPager();
-		List<ProductVO> productList = productService.getList(productPager, 12L, 5L);
+		productPager.setUsername(memberVO.getUsername());
+		List<ProductVO> productList = productService.getList(productPager, 16L, 5L);
 		
 		mv.addObject("member", memberVO);
 		mv.addObject("file", memberFileVO);
 		mv.addObject("locations", locationList);
 		mv.addObject("products", productList);
+		mv.addObject("pager", productPager);
 		mv.setViewName("/store/products");
+		return mv;
+	}
+	
+	//code 넣으면 다른 지역이 안나와서 그냥 빼고 했습니당!
+	@GetMapping("/hearts")
+	public ModelAndView hearts(Authentication authentication, ModelAndView mv) throws Exception {
+		MemberVO memberVO = new MemberVO();
+		memberVO = (MemberVO)authentication.getPrincipal();
+		MemberFileVO memberFileVO = memberService.selectFile(memberVO);
+		
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		memberLocationVO.setUsername(memberVO.getUsername());
+		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		
+		HeartVO heartVO = new HeartVO();
+		heartVO.setUsername(memberVO.getUsername());
+		List<ProductVO> productList = productService.getHeartList(heartVO);
+		
+		mv.addObject("products", productList);
+		mv.addObject("member", memberVO);
+		mv.addObject("file", memberFileVO);
+		mv.addObject("locations", locationList);
+		mv.setViewName("/store/hearts");
+		
 		return mv;
 	}
 	
@@ -67,7 +90,7 @@ public class StoreController {
 	public String socials(@PathVariable("code") Long code) throws Exception {
 		return "/store/socials";
 	}
-	
+		
 	@GetMapping("profileUpdate")
 	public ModelAndView setUpdateFile(MemberFileVO memberFileVO, Authentication authentication) throws Exception{
 		MemberVO memberVO =(MemberVO)authentication.getPrincipal();

@@ -22,8 +22,12 @@
 			 <if test="locationCode != 0L">
 			 	P.locationCode = #{locationCode} AND
 			 </if>
-		 P.productName LIKE CONCAT ('%', #{keyword}, '%')
-		 ORDER BY 
+			 <if test="username != null">
+			 	username = #{username} AND
+			 </if>
+		 P.productName LIKE CONCAT ('%', #{keyword}, '%') AND
+		 PF.fileNum = (SELECT MIN(PF.fileNum) FROM productFile PF WHERE productNum = P.productNum)
+		 ORDER BY
 			 <choose>
 			 	<when test="order == 'lowPrice'">
 			 		P.productPrice asc
@@ -32,7 +36,7 @@
 			 		P.productPrice desc
 			 	</when>
 			 	<otherwise>
-			 		P.productNum DESC
+			 		P.productDate DESC
 			 	</otherwise>
 			 </choose>
 		 limit #{startRow}, #{perPage}
@@ -47,6 +51,9 @@
 				</if>
 				<if test="locationCode != 0L">
 					locationCode = #{locationCode} AND
+				</if>
+				<if test="username != null">
+					username = #{username} AND
 				</if>
 			productName LIKE CONCAT ('%', #{keyword}, '%')		   
 			AND productNum > 0
@@ -90,6 +97,11 @@
 				<result property="fileName" column="fileName"/>
 				<result property="originName" column="originName"/>
 			</collection>
+			<collection property="heart" javaType="HeartVO">
+				<id property="heartNum" column="heartNum"/>
+				<result property="username" column="username"/>
+				<result property="productNum" column="productNum"/>
+			</collection>
 		</resultMap> 
 		
 		<select id="getProductNum" resultType="Long">
@@ -107,7 +119,7 @@
 		<insert id="setInsert" parameterType="ProductVO" useGeneratedKeys="true" keyProperty="productNum">
 			insert into product 
 			(productNum, productName, username, categoryCode, productDate, productHit, productHeart, productContent, productPrice, productNego, locationCode)
-			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, #{productContent}, #{productPrice}, 0, #{locationCode})
+			 values (#{productNum}, #{productName}, #{username}, #{categoryCode}, NOW(), 0, 0, #{productContent}, #{productPrice}, #{productNego}, #{locationCode})
 		</insert>
 		
 		<insert id="setFileInsert" parameterType="ProductFileVO">
@@ -132,6 +144,25 @@
 			where productNum=#{productNum}
 		</update>
 		
+		
+		<update id="setRewrite" parameterType="ProductVO">
+			update product set
+			productName=#{productName}, 
+			categoryCode=#{categoryCode}, 
+			productContent=#{productContent}, 
+			productDate=NOW(),
+			productPrice=#{productPrice}
+			where productNum=#{productNum}
+		</update>
+		
+		<update id="setStatus" parameterType="ProductVO">
+			UPDATE product SET productStatus=#{productStatus} WHERE productNum=#{productNum}
+		</update>
+		
+		<select id="getNum" parameterType="ProductVO" resultType="ProductVO">
+			select productNum from product where username=#{username} and productName=#{productName}
+		</select>
+		
 		<!-- heart -->
 		<insert id="setHeart" parameterType="HeartVO">
 			insert into heart (username, productNum) values (#{username}, #{productNum}) 
@@ -147,6 +178,17 @@
 		
 		<select id="getHeart" resultType="Long">
 			SELECT COUNT(heartNum) FROM heart WHERE username=#{username} and productNum=#{productNum}
+		</select>
+		
+		<select id="getHeartList" parameterType="HeartVO" resultMap="selectResult">
+			SELECT H.*, P.*, PF.* ,M.username
+			FROM heart H left Join product P
+			ON h.productNum = P.productNum
+			LEFT JOIN productFile PF
+			ON p.productNum = pf.productNum
+			LEFT JOIN member M
+			ON M.username = H.username
+			WHERE H.username = #{username}
 		</select>
 		
 </mapper>   

@@ -17,6 +17,7 @@ public class ProductPager {
 	private Long locationCode;
 	private String keyword;
 	private String order;
+	private String username;
 	
 
 	public Long getPerPage() {
@@ -156,14 +157,14 @@ public class ProductPager {
 		this.locationCode = locationCode;
 	}
 
-	public String getkeyword() {
+	public String getKeyword() {
 		if(keyword == null) {
 			keyword = "";
 		}
 		return keyword;
 	}
 
-	public void setkeyword(String keyword) {
+	public void setKeyword(String keyword) {
 		if(keyword == null) {
 			keyword = "";
 		}
@@ -184,9 +185,21 @@ public class ProductPager {
 		this.order = order;
 	}
 
+	public Long getPage() {
+		return page;
+	}
 
-	
-	
-	
+	public void setPage(Long page) {
+		this.page = page;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 
 }

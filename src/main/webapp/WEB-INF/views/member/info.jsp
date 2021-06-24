@@ -23,10 +23,10 @@
 		<div class="info__header">
 			<h2>내 정보</h2>
 			<div class="btn-group">
-				<button class="btn btn-edit" class="active">수정</button>
-				<a href="./delete">탈퇴</a>
+				<button class="btn btn-edit">수정</button>
 				<button class="btn btn-submit">완료</button>
 				<button class="btn btn-cancel">취소</button>
+				<button class="btn btn-delAcc active" onclick="deleteMember('${principal.username}')">탈퇴</button>
 			</div>
 		</div>
 		<form id="info-form" action="./update" method="post">
@@ -38,7 +38,7 @@
 			<div class="info-group">
 				<div class="info__title">Password</div>
 				<div class="info__content">********</div>
-				<input class="info__input" type="password" name="password" placeholder="변경 시에만 입력하세요.">
+				<input class="info__input" type="password" name="password" placeholder="영문, 숫자, 특수기호 조합, 8-20자">
 			</div>
 			<div class="info-group">
 				<div class="info__title">Name</div>

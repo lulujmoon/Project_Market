@@ -57,7 +57,7 @@ const form = document.querySelector('.form');
 
 $(document).ready(function(){
 	(function(){
-		let productNum = $("#productNum").attr("title");		
+		let socialNum = $("#socialNum").attr("title");		
 	})
 })
 
@@ -86,5 +86,3 @@ function previewImage(f,idx) {
 	}
 	
 }
-
-
