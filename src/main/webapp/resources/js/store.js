@@ -32,7 +32,19 @@
 		});
 });
 
+/** 초기설정 3. 가격 표시
+ */
+const infoPrices = document.querySelectorAll('.info__price');
+for(infoPrice of infoPrices){
+	setPrice(infoPrice);
+	if(infoPrice.innerText == '0 원'){
+		infoPrice.innerText = '무료나눔';
+	}
+}
+
+
 /* products */
+
 function goSelect(productNum){
 	location.href = '/product/select/'+productNum;
 }
@@ -45,4 +57,14 @@ function goSelect(productNum){
  for(rvdate of reviewDates){
 	let datetime = rvdate.innerText;
 	rvdate.innerText = calculateTime(datetime);
+}
+
+/** @function showProduct(productNum)
+ *	--팝업으로 상품 페이지를 보여준다.
+ */
+ function showProduct(productNum){
+	window.open(
+		'/product/select/'+productNum, 
+		'',
+		'resizable');
 }

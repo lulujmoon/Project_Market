@@ -1,5 +1,6 @@
 package com.mm.market.member;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -50,12 +51,18 @@ public class StoreController {
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
 		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setReviewee(memberVO.getUsername());
+		reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+		
+		
 		productPager.setUsername(memberVO.getUsername());
 		List<ProductVO> productList = productService.getList(productPager, 16L, 5L);
 		
 		mv.addObject("member", memberVO);
 		mv.addObject("file", memberFileVO);
 		mv.addObject("locations", locationList);
+		mv.addObject("rating", reviewVO);
 		mv.addObject("products", productList);
 		mv.addObject("pager", productPager);
 		mv.setViewName("/store/products");
@@ -101,6 +108,11 @@ public class StoreController {
 		
 		MemberFileVO revieweeFileVO = memberService.selectFile(memberVO);
 		
+		reviewVO = new ReviewVO();
+		reviewVO.setReviewee(memberVO.getUsername());
+		reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+
+		
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
@@ -108,6 +120,7 @@ public class StoreController {
 		mv.addObject("member", memberVO);
 		mv.addObject("file", revieweeFileVO);
 		mv.addObject("locations", locationList);
+		mv.addObject("rating", reviewVO);
 
 		mv.addObject("buyerReviews", buyerReviews);
 		mv.addObject("sellerReviews", sellerReviews);

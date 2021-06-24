@@ -67,4 +67,9 @@
 		insert into review (productNum, reviewer, reviewee, type, locationCode, state, manner, speed, reviewContent)
 		values (#{productNum}, #{reviewer}, #{reviewee}, #{type}, #{locationCode}, #{state}, #{manner}, #{speed}, #{reviewContent})
 	</insert>
+	
+	<select id="getAvgsAndCounts" parameterType="ReviewVO" resultType="ReviewVO">
+		SELECT ROUND(AVG(state)) avgState, ROUND(AVG(manner)) avgManner, ROUND(AVG(speed)) avgSpeed, COUNT(state) countState, COUNT(manner) countManner, COUNT(speed) countSpeed FROM review WHERE reviewee=#{reviewee}
+	</select>
+
 </mapper>

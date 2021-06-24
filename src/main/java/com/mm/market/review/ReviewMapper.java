@@ -1,5 +1,6 @@
 package com.mm.market.review;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -14,4 +15,6 @@ public interface ReviewMapper {
 	public ReviewVO getSelect(ReviewVO reviewVO) throws Exception;
 	
 	public int setInsert(ReviewVO reviewVO) throws Exception;
+	
+	public ReviewVO getAvgsAndCounts(ReviewVO reviewVO) throws Exception;
 }

@@ -24,6 +24,13 @@ public class ReviewVO {
 	private Long speed;
 	private String reviewContent;
 	
+	private Long avgState;
+	private Long avgManner;
+	private Long avgSpeed;
+	private Long countState;
+	private Long countManner;
+	private Long countSpeed;
+	
 	private ProductVO product;
 	private MemberVO reviewerVO;
 	private MemberFileVO reviewerFile;

@@ -1,5 +1,6 @@
 package com.mm.market.review;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,7 @@ public class ReviewService {
 		return reviewMapper.setInsert(reviewVO);
 	}
 	
+	public ReviewVO getAvgsAndCounts(ReviewVO reviewVO) throws Exception {
+		return reviewMapper.getAvgsAndCounts(reviewVO);
+	}
 }
