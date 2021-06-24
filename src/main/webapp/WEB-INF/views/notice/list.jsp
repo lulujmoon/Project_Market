@@ -40,7 +40,7 @@
 			</div>
 			<div class="ntc__content">
 				${notice.noticeContent}
-			</div>
+			</div>		
 		</c:forEach>
 	</div>
 	<div class="pagination">

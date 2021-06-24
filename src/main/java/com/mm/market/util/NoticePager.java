@@ -132,7 +132,7 @@ public class NoticePager {
 
 		public String getKind() {
 			if(this.kind==null) {
-				this.kind="noticeTitle";
+				this.kind="all";
 			}
 			
 			return kind;

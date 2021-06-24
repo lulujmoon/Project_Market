@@ -77,7 +77,7 @@ public class NoticeController {
 		return "redirect:./list";
 	}
 	
-	@GetMapping("delete")
+	@PostMapping("delete")
 	public String setDelete(NoticeVO noticeVO)throws Exception{
 		
 		int result = noticeService.setDelete(noticeVO);
