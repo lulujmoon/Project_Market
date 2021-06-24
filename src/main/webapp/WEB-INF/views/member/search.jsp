@@ -14,8 +14,8 @@
 <form action="./search" method="post">
 
 <h2>정보를 입력해주세요.</h2>
-이름<input type="text" class="name" name="name"/>
-전화번호<input type="text" class="phone" name="phone"/>
+아이디<input type="text" class="username" name="username"/>
+이메일<input type="text" class="email" name="email"/>
 
 <button type="submit" onclick="sendMail()">입력</button>
 </form>
