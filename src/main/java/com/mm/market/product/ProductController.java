@@ -117,7 +117,7 @@ public class ProductController {
 
 		model.addAttribute("product", productVO);
 
-		System.out.println(auth.getPrincipal());
+		System.out.println(authentication.getPrincipal());
 		//판매자 정보
 		if(productVO.getUsername() != null) {
 			MemberVO sellerVO = new MemberVO();
@@ -140,6 +140,8 @@ public class ProductController {
 
 			//chat
 			ChatVO chatVO = new ChatVO();
+			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+			String username = memberVO.getUsername();
 			chatVO.setUsername(username);
 			System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
 			List<ChatVO> list = chatService.chatList(chatVO);
