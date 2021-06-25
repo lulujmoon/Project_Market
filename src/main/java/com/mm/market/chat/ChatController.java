@@ -94,9 +94,9 @@ public class ChatController {
 	
 	
 	//메세지 리스트에서 메세지 보내기
-	@ResponseBody
+	/* @ResponseBody */
 	@RequestMapping("chatSendInList")
-	public int chatSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
+	public String chatSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
 		System.out.println("otherUser : " + otherUser);
 		ChatVO chatVO = new ChatVO();
 		
@@ -111,7 +111,7 @@ public class ChatController {
 		
 		int flag = chatService.chatSendInList(chatVO);
 		
-		return flag;
+		return "redirect:/product/list";
 	}
 	
 	

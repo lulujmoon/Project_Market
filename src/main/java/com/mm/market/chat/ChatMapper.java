@@ -21,7 +21,7 @@ public interface ChatMapper {
 	
 	public int chatSendInList(ChatVO chatVO) throws Exception;
 	
-	public int maxRoom(ChatVO chatVO) throws Exception;
+	public Integer maxRoom(ChatVO chatVO) throws Exception;
 	
 	public int existChat(ChatVO chatVO) throws Exception;
 	
