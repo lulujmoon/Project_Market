@@ -111,8 +111,6 @@ function submit() {
 $(document).ready(function(){
 	var status = $("#productStatus").val();
 	$("#status").val(status);
-	
-	
 		
 	let category = document.getElementById('category').innerText;
 	let price = document.getElementById('price').innerText;
@@ -124,6 +122,5 @@ $(document).ready(function(){
 		}
 	} 
 })
-
 
 

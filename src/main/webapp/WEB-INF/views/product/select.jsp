@@ -74,7 +74,7 @@
 						<div class="top-btn btn-contact"><a type="button" href="/chat/chatList" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
 					</c:if>
 					<c:if test="${chat eq 0}">
-						<div class="top-btn btn-contact"><a type="button" href="/chat/chatSendInList?room=0&otherUser=${seller.username}&content="${product.productName} onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
+						<div class="top-btn btn-contact"><a class="msg_send_btn" type="button" href="/chat/chatSendInList?room=0&otherUser=${seller.username}&content=※${principal.username}님이 ${product.productName}을 구매하고 싶어해요!" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
 					</c:if>
 					<div class="top-btn btn-nego">가격 제안하기</div>
 					<div class="btn-heart"></div>
@@ -114,9 +114,6 @@
 </div>
 
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript">
-
-</script>
 <script type="text/javascript" src="/resources/js/common.js"></script>
 <script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/productSelect.js"></script>

@@ -81,6 +81,8 @@ public class ChatService {
 			//프로필에서 보낸것중 메세지 내역이 없어서 첫 메세지가 될 경우를 구분하기 위함
 			if(existChat==0) { //메세지 내역이 없어서 0이면 chat테이블의 room 최댓값을 구해서 chatVO에 set
 				int maxRoom = chatMapper.maxRoom(chatVO);
+				System.out.println("maxRoom :" +maxRoom);
+				
 				chatVO.setRoom(maxRoom+1);
 			}else { //메세지 내역이 있다면 해당 room번호를 가져옴
 				int room = Integer.parseInt(chatMapper.selectRoom(chatVO));

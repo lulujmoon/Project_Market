@@ -8,11 +8,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.member.MemberVO;
+import com.mm.market.product.ProductVO;
 
 @Controller
 @RequestMapping("/chat/**")
@@ -94,10 +97,11 @@ public class ChatController {
 	
 	
 	//메세지 리스트에서 메세지 보내기
-	@ResponseBody
+	
 	@RequestMapping("chatSendInList")
-	public int chatSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
+	public String chatSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
 		System.out.println("otherUser : " + otherUser);
+		ModelAndView mv= new ModelAndView();
 		ChatVO chatVO = new ChatVO();
 		
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();
@@ -109,9 +113,15 @@ public class ChatController {
 		chatVO.setRecvUser(otherUser);
 		chatVO.setContent(content);
 		
+		ProductVO productVO = new ProductVO();
+		productVO.setUsername(username);
+		
+		
+		
 		int flag = chatService.chatSendInList(chatVO);
 		
-		return flag;
+		mv.addObject("flag", flag);
+		return "redirect:/chat/chatList";
 	}
 	
 	

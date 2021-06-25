@@ -130,11 +130,19 @@ public class ProductController {
 			
 			if(list.size()<1) {
 				model.addAttribute("chat", 0);
+			} else {
+				for(int i=0;i<list.size();i++) {
+					if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
+						model.addAttribute("chat", list.get(i).getOtherUser());
+					} else {
+						model.addAttribute("chat", 0);
+					}
+				}
 			}
 			
 			
+			
 		}
-		
 
 		return "product/select";
 	}
