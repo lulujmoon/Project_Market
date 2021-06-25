@@ -43,3 +43,7 @@
 	height: 100px;
 	background-color: yellow;
 }
+
+.active_chat {
+	background-color: blue;
+}

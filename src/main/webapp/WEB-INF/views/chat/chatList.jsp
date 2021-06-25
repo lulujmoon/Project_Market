@@ -39,7 +39,6 @@
 	          
 	          <!-- 메세지 리스트 -->
 	          <div class="inbox_chat">
-		          <div>메시지 리스트</div>
 	          </div>
 	        </div>
 	        
@@ -48,11 +47,9 @@
 	        <div>내용</div>
 	          <!-- 메세지 내용 목록 -->
 	          <div class="msg_history" name="contentList">
-	          <div>내용</div>
 	            <!-- 메세지 내용이 올 자리 -->
 	          </div>
 	          <div class="send_message">
-	          <div>압력</div>
 	          </div>
 	          <!-- 메세지 입력란이 올자리 -->
 	        </div>

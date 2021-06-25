@@ -110,7 +110,7 @@ public class ChatController {
 		chatVO.setContent(content);
 		
 		int flag = chatService.chatSendInList(chatVO);
-		
+		/* return flag; */
 		return "redirect:/product/list";
 	}
 	
