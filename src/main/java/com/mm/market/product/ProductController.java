@@ -25,8 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
-import com.mm.market.chat.ChatService;
-import com.mm.market.chat.ChatVO;
 import com.mm.market.location.LocationVO;
 import com.mm.market.member.MemberFileVO;
 import com.mm.market.member.MemberService;
@@ -43,9 +41,6 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	
-	@Autowired
-	private ChatService chatService;
 
 	@Autowired
 	private CategoryMapper categoryMapper;
@@ -120,29 +115,7 @@ public class ProductController {
 			model.addAttribute("seller", sellerVO);
 			model.addAttribute("sellerFile", sellerFileVO);
 			model.addAttribute("sellerLocation", sellerLocations.get(0));
-			
-			//chat
-			ChatVO chatVO = new ChatVO();
-			chatVO.setUsername(username);
-			System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
-			List<ChatVO> list = chatService.chatList(chatVO);
-			System.out.println("list : "+list);
-			
-			if(list.size()<1) {
-				model.addAttribute("chat", 0);	
-			} else {
-				for(int i=0;i<list.size();i++) {
-					if(list.get(i).getOtherUser()!=sellerVO.getUsername()) {
-						model.addAttribute("chat", sellerVO.getUsername());	
-						System.out.println("model chat : "+sellerVO.getUsername());
-					}
-					
-				}
-
-			}
-			
 		}
-		
 
 		return "product/select";
 	}
