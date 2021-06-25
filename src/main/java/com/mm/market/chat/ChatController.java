@@ -27,7 +27,7 @@ public class ChatController {
 		
 		MemberVO memberVO= (MemberVO)auth.getPrincipal();
 //		System.out.println("auth : "+memberVO.getUsername());
-		System.out.println(memberVO);
+		
 		String username = memberVO.getUsername();
 		
 		ChatVO chatVO = new ChatVO();
@@ -64,7 +64,7 @@ public class ChatController {
 	@RequestMapping("chatContentList")
 	public String chatContentList(HttpServletRequest request, Authentication auth) throws Exception {
 		
-		System.out.println(request);
+		
 		int room = Integer.parseInt(request.getParameter("room"));
 		//System.out.println(room);
 		
@@ -73,17 +73,19 @@ public class ChatController {
 		MemberVO memberVO= (MemberVO)auth.getPrincipal();
 		String username = memberVO.getUsername();
 		chatVO.setUsername(username);
-		System.out.println(chatVO);
+		System.out.println("content list chatVO : "+chatVO);
 		List<ChatVO> clist = chatService.getVO(chatVO);
 		
-		for(int i=0;i<clist.size();i++) {
-			clist.get(i).setOtherUser(clist.get(i).getRecvUser());
-		}
 		
 		System.out.println(clist);
 		
 		//메세지 내용 가져오기
 		clist = chatService.roomContentList(chatVO);
+		
+		for(int i=0;i<clist.size();i++) {
+			clist.get(i).setOtherUser(clist.get(i).getRecvUser());
+		}
+		System.out.println("메세지내용 가져오기 후 : "+clist);
 		
 		request.setAttribute("clist", clist);
 		
@@ -95,6 +97,7 @@ public class ChatController {
 	@ResponseBody
 	@RequestMapping("chatSendInList")
 	public int chatSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
+		System.out.println("otherUser : " + otherUser);
 		ChatVO chatVO = new ChatVO();
 		
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();
@@ -102,6 +105,7 @@ public class ChatController {
 		
 		chatVO.setRoom(room);
 		chatVO.setSendUser(username);
+		System.out.println("user : "+username);
 		chatVO.setRecvUser(otherUser);
 		chatVO.setContent(content);
 		
