@@ -32,6 +32,7 @@
 						</c:if>
 						<div class="card__info">
 							<div class="info__name"> ${product.productName}</div>
+							<div class="hidden info__category">${product.categoryCode}</div>
 							<div class="info__price">${product.productPrice}</div>
 							<div class="info__date">${product.productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>

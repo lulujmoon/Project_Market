@@ -33,6 +33,8 @@ import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
+import com.mm.market.review.ReviewService;
+import com.mm.market.review.ReviewVO;
 import com.mm.market.util.FileManager;
 import com.mm.market.util.Pager;
 import com.mm.market.util.ProductPager;
@@ -55,6 +57,9 @@ public class ProductController {
 
 	@Autowired
 	private MemberLocationService memberLocationService;
+	
+	@Autowired
+	private ReviewService reviewService;
 
 	@GetMapping("list")
 	public String getList(ProductPager productPager, Long myLocation, Authentication authentication, Model model) throws Exception {
@@ -62,16 +67,20 @@ public class ProductController {
 		if(myLocation == null) {
 			myLocation = 0L;
 		}
+		
+		if(authentication != null) {
+			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+			MemberLocationVO memberLocationVO = new MemberLocationVO();
+			memberLocationVO.setUsername(memberVO.getUsername());
+			
+			List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+			memberLocationVO.setLocationCode(0L);
+			locationList.add(0, memberLocationVO);
+			
+			productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
+			model.addAttribute("locations", locationList);
+		}
 
-		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-		MemberLocationVO memberLocationVO = new MemberLocationVO();
-		memberLocationVO.setUsername(memberVO.getUsername());
-
-		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
-		memberLocationVO.setLocationCode(0L);
-		locationList.add(0, memberLocationVO);
-
-		productPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
 		List<ProductVO> productList  = productService.getList(productPager, 16L, 5L);
 
 		List<CategoryVO> categories = categoryMapper.getList();
@@ -81,28 +90,31 @@ public class ProductController {
 		model.addAttribute("pager", productPager);
 		model.addAttribute("myLocation", myLocation);
 		model.addAttribute("categories", categories);
-		model.addAttribute("locations", locationList);
 
 		return "product/list";
 	}
 
 
 	@GetMapping("select/{productNum}")
-	public String getSelect(@PathVariable("productNum") Long productNum, Model model, Authentication auth)throws Exception {
+	public String getSelect(@PathVariable("productNum") Long productNum, Model model, Authentication authentication)throws Exception {
 		ProductVO productVO = new ProductVO();
 		productVO.setProductNum(productNum);
 		productVO =	productService.getSelect(productVO);
 
-		MemberVO memberVO = (MemberVO)auth.getPrincipal();
-		String username = memberVO.getUsername();
 
-		HeartVO heartVO = new HeartVO();
-		heartVO.setProductNum(productNum);
-		heartVO.setUsername(username);
+		if(authentication != null) {
+			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+			String username = memberVO.getUsername();
+			
+			HeartVO heartVO = new HeartVO();
+			heartVO.setProductNum(productNum);
+			heartVO.setUsername(username);
+			
+			Long heart = productService.getHeart(heartVO);
+			
+			model.addAttribute("heart", heart);			
+		}
 
-		Long heart = productService.getHeart(heartVO);
-
-		model.addAttribute("heart", heart);
 		model.addAttribute("product", productVO);
 
 		System.out.println(auth.getPrincipal());
@@ -116,11 +128,16 @@ public class ProductController {
 			MemberLocationVO sellerLocationVO = new MemberLocationVO();
 			sellerLocationVO.setUsername(sellerVO.getUsername());
 			List<MemberLocationVO> sellerLocations = memberLocationService.getList(sellerLocationVO);
+			
+			ReviewVO reviewVO = new ReviewVO();
+			reviewVO.setReviewee(sellerVO.getUsername());
+			reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+		
 
 			model.addAttribute("seller", sellerVO);
 			model.addAttribute("sellerFile", sellerFileVO);
 			model.addAttribute("sellerLocation", sellerLocations.get(0));
-			
+
 			//chat
 			ChatVO chatVO = new ChatVO();
 			chatVO.setUsername(username);
@@ -142,6 +159,9 @@ public class ProductController {
 			
 			
 			
+
+			model.addAttribute("rating", reviewVO);
+
 		}
 
 		return "product/select";

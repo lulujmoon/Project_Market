@@ -1,5 +1,6 @@
 package com.mm.market.member;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -20,6 +21,7 @@ import com.mm.market.review.ReviewService;
 import com.mm.market.review.ReviewVO;
 import com.mm.market.util.Pager;
 import com.mm.market.util.ProductPager;
+import com.mm.market.util.ReviewPager;
 
 @Controller
 @RequestMapping("/store/**")
@@ -50,12 +52,18 @@ public class StoreController {
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
 		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setReviewee(memberVO.getUsername());
+		reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+		
+		
 		productPager.setUsername(memberVO.getUsername());
 		List<ProductVO> productList = productService.getList(productPager, 16L, 5L);
 		
 		mv.addObject("member", memberVO);
 		mv.addObject("file", memberFileVO);
 		mv.addObject("locations", locationList);
+		mv.addObject("rating", reviewVO);
 		mv.addObject("products", productList);
 		mv.addObject("pager", productPager);
 		mv.setViewName("/store/products");
@@ -87,19 +95,19 @@ public class StoreController {
 	}
 
 	@GetMapping("{code}/reviews")
-	public ModelAndView getLists(@PathVariable("code") Long code, ModelAndView mv) throws Exception {
+	public ModelAndView getLists(@PathVariable("code") Long code, ReviewPager reviewPager, ModelAndView mv) throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setCode(code);
 		memberVO = memberService.getSelectByCode(memberVO);
 		
-		ReviewVO reviewVO = new ReviewVO();
-		reviewVO.setReviewee(memberVO.getUsername());
-		reviewVO.setType(true);
-		List<ReviewVO> buyerReviews = reviewService.getListByReviewee(reviewVO);
-		reviewVO.setType(false);
-		List<ReviewVO> sellerReviews = reviewService.getListByReviewee(reviewVO);
+		reviewPager.setReviewee(memberVO.getUsername());
+		List<ReviewVO> reviewList = reviewService.getListByReviewee(reviewPager, 10L);
 		
 		MemberFileVO revieweeFileVO = memberService.selectFile(memberVO);
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setReviewee(memberVO.getUsername());
+		reviewVO = reviewService.getAvgsAndCounts(reviewVO);
 		
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(memberVO.getUsername());
@@ -108,9 +116,10 @@ public class StoreController {
 		mv.addObject("member", memberVO);
 		mv.addObject("file", revieweeFileVO);
 		mv.addObject("locations", locationList);
+		mv.addObject("rating", reviewVO);
+		mv.addObject("reviewPager", reviewPager);
+		mv.addObject("reviews", reviewList);
 
-		mv.addObject("buyerReviews", buyerReviews);
-		mv.addObject("sellerReviews", sellerReviews);
 		mv.setViewName("store/reviews");
 
 		return mv;

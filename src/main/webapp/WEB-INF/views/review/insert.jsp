@@ -12,7 +12,7 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
-	<div class="hidden warning">${warning}</div>
+	<div class="hidden alert">${warning}</div>
 	<form action="./insert" method="post" class="insert-form">
 		<input type="hidden" name="productNum" value="${product.productNum}">
 		<input type="hidden" name="locationCode" value="${product.locationCode}" />
@@ -34,7 +34,7 @@
 			항목을 평가해주세요. (필수)
 		</div>
 		<div class="rate-container">
-			<c:if test="${!dealType}">
+			<c:if test="${dealType != 1}">
 				<div class="rate-title">상품 상태가 설명과 같았나요?</div>
 				<div class="rate-content">
 					<input type="hidden" name="state" class="input state"/>

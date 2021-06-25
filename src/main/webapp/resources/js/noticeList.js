@@ -1,10 +1,11 @@
 
 /** 초기설정 1. selectPage
  */
- selectPage();
+ const pageContainer = document.querySelector('.page-container');
+ selectPage(pageContainer);
 
 /** @function showContent()
- *	-- 공지사항의 content를 보여준다.
+ *	-- 공지사항의 content를 보여주고 숨긴다.
  */
  function manageContent(){
 	let content = event.currentTarget.nextElementSibling;

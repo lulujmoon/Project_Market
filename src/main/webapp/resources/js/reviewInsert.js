@@ -121,7 +121,7 @@ const rateContents = document.querySelectorAll('.rate-content');
 
 /** 초기 설정 1. 작성한 후기인지 판별
  */
-const warning = document.querySelector('.warning');
+const warning = document.querySelector('.alert');
 if(warning.innerText != ""){
 	alert(warning.innerText);
 	history.back();

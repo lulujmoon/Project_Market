@@ -63,7 +63,7 @@ class ReviewTest {
 		reviewVO.setProductNum(1L);
 		reviewVO.setReviewer("user");
 		reviewVO.setReviewee("user2");
-		reviewVO.setType(false);
+		reviewVO.setType(1L);
 		reviewVO.setLocationCode(1111010300L);
 		reviewVO.setManner(10L);
 		reviewVO.setSpeed(7L);

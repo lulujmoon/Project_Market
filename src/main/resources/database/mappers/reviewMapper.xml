@@ -13,7 +13,7 @@
 		order by reviewNum desc
 	</select>
 	
-	<select id="getListByReviewee" parameterType="ReviewVO" resultMap="reviewResult">
+	<select id="getListByReviewee" parameterType="ReviewPager" resultMap="reviewResult">
 		select R.*, P.*, M.*, MF.*
 		from review R
 		left join product P
@@ -22,11 +22,12 @@
 		on R.reviewer = M.username
 		left join memberFile MF
 		on R.reviewer = MF.username
-		where reviewee=#{reviewee}
+		where R.reviewee=#{reviewee}
 		<if test="type != null">
-		 and type=#{type}
+		 and R.type=#{type}
 		</if>
-		order by reviewNum desc
+		order by R.reviewNum desc
+		limit #{startRow}, #{perPage}
 	</select>
 	
 	<resultMap type="ReviewVO" id="reviewResult">
@@ -56,6 +57,15 @@
 		</association>
 	</resultMap>
 	
+	<select id="getTotalCount" parameterType="ReviewPager" resultType="Long">
+		select count(reviewNum) from review 
+		where reviewee=#{reviewee}
+		<if test="type != null">
+		 and type=#{type}
+		</if>
+		and reviewNum>0
+	</select>
+	
 	<select id="getSelect" parameterType="ReviewVO" resultType="ReviewVO">
 		select * from review where productNum=#{productNum}
 		<if test="reviewer != null">
@@ -67,4 +77,9 @@
 		insert into review (productNum, reviewer, reviewee, type, locationCode, state, manner, speed, reviewContent)
 		values (#{productNum}, #{reviewer}, #{reviewee}, #{type}, #{locationCode}, #{state}, #{manner}, #{speed}, #{reviewContent})
 	</insert>
+	
+	<select id="getAvgsAndCounts" parameterType="ReviewVO" resultType="ReviewVO">
+		SELECT ROUND(AVG(state)) avgState, ROUND(AVG(manner)) avgManner, ROUND(AVG(speed)) avgSpeed, COUNT(state) countState, COUNT(manner) countManner, COUNT(speed) countSpeed FROM review WHERE reviewee=#{reviewee}
+	</select>
+
 </mapper>
