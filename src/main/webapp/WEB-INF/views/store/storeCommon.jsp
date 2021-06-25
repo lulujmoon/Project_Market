@@ -19,12 +19,12 @@
 	</div>
 	</div>
 	<div class="profile__rating">
-		<div class="rating__notice">
+		<div class="avg-rating__notice">
 			${member.name}님이 받은 거래 평가입니다.
 		</div>
-		<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">${rating.avgState}</div> (${rating.countState})</div>
-		<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">${rating.avgManner}</div> (${rating.countManner})</div>
-		<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">${rating.avgSpeed}</div> (${rating.countSpeed})</div>
+		<div class="avg-rating__content"><div class="avg-rating__title">거래 매너</div> <div class="avg-rate">${rating.avgManner}</div> (${rating.countManner})</div>
+		<div class="avg-rating__content"><div class="avg-rating__title">응답 속도</div> <div class="avg-rate">${rating.avgSpeed}</div> (${rating.countSpeed})</div>
+		<div class="avg-rating__content"><div class="avg-rating__title">상품 상태</div> <div class="avg-rate">${rating.avgState}</div> (${rating.countState})</div>
 	</div>
 </div>
 <div class="board-container">	<!-- 엔드 태그는 본문에 있음 -->

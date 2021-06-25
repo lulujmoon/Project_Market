@@ -88,12 +88,13 @@
   return joinDate;
 }
 
-/** @function selectPage() 
+/** @function selectPage(pageContainer) 
  *	-- 현재 페이지에 selected 클래스를 추가한다.
+ *	1. page-container 클래스가 있는 객체를 매개변수로 받는다.
  */
- function selectPage(){
+ function selectPage(pageContainer){
 	 const pageVal = document.querySelector('.page-value');
-	 let selectedPage = document.querySelector('.code_'+pageVal.innerText);
+	 let selectedPage = pageContainer.querySelector('.code_'+pageVal.innerText);
 	 selectedPage.classList.add('selected');	
 }
 

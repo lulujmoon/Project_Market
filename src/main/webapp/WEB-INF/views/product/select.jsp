@@ -95,9 +95,9 @@
 				<div class="seller__joinDate">${seller.joinDate}</div>
 			</div>
 			<div class="seller__rating">
-				<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">6</div> (15)</div>
-				<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">7</div> (23)</div>
-				<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">8</div> (23)</div>
+				<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">${rating.avgState}</div> (${rating.countState})</div>
+				<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">${rating.avgManner}</div> (${rating.countManner})</div>
+				<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">${rating.avgSpeed}</div> (${rating.countSpeed})</div>
 			</div>
 		</div>
 		<div class="product-content">

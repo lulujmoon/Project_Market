@@ -16,7 +16,7 @@ public class ReviewVO {
 	private Long productNum;
 	private String reviewer;
 	private String reviewee;
-	private boolean type; //구매자는 true, 판매자는 false
+	private Long type; //판매자 1, 구매자 2
 	private Timestamp reviewDate;
 	private Long locationCode;
 	private Long state;

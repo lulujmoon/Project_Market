@@ -31,6 +31,8 @@ import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
+import com.mm.market.review.ReviewService;
+import com.mm.market.review.ReviewVO;
 import com.mm.market.util.FileManager;
 import com.mm.market.util.Pager;
 import com.mm.market.util.ProductPager;
@@ -50,6 +52,9 @@ public class ProductController {
 
 	@Autowired
 	private MemberLocationService memberLocationService;
+	
+	@Autowired
+	private ReviewService reviewService;
 
 	@GetMapping("list")
 	public String getList(ProductPager productPager, Long myLocation, Authentication authentication, Model model) throws Exception {
@@ -115,11 +120,16 @@ public class ProductController {
 			MemberLocationVO sellerLocationVO = new MemberLocationVO();
 			sellerLocationVO.setUsername(sellerVO.getUsername());
 			List<MemberLocationVO> sellerLocations = memberLocationService.getList(sellerLocationVO);
+			
+			ReviewVO reviewVO = new ReviewVO();
+			reviewVO.setReviewee(sellerVO.getUsername());
+			reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+		
 
 			model.addAttribute("seller", sellerVO);
 			model.addAttribute("sellerFile", sellerFileVO);
 			model.addAttribute("sellerLocation", sellerLocations.get(0));
-		
+			model.addAttribute("rating", reviewVO);
 		}
 		return "product/select";
 	}

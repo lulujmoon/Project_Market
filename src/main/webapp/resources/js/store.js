@@ -11,6 +11,11 @@
  
  /** 초기 설정 2. 받은 평가
   */
+  const avgRates = document.querySelectorAll('.avg-rate');
+  for(avgRate of avgRates){
+		setRateInStar(avgRate);
+	}
+  
   const rates = document.querySelectorAll('.rate');
   for(rate of rates){
 		setRateInStar(rate);
@@ -42,29 +47,23 @@ for(infoPrice of infoPrices){
 	}
 }
 
+/** 초기설정 4. 선택한 페이지와 조회조건(전체/판매자/구매자)
+ */
+const pageContainer = document.querySelector('.page-container');
+selectPage(pageContainer);
+const typeContainer = document.querySelector('.type-container');
+const typeVal = document.querySelector('.type-value');
+if(typeContainer != null){
+	if(typeVal.innerText == ""){
+		typeVal.innerText = 0;
+	}
+	let selectedType = typeContainer.querySelector('.code_'+typeVal.innerText);
+	selectedType.classList.add('selected');	
+}
+
 
 /* products */
 
 function goSelect(productNum){
 	location.href = '/product/select/'+productNum;
-}
-
-/* reviews */
-
-/** 초기설정. 후기 작성일 계산
- */
- const reviewDates = document.querySelectorAll('.rv__date');
- for(rvdate of reviewDates){
-	let datetime = rvdate.innerText;
-	rvdate.innerText = calculateTime(datetime);
-}
-
-/** @function showProduct(productNum)
- *	--팝업으로 상품 페이지를 보여준다.
- */
- function showProduct(productNum){
-	window.open(
-		'/product/select/'+productNum, 
-		'',
-		'resizable');
 }

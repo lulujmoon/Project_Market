@@ -56,13 +56,13 @@ public class ReviewController {
 			reviewVO = new ReviewVO();
 			reviewVO.setProductNum(reservationVO.getProductNum());
 			if(memberVO.getUsername().equals(reservationVO.getSeller())) {
-				reviewVO.setType(true);
+				reviewVO.setType(1L);
 				counterpart.setUsername(reservationVO.getBuyer());
 			}else if(memberVO.getUsername().equals(reservationVO.getBuyer())) {
-				reviewVO.setType(false);
+				reviewVO.setType(2L);
 				counterpart.setUsername(reservationVO.getSeller());
 			}else {
-				model.addAttribute("warning", "거래 당사자가 아닙니다.");
+				model.addAttribute("alert", "거래 당사자가 아닙니다.");
 			}
 			counterpart = memberService.getSeletByUsername(counterpart);
 			
@@ -72,7 +72,7 @@ public class ReviewController {
 			
 			model.addAttribute("counterpart", counterpart);
 			model.addAttribute("product", productVO);
-			model.addAttribute("dealType", reviewVO.isType());		
+			model.addAttribute("dealType", reviewVO.getType());		
 		}
 		
 		return "review/insert";
