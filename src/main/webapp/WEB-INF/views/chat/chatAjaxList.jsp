@@ -4,7 +4,7 @@
 
 <c:forEach var="tmp" items="${list}">
 	<div class="chat_list_box${tmp.room} chat_list_box">
-		<div type="button" class="chat_list" room="${tmp.room}" other-nick="${tmp.recvUser}">
+		<div type="button" class="chat_list" room="${tmp.room}" otherUser="${tmp.recvUser}">
 			<!-- active-chat -->
 			<div class="chat_people">
 				<div class="chat_img" >

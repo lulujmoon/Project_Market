@@ -36,6 +36,7 @@ public class ChatService {
 				System.out.println("otherUser : "+chat.getOtherUser());
 			} else {
 				chat.setOtherUser(chat.getSendUser());
+				System.out.println("otherUser : "+chat.getOtherUser());
 			}
 		}
 		return list;
