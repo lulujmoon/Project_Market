@@ -129,17 +129,9 @@ public class ProductController {
 			System.out.println("list : "+list);
 			
 			if(list.size()<1) {
-				model.addAttribute("chat", 0);	
-			} else {
-				for(int i=0;i<list.size();i++) {
-					if(list.get(i).getOtherUser()!=sellerVO.getUsername()) {
-						model.addAttribute("chat", sellerVO.getUsername());	
-						System.out.println("model chat : "+sellerVO.getUsername());
-					}
-					
-				}
-
+				model.addAttribute("chat", 0);
 			}
+			
 			
 		}
 		
