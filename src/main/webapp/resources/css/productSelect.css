@@ -22,7 +22,7 @@
 .top__productName{
 	width: 100%;
 	padding: 20px 0;
-	font-size: 2.3em;
+	font-size: 2.3rem;
 	font-weight: 800;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .top__price{
-	font-size: 2em;
+	font-size: 2rem;
 	font-weight: 800;
 }
 
@@ -89,7 +89,11 @@
 	color: white;
 }
 
-.btn-contact, .btn-status{
+.tob-btn>a{
+	color: white;
+}
+
+.btn-contact, .btn-status, .btn-contact{
 	background-color: #fadd85;
 }
 
@@ -102,7 +106,7 @@
 }
 
 .btn-heart{
-	font-size: 2.3em;
+	font-size: 2.3rem;
 	color: #ff5151;
 	margin: 7px;
 	cursor: pointer;
@@ -112,7 +116,7 @@
 	align-self: flex-start;
 	margin: 10px 0 0 50px;
 	color: #4d4d4d;
-	font-size: 0.9em;
+	font-size: 0.9rem;
 	cursor: pointer;
 }
 
@@ -143,7 +147,7 @@
 
 .seller__name{
 	padding: 0 20px;
-	font-size: 1.4em;
+	font-size: 1.4rem;
 	font-weight: bold;
 }
 
@@ -155,7 +159,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	font-size: 0.95em;
+	font-size: 0.95rem;
 }
 
 .seller__rating{
@@ -168,7 +172,7 @@
 	padding: 3px 0;
 	display: flex;
 	flex-direction: row;
-	font-size: 0.9em;
+	font-size: 0.9rem;
 }
 
 .rating__title{
@@ -230,7 +234,7 @@
 	margin: 0 3px;
 	border-radius: 70%;
 	border: 1.5px solid #b4b4b4;
-	font-size: 0.3em;
+	font-size: 0.3rem;
 	cursor: pointer;
 }
 

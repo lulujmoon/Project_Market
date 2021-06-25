@@ -59,6 +59,7 @@
  *	5. 차이가 7일 이상이면 'yyyy일 mm월 dd일'
  */
  function calculateTime(datetime){
+	console.log(datetime);
 	datetime = new Date(datetime);
 	var now = new Date();
 	var gap = now - datetime;
@@ -87,6 +88,15 @@
   joinDate = dateArray[0]+'년 '+dateArray[1]+'월 '+dateArray[2]+'일 가입';
 
   return joinDate;
+}
+
+/** @function selectPage() 
+ *	-- 현재 페이지에 selected 클래스를 추가한다.
+ */
+ function selectPage(){
+	 const pageVal = document.querySelector('.page-value');
+	 let selectedPage = document.querySelector('.code_'+pageVal.innerText);
+	 selectedPage.classList.add('selected');	
 }
 
 /** @function carousel

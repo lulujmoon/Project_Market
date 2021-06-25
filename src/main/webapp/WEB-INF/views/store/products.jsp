@@ -19,15 +19,9 @@
 
 <div class="container">
 	<c:import url="./storeCommon.jsp"></c:import>
-	<div class="board-container">
-		<div class="board__nav">
-			<div class="nav__item nav__selected">판매 상품</div>
-			<div class="nav__item">받은 후기</div>
-			<div class="nav__item">동네 생활</div>
-		</div>
 		<div class="board__contents">
-			<div class="hidden">${pager.page}</div>
-			<div class="list-container">		
+			<div class="hidden page-value">${pager.page}</div>
+			<div class="list-container">
 				<c:forEach items="${products}" var="product">
 					<div class="prd__card" onclick="goSelect(${product.productNum})">
 						<c:if test="${product.files[0].fileName != null}">
@@ -47,19 +41,19 @@
 			</div>
 			<ul class="page-container list-page">
 				<c:if test="${pager.pre}">
-					<li><a class="page-item arrow" href="./list?page=${pager.startNum-1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-left"></i></a></li>
+					<li><a class="page-item arrow" href="${pageContext.request.contextPath}/store/${member.code}/products?page=${pager.startNum-1}"><i class="fas fa-angle-double-left"></i></a></li>
 				</c:if>
 				<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-						<li><a class="page-item code_${i}" href="${pageContext.request.contextPath}/store/${principal.code}/products?page=${i}">${i}</a></li>
+						<li><a class="page-item code_${i}" href="${pageContext.request.contextPath}/store/${member.code}/products?page=${i}">${i}</a></li>
 				</c:forEach>
 				<c:if test="${pager.next}">
-					<li><a class="page-item arrow" href="./list?page=${pager.lastNum+1}&categoryCode=${pager.categoryCode}&myLocation=${myLocation}&keyword=${pager.keyword}&order=${pager.order}"><i class="fas fa-angle-double-right"></i></a></li>
+					<li><a class="page-item arrow" href="${pageContext.request.contextPath}/store/${member.code}/products?page=${pager.lastNum+1}"><i class="fas fa-angle-double-right"></i></a></li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
 
-</div>
+</div>	<!-- 스타팅 태그는 임포트한 부분에 포함되어 있음 -->
 
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="/resources/js/common.js"></script>

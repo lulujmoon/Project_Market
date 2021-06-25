@@ -15,12 +15,6 @@
   for(rate of rates){
 		setRateInStar(rate);
 	}
-	
-/** 초기 설정 3. 현재 페이지에 selected 클래스를 추가한다.
- */
- const hidden = document.querySelector('.hidden');
- let selectedPage = document.querySelector('.code_'+hidden.innerText);
- selectedPage.classList.add('selected');
  
  /** const btnAvatar
 	* 1. 클릭하면 file 팝업을 띄운다.
@@ -38,6 +32,17 @@
 		});
 });
 
+/* products */
 function goSelect(productNum){
 	location.href = '/product/select/'+productNum;
+}
+
+/* reviews */
+
+/** 초기설정. 후기 작성일 계산
+ */
+ const reviewDates = document.querySelectorAll('.rv__date');
+ for(rvdate of reviewDates){
+	let datetime = rvdate.innerText;
+	rvdate.innerText = calculateTime(datetime);
 }

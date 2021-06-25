@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
-<link rel="stylesheet" href="../resources/css/sign.css">
+<link rel="stylesheet" href="/resources/css/sign.css">
 <title>Join</title>
 </head>
 <body>
@@ -57,7 +57,7 @@
 				<label for="avatar" class="form-title">Avatar</label> 
 				<input type="file" class="form-control etc"	id="avatar" name="avatar" required="required">
 			</div>
-			<div class="join-btn">
+			<div class="btn-wrapper">
 				<input type="button" class="btn-wide btn-submit" value="Join">
 			</div>
 		</form:form>
@@ -65,7 +65,7 @@
 </div>
 	
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
-<script type="text/javascript" src="../resources/js/memberJoin.js"></script>
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/memberJoin.js"></script>
 </body>
 </html>

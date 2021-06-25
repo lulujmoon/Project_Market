@@ -27,3 +27,11 @@
 		<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">8</div> (23)</div>
 	</div>
 </div>
+<div class="board-container">	<!-- 엔드 태그는 본문에 있음 -->
+	<div class="board__nav">
+		<a class="nav__item nav__selected" href="./products">판매 상품</a>
+		<a class="nav__item" href="./reviews">받은 후기</a>
+		<a class="nav__item">동네 생활</a>
+		<a class="nav__item">찜한 상품</a>
+		<a class="nav__item">작성한 후기</a>
+	</div>
