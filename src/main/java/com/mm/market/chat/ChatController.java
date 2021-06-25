@@ -97,6 +97,7 @@ public class ChatController {
 	@ResponseBody
 	@RequestMapping("chatSendInList")
 	public int chatSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
+		System.out.println("otherUser : " + otherUser);
 		ChatVO chatVO = new ChatVO();
 		
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();
@@ -104,8 +105,8 @@ public class ChatController {
 		
 		chatVO.setRoom(room);
 		chatVO.setSendUser(username);
+		System.out.println("user : "+username);
 		chatVO.setRecvUser(otherUser);
-		System.out.println("otherUser : " + otherUser);
 		chatVO.setContent(content);
 		
 		int flag = chatService.chatSendInList(chatVO);

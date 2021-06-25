@@ -36,12 +36,17 @@ public class ChatService {
 			//메세지 상대의 프로핖 사진을 chat에 set
 			chat.setProfile(profile);
 			//메세지 상대 username을 세팅 otherUser
+			
+			System.out.println("==user : "+username);
+			System.out.println("==send : " + chat.getSendUser());
+			System.out.println("==recv : " + chat.getRecvUser());
+			System.out.println("==user eq send : " + username.equals(chat.getSendUser()));
 			if(username.equals(chat.getSendUser())) {
 				chat.setOtherUser(chat.getRecvUser());
-				System.out.println("otherUser : "+chat.getOtherUser());
 			} else {
 				chat.setOtherUser(chat.getSendUser());
 			}
+			System.out.println("==otherUser : "+chat.getOtherUser());
 		}
 		return list;
 	}
@@ -52,7 +57,7 @@ public class ChatService {
 		
 		//메세지 내역을 가져옴
 		List<ChatVO> clist = (List<ChatVO>)chatMapper.roomContentList(chatVO);
-		System.out.println("메세지 내역 가져오기 서비스 : "+clist);		
+//		System.out.println("메세지 내역 가져오기 서비스 : "+clist);		
 		
 //		for(int i=0;i<clist.size();i++) {
 //			System.out.println("room : " + clist.get(i).getRoom());
