@@ -1,7 +1,5 @@
 package com.mm.market.chat;
 
-import com.mm.market.member.MemberFileVO;
-
 import lombok.Data;
 
 @Data
@@ -27,9 +25,6 @@ public class ChatVO {
 	
 	//안읽은 메세지 갯수
 	private int unread;
-	
-	private MemberFileVO file;
-	
 	
 	
 	

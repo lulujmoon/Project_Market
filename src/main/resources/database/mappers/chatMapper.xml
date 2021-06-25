@@ -6,17 +6,26 @@
 
 <mapper namespace="com.mm.market.chat.ChatMapper">
 	
+	
+	<!-- chatVO 가져오기 -->
+	<select id="getVO" parameterType="ChatVO" resultType="ChatVO">
+		select num, room, sendUser, recvUser, date_format(sendTime, '%Y.%m.%d %H:%i') sendTime, readTime, content, readChk 
+		from chat where room=#{room}  and (sendUser=#{username} or recvUser=#{username})
+	</select>
+	
+	
 	<!-- 메세지 리스트 -->
 	<select id="chatList" parameterType="ChatVO" resultType="ChatVO">
-		select num, room, sendUser, recvUser, date_format(sendTime, '%Y_%m_%d %H:%i') sendTime, readTime, content, readChk 
+		select num, room, sendUser, recvUser, date_format(sendTime, '%Y.%m.%d %H:%i') sendTime, readTime, content, readChk 
 		from chat
-		where num in (select max(num) from chat group by room) and (sendUser=#{sendUser} or recvUser=#{recvUser}) 
+		where num in (select max(num) from chat group by room) and (sendUser=#{username} or recvUser=#{username}) 
 		order by num desc
 	</select>
 	
+
 	<!-- list에서 상대방 profile 가져오기 -->
 	<select id="getOtherProfile" parameterType="ChatVO" resultType="String">
-		select fileName from MemberFileVO
+		select fileName from MemberFile
 		<choose>
 			<when test="sendUser == username">
 				where username = #{recvUser}
@@ -35,7 +44,7 @@
 	
 	<!-- 메세지 내용 가져오기 -->
 	<select id="roomContentList" parameterType="ChatVO" resultType="ChatVO">
-		select C.num, C.room, C.sendUser, C.recvUser, date_format(C.sendTime, '%Y_%m_%d %H:%i') sendTime, C.readTime, C.content, C.readChk, MF.fileName
+		select C.num, C.room, C.sendUser, C.recvUser, date_format(C.sendTime, '%Y.%m.%d %H:%i') sendTime, C.readTime, C.content, C.readChk, MF.fileName
 		from chat C left outer join MemberFile MF
 		on C.sendUser = MF.username
 		<choose>
@@ -64,10 +73,10 @@
 	<!-- 리스트에서 메세지 보내기 -->
 	<insert id="chatSendInList" parameterType="ChatVO">
 		<choose>
-			<when test="room != 0">
+			<when test="room != 0"> 
 				insert into chat values(0, #{room}, #{sendUser}, #{recvUser}, now(), now(), #{content}, 0)
 			</when>
-			<otherwise>
+			<otherwise> <!-- 0이면 상품페이지에서 보낸것 -->
 				insert into chat values(0, #{room}, #{sendUser}, #{recvUser}, now(), now(), #{content}, 0)
 			</otherwise>
 		</choose>
