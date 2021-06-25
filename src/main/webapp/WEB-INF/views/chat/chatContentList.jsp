@@ -15,6 +15,9 @@
 		<!-- 받은 메세지 -->
 		<div class="incoming_msg">
 			<div class="incoming_msg_img">
+			<input type="hidden" value="${tmp.otherUser}">
+			<input type="hidden" value="${tmp.profile}">
+			<input type="hidden" value="${tmp.recvUser}">
 	<%-- 			<a href="other_profile.do?other_nick=${tmp.sendUser}"> --%>
 					<img src="/resources/upload/member/${tmp.profile}" alt="보낸사람 프로필">
 				<!-- </a> -->
