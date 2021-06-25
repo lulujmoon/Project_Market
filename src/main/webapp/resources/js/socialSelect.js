@@ -2,36 +2,40 @@
  * 
  */
 
+const btnGood = document.querySelector('.btn-good');
+let goodval = Number(document.querySelector('.goodval').value);
+let socialNum = Number(document.querySelector('.socialNum').value);
+
 $(document).ready(function() {
 
-	var goodval = ${good};
-
-	if (goodval>0) {
-		console.log(goodval);
-		$("#good").prop("src", "/resources/images/빨강.png");
-		$(".good").prop('name', goodval);
+	if(goodval>0) {
+		btnGood.innerHTML = '<i class="fas fa-heart"></i>';
 	} else {
-		console.log(goodval);
-		$("#good").prop("src", "/resources/images/검정.png");
-		$(".good").prop('name', goodval);
+		btnGood.innerHTML = '<i class="far fa-heart"></i>';
 	}
 
-	$(".good").on("click", function() {
-			var that = $(".good");
-			var sendData = {'socialNum' : '${socialVO.socialNum}', 'good' : that.prop('name')};
+	btnGood.addEventListener('click', ()=>{
+		let sendData = {'socialNum' : socialNum, 'good' : goodval};
 		$.ajax({
 			url : '/social/good',
 			type : 'POST',
 			data : sendData,
 			success : function(data) {
-				that.prop('name', data);
-				if (data == 1) {
-					$("#good").prop("src", "/resources/images/빨강.png");
+				$(".goodval").val(data);
+				if(data==1) {
+					$(".goodval").html('<i class="fas fa-heart"></i>');
+					good_reload();
 				} else {
-					$("#good").prop("src", "/resources/images/검정.png");
+					$(".goodval").html('<i class="far fa-heart"></i>');
+					good_reload();
 				}
-
 			}
 		});
 	});
 });
+
+function heart_reload() {
+	$("#good").load(window.location.href='/social/select/'+socialNum);
+}
+	$("#good").load(window.location.href='/social/select/'+socialNum);
+}
