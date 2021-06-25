@@ -76,7 +76,7 @@ public class ChatService {
 	public int chatSendInList(ChatVO chatVO) throws Exception{
 		
 		//메세지 리스트에서 보낸건지 프로필에서 보낸건지 구분하기 위함
-		if(chatVO.getRoom()==0) { //room이 0이라며 프로필에서 보낸것
+		if(chatVO.getRoom()==0) { //room이 0이라며 상품페이지에서 보낸것
 			int existChat = chatMapper.existChat(chatVO);
 			//프로필에서 보낸것중 메세지 내역이 없어서 첫 메세지가 될 경우를 구분하기 위함
 			if(existChat==0) { //메세지 내역이 없어서 0이면 chat테이블의 room 최댓값을 구해서 chatVO에 set

@@ -73,10 +73,10 @@
 	<!-- 리스트에서 메세지 보내기 -->
 	<insert id="chatSendInList" parameterType="ChatVO">
 		<choose>
-			<when test="room != 0">
+			<when test="room != 0"> 
 				insert into chat values(0, #{room}, #{sendUser}, #{recvUser}, now(), now(), #{content}, 0)
 			</when>
-			<otherwise>
+			<otherwise> <!-- 0이면 상품페이지에서 보낸것 -->
 				insert into chat values(0, #{room}, #{sendUser}, #{recvUser}, now(), now(), #{content}, 0)
 			</otherwise>
 		</choose>
