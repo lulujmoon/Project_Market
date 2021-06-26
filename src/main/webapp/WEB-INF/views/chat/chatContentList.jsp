@@ -35,7 +35,7 @@
 		<!-- 보낸 메세지 -->
 		<div class="outgoing_msg">
 			<div class="sent_msg">
-				<p>${tmp.content }</p>
+				<p>${tmp.content}</p>
 				<span class="time_date"> ${tmp.sendTime}</span>
 			</div>
 		</div>

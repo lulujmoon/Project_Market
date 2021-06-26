@@ -14,6 +14,24 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<link rel="stylesheet" href="../resources/css/chat.css">
 	<title>Chat List</title>
+<style type="text/css">
+	.outgoing_msg{
+		text-align: right;
+	}
+	.incoming_msg{
+		color: white;
+		text-align: left;
+	}
+	.sent_msg{
+		background-color: white;
+	}
+	
+	.received_msg{
+		background-color: blue;
+	}
+	
+
+</style>
 </head>
 <body>
 <div class="msg-container">
@@ -27,14 +45,14 @@
 	              <h4>Recent</h4>
 	            </div>
 	            <!-- 메세지 검색 -->
-	            <div class="srch_bar">
+	            <!-- <div class="srch_bar">
 	              <div class="stylish-input-group">
 	                <input type="text" class="search-bar"  placeholder="Search" >
 	                <span class="input-group-addon">
 	                <button type="button" value="button"><i class="fa fa-search" aria-hidden="true"></i></button>
 	                </span> 
 	              </div>
-	            </div>
+	            </div> -->
 	          </div>
 	          
 	          <!-- 메세지 리스트 -->
@@ -52,7 +70,7 @@
 	            <!-- 메세지 내용이 올 자리 -->
 	          </div>
 	          <div class="send_message">
-	          <div>압력</div>
+	          <div>입력</div>
 	          </div>
 	          <!-- 메세지 입력란이 올자리 -->
 	        </div>
@@ -82,10 +100,10 @@
 					let room = $(this).attr('room');
 					let otherUser = $(this).attr('otherUser');
 					
-					// 선택한 메세지빼고 나머지는 active 효과 해제하기
+					/* // 선택한 메세지빼고 나머지는 active 효과 해제하기
 					$('.chat_list_box').not('.chat_list_box.chat_list_box'+room).removeClass('active_chat');
 					// 선택한 메세지만 active 효과 주기
-					$('.chat_list_box'+room).addClass('active_chat');
+					$('.chat_list_box'+room).addClass('active_chat'); */
 					
 					let send_msg = "";
 					send_msg += "<div class='type_msg'>";
@@ -142,10 +160,10 @@
 					let room = $(this).attr('room');
 					let otherUser = $(this).attr('otherUser');
 					
-					// 선택한 메세지빼고 나머지는 active 효과 해제하기
+					/* // 선택한 메세지빼고 나머지는 active 효과 해제하기
 					$('.chat_list_box').not('.chat_list_box.chat_list_box'+room).removeClass('active_chat');
 					// 선택한 메세지만 active 효과 주기
-					$('.chat_list_box'+room).addClass('active_chat');
+					$('.chat_list_box'+room).addClass('active_chat'); */
 					
 					let send_msg = "";
 					send_msg += "<div class='type_msg'>";
