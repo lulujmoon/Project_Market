@@ -80,6 +80,7 @@ public class ChatController {
 		List<ChatVO> clist = chatService.getVO(chatVO);
 		
 		
+		
 		System.out.println(clist);
 		
 		//메세지 내용 가져오기

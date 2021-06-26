@@ -57,18 +57,18 @@ public class ChatService {
 		
 		//메세지 내역을 가져옴
 		List<ChatVO> clist = (List<ChatVO>)chatMapper.roomContentList(chatVO);
-//		System.out.println("메세지 내역 가져오기 서비스 : "+clist);		
 		
-//		for(int i=0;i<clist.size();i++) {
-//			System.out.println("room : " + clist.get(i).getRoom());
-//		System.out.println("recv user : " + clist.get(i).getRecvUser());
-//		System.out.println("username : " + clist.get(i).getUsername());
-//		clist.get(i).setOtherUser(clist.get(i).getRecvUser());
-//		}
 		
+		for(int i=0;i<clist.size();i++) {
+		String profile = chatMapper.getOtherProfile(clist.get(i));
+		System.out.println("rcl profile : "+profile);
+		clist.get(i).setProfile(profile);
+		}
 		//해당 방의 메세지들 중 받는 사람이 현재 사용자의 username인 메세지를 모두 읽음 처리
 		chatMapper.chatReadChk(chatVO);
 		
+		
+		System.out.println(clist);
 		return clist;
 	}
 	
