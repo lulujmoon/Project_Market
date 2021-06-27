@@ -44,21 +44,7 @@ function uploadFile(file) {
 		success:function(result){
 			fileName=result.trim();
 			console.log(fileName);
-			$("#socialContent").summernote('insertImage', fileName, function ($image) {
-			 
-			 console.log($image.width());
-			 //이미지 사이즈에 따라 크기 바뀌어서 나오도록
-			  if($image.width()>300){
-			  	$image.css('width', $image.width() / 2);
-			  }
-			  
-			  if($image.width()>800){
-			  	$image.css('width', $image.width() / 3);
-			  }
-			
-			  $image.css('width', $image.width());
-			  $image.attr('data-filename', 'retriever');
-			});
+			$("#socialContent").summernote('insertImage', fileName);
 		} 
 		
 	})

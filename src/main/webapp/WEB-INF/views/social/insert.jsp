@@ -58,6 +58,6 @@
 		</form>
 	</div>
 
-	<script type="text/javascript" src="/jquery/summerFile.js"></script>
+	<script type="text/javascript" src="/static/jquery/summerFile.js"></script>
 </body>
 </html>

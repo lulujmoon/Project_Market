@@ -7,53 +7,7 @@
 <c:import url="../template/setting.jsp"></c:import>
 <title>우리동네</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<style type="text/css">
-.container {
-	padding-top: 125px;
-	width: 1252px;
-	min-height: 55vh;
-	margin: 30px auto;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.hidden {
-	display: none;
-}
-
-.category-container {
-	width: 1170px;
-	margin: 30px auto;
-	padding: 0 80px;
-	display: flex;
-	flex-flow: row wrap;
-	background-color: white;
-}
-
-.category-list li {
-	background-color: #fadd85;
-	border-radius: 5px 5px 5px 5px;
-	border: 1px solid #fadd85;
-	list-style-type: none;
-	float: left;
-	margin-left: 40px;
-	display: inline;
-	font-size: 12pt;
-}
-
-.table-box {
-	border: 3px solid #f8cb45;
-	width: 80%;
-	height: auto;
-	margin-left: 7%;
-	margin-bottom: 2%;
-	padding: 0 0 0 0;
-	color: black;
-	text-align: center;
-	font-size: 12pt;
-}
-</style>
+<link rel="stylesheet" href="/resources/css/socialList.css">
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
@@ -67,8 +21,7 @@
 				</c:forEach>
 			</ul>
 
-			<input type="hidden" class="category" value="category"
-				name="categoryCode">
+			<input type="hidden" class="category" value="category" name="categoryCode">
 			<table class="table-box">
 				<thead class="thead-dark">
 					<tr>
@@ -82,8 +35,7 @@
 					<c:forEach items="${list}" var="dto">
 						<tr>
 							<td>${dto.socialNum}</td>
-							<td><a href="./select?socialNum=${dto.socialNum}">
-									${dto.socialTitle}</a></td>
+							<td><a href="./select?socialNum=${dto.socialNum}">${dto.socialTitle}</a></td>
 							<td>${dto.username}</td>
 							<td>${dto.socialDate}</td>
 						</tr>
@@ -91,20 +43,25 @@
 				</tbody>
 			</table>
 		</div>
+
 		<ul class="pagination">
 			<c:if test="${pager.pre}">
-				<li class="page-item"><a class="page-link p" href="#"
-					title="${pager.startNum-1}">이전</a></li>
+				<li class="page-item">
+					<a class="page-link p" href="#" title="${pager.startNum-1}">이전</a>
+				</li>
 			</c:if>
 			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<li class="page-item "><a class="page-link p" href="#"
-					title="goPage('${pager.search}', ${i})">${i}</a></li>
+				<li class="page-item ">
+					<a class="page-link p" href="#" title="goPage('${pager.search}', ${i})">${i}</a>
+				</li>
 			</c:forEach>
 			<c:if test="${pager.next}">
-				<li class="page-item"><a class="page-link p" href="#"
-					title="goPage(${pager.search}, ${pager.lastNum+1})">다음</a></li>
+				<li class="page-item">
+					<a class="page-link p" href="#"	title="goPage(${pager.search}, ${pager.lastNum+1})">다음</a>
+				</li>
 			</c:if>
 		</ul>
+
 		<div class="input-group mt-3 mb-3">
 			<form id="form" action="./list" class="form-inline">
 				<input type="hidden" name="curPage" value="1" id="curPage">

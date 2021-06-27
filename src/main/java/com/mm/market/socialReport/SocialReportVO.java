@@ -1,4 +1,4 @@
-package com.mm.market.report;
+package com.mm.market.socialReport;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ReportVO {
-	private Long productNum;
+public class SocialReportVO {
+	private Long socialNum;
     private String address;
     private String username;
     private String title;

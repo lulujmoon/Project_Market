@@ -199,7 +199,7 @@ public class SocialController {
 		ModelAndView mv = new ModelAndView();
 		
 		String fileName = socialService.setSummerFileUpload(file);
-		fileName = "../resources/upload/social"+fileName;
+		fileName = "../resources/upload/social/"+fileName;
 		
 		mv.addObject("result", fileName);
 		mv.setViewName("common/ajaxResult");
