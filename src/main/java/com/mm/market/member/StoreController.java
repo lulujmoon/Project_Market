@@ -129,6 +129,13 @@ public class StoreController {
 	public String socials(@PathVariable("code") Long code) throws Exception {
 		return "/store/socials";
 	}
+	
+	@GetMapping("{code}/myReviews")
+	public String myReviews(@PathVariable("code") Long code, ReviewPager reviewPager, Authentication authentication, ModelAndView mv) throws Exception {
+		//본인 확인이 필요하다
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		return "";
+	}
 		
 	@GetMapping("profileUpdate")
 	public ModelAndView setUpdateFile(MemberFileVO memberFileVO, Authentication authentication) throws Exception{
