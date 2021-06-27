@@ -15,11 +15,10 @@
 		<!-- 받은 메세지 -->
 		<div class="incoming_msg">
 			<div class="incoming_msg_img">
-			<input type="hidden" value="${tmp.otherUser}">
-			<input type="hidden" value="${tmp.profile}">
-			<input type="hidden" value="${tmp.recvUser}">
-	<%-- 			<a href="other_profile.do?other_nick=${tmp.sendUser}"> --%>
-					 <img src="/resources/upload/member/${tmp.profile}" alt="보낸사람 프로필" width="50px" height="50px"> 
+				<input type="hidden" value="${tmp.otherUser}">
+				<input type="hidden" value="${tmp.profile}">
+				<input type="hidden" value="${tmp.recvUser}">
+
 				<!-- </a> -->
 			</div>
 			<div class="received_msg">
@@ -35,7 +34,7 @@
 		<!-- 보낸 메세지 -->
 		<div class="outgoing_msg">
 			<div class="sent_msg">
-				<p>${tmp.content}</p>
+				<p>${tmp.content }</p>
 				<span class="time_date"> ${tmp.sendTime}</span>
 			</div>
 		</div>

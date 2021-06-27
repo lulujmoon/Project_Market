@@ -15,7 +15,7 @@ public class SocialPager {
 	private boolean next;
 	
 	//search
-	private String keyword;
+	private String kind;
 	private String search;
 	private Long categoryCode;
 	
@@ -131,16 +131,16 @@ public class SocialPager {
 		this.next = next;
 	}
 
-	public String getKeyword() {
-		if(this.keyword==null) {
-			this.keyword="";
+	public String getKind() {
+		if(this.kind==null) {
+			this.kind="noticeTitle";
 		}
 		
-		return keyword;
+		return kind;
 	}
 
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 	public String getSearch() {

@@ -339,21 +339,18 @@ public class MemberController {
 		return "redirect:../";
 	}
 	
-	@GetMapping("search")
-	public void getEmail()throws Exception{
-		
-	}
 	
 	@PostMapping("search")
-	public ModelAndView getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
+	public String getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
 		memberVO = memberService.getEmail(memberVO);		
-		if(memberVO==null) {
-			mv.addObject("alert", "fail");
-			mv.setViewName("member/search");
-		}else {
+
+		mv.addObject("dto",memberVO);
+		mv.setViewName("member/search");
+				
 		String uuid = UUID.randomUUID().toString();		
 		memberVO.setPassword(uuid);		
 		memberService.setUpdate(memberVO);
+		
 		
 		//smtp서버명
 		  String host     = "smtp.naver.com";
@@ -392,12 +389,9 @@ public class MemberController {
 		   System.out.println("message sent successfully...");
 		  } catch (MessagingException e) {
 		   e.printStackTrace();
-		  }
-		  
-		mv.addObject("alert", "success");
-		mv.setViewName("member/search");
-		}
-		return mv;
+		  }	  		
+		
+		return "redirect:./login" ;
 	}
 
 	//-----------------shop	

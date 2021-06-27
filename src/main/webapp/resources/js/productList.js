@@ -30,12 +30,6 @@
 	 date.innerText = calculateTime(datetime);	
 }
 
-/** 초기설정 3. 가격 표시
- */
- const infoPrices = document.querySelectorAll('.info__price');
- for(infoPrice of infoPrices){
-	setPrice(infoPrice);
-	if(infoPrice.innerText == '0 원' && infoPrice.previousElementSibling.innerText != 14){
-		infoPrice.innerText = '무료나눔';
-	}
-}
+
+
+

@@ -66,20 +66,6 @@ h2 {
 	margin-top: 2%;
 	margin-left: 2%;
 }
-
-.btn-good {
-	font-size: 2.3em;
-	color: #ff5151;
-	margin: 7px;
-	cursor: pointer;
-}
-
-.icon_good {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	padding: 20px 0;
-}
 </style>
 </head>
 <body>
@@ -110,29 +96,21 @@ h2 {
 			</thead>
 			<tbody>
 				<tr>
-					<td>${social.socialContent} <c:forEach
-							items="${social.file}" var="file">
-							<img src="/resources/upload/social/${file.fileName}">
-						</c:forEach>
-					</td>
+					<td>${social.socialContent}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 
-	<div class="table-box2">
-		<a class="insert-button" href="./update?socialNum=${social.socialNum}"
-			class="btn btn-primary" role="button">수정</a> <a class="insert-button"
-			href="./delete?socialNum=${social.socialNum}" class="btn btn-primary"
-			role="button">삭제</a>
-		<div class="icon_good">
-			<i class="fas fa-heart"></i> ${social.socialGood}
-		</div>
-		<div class="btn-good"></div>
-	</div>
-	<div class="hidden">
-		<input type="hidden" class="goodval" value="${good}"> <input
-			type="hidden" class="socialNum" value="${social.socialNum}">
+	<a class="insert-button" href="./update?socialNum=${social.socialNum}"
+		class="btn btn-primary" role="button">수정</a>
+	<a class="insert-button" href="./delete?socialNum=${social.socialNum}"
+		class="btn btn-primary" role="button">삭제</a>
+	<a class="btn btn-danger" href="#" role="button">신고</a>
+	<div style="text-align: center;">
+		<a class="good">
+			<img id="good" src="" width="50px" height="50px">
+		</a>
 	</div>
 	<br>
 	<br>

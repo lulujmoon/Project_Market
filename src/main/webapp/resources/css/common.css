@@ -29,18 +29,8 @@ ul {
 	display: none;
 }
 
-/* container */
-.container{
-	width: 1050px;
-	min-height: 55vh;
-	margin: 30px auto;
-	margin-top: 125px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
 /* 헤더 */
+
 header{
 	position: fixed;
 	top: 0px;
@@ -107,7 +97,7 @@ header{
 	height: 80%;
 	border: none;
 	outline: none;
-	font-size: 1rem;
+	font-size: 1em;
 }
 
 .nav__search-form{
@@ -177,6 +167,16 @@ header{
 	font-weight: bold;
 }
 
+/* container */
+.container{
+	width: 1050px;
+	min-height: 55vh;
+	margin: 30px auto;
+	margin-top: 125px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
 /* footer */
 
