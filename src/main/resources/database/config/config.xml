@@ -30,6 +30,8 @@
 		<typeAlias type="com.mm.market.util.SocialPager" alias="SocialPager"/>
 		<typeAlias type="com.mm.market.util.NoticePager" alias="NoticePager"/>
 		<typeAlias type="com.mm.market.util.ReviewPager" alias="ReviewPager"/>
+		<typeAlias type="com.mm.market.chat.ChatVO" alias="ChatVO"/>
+		<typeAlias type="com.mm.market.notification.NotificationVO" alias="NotificationVO"/>
   </typeAliases>
  </configuration>
 
