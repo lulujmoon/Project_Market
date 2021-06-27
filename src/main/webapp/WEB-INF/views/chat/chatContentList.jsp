@@ -15,16 +15,15 @@
 		<!-- 받은 메세지 -->
 		<div class="incoming_msg">
 			<div class="incoming_msg_img">
-				<input type="hidden" value="${tmp.otherUser}">
-				<input type="hidden" value="${tmp.profile}">
-				<input type="hidden" value="${tmp.recvUser}">
-
-				<!-- </a> -->
+			<input type="hidden" value="${tmp.otherUser}">
+			<input type="hidden" value="${tmp.profile}">
+			<input type="hidden" value="${tmp.recvUser}">
+					<img src="/resources/upload/member/${tmp.profile}" alt="보낸사람 프로필" width="50px" height="50px"> 
 			</div>
 			<div class="received_msg">
 				<div class="received_withd_msg">
 					<p>${tmp.content}</p>
-					<span class="time_date"> ${tmp.sendTime}</span>
+					<span> ${tmp.sendTime}</span>
 				</div>
 			</div>
 		</div>
@@ -34,8 +33,8 @@
 		<!-- 보낸 메세지 -->
 		<div class="outgoing_msg">
 			<div class="sent_msg">
-				<p>${tmp.content }</p>
-				<span class="time_date"> ${tmp.sendTime}</span>
+				<p>${tmp.content}</p>
+				<span> ${tmp.sendTime}</span>
 			</div>
 		</div>
 		</c:otherwise>
