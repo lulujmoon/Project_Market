@@ -1,6 +1,6 @@
 package com.mm.market.social;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.mm.market.socialCategory.SocialCategoryVO;
@@ -15,7 +15,7 @@ public class SocialVO {
 	private Long categoryCode;
 	private String username;
 	private String socialContent;
-	private Date socialDate;
+	private Timestamp socialDate;
 	private Long socialGood;
 	
 	private List<SocialFileVO> file;
