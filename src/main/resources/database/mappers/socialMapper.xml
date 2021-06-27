@@ -19,6 +19,7 @@
 		<if test="categoryCode != 0L">
 			S.categoryCode=#{categoryCode} and
 		</if>
+		
 		S.socialTitle like concat('%', #{search}, '%')
 		order by S.socialNum desc
 		limit #{startRow}, 20

@@ -37,4 +37,8 @@ public class ReviewService {
 	public ReviewVO getAvgsAndCounts(ReviewVO reviewVO) throws Exception {
 		return reviewMapper.getAvgsAndCounts(reviewVO);
 	}
+	
+	public int setDelete(ReviewVO reviewVO) throws Exception {
+		return reviewMapper.setDelete(reviewVO);
+	}
 }
