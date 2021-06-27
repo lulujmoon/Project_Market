@@ -13,11 +13,14 @@
 	<c:import url="../template/header.jsp"></c:import>
 	<div class="container">
 		<h2>우리동네</h2>
+
 		<div class="category-container">
 			<ul class="category-list">
 				<c:forEach items="${categories}" var="category">
-					<li><a href="./list?categoryCode=${category.categoryCode}"
-						onclick="${category.categoryCode}">${category.categoryName}</a></li>
+					<li>
+						<a href="./list?categoryCode=${category.categoryCode}"
+							onclick="${category.categoryCode}">${category.categoryName}</a>
+					</li>
 				</c:forEach>
 			</ul>
 
@@ -81,6 +84,7 @@
 			<a href="./insert" class="btn btn-primary" role="button">작성</a>
 		</div>
 	</div>
+
 	<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
 	<script type="text/javascript" src="/resources/js/functions.js"></script>
