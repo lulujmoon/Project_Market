@@ -71,19 +71,13 @@
 		select last_insert_id()
 	</select>
 
-	<select id="getTotalCount" resultType="Long"
-		parameterType="SocialPager">
+	<select id="getTotalCount" resultType="Long" parameterType="SocialPager">
 		select count(socialNum) from social
 	</select>
 
-	<insert id="setInsert" parameterType="SocialVO"
-		useGeneratedKeys="true" keyProperty="socialNum">
-		insert into social
-		(socialNum,
-		socialTitle, categoryCode, username, socialContent, socialDate)
-		values
-		(#{socialNum}, #{socialTitle}, #{categoryCode}, #{username},
-		#{socialContent}, now())
+	<insert id="setInsert" parameterType="SocialVO" useGeneratedKeys="true" keyProperty="socialNum">
+		insert into social(socialNum, socialTitle, categoryCode, username, socialContent, socialDate, locationCode)
+		values (#{socialNum}, #{socialTitle}, #{categoryCode}, #{username},	#{socialContent}, now(), #{locationCode})
 	</insert>
 
 	<update id="setUpdate" parameterType="SocialVO">

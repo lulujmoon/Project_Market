@@ -114,8 +114,14 @@ public class SocialController {
 	@PostMapping("insert")
 	public String setInsert(SocialVO socialVO, Model model) throws Exception {
 
+		int result = socialService.setInsert(socialVO);
+		
 		String message = "등록에 실패했습니다!";
 		String path = "./list";
+
+		if(result>0) {
+			message = "등록에 성공했습니다!";
+		}
 
 		model.addAttribute("msg", message);
 		model.addAttribute("path", path);
