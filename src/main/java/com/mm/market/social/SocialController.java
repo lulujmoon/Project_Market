@@ -106,9 +106,16 @@ public class SocialController {
 	}
 
 	@GetMapping("insert")
-	public void setInsert(Model model) throws Exception {
-		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
-		model.addAttribute("categories", categories);
+	public void setInsert(Model model, Authentication authentication) throws Exception {
+		List<SocialCategoryVO> categoryList = socialCategoryMapper.getList();
+		
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		memberLocationVO.setUsername(memberVO.getUsername());
+		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+
+		model.addAttribute("categories", categoryList);
+		model.addAttribute("locations", locationList);
 	}
 
 	@PostMapping("insert")

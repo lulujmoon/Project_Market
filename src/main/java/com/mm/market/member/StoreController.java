@@ -131,14 +131,35 @@ public class StoreController {
 	}
 	
 	@GetMapping("{code}/myReviews")
-	public String myReviews(@PathVariable("code") Long code, ReviewPager reviewPager, Authentication authentication, ModelAndView mv) throws Exception {
+	public ModelAndView myReviews(@PathVariable("code") Long code, ReviewPager reviewPager, Authentication authentication, ModelAndView mv) throws Exception {
 		//본인 확인이 필요하다
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-		if(memberVO.getCode() != code) {
+
+		if(!memberVO.getCode().equals(code)) {
 			mv.addObject("alert", "잘못된 접근입니다.");
+		}else {
+			reviewPager.setReviewer(memberVO.getUsername());
+			List<ReviewVO> reviewList = reviewService.getListByReviewer(reviewPager, 10L);
+
+			MemberFileVO memberFileVO = memberService.selectFile(memberVO);
+			
+			ReviewVO reviewVO = new ReviewVO();
+			reviewVO.setReviewee(memberVO.getUsername());
+			reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+			
+			MemberLocationVO memberLocationVO = new MemberLocationVO();
+			memberLocationVO.setUsername(memberVO.getUsername());
+			List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+
+			mv.addObject("member", memberVO);
+			mv.addObject("file", memberFileVO);
+			mv.addObject("locations", locationList);
+			mv.addObject("rating", reviewVO);
+			mv.addObject("reviewPager", reviewPager);
+			mv.addObject("reviews", reviewList);
 		}
-		
-		return "";
+		mv.setViewName("store/myReviews");
+		return mv;
 	}
 		
 	@GetMapping("profileUpdate")

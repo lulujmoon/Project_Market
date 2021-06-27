@@ -89,12 +89,13 @@ public class ReviewController {
 	}
 	
 	@PostMapping("delete")
-	public String setDelete(ReviewVO reviewVO, Authentication authentication) throws Exception {
-		reviewService.setDelete(reviewVO);
+	public ModelAndView setDelete(ReviewVO reviewVO, ModelAndView mv) throws Exception {
+		int result = reviewService.setDelete(reviewVO);
 		
-		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
 		
-		return "/store/"+memberVO.getCode()+"/myReviews";
+		return mv;
 	}
 	
 }

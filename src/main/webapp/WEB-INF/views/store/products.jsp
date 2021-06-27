@@ -22,6 +22,11 @@
 		<div class="board__contents">
 			<div class="hidden page-value">${pager.page}</div>
 			<div class="list-container">
+				<c:if test="${products.size() == 0}">
+					<div class="empty__info">
+						아직 올린 상품이 없습니다.
+					</div> 
+				</c:if>			
 				<c:forEach items="${products}" var="product">
 					<div class="prd__card" onclick="goSelect(${product.productNum})">
 						<c:if test="${product.files[0].fileName != null}">

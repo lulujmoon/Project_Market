@@ -17,7 +17,7 @@ public class ReviewService {
 		reviewPager.setPerPage(perPage);
 		reviewPager.makeRow(perPage);
 		Long totalCount = reviewMapper.getTotalCount(reviewPager);
-		reviewPager.makeNum(totalCount, perPage, totalCount);
+		reviewPager.makeNum(totalCount, perPage, 5L);
 		return reviewMapper.getListByReviewer(reviewPager);
 	}
 	

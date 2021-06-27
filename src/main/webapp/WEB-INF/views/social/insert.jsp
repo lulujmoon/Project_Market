@@ -10,10 +10,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/socialNote.css"/>
+<link rel="stylesheet" href="../resources/css/summernote/summernote-lite.css">
+<script src="../resources/js/summernote/summernote-lite.js"></script>
+<script src="../resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <title>글쓰기</title>
 </head>
 <body>
@@ -25,35 +28,30 @@
 	<form class="upload-form" action="./insert" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="socialNum"> 
 		<input type="hidden" name="username" value="${principal.username}">
-		<div class="select-wrapper">
-			<select class="select" name="categoryCode">
+		<div class="location-container">
+			<select class="select-location" name="locationCode">			
+				<c:forEach items="${locations}" var="location">
+						<option value="${location.locationCode}">${location.locationName}</option>
+				</c:forEach>
+			</select>
+			<i class="fas fa-sort-down"></i>		
+		</div>
+		<div class="category-container">
+			<select class="select-category" name="categoryCode">
 				<c:forEach items="${categories}" var="category">
 					<option value="${category.categoryCode}">${category.categoryName}</option>
 				</c:forEach>
 			</select>
 			<i class="fas fa-sort-down"></i>
 		</div>
-		<div class="form-group">
-			<div class="form-title">지역</div>
-			<div class="form-content form-content-select">
-				<select class="form-select" id="locationCode" name="locationCode">
-					<c:forEach items="${location}" var="location">
-				   <option value="${location.locationCode}">${location.locationName}</option>
-				  </c:forEach>
-				</select>
-				<i class="fas fa-sort-down"></i>
-			</div>
-			<div class="form-info">
-				내 지역으로 저장한 지역을 선택할 수 있습니다.
-				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></a>
-			</div>
-		</div>
-		<input type="text" class="title" name="socialTitle" placeholder="제목">
+		<input type="text" class="title" name="socialTitle" placeholder="제목"> 
+		<textarea class="content"	id="socialContent" name="socialContent"></textarea>
 		<div class="btn-wrapper">
 			<button type="submit" class="btn-submit">등록</button>
 		</div>
 	</form>
 </div>
 <script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/summerFile.js"></script>
 </body>
 </html>
