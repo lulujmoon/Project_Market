@@ -12,75 +12,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <title>우리동네</title>
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<style type="text/css">
-.main-container {
-	padding-top: 125px;
-	width: 1252px;
-	min-height: 55vh;
-	margin: 30px auto;
-	display: flex;
-	flex-direction: column;
-}
 
-h2 {
-	text-align: center;
-}
-
-.button {
-	padding-top: 25px;
-	width: 1252px;
-	margin: 30px auto;
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-}
-
-.table-box {
-	border: 3px solid #f8cb45;
-	width: 80%;
-	height: auto;
-	margin-left: 10%;
-	margin-bottom: 2%;
-	padding: 0 0 0;
-	color: black;
-	text-align: center;
-	font-size: 12pt;
-}
-
-.table-box2 {
-	border: 3px solid white;
-	width: 80%;
-	height: auto;
-	margin-left: 10%;
-	margin-bottom: 2%;
-	padding: 0 0 0;
-	color: black;
-	text-align: center;
-	font-size: 12pt;
-}
-
-.comment-container {
-	border: 1px solid black;
-	width: 95%;
-	margin-top: 2%;
-	margin-left: 2%;
-}
-
-.btn-good {
-	font-size: 2.3em;
-	color: #ff5151;
-	margin: 7px;
-	cursor: pointer;
-}
-
-.icon_good {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	padding: 20px 0;
-}
-</style>
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
