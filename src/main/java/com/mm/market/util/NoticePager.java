@@ -2,7 +2,7 @@ package com.mm.market.util;
 
 public class NoticePager {
 		
-		private Long page;
+		private Long curPage;
 		private Long perPage;
 		
 		private Long startRow;
@@ -31,8 +31,8 @@ public class NoticePager {
 				totalBlock++;
 			}
 
-			Long curBlock = this.getPage() / perBlock;
-			if(this.page%perBlock !=0) {
+			Long curBlock = this.getCurPage() / perBlock;
+			if(this.curPage%perBlock !=0) {
 				curBlock++;
 			}
 			
@@ -57,21 +57,21 @@ public class NoticePager {
 		
 		public void makeRow() {
 
-			this.startRow = (this.getPage()-1)*this.getPerPage(); 
+			this.startRow = (this.getCurPage()-1)*this.getPerPage(); 
 		}
 
-		public Long getPage() {
-			if(this.page == null || this.page==0) {
-				this.page=1L;
+		public Long getCurPage() {
+			if(this.curPage == null || this.curPage==0) {
+				this.curPage=1L;
 			}
-			return page;
+			return curPage;
 		}
 
-		public void setPage(Long page) {
-			if(page == null || page==0) {
-				this.page=1L;
+		public void setCurPage(Long curPage) {
+			if(curPage == null || curPage==0) {
+				this.curPage=1L;
 			}else {
-				this.page = page;
+				this.curPage = curPage;
 			}
 		}
 
@@ -132,7 +132,7 @@ public class NoticePager {
 
 		public String getKind() {
 			if(this.kind==null) {
-				this.kind="all";
+				this.kind="noticeTitle";
 			}
 			
 			return kind;

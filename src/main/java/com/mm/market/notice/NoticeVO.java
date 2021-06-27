@@ -1,7 +1,5 @@
 package com.mm.market.notice;
 
-import java.sql.Date;
-
 import lombok.Data;
 
 @Data
@@ -11,5 +9,5 @@ public class NoticeVO {
 	private String username;
 	private String noticeTitle;
 	private String noticeContent;
-	private Date noticeDate;
+	private Data noticeDate;
 }

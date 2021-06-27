@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**","/favicon.ico","/script/**","/img/**","/resources/**","/js/**","/error");
+		web.ignoring().antMatchers("/css/**","/script/**","/img/**","/resources/**","/js/**");
 	}
 	
 	@Override
@@ -37,8 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/").permitAll()
-		.antMatchers("/member/login","/member/join","/member/search","/member/approve").permitAll()
-		.antMatchers("/product/select/**","/product/list").permitAll()
+		.antMatchers("/member/**").permitAll()
 		.antMatchers("/notice/list","/notice/select").permitAll()
 		.antMatchers("/notice/**").hasAnyRole("ADMIN")
 		.antMatchers("/member/auth/kakao/callback").permitAll()

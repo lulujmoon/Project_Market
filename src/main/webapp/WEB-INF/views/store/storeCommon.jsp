@@ -19,19 +19,11 @@
 	</div>
 	</div>
 	<div class="profile__rating">
-		<div class="avg-rating__notice">
+		<div class="rating__notice">
 			${member.name}님이 받은 거래 평가입니다.
 		</div>
-		<div class="avg-rating__content"><div class="avg-rating__title">거래 매너</div> <div class="avg-rate">${rating.avgManner}</div> (${rating.countManner})</div>
-		<div class="avg-rating__content"><div class="avg-rating__title">응답 속도</div> <div class="avg-rate">${rating.avgSpeed}</div> (${rating.countSpeed})</div>
-		<div class="avg-rating__content"><div class="avg-rating__title">상품 상태</div> <div class="avg-rate">${rating.avgState}</div> (${rating.countState})</div>
+		<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">6</div> (15)</div>
+		<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">7</div> (23)</div>
+		<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">8</div> (23)</div>
 	</div>
 </div>
-<div class="board-container">	<!-- 엔드 태그는 본문에 있음 -->
-	<div class="board__nav">
-		<a class="nav__item nav__selected" href="./products">판매 상품</a>
-		<a class="nav__item" href="/store/${member.code}/reviews">받은 후기</a>
-		<a class="nav__item">동네 생활</a>
-		<a class="nav__item">찜한 상품</a>
-		<a class="nav__item">작성한 후기</a>
-	</div>

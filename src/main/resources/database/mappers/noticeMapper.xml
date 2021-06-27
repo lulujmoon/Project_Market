@@ -6,13 +6,16 @@
  <mapper namespace="com.mm.market.notice.NoticeMapper">  
 
 <sql id="searcher">
-<choose>
-		<when test="kind=='all'">
-			where
+<where>
+	<choose>
+		<when test="kind=='noticeTitle'">
 			noticeTitle like concat('%', #{search}, '%')
-			or noticeContent like concat('%', #{search}, '%')
 		</when>
-</choose>
+		<otherwise>
+			noticeContent like concat('%', #{search}, '%')
+		</otherwise>	
+	</choose>
+</where>
 </sql>
  
  <select id="getList" parameterType="NoticePager" resultType="NoticeVO">

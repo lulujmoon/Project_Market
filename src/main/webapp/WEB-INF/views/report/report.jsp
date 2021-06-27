@@ -10,24 +10,20 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
-<link rel="stylesheet" href="/resources/css/report.css"/>
-<title>신고하기</title>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<title>${product.productName}</title>
 </head>
 <body>
 
+    <h2>메일 발송</h2>
 <%--         <input readonly="readonly" type="text" name="address" value="${principal.email}"><br> --%>
-<div class="container">
-<div class="title-container">
-	신고하기
-</div>
-<form action="/report/report" method="post" class="send-form">
-  <input type="hidden" name="productNum" value="${product.productNum}">
-	<div class="form-content">${principal.name}</div>
-  <input readonly="readonly" type="text" class="form-content" name="title" value="상품 신고 : ${product.productName}">
-  <textarea name="message" class="form-content message" placeholder="내용을 입력해주세요."></textarea>
-  <input type="button" class="btn-report" value="신고하기">
-</form>
-</div>
-<script type="text/javascript" src="../resources/js/report.js"></script>
+
+    <form action="/report/report" method="post">
+    	<input readonly="readonly" type="text" name=username value="${principal.username}">
+        <input readonly="readonly" type="text" name="productNum" value="${product.productNum}"><br>
+        <input readonly="readonly" type="text" name="title" value="${product.productNum}번 상품을 신고합니다."><br>
+        <textarea name="message" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"></textarea>
+        <input type="submit" value="Report">
+    </form>
 </body>
 </html>

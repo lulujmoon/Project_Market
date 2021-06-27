@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.util.NoticePager;
@@ -65,7 +64,7 @@ public class NoticeController {
 	@GetMapping("update")
 	public ModelAndView setUpdate(NoticeVO noticeVO,ModelAndView mv)throws Exception{
 		noticeVO =noticeService.getSelect(noticeVO);
-		mv.addObject("notice",noticeVO);
+		mv.addObject("dto",noticeVO);
 		mv.setViewName("notice/update");
 		return mv;
 	}
@@ -77,7 +76,7 @@ public class NoticeController {
 		return "redirect:./list";
 	}
 	
-	@PostMapping("delete")
+	@GetMapping("delete")
 	public String setDelete(NoticeVO noticeVO)throws Exception{
 		
 		int result = noticeService.setDelete(noticeVO);

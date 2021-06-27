@@ -15,10 +15,16 @@
 
 <div class="container">
 	<c:import url="./storeCommon.jsp"></c:import>
+	<div class="board-container">
+		<div class="board__nav">
+			<div class="nav__item">판매 상품</div>
+			<div class="nav__item">받은 후기</div>
+			<div class="nav__item">동네 생활</div>
+		</div>
 		<div class="board__contents"></div>
 	</div>
 
-</div>	<!-- 스타팅 태그는 임포트한 부분에 포함되어 있음 -->
+</div>
 
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>

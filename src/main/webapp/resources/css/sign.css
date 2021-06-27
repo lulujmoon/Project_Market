@@ -33,11 +33,6 @@
 	font-weight: bold;
 }
 
-.info{
-	padding: 18px;
-	font-size: 0.9rem;
-}
-
 .form-group{
 	color: #2e2e2e;
 	font-weight: 800;
@@ -86,7 +81,7 @@
 }
 
 
-.btn-wrapper{
+.login-btn, .join-btn{
 	padding: 0 18px;
 }
 
@@ -99,7 +94,7 @@
 	font-size: 1.1rem;
 }
 
-.btn-wrapper *{
+.login-btn *, .join-btn *{
 	margin: 10px 0;
 }
 

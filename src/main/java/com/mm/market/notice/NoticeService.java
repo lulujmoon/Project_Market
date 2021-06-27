@@ -2,13 +2,9 @@ package com.mm.market.notice;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.mm.market.util.FileManager;
 import com.mm.market.util.NoticePager;
 import com.mm.market.util.Pager;
 
@@ -17,10 +13,6 @@ public class NoticeService {
 	
 	@Autowired
 	NoticeMapper noticeMapper;
-	@Autowired
-	private HttpSession session;
-	@Autowired
-	private FileManager fileManager;
 
 	public List<NoticeVO> getList(NoticePager noticePager)throws Exception{
 		noticePager.makeRow();
@@ -52,5 +44,4 @@ public class NoticeService {
 	public Long getNext(NoticeVO noticeVO)throws Exception{
 		return noticeMapper.getNext(noticeVO);
 	}
-	
 }
