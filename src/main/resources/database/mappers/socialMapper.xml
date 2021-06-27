@@ -5,8 +5,7 @@
 
 <mapper namespace="com.mm.market.social.SocialMapper">
 
-	<select id="getList" resultMap="selectResult"
-		parameterType="SocialPager">
+	<select id="getList" resultMap="selectResult" parameterType="SocialPager">
 		select S.*, M.*, SC.*, SF.*
 		from social S
 		left join member M
@@ -15,25 +14,32 @@
 		on S.socialNum = SF.socialNum
 		inner join socialCategory SC
 		on S.categoryCode = SC.categoryCode
+		inner join location L
+		on S.locationCode = L.locationCode
 		where
 		<if test="categoryCode != 0L">
 			S.categoryCode=#{categoryCode} and
+		</if>
+		<if test="locationCode != 0L">
+			S.locationCode = #{locationCode} and
+		</if>
+		<if test="username != null">
+			username = #{username} and
 		</if>
 		S.socialTitle like concat('%', #{search}, '%')
 		order by S.socialNum desc
 		limit #{startRow}, 20
 	</select>
 
-	<select id="getSelect" resultMap="selectResult"
-		parameterType="SocialVO">
+	<select id="getSelect" resultMap="selectResult" parameterType="SocialVO">
 		select S.*, SC.*, SF.*
-		from social S left join socialFile
-		SF
+		from social S left join socialFile SF
 		on S.socialNum = SF.socialNum
 		inner join socialCategory SC
-		on
-		S.categoryCode = SC.categoryCode
-		where S.socialNum=#{socialNum}
+		on S.categoryCode = SC.categoryCode
+		inner join location L
+		on S.locationCode = L.locationCode
+		where S.socialNum = #{socialNum}
 	</select>
 
 	<resultMap type="SocialVO" id="selectResult">
@@ -44,13 +50,18 @@
 		<result column="socialContent" property="socialContent" />
 		<result column="socialDate" property="socialDate" />
 		<result column="socialGood" property="socialGood" />
+		<result column="locationCode" property="locationCode" />
 		<association property="socialCategory" javaType="SocialCategoryVO">
 			<id property="categoryCode" column="categoryCode" />
 			<result property="categoryName" column="categoryName" />
 		</association>
+		<association property="location" javaType="LocationVO">
+			<id property="locationCode" column="locationCode" />
+			<result property="locationName" column="locationName" />
+		</association>
 		<association property="writer" javaType="MemberVO">
-			<id property="username" column="username"/>
-			<result property="name" column="name"/>
+			<id property="username" column="username" />
+			<result property="name" column="name" />
 		</association>
 		<collection property="files" javaType="java.util.List" ofType="SocialFileVO">
 			<id column="fileNum" property="fileNum" />

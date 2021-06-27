@@ -22,6 +22,15 @@
 				<li class="category__item"><a href="./list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
 			</c:forEach>
 		</ul>
+		<h3 class="category__title">지역</h3>
+		<ul class="category__list list-myLocation">
+			<li class="category__item-location code_0"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>
+			<c:if test="${locations.size()!=0}">
+				<c:forEach begin="1" end="3" var="i">
+					<li class="category__item-location code_${i}"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
+				</c:forEach>
+			</c:if>
+		</ul>
 	</div>
 	<div class="social-container">
 		<c:forEach items="${list}" var="social">					
@@ -29,6 +38,7 @@
 				<div class="scl__top-wrapper">
 					<div class="scl__title">${social.socialTitle}</div>
 					<div class="scl__date">${social.socialDate}</div>
+					<div class="scl__location"><i class="fas fa-map-marker-alt"></i> ${social.location.locationName}</div>
 				</div>
 				<div class="scl__mid-wrapper">
 					<div class="scl__writer">${social.writer.name}</div>
@@ -48,8 +58,7 @@
 
 		<ul class="page-container">
 			<c:if test="${pager.pre}">
-				<li><a class="page-item arrow" href="#" title="${pager.startNum-1}">이전</a>
-				</li>
+				<li><a class="page-item arrow" href="#" title="${pager.startNum-1}">이전</a></li>
 			</c:if>
 			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 				<li><a class="page-item code_${i}" href="#" title="goPage('${pager.search}', ${i})">${i}</a></li>

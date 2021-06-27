@@ -18,7 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.comment.CommentService;
 import com.mm.market.comment.CommentVO;
+import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
+import com.mm.market.memberLocation.MemberLocationService;
+import com.mm.market.memberLocation.MemberLocationVO;
 import com.mm.market.socialCategory.SocialCategoryMapper;
 import com.mm.market.socialCategory.SocialCategoryVO;
 import com.mm.market.util.SocialPager;
@@ -36,13 +39,37 @@ public class SocialController {
 	@Autowired
 	private SocialCategoryMapper socialCategoryMapper;
 
+	@Autowired
+	private MemberService memberService;
+
+	@Autowired
+	private MemberLocationService memberLocationService;
+	
 	@GetMapping("list")
-	public String getList(SocialPager socialPager, Model model) throws Exception {
+	public String getList(SocialPager socialPager, Long myLocation, Authentication auth, Model model) throws Exception {
+		if(myLocation == null) {
+			myLocation = 0L;
+		}
+		
+		if(auth != null) {
+			MemberVO memberVO = (MemberVO)auth.getPrincipal();
+			MemberLocationVO memberLocationVO = new MemberLocationVO();
+			memberLocationVO.setUsername(memberVO.getUsername());
+			
+			List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+			memberLocationVO.setLocationCode(0L);
+			locationList.add(0, memberLocationVO);
+			
+			socialPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
+			model.addAttribute("locations", locationList);
+		}
+
 		List<SocialVO> ar = socialService.getList(socialPager);
 		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
 
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", socialPager);
+		model.addAttribute("myLocation", myLocation);
 		model.addAttribute("categories", categories);
 		
 		return "social/list";

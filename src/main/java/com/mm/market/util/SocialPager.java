@@ -7,17 +7,17 @@ public class SocialPager {
 	
 	private Long startRow;
 	
-	//page
 	private Long startNum;
 	private Long lastNum;
 	
 	private boolean pre;
 	private boolean next;
-	
-	//search
+		
+	private Long categoryCode;
+	private Long locationCode;
 	private String keyword;
 	private String search;
-	private Long categoryCode;
+	private String username;
 	
 	public void makeNum(Long totalCount) {
 		int perBlock=5;
@@ -168,7 +168,26 @@ public class SocialPager {
 		this.categoryCode = categoryCode;
 	}
 	
-	
-	
+	public Long getLocationCode() {
+		if(locationCode == null) {
+			locationCode = 0L;
+		}
+		return locationCode;
+	}
+
+	public void setLocationCode(Long locationCode) {
+		if(locationCode == null) {
+			locationCode = 0L;
+		}		
+		this.locationCode = locationCode;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 }

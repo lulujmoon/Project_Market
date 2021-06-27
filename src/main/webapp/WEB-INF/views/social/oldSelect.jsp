@@ -36,6 +36,19 @@
 				</tr>
 			</tbody>
 		</table>
+
+		<table class="table-box2">
+			<thead class="thead-dark">
+				<tr>
+					<th>내용</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>${social.socialContent}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<div class="table-box2">

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.mm.market.location.LocationVO;
 import com.mm.market.member.MemberVO;
 import com.mm.market.socialCategory.SocialCategoryVO;
 
@@ -19,9 +20,11 @@ public class SocialVO {
 	private String socialContent;
 	private Timestamp socialDate;
 	private Long socialGood;
+	private Long locationCode;
 	
 	private MemberVO writer;
 	private List<SocialFileVO> files;
+	private LocationVO location;
 	private SocialCategoryVO socialCategory;
 	private GoodVO goods;
 
