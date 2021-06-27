@@ -37,16 +37,11 @@ public class ChatService {
 			chat.setProfile(profile);
 			//메세지 상대 username을 세팅 otherUser
 			
-			System.out.println("==user : "+username);
-			System.out.println("==send : " + chat.getSendUser());
-			System.out.println("==recv : " + chat.getRecvUser());
-			System.out.println("==user eq send : " + username.equals(chat.getSendUser()));
 			if(username.equals(chat.getSendUser())) {
 				chat.setOtherUser(chat.getRecvUser());
 			} else {
 				chat.setOtherUser(chat.getSendUser());
 			}
-			System.out.println("==otherUser : "+chat.getOtherUser());
 		}
 		return list;
 	}
@@ -54,21 +49,17 @@ public class ChatService {
 	//room별 메세지 내용을 가져온다
 	public List<ChatVO> roomContentList(ChatVO chatVO) throws Exception {
 		
-		
 		//메세지 내역을 가져옴
 		List<ChatVO> clist = (List<ChatVO>)chatMapper.roomContentList(chatVO);
 		
-		
 		for(int i=0;i<clist.size();i++) {
 		String profile = chatMapper.getOtherProfile(clist.get(i));
-		System.out.println("rcl profile : "+profile);
 		clist.get(i).setProfile(profile);
 		}
 		//해당 방의 메세지들 중 받는 사람이 현재 사용자의 username인 메세지를 모두 읽음 처리
 		chatMapper.chatReadChk(chatVO);
 		
-		
-		System.out.println(clist);
+		//System.out.println(clist);
 		return clist;
 	}
 	
