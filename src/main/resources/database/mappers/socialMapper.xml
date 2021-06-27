@@ -7,20 +7,21 @@
 
 	<select id="getList" resultMap="selectResult"
 		parameterType="SocialPager">
-		select S.*, SC.*, SF.*
-		from social S left join socialFile SF
-		on
-		S.socialNum = SF.socialNum
+		select S.*, M.*, SC.*, SF.*
+		from social S
+		left join member M
+		on S.username = M.username
+		left join socialFile SF
+		on S.socialNum = SF.socialNum
 		inner join socialCategory SC
-		on
-		S.categoryCode = SC.categoryCode
+		on S.categoryCode = SC.categoryCode
 		where
 		<if test="categoryCode != 0L">
 			S.categoryCode=#{categoryCode} and
 		</if>
+		
 		S.socialTitle like concat('%', #{search}, '%')
-		order by S.socialNum
-		desc
+		order by S.socialNum desc
 		limit #{startRow}, 20
 	</select>
 
@@ -48,14 +49,17 @@
 			<id property="categoryCode" column="categoryCode" />
 			<result property="categoryName" column="categoryName" />
 		</association>
-		<collection property="file" javaType="java.util.List"
-			ofType="SocialFileVO">
+		<association property="writer" javaType="MemberVO">
+			<id property="username" column="username"/>
+			<result property="name" column="name"/>
+		</association>
+		<collection property="files" javaType="java.util.List" ofType="SocialFileVO">
 			<id column="fileNum" property="fileNum" />
 			<result column="socialNum" property="socialNum" />
 			<result column="fileName" property="fileName" />
 			<result column="originName" property="originName" />
 		</collection>
-		<collection property="good" javaType="GoodVO">
+		<collection property="goods" javaType="GoodVO">
 			<id column="goodNum" property="goodNum"/>
 			<result column="socialNum" property="socialNum"/>
 			<result column="username" property="username"/>

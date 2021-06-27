@@ -50,7 +50,6 @@ public interface ProductMapper {
 	//setStatus
 	public int setStatus(ProductVO productVO) throws Exception;
 
-	public ProductVO getNum(ProductVO productVO) throws Exception;
 	
 	//heart
 	public Long getHeart(HeartVO heartVO)throws Exception;

@@ -33,6 +33,7 @@
 		<typeAlias type="com.mm.market.chat.ChatVO" alias="ChatVO"/>
 		<typeAlias type="com.mm.market.notification.NotificationVO" alias="NotificationVO"/>
  </typeAliases>
+
  </configuration>
 
 

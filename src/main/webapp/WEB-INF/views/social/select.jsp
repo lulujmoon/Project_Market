@@ -12,75 +12,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <title>우리동네</title>
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<style type="text/css">
-.main-container {
-	padding-top: 125px;
-	width: 1252px;
-	min-height: 55vh;
-	margin: 30px auto;
-	display: flex;
-	flex-direction: column;
-}
-
-h2 {
-	text-align: center;
-}
-
-.button {
-	padding-top: 25px;
-	width: 1252px;
-	margin: 30px auto;
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-}
-
-.table-box {
-	border: 3px solid #f8cb45;
-	width: 80%;
-	height: auto;
-	margin-left: 10%;
-	margin-bottom: 2%;
-	padding: 0 0 0;
-	color: black;
-	text-align: center;
-	font-size: 12pt;
-}
-
-.table-box2 {
-	border: 3px solid white;
-	width: 80%;
-	height: auto;
-	margin-left: 10%;
-	margin-bottom: 2%;
-	padding: 0 0 0;
-	color: black;
-	text-align: center;
-	font-size: 12pt;
-}
-
-.comment-container {
-	border: 1px solid black;
-	width: 95%;
-	margin-top: 2%;
-	margin-left: 2%;
-}
-
-.btn-good {
-	font-size: 2.3em;
-	color: #ff5151;
-	margin: 7px;
-	cursor: pointer;
-}
-
-.icon_good {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	padding: 20px 0;
-}
-</style>
+<link rel="stylesheet" href="/resources/css/socialSelect.css" />
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
@@ -102,6 +34,7 @@ h2 {
 				</tr>
 			</tbody>
 		</table>
+
 		<table class="table-box2">
 			<thead class="thead-dark">
 				<tr>
@@ -110,11 +43,7 @@ h2 {
 			</thead>
 			<tbody>
 				<tr>
-					<td>${social.socialContent} <c:forEach
-							items="${social.file}" var="file">
-							<img src="/resources/upload/social/${file.fileName}">
-						</c:forEach>
-					</td>
+					<td>${social.socialContent}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -122,38 +51,34 @@ h2 {
 
 	<div class="table-box2">
 		<a class="insert-button" href="./update?socialNum=${social.socialNum}"
-			class="btn btn-primary" role="button">수정</a> <a class="insert-button"
-			href="./delete?socialNum=${social.socialNum}" class="btn btn-primary"
-			role="button">삭제</a>
+			class="btn btn-primary" role="button">수정</a>
+		<a class="insert-button" href="./delete?socialNum=${social.socialNum}"
+			class="btn btn-primary" role="button">삭제</a>
 		<div class="icon_good">
 			<i class="fas fa-heart"></i> ${social.socialGood}
 		</div>
 		<div class="btn-good"></div>
 	</div>
 	<div class="hidden">
-		<input type="hidden" class="goodval" value="${good}"> <input
-			type="hidden" class="socialNum" value="${social.socialNum}">
+		<input type="hidden" class="goodval" value="${good}">
+		<input type="hidden" class="socialNum" value="${social.socialNum}">
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
+	<br><br><br><br>
 
 	<!--  댓글  -->
 	<div class="table-box2">
 		<label for="comment">댓글</label>
-		<form id="form"
-			action="../comment/insert?socialNum=${social.socialNum}"
-			method="post">
+		<form id="form" action="../comment/insert?socialNum=${social.socialNum}" method="post">
 			<input type="hidden" id="socialNum" name="socialNum">
 			<textarea class="form-control myCheck" id="commentContent"
 				name="commentContent" placeholder="내용을 입력하세요."></textarea>
-			<input type="text" readonly="readonly" value="${social.username}"
-				name="username"> <input type="submit" value="작성" />
+			<input type="text" readonly="readonly" value="${social.username}" name="username">
+			<input type="submit" value="작성" />
 		</form>
 	</div>
 	<br>
 
+	<!-- 댓글 리스트 -->
 	<c:if test="${comment ne null}">
 		<c:forEach items="${list}" var="comment">
 			<ul class="table-box2">
@@ -161,19 +86,20 @@ h2 {
 						<c:forEach begin="1" end="${comment.depth}">
 								&ensp;>
 						</c:forEach>
-					</c:catch> ${comment.commentContent}</li>
+					</c:catch>
+					${comment.commentContent}</li>
 				<li>
 					<div class="container">
-						${comment.username}<br>${comment.commentDate} <a
-							href="../comment/update?commentNum=${comment.commentNum}">수정</a>
+						${comment.username}<br>${comment.commentDate}
+						<a href="../comment/update?commentNum=${comment.commentNum}">수정</a>
 						<a href="../comment/delete?commentNum=${comment.commentNum}">삭제</a>
-						<a
-							href="../comment/reply?socialNum=${social.socialNum}&commentNum=${comment.commentNum}">답글</a>
+						<a href="../comment/reply?socialNum=${social.socialNum}&commentNum=${comment.commentNum}">답글</a>
 					</div>
 				</li>
 			</ul>
 		</c:forEach>
 	</c:if>
+
 	<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
 	<script type="text/javascript" src="/resources/js/functions.js"></script>

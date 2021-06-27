@@ -190,10 +190,6 @@ public class ProductService {
 		return result;
 	}
 	
-	public ProductVO getNum(ProductVO productVO)throws Exception {
-		return productMapper.getNum(productVO);
-	}
-	
 	
 	//heart
 	public void setHeart(HeartVO heartVO)throws Exception{

@@ -88,4 +88,5 @@
 .rv__more.active{
 	display: inline-block;
 	padding-top: 5px;
+	cursor: pointer;
 }
