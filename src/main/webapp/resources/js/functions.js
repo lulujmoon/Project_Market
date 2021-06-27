@@ -2,10 +2,9 @@
 /** @function setPrice(className)
  *  -- 숫자를 '100,000원' 형태로 바꾸는 함수
  *  1. number.toLocaleString(locale, option) 이용
- *  2. 가격 정보가 담긴 선택자를 매개변수로 받는다.
+ *  2. 가격 정보가 담긴 변수를 매개변수로 받는다.
  */
- function setPrice(selector){
-	let priceDiv = document.querySelector(selector);
+ function setPrice(priceDiv){
 	let price = Number(priceDiv.innerText);
 	price = price.toLocaleString('currency');
 	priceDiv.innerText = price+' 원';
@@ -87,6 +86,16 @@
   joinDate = dateArray[0]+'년 '+dateArray[1]+'월 '+dateArray[2]+'일 가입';
 
   return joinDate;
+}
+
+/** @function selectPage(pageContainer) 
+ *	-- 현재 페이지에 selected 클래스를 추가한다.
+ *	1. page-container 클래스가 있는 객체를 매개변수로 받는다.
+ */
+ function selectPage(pageContainer){
+	 const pageVal = document.querySelector('.page-value');
+	 let selectedPage = pageContainer.querySelector('.code_'+pageVal.innerText);
+	 selectedPage.classList.add('selected');	
 }
 
 /** @function carousel

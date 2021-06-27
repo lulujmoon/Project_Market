@@ -57,18 +57,18 @@ public class ChatService {
 		
 		//메세지 내역을 가져옴
 		List<ChatVO> clist = (List<ChatVO>)chatMapper.roomContentList(chatVO);
-//		System.out.println("메세지 내역 가져오기 서비스 : "+clist);		
 		
-//		for(int i=0;i<clist.size();i++) {
-//			System.out.println("room : " + clist.get(i).getRoom());
-//		System.out.println("recv user : " + clist.get(i).getRecvUser());
-//		System.out.println("username : " + clist.get(i).getUsername());
-//		clist.get(i).setOtherUser(clist.get(i).getRecvUser());
-//		}
 		
+		for(int i=0;i<clist.size();i++) {
+		String profile = chatMapper.getOtherProfile(clist.get(i));
+		System.out.println("rcl profile : "+profile);
+		clist.get(i).setProfile(profile);
+		}
 		//해당 방의 메세지들 중 받는 사람이 현재 사용자의 username인 메세지를 모두 읽음 처리
 		chatMapper.chatReadChk(chatVO);
 		
+		
+		System.out.println(clist);
 		return clist;
 	}
 	
@@ -78,18 +78,18 @@ public class ChatService {
 		//메세지 리스트에서 보낸건지 프로필에서 보낸건지 구분하기 위함
 		if(chatVO.getRoom()==0) { //room이 0이라며 상품페이지에서 보낸것
 			int existChat = chatMapper.existChat(chatVO);
-			System.out.println(existChat);
 			//프로필에서 보낸것중 메세지 내역이 없어서 첫 메세지가 될 경우를 구분하기 위함
 			if(existChat==0) { //메세지 내역이 없어서 0이면 chat테이블의 room 최댓값을 구해서 chatVO에 set
 				Integer maxRoom = chatMapper.maxRoom(chatVO);
 				if(maxRoom==null) {
 					maxRoom = 0;
 				}
+					
 				chatVO.setRoom(maxRoom+1);
 			}else { //메세지 내역이 있다면 해당 room번호를 가져옴
 				int room = Integer.parseInt(chatMapper.selectRoom(chatVO));
 				chatVO.setRoom(room);
-			}
+			} 
 		}
 		int flag = chatMapper.chatSendInList(chatVO);
 		return flag;

@@ -42,9 +42,9 @@
 		 limit #{startRow}, #{perPage}
 		</select>
 		
-				<select id="getTotalCount" resultType="Long" parameterType="ProductPager">
+		<select id="getTotalCount" resultType="Long" parameterType="ProductPager">
 			SELECT count(productNum)
-			FROM product P
+			FROM product
 			WHERE 
 				<if test="categoryCode != 0L">
 					categoryCode = #{categoryCode} AND 

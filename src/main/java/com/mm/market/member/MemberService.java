@@ -95,17 +95,12 @@ public class MemberService implements UserDetailsService{
 		int result = memberMapper.setJoin(memberVO);
 
 		//role table
-		if(memberVO.getUsername().contains("admin")) {
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("username", memberVO.getUsername()); //키값 ,밸류값
-			map.put("roleName", "ROLE_ADMIN");
-			result = memberMapper.setMemberRole(map);	
-		}else {
+		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("username", memberVO.getUsername()); //키값 ,밸류값
 		map.put("roleName", "ROLE_MEMBER");
 		result = memberMapper.setMemberRole(map);
-		}
+		
 		//hdd file
 		String filePath="member/";
 		if(multipartFile.getSize() !=0) {

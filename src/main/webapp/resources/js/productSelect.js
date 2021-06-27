@@ -3,7 +3,12 @@
 /** 초기설정 1. 가격 표시 방법
  *	number.toLocaleString(locale, option) 이용
  */
- setPrice('.top__price');
+ const topPrice = document.querySelector('.top__price');
+ const topCategory = document.querySelector('.top__category');
+ setPrice(topPrice);
+ if(topPrice.innerText=='0 원' && topCategory.innerText != '삽니다'){
+	topPrice.innerText = '무료나눔';
+}
  
 /** 초기설정 2. 별점 표시
  */
@@ -34,13 +39,6 @@
  joinDate = seller__joinDate.innerText;
  joinDate = setJoinDate(joinDate);
  seller__joinDate.innerText = joinDate;
- 
-/** @function goSellerPage(sellerCode)
- *	-- 멤버코드를 받아 store/products 페이지로 이동한다.
- */
- function goSellerPage(sellerCode){
-	location.href = '/store/'+sellerCode+'/products/';
-}
 
 /** 초기설정 6. 캐러셀
  */
@@ -103,16 +101,21 @@ function heart_reload() {
 	$("#heart").load(window.location.href='/product/select/'+productNum);
 }
 
-
 function submit() {
-	document.status.submit();	
+	document.status.submit();
 }
+ 
+/** @function goSellerPage(sellerCode)
+ *	-- 멤버코드를 받아 store/products 페이지로 이동한다.
+ */
+ function goSellerPage(sellerCode){
+	location.href = '/store/'+sellerCode+'/products/';
+}
+
 
 $(document).ready(function(){
 	var status = $("#productStatus").val();
 	$("#status").val(status);
-	
-	
 		
 	let category = document.getElementById('category').innerText;
 	let price = document.getElementById('price').innerText;
@@ -126,4 +129,10 @@ $(document).ready(function(){
 })
 
 
+function openReport(productNum){
+	window.open(
+		"/report/report?productNum="+productNum, 
+		'', 
+		"width=500,height=600,resizable,scrollbars=yes,left=1300,top=150");
+}
 
