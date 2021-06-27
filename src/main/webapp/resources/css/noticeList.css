@@ -1,0 +1,166 @@
+@charset "UTF-8";
+
+.container{
+	/*background-color: white;*/
+	margin-top: 165px;	
+}
+
+.btn{
+	all: unset;
+	display: block;
+	margin-left: 5px;
+	padding: 5px 10px;
+	border-radius: 5px;
+	text-align: center;
+	cursor: pointer;	
+}
+
+.top-container{
+	width: 950px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.top__title{
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.top__form-search{
+	width: 300px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.search__input{
+	all: unset;
+	display: block;
+	width: 200px;
+	height: 2rem;
+	margin-left: 20px;
+	padding: 0 0.5rem;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid #aeaeae;
+	outline: none;
+	font-size: 0.9rem;
+}
+
+.btn-search{
+	width: 35px;
+	background-color: #fadd85;
+	color: white;
+}
+
+.btn-search:hover{
+	background-color: #f9d568;
+}
+
+.notice-container{
+	width: 950px;
+	margin-top: 30px;
+	border: 1px solid #e6e6e6;
+	border-bottom: none;
+}
+
+.ntc__card{
+	width: 920px;
+	min-height: 45px;
+	padding: 15px;
+	background-color: white;
+	border-bottom: 1px solid #e6e6e6;
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.ntc__left{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.ntc__title{
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+.ntc__date{
+	font-size: 0.9rem;
+}
+
+
+.ntc__card > i{
+	position: relative;
+	top: 0.8rem;
+	right: 20px;
+	z-index: 2;
+	font-size: 1.3rem;
+	color: #b4b4b4;
+	pointer-events: none;
+}
+
+.content-wrapper{
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+}
+
+.content-wrapper.active{
+	max-height: 500px;
+	overflow: auto;
+	transition: max-height 0.2s ease-in;
+	border-bottom: 1px solid #e6e6e6;
+}
+
+.ntc__btn{
+	width: 920px;
+	display: flex;
+	justify-content: flex-end;
+	padding: 15px 15px 0 15px;
+}
+
+.ntc__content{
+	padding: 15px;
+}
+
+.btn-edit{
+	border: 1px solid #c6c6c6;	
+}
+
+.btn-edit:hover{
+	background-color: #c6c6c6;
+	color: white;	
+}
+
+.btn-del{
+	border: 1px solid #ff5e5e;
+	color: #ff5e5e;	
+}
+
+.btn-del:hover{
+	background-color: #ff5e5e;
+	color: white;
+}
+
+.btn-insert-wrapper{
+	width: 950px;
+	padding: 15px 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn-insert{
+	width: 35px;
+	height: 25px;
+	line-height: 25px;
+	background-color: #fadd85;
+	color: white;
+}
+
+.btn-insert:hover{
+	background-color: #f9d568;
+}

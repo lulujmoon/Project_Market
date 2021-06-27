@@ -42,9 +42,9 @@
 		 limit #{startRow}, #{perPage}
 		</select>
 		
-				<select id="getTotalCount" resultType="Long" parameterType="ProductPager">
+		<select id="getTotalCount" resultType="Long" parameterType="ProductPager">
 			SELECT count(productNum)
-			FROM product P
+			FROM product
 			WHERE 
 				<if test="categoryCode != 0L">
 					categoryCode = #{categoryCode} AND 
@@ -159,9 +159,6 @@
 			UPDATE product SET productStatus=#{productStatus} WHERE productNum=#{productNum}
 		</update>
 		
-		<select id="getNum" parameterType="ProductVO" resultType="ProductVO">
-			select productNum from product where username=#{username} and productName=#{productName}
-		</select>
 		
 		<!-- heart -->
 		<insert id="setHeart" parameterType="HeartVO">

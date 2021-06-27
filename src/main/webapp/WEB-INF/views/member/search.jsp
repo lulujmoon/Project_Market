@@ -5,41 +5,34 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<c:import url="../template/setting.jsp"></c:import>
+<link rel="stylesheet" href="/resources/css/sign.css">
 <title>Insert title here</title>
 </head>
 <body>
-
-<form action="./search" method="post">
-
-<h2>정보를 입력해주세요.</h2>
-이름<input type="text" class="name" name="name"/>
-전화번호<input type="text" class="phone" name="phone"/>
-
-<button type="submit" onclick="sendMail()">입력</button>
-</form>
-
-<!-- <script type="text/javascript">
-
-var name = document.getElementById("name");
-var phone = document.getElementById("phone");
-var check = true;
-
-function sendMail(){
-	if(name=null){
-		alert("이름입력");
-		check=false;
-	}
-	if(phone=""){
-		alert("번호입력");
-		check=false;
-	}
-	if(check){
-		alert("전송완료");
-		form.submit();
-	}
-}
-
-</script> -->
-
+<c:import url="../template/header.jsp"></c:import>
+<div class="container">
+	<div class="alert hidden">${alert}</div>
+	<form action="./search" method="post" onclick="submitForm()">
+		<div class="logo">
+			<i class="fas fa-lemon"></i><span>&nbsp;Find</span>
+		</div>
+		<div class="info">가입한 이메일로 임시 비밀번호를 발송합니다.</div>
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input type="text" class="form-control" name="username" id="username"/>
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>	
+			<input type="text" class="form-control" name="email" id="email"/>
+		</div>
+		<div class="btn-wrapper">
+			<button class="btn-wide btn-submit">Find Password</button>
+		</div>
+	</form>
+</div>
+<c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/memberSearch.js"></script>
 </body>
 </html>

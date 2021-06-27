@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ReportVO {
+	private Long productNum;
     private String address;
     private String username;
     private String title;

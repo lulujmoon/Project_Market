@@ -6,35 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
-<title>Insert title here</title>
+<script src="../resources/js/summernote/summernote-lite.js"></script>
+<script src="../resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="../resources/css/summernote/summernote-lite.css">
+<link rel="stylesheet" href="../resources/css/noticeNote.css"/>
+<title>공지 수정</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class=container>
-<h1>notice update</h1>
-
-	<form action="./update" method="POST">	
-	    <div class="form-group"> 
-	   	 <label>글번호</label>
-	    <input type="text" name="noticeNum" value="${dto.noticeNum}" readonly="readonly">
-	  </div>
-	  <div class="form-group"> 
-	    <label>작성자</label>
-	    <input type="text" name="username" value="${dto.username}" readonly="readonly">
-	  </div>
-	  <div class="form-group">
-	    <label>제목</label>
-	    <input type="text" name="noticeTitle" value="${dto.noticeTitle}">
-	  </div>
-	    <div class="form-group">
-	    <label>내용</label>
-	    <input type="text" name="noticeContent" value="${dto.noticeContent}">
-	  </div>
-
-	  
-	<button type="submit">Update</button>
-</form>
+	<div class="title-container">
+		공지 수정
+	</div>
+	<form action="./update" method="POST" class="upload-form">	
+	  <input type="hidden" name="noticeNum" value="${notice.noticeNum}">
+		<input type="text" class="title" name="noticeTitle" value="${notice.noticeTitle}">
+		<textarea class="content" name="noticeContent">${notice.noticeContent}</textarea>
+		<div class="btn-wrapper">
+			<button type="submit" class="btn-submit">등록</button>
+		</div>
+	</form>
 </div>
+<script>
+</script>
 <c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/noticeNote.js"></script>
 </body>
 </html>

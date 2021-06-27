@@ -13,7 +13,9 @@ const btnSubmit = document.querySelector('.btn-submit');
 const productContent = document.querySelector('#productContent');
 const productPrice = document.querySelector('.product-price');
 var counter = 0;
-
+if(document.querySelector('.preview')!=null){
+	counter = (document.querySelectorAll('.preview')).length;		
+}
 
 /** @function makeInput()
  *	-- inputs 영역 안에 input type file을 추가한다.
@@ -112,7 +114,7 @@ function makeBtnDel(){
  *	1. 이미지 파일이 아니면 false를 반환하고, 모두 이미지면 true를 반환한다.
  */
 function checkFiles(files){
-	const fileCheck = /\.(gif|jpg|jpeg|png)$/;
+	const fileCheck = /\.(gif|jpg|jpeg|png|GIF|JPG|JPEG|PNG)$/;
 	for(file of files){
 		if((file.name).search(fileCheck)==-1){
 			return false;
@@ -153,6 +155,11 @@ for(btnDel of btnDels){
 /** 이벤트 1. 이미지 추가 버튼 클릭
  *	1. input type file 추가하고 click()
  *	2. change 이벤트 발생 시 preview와 btn-del 생성
+ *	3. counter 계산
+ *	3-1. 초기 counter는 수정은 .preview의 개수이고, 입력은 0이다.
+ *	3-2. counter가 7 미만이면 input을 생성한다.
+ *	3-3. input의 value가 바뀐 후 counter는 기존의 counter에 새로 추가한 파일의 개수를 합한 값이다.
+ *	3-4. counter가 8 미만이면 파일의 형식을 체크하고 통과시키고, 8 이상이면 input을 삭제한다.
  */
  
 btnAdd.addEventListener('click', ()=>{
@@ -176,7 +183,8 @@ btnAdd.addEventListener('click', ()=>{
 					inputs.removeChild(inputFile);
 				}						
 			}else{
-				alert('이미지는 최대 7장까지 첨부 가능합니다.');
+				alert('이미지는 최대 7장까지 첨부 가능합니다!');
+				inputs.removeChild(inputFile);
 			}
 			counter = (document.querySelectorAll('.preview')).length;		
 		});

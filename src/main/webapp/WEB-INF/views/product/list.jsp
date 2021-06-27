@@ -29,9 +29,11 @@
 		<h3 class="top__title">지역</h3>
 		<ul class="top__list list-myLocation">
 			<li class="top__item-location code_0"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>
-			<c:forEach begin="1" end="3" var="i">
-				<li class="top__item-location code_${i}"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
-			</c:forEach>
+			<c:if test="${locations.size()!=0}">
+				<c:forEach begin="1" end="3" var="i">
+					<li class="top__item-location code_${i}"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
+				</c:forEach>
+			</c:if>
 		</ul>
 	</div>
 	<div class="list-container">
@@ -53,12 +55,8 @@
 						</c:if>
 						<div class="card__info">
 							<div class="info__name"> ${product.productName}</div>
-							<c:if test="${product.productPrice eq 0 && product.categoryCode != 14}">
-								<div class="info__price">무료나눔</div>
-							</c:if>
-							<c:if test="${product.productPrice ne 0 || product.categoryCode == 14}">
-								<div class="info__price">${product.productPrice}</div>
-							</c:if>
+							<div class="hidden info__category">${product.categoryCode}</div>
+							<div class="info__price">${product.productPrice}</div>
 							<div class="info__date">${product.productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 						</div>
