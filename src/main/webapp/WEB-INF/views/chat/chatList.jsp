@@ -14,7 +14,9 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<link rel="stylesheet" href="../resources/css/chat.css">
 	<title>Chat List</title>
+	
 <style type="text/css">
+/***   헷갈려서 확인하려고 해놨어요  ***/
 	.outgoing_msg{
 		text-align: right;
 	}
@@ -29,8 +31,6 @@
 	.received_msg{
 		background-color: blue;
 	}
-	
-
 </style>
 </head>
 <body>
@@ -95,10 +95,10 @@
 					send_msg += "<div class='type_msg'>";
 					send_msg += "	<div class='input_msg_write row'>";
 					send_msg += "		<div class='col-11'>";
-					send_msg += "			<input type='text' class='write_msg' placeholder='메세지를 입력...' />";
+					send_msg += "			<input type='text' class='write_msg form-control' placeholder='메세지를 입력...' />";
 					send_msg += "		</div>";
 					send_msg += "		<div class='col-1'>";
-					send_msg += "			<button class='msg_send_btn' type='button'><i aria-hidden='true'></i></button>";
+					send_msg += "			<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 					send_msg += "		</div>";
 					send_msg += "	</div>";
 					send_msg += "</div>";
@@ -146,10 +146,10 @@
 					send_msg += "<div class='type_msg'>";
 					send_msg += "	<div class='input_msg_write row'>";
 					send_msg += "		<div class='col-11'>";
-					send_msg += "			<input type='text' class='write_msg' placeholder='메세지를 입력...' />";
+					send_msg += "			<input type='text' class='write_msg form-control' placeholder='메세지를 입력...' />";
 					send_msg += "		</div>";
 					send_msg += "		<div class='col-1'>";
-					send_msg += "			<button class='msg_send_btn' type='button'><i aria-hidden='true'></i></button>";
+					send_msg += "			<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 					send_msg += "		</div>";
 					send_msg += "	</div>";
 					send_msg += "</div>";
