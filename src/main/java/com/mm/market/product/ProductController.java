@@ -25,8 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
-import com.mm.market.chat.ChatService;
-import com.mm.market.chat.ChatVO;
 import com.mm.market.location.LocationVO;
 import com.mm.market.member.MemberFileVO;
 import com.mm.market.member.MemberService;
@@ -45,9 +43,6 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	
-	@Autowired
-	private ChatService chatService;
 
 	@Autowired
 	private CategoryMapper categoryMapper;
@@ -85,7 +80,7 @@ public class ProductController {
 
 		List<CategoryVO> categories = categoryMapper.getList();
 
-		
+
 		model.addAttribute("products", productList);
 		model.addAttribute("pager", productPager);
 		model.addAttribute("myLocation", myLocation);
@@ -101,7 +96,6 @@ public class ProductController {
 		productVO.setProductNum(productNum);
 		productVO =	productService.getSelect(productVO);
 
-
 		if(authentication != null) {
 			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 			String username = memberVO.getUsername();
@@ -114,10 +108,8 @@ public class ProductController {
 			
 			model.addAttribute("heart", heart);			
 		}
-
+		
 		model.addAttribute("product", productVO);
-
-		System.out.println(authentication.getPrincipal());
 		//판매자 정보
 		if(productVO.getUsername() != null) {
 			MemberVO sellerVO = new MemberVO();
@@ -137,35 +129,8 @@ public class ProductController {
 			model.addAttribute("seller", sellerVO);
 			model.addAttribute("sellerFile", sellerFileVO);
 			model.addAttribute("sellerLocation", sellerLocations.get(0));
-
-			//chat
-			ChatVO chatVO = new ChatVO();
-			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-			String username = memberVO.getUsername();
-			chatVO.setUsername(username);
-			System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
-			List<ChatVO> list = chatService.chatList(chatVO);
-			System.out.println("list : "+list);
-			
-			if(list.size()<1) {
-				model.addAttribute("chat", 0);
-			} else {
-				for(int i=0;i<list.size();i++) {
-					if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
-						model.addAttribute("chat", list.get(i).getOtherUser());
-					} else {
-						model.addAttribute("chat", 0);
-					}
-				}
-			}
-			
-			
-			
-
 			model.addAttribute("rating", reviewVO);
-
 		}
-
 		return "product/select";
 	}
 
@@ -316,7 +281,7 @@ public class ProductController {
 
 
 	@GetMapping("rewrite")
-	public ModelAndView setRewrite(ProductVO productVO, ModelAndView mv) throws Exception{
+	public ModelAndView setRewrite(ProductVO productVO, Authentication authentication, ModelAndView mv) throws Exception{
 		productVO = productService.getSelect(productVO);
 
 		long write = productVO.getProductDate().getTime();
@@ -347,18 +312,25 @@ public class ProductController {
 			mv.setViewName("common/commonResult");
 		} else {
 
-			List<ProductFileVO> file = productVO.getFiles();
+			List<ProductFileVO> files = productVO.getFiles();
 
-			for(int i=0;i<file.size();i++) {
-				file.get(i).setProductNum(productVO.getProductNum());
-
-				mv.addObject("vo", productVO);
-				mv.addObject("files", file);
-
-
-
-				mv.setViewName("product/rewrite");
+			for(ProductFileVO file:files) {
+				file.setProductNum(productVO.getProductNum());
 			}
+			
+			List<CategoryVO> categories = categoryMapper.getList();
+
+			MemberLocationVO memberLocationVO = new MemberLocationVO();
+			MemberVO memberVO = new MemberVO();
+			memberVO = (MemberVO)authentication.getPrincipal();
+			memberLocationVO.setUsername(memberVO.getUsername());
+			List<MemberLocationVO> locations = memberLocationService.getList(memberLocationVO);
+			
+			mv.addObject("files", files);
+			mv.addObject("product", productVO);
+			mv.addObject("categories", categories);
+			mv.addObject("locations", locations);
+			mv.setViewName("product/rewrite");
 		}
 
 		return mv;

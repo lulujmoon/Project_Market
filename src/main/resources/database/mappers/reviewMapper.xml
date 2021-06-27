@@ -81,5 +81,9 @@
 	<select id="getAvgsAndCounts" parameterType="ReviewVO" resultType="ReviewVO">
 		SELECT ROUND(AVG(state)) avgState, ROUND(AVG(manner)) avgManner, ROUND(AVG(speed)) avgSpeed, COUNT(state) countState, COUNT(manner) countManner, COUNT(speed) countSpeed FROM review WHERE reviewee=#{reviewee}
 	</select>
+	
+	<delete id="setDelete" parameterType="ReviewVO">
+		delete from review where reviewNum=#{reviewNum}
+	</delete>
 
 </mapper>

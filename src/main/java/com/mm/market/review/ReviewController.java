@@ -88,4 +88,13 @@ public class ReviewController {
 		return "redirect:/";
 	}
 	
+	@PostMapping("delete")
+	public String setDelete(ReviewVO reviewVO, Authentication authentication) throws Exception {
+		reviewService.setDelete(reviewVO);
+		
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		
+		return "/store/"+memberVO.getCode()+"/myReviews";
+	}
+	
 }

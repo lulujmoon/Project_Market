@@ -79,15 +79,9 @@ public class SocialController {
 	}
 
 	@GetMapping("insert")
-	public ModelAndView setInsert() throws Exception {
-
-		ModelAndView mv = new ModelAndView();
-		SocialVO socialVO = new SocialVO();
-
-		mv.addObject("vo", socialVO);
-		mv.setViewName("social/insert");
-
-		return mv;
+	public void setInsert(Model model) throws Exception {
+		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
+		model.addAttribute("categories", categories);
 	}
 
 	@PostMapping("insert")
@@ -117,8 +111,10 @@ public class SocialController {
 		ModelAndView mv = new ModelAndView();
 		
 		socialVO = socialService.getSelect(socialVO);
+		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
 		
-		mv.addObject("vo", socialVO);
+		mv.addObject("social", socialVO);
+		mv.addObject("categories", categories);
 		mv.setViewName("social/update");
 
 		return mv;
@@ -199,8 +195,7 @@ public class SocialController {
 		ModelAndView mv = new ModelAndView();
 		
 		String fileName = socialService.setSummerFileUpload(file);
-		fileName = "../resources/upload/social"+fileName;
-		
+		fileName = "../resources/upload/social/"+fileName;
 		mv.addObject("result", fileName);
 		mv.setViewName("common/ajaxResult");
 		

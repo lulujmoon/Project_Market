@@ -1,59 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <c:import url="../template/setting.jsp"></c:import>
-
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<title>우리동네</title>
-
-<!-- summernote -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link rel="stylesheet" href="/resources/css/common.css" />
+<link rel="stylesheet" href="/resources/css/socialNote.css"/>
+<link rel="stylesheet" href="../resources/css/summernote/summernote-lite.css">
+<script src="../resources/js/summernote/summernote-lite.js"></script>
+<script src="../resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<title>글쓰기</title>
 </head>
 <body>
-	<div class="container">
-		<h2>글 수정</h2>
-		<br>
-		<form class="form" action="./update" method="POST"
-			enctype="multipart/form-data">
-
-			<input type="hidden" name="socialNum" value="${vo.socialNum}">
-
-			<label>제목</label> <input type="text" value="${vo.socialTitle}"
-				name="socialTitle"> <br>
-			<br> <label>작성자</label> <input type="text" readonly="readonly"
-				value="${vo.username}" name="username"> <br> <br>
-			<label>카테고리</label> <select class="form-control" id="socialCategory"
-				name="categoryCode">
-				<option value="1">동네맛집</option>
-				<option value="2">동네소식</option>
-				<option value="3">취미생활</option>
-				<option value="4">애완동물</option>
-				<option value="5">살림/인테리어</option>
-				<option value="6">출산/육아</option>
-				<option value="7">기타</option>
-			</select> <br> <br> <label>글 내용</label>
-			<textarea id="socialContent" name="socialContent">${vo.socialContent}</textarea>
-
-			<input type="submit" value="수정">
-		</form>
+<c:import url="../template/header.jsp"></c:import>
+<div class="container">
+	<div class="title-container">
+		글 수정
 	</div>
-
-	<script type="text/javascript" src="/jquery/summerFile.js"></script>
+	<form class="upload-form" action="./update" method="POST" enctype="multipart/form-data">
+		<input type="hidden" name="socialNum" value="${social.socialNum}"> 
+		<input type="hidden" name="username" value="${principal.username}">
+		<div class="select-wrapper">
+			<select class="select" name="categoryCode">
+				<c:forEach items="${categories}" var="category">
+					<option value="${category.categoryCode}"
+						<c:if test="${category.categoryCode == social.categoryCode}">selected</c:if>				
+					>${category.categoryName}</option>
+				</c:forEach>
+			</select>
+			<i class="fas fa-sort-down"></i>
+		</div>
+		<input type="text" class="title" name="socialTitle" value="${social.socialTitle}" placeholder="제목"> 
+		<textarea class="content"	id="socialContent" name="socialContent">${social.socialContent}</textarea>
+		<div class="btn-wrapper">
+			<button type="submit" class="btn-submit">등록</button>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/summerFile.js"></script>
 </body>
 </html>

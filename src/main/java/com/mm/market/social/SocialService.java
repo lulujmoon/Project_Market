@@ -99,7 +99,6 @@ public class SocialService {
 	public String setSummerFileUpload(MultipartFile file) throws Exception {
 		String fileName = fileManager.save("social", file, session);
 		return fileName;
-
 	}
 
 	public Boolean setSummerFileDelete(String fileName) throws Exception {
