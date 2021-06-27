@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
-<link rel="stylesheet" href="/resources/css/report.css"/>
+<link rel="stylesheet" href="/resources/css/socialReport.css"/>
 <title>신고하기</title>
 </head>
 <body>
