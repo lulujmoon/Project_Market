@@ -1,8 +1,6 @@
 package com.mm.market.social;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.List;
 
 import com.mm.market.location.LocationVO;
 import com.mm.market.member.MemberVO;
@@ -23,7 +21,6 @@ public class SocialVO {
 	private Long locationCode;
 	
 	private MemberVO writer;
-	private List<SocialFileVO> files;
 	private LocationVO location;
 	private SocialCategoryVO socialCategory;
 	private GoodVO goods;

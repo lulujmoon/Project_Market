@@ -112,20 +112,10 @@ public class SocialController {
 	}
 
 	@PostMapping("insert")
-	public String setInsert(SocialVO socialVO, MultipartFile [] files, Model model) throws Exception {
-
-		for(MultipartFile mf:files) {
-			System.out.println(mf.getOriginalFilename());
-		}
-
-		int result = socialService.setInsert(socialVO, files);
+	public String setInsert(SocialVO socialVO, Model model) throws Exception {
 
 		String message = "등록에 실패했습니다!";
 		String path = "./list";
-
-		if(result>0) {
-			message = "등록에 성공했습니다!";
-		}
 
 		model.addAttribute("msg", message);
 		model.addAttribute("path", path);
@@ -213,32 +203,6 @@ public class SocialController {
 		}
 
 		return good;
-	}
-
-	//summerfile upload	
-	@PostMapping("summerFileUpload")
-	public ModelAndView setSummerFileUpload(MultipartFile file) throws Exception {
-		
-		ModelAndView mv = new ModelAndView();
-		
-		String fileName = socialService.setSummerFileUpload(file);
-		fileName = "../resources/upload/social/"+fileName;
-		mv.addObject("result", fileName);
-		mv.setViewName("common/ajaxResult");
-		
-		return mv;
-		
-	}
-	
-	@PostMapping("summerFileDelete")
-	public ModelAndView setSummerFileDelete(String fileName) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		boolean result = socialService.setSummerFileDelete(fileName);
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
-		
-		return mv;
 	}
 
 }

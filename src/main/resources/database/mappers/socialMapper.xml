@@ -6,12 +6,10 @@
 <mapper namespace="com.mm.market.social.SocialMapper">
 
 	<select id="getList" resultMap="selectResult" parameterType="SocialPager">
-		select S.*, M.*, SC.*, SF.*
+		select S.*, M.*, SC.*
 		from social S
 		left join member M
 		on S.username = M.username
-		left join socialFile SF
-		on S.socialNum = SF.socialNum
 		inner join socialCategory SC
 		on S.categoryCode = SC.categoryCode
 		inner join location L
@@ -32,9 +30,8 @@
 	</select>
 
 	<select id="getSelect" resultMap="selectResult" parameterType="SocialVO">
-		select S.*, SC.*, SF.*
-		from social S left join socialFile SF
-		on S.socialNum = SF.socialNum
+		select S.*, SC.*
+		from social S
 		inner join socialCategory SC
 		on S.categoryCode = SC.categoryCode
 		inner join location L
@@ -63,12 +60,6 @@
 			<id property="username" column="username" />
 			<result property="name" column="name" />
 		</association>
-		<collection property="files" javaType="java.util.List" ofType="SocialFileVO">
-			<id column="fileNum" property="fileNum" />
-			<result column="socialNum" property="socialNum" />
-			<result column="fileName" property="fileName" />
-			<result column="originName" property="originName" />
-		</collection>
 		<collection property="goods" javaType="GoodVO">
 			<id column="goodNum" property="goodNum"/>
 			<result column="socialNum" property="socialNum"/>
@@ -94,23 +85,6 @@
 		(#{socialNum}, #{socialTitle}, #{categoryCode}, #{username},
 		#{socialContent}, now())
 	</insert>
-
-	<insert id="setFileInsert" parameterType="SocialFileVO">
-		insert into socialFile
-		(socialNum, fileName, originName)
-		values (#{socialNum}, #{fileName},
-		#{originName})
-	</insert>
-
-	<delete id="setFileDelete" parameterType="SocialFileVO">
-		delete socialFile where
-		fileNum=#{fileNum}
-	</delete>
-
-	<select id="getFileSelect" parameterType="SocialFileVO"
-		resultType="SocialFileVO">
-		select * from socialFile where fileNum=#{fileNum}
-	</select>
 
 	<update id="setUpdate" parameterType="SocialVO">
 		update social set
