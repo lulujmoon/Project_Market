@@ -55,7 +55,7 @@
 				where (recvUser=#{recvUser} and sendUser=#{username} or sendUser=#{sendUser} and recvUser = #{username})
 			</otherwise>
 		</choose>
-		order by sendtime asc
+		order by num asc
 	</select>
 	
 	<!-- 메세지 읽음 처리 -->

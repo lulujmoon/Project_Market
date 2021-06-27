@@ -44,15 +44,6 @@
 	            <div class="recent_heading">
 	              <h4>Recent</h4>
 	            </div>
-	            <!-- 메세지 검색 -->
-	            <!-- <div class="srch_bar">
-	              <div class="stylish-input-group">
-	                <input type="text" class="search-bar"  placeholder="Search" >
-	                <span class="input-group-addon">
-	                <button type="button" value="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-	                </span> 
-	              </div>
-	            </div> -->
 	          </div>
 	          
 	          <!-- 메세지 리스트 -->
@@ -100,19 +91,14 @@
 					let room = $(this).attr('room');
 					let otherUser = $(this).attr('otherUser');
 					
-					/* // 선택한 메세지빼고 나머지는 active 효과 해제하기
-					$('.chat_list_box').not('.chat_list_box.chat_list_box'+room).removeClass('active_chat');
-					// 선택한 메세지만 active 효과 주기
-					$('.chat_list_box'+room).addClass('active_chat'); */
-					
 					let send_msg = "";
 					send_msg += "<div class='type_msg'>";
 					send_msg += "	<div class='input_msg_write row'>";
 					send_msg += "		<div class='col-11'>";
-					send_msg += "			<input type='text' class='write_msg form-control' placeholder='메세지를 입력...' />";
+					send_msg += "			<input type='text' class='write_msg' placeholder='메세지를 입력...' />";
 					send_msg += "		</div>";
 					send_msg += "		<div class='col-1'>";
-					send_msg += "			<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+					send_msg += "			<button class='msg_send_btn' type='button'><i aria-hidden='true'></i></button>";
 					send_msg += "		</div>";
 					send_msg += "	</div>";
 					send_msg += "</div>";
@@ -126,11 +112,7 @@
 						// 메세지 전송 함수 호출
 						SendMessage(room, otherUser);
 						
-						// 전송버튼을 누르면 메세지 리스트가 리로드 되면서 현재 열린 메세지의 선택됨 표시가 사라진다.
-						// 이걸 해결하기 위해 메세지 전송버튼을 누르고 메세지 리스트가 리로드되면 메세지 리스트의 첫번째 메세지(현재 열린 메세지)가 선택됨 표시 되도록 한다.
-						//$('.chat_list_box:first').addClass('active_chat');
 					});
-					
 					
 					// 메세지 내용을 불러오는 함수 호출
 					MessageContentList(room);
@@ -160,19 +142,14 @@
 					let room = $(this).attr('room');
 					let otherUser = $(this).attr('otherUser');
 					
-					/* // 선택한 메세지빼고 나머지는 active 효과 해제하기
-					$('.chat_list_box').not('.chat_list_box.chat_list_box'+room).removeClass('active_chat');
-					// 선택한 메세지만 active 효과 주기
-					$('.chat_list_box'+room).addClass('active_chat'); */
-					
 					let send_msg = "";
 					send_msg += "<div class='type_msg'>";
 					send_msg += "	<div class='input_msg_write row'>";
 					send_msg += "		<div class='col-11'>";
-					send_msg += "			<input type='text' class='write_msg form-control' placeholder='메세지를 입력...' />";
+					send_msg += "			<input type='text' class='write_msg' placeholder='메세지를 입력...' />";
 					send_msg += "		</div>";
 					send_msg += "		<div class='col-1'>";
-					send_msg += "			<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
+					send_msg += "			<button class='msg_send_btn' type='button'><i aria-hidden='true'></i></button>";
 					send_msg += "		</div>";
 					send_msg += "	</div>";
 					send_msg += "</div>";
@@ -186,9 +163,6 @@
 						// 메세지 전송 함수 호출
 						SendMessage(room, otherUser);
 						
-						// 전송버튼을 누르면 메세지 리스트가 리로드 되면서 현재 열린 메세지의 선택됨 표시가 사라진다.
-						// 이걸 해결하기 위해 메세지 전송버튼을 누르고 메세지 리스트가 리로드되면 메세지 리스트의 첫번째 메세지(현재 열린 메세지)가 선택됨 표시 되도록 한다.
-						//$('.chat_list_box:first').addClass('active_chat');
 					});
 					
 					// 메세지 내용을 불러오는 함수 호출
@@ -196,9 +170,6 @@
 					
 				});
 				
-				// 전송버튼을 누르면 메세지 리스트가 리로드 되면서 현재 열린 메세지의 선택됨 표시가 사라진다.
-				// 이걸 해결하기 위해 메세지 전송버튼을 누르고 메세지 리스트가 리로드되면 메세지 리스트의 첫번째 메세지(현재 열린 메세지)가 선택됨 표시 되도록 한다.
-				$('.chat_list_box:first').addClass('active_chat');
 			}
 		})
 	};
@@ -238,7 +209,6 @@
 	const SendMessage = function(room, otherUser){
 		
 		let content = $('.write_msg').val();
-		//alert("content: " + content);
 		
 		content = content.trim();
 		
@@ -278,8 +248,6 @@
 		// 메세지 리스트 리로드
 		FirstMessageList();
 	});
-	
-	
 	
 	
 	</script>
