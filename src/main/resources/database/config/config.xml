@@ -24,7 +24,6 @@
 		<typeAlias type="com.mm.market.social.GoodVO" alias="GoodVO"/>
 	    <typeAlias type="com.mm.market.socialCategory.SocialCategoryVO" alias="SocialCategoryVO"/>
 	    <typeAlias type="com.mm.market.comment.CommentVO" alias="CommentVO"/>
-	    <typeAlias type="com.mm.market.message.MessageVO" alias="MessageVO"/>
 	    <typeAlias type="com.mm.market.util.Pager" alias="Pager"/>
 	    <typeAlias type="com.mm.market.util.ProductPager" alias="ProductPager"/>
 		<typeAlias type="com.mm.market.util.SocialPager" alias="SocialPager"/>

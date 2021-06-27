@@ -9,12 +9,12 @@
 				<div class="chat_img" >
 						<img src="/resources/upload/member/${tmp.profile}" alt="상대방 프로필" width="50px" height="50px">
 				</div>
-				<div >
-					<h5>${tmp.otherUser}<span>${tmp.sendTime}</span>
-					</h5>
+				<div>
+					<h5>${tmp.otherUser}</h5><br>
+					<span>${tmp.sendTime}</span>
 					<div class="row">
 						<div>
-							<p>${tmp.content}</p>
+							<span>${tmp.content}</span>
 						</div>
 						<%-- 만약 현재사용자가 안읽은 메세지 갯수가 0보다 클때만 badge를 표시한다. --%>
 						<c:if test="${tmp.unread > 0 }">

@@ -45,5 +45,6 @@
 }
 
 .active_chat {
+	width: auto;
 	background-color: blue;
 }
