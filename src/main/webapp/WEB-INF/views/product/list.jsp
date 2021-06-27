@@ -28,10 +28,12 @@
 		</ul>
 		<h3 class="top__title">지역</h3>
 		<ul class="top__list list-myLocation">
-			<li class="top__item-location code_0"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>		
-			<c:forEach begin="1" end="3" var="i">
-				<li class="top__item-location code_${i}"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
-			</c:forEach>
+			<li class="top__item-location code_0"><a href="./list?page=1&categoryCode=${pager.categoryCode}&keyword=${pager.keyword}">전체</a></li>
+			<c:if test="${locations.size()!=0}">
+				<c:forEach begin="1" end="3" var="i">
+					<li class="top__item-location code_${i}"><a href="./list?page=1&categoryCode=${pager.categoryCode}&myLocation=${i}&keyword=${pager.keyword}">${locations[i].locationName}</a></li>
+				</c:forEach>
+			</c:if>
 		</ul>
 	</div>
 	<div class="list-container">
@@ -46,18 +48,21 @@
 					<div class="prd__card" onclick="goSelect(${product.productNum})">
 						<c:if test="${product.files[0].fileName != null}">
 							<img class="card__img" src="/resources/upload/product/${product.files[0].fileName}">
+							<input type="hidden" class="category" value="${product.categoryCode}">
 						</c:if>
 						<c:if test="${product.files[0].fileName == null}">
 							<img class="card__img" src="/resources/images/productDefault.jpg">
 						</c:if>
 						<div class="card__info">
 							<div class="info__name"> ${product.productName}</div>
+							<div class="hidden info__category">${product.categoryCode}</div>
 							<div class="info__price">${product.productPrice}</div>
 							<div class="info__date">${product.productDate}</div>
 							<div class="info__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 						</div>
 					</div>
 				</c:forEach>
+				<input type="hidden" id="size" value="${products.size()}">
 			</div>
 			<ul class="page-container list-page">
 				<c:if test="${pager.pre}">

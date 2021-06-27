@@ -67,10 +67,10 @@
 		</div>
 		<div class="form-group">
 			<div class="form-title">가격</div>
-			<input type="text" name="productPrice" class="product-price form-content" required placeholder="숫자만 입력해주세요.">
+			<input type="text" name="productPrice" class="product-price form-content" required placeholder="무료나눔은 0을 입력하세요.">
 			<div class="form-title">가격 제안</div>
 			<input type="radio" name="productNego" value="1" id="nego-enabled">&nbsp;<label for="nego-enabled">가능</label>&nbsp;&nbsp;&nbsp;
-			<input type="radio" name="productNego" value="0" id="nego-disabled">&nbsp;<label for="nego-disabled">불가</label>
+			<input type="radio" name="productNego" value="0" id="nego-disabled" checked>&nbsp;<label for="nego-disabled">불가</label>
 		</div>
 		<div class="form-group">
 			<div class="form-title">지역</div>
@@ -82,7 +82,10 @@
 				</select>
 				<i class="fas fa-sort-down"></i>
 			</div>
-			<div class="form-info">내 지역으로 저장한 지역을 선택할 수 있습니다.</div>
+			<div class="form-info">
+				내 지역으로 저장한 지역을 선택할 수 있습니다.
+				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></a>
+			</div>
 		</div>
 		<div class="btn-wrapper">
 			<input type="button" class="btn-presubmit" value="등록">

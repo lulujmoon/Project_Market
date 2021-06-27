@@ -26,7 +26,7 @@
 				<button class="btn btn-edit">수정</button>
 				<button class="btn btn-submit">완료</button>
 				<button class="btn btn-cancel">취소</button>
-				<button class="btn btn-delete active" onclick="deleteMember('${principal.username}')">탈퇴</button>
+				<button class="btn btn-delAcc active" onclick="deleteMember('${principal.username}')">탈퇴</button>
 			</div>
 		</div>
 		<form id="info-form" action="./update" method="post">
@@ -38,7 +38,7 @@
 			<div class="info-group">
 				<div class="info__title">Password</div>
 				<div class="info__content">********</div>
-				<input class="info__input" type="password" name="password" placeholder="변경 시에만 입력하세요.">
+				<input class="info__input" type="password" name="password" placeholder="영문, 숫자, 특수기호 조합, 8-20자">
 			</div>
 			<div class="info-group">
 				<div class="info__title">Name</div>
@@ -97,7 +97,7 @@
 
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
-<script src="/t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="../resources/js/memberInfo.js"></script>
 </body>
 </html>

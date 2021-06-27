@@ -28,7 +28,8 @@ public class SocketHandler extends TextWebSocketHandler {
 	@Override	//현재 방번호를 가져오고 방정보+세션정보를 관리하는 rls리스트 컬랙션에서 데이터를 조회한 후  해당 Hashmap을 임시 맵에 파밍하여 roomNumber의 키 값을 제외한 모든 세션키값들을 웹소켓을 통해 메시지를 보냄(방구분)
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
-		System.out.println("handleTextMessage : " + session + " : " + message);
+		//System.out.println("handleTextMessage : " + session + " : " + message);
+//		System.out.println(message.getPayload());
 		// 메시지 발송 (메시지를 수신하면 실행됨)
 		String msg = message.getPayload();
 		JSONObject obj = jsonToObjectParser(msg);
@@ -66,7 +67,7 @@ public class SocketHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		// 소켓 연결
-		System.out.println("afterConnectionEstablishd : " + session);
+		//System.out.println("afterConnectionEstablishd : " + session);
 		super.afterConnectionEstablished(session);
 		boolean flag = false;
 		String url = session.getUri().toString();
@@ -100,22 +101,29 @@ public class SocketHandler extends TextWebSocketHandler {
 		//생성된 세션을 저장하면 발신메시지 타입은 getId라고 명시 후 생성된 세션ID값을 클라이언트단으로 발송
 		//클라이언트단에서는 type값을 통해 메시지와 초기 설정값을 구분
 		obj.put("type", "getId");
+		obj.put("userName", session.getPrincipal().getName());
 		obj.put("sessionId", session.getId());
-		session.sendMessage(new TextMessage(obj.toJSONString()));
+		TextMessage message = new TextMessage(obj.toJSONString());
+		session.sendMessage(message);
+		//System.out.println(message.getPayload());
+		/* session.sendMessage(new TextMessage(session.getId() + "님이 입장했습니다.")); */
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println("afterConnectionClosed : " + session + " : " + status);
+		//System.out.println("afterConnectionClosed : " + session + " : " + status);
 		// 소켓 종료
 		if(rls.size()>0) { //소켓이 종료되면 해당 세션값들을 찾아서 지움
 			for(int i=0;i<rls.size();i++) {
 				rls.get(i).remove(session.getId());
 			}
 		}
+		/* session.sendMessage(new TextMessage(session.getId() + "님이 퇴장했습니다.")); */
 		super.afterConnectionClosed(session, status);
 	}
 
+	
+	
 	private static JSONObject jsonToObjectParser(String jsonStr){
 		JSONParser parser = new JSONParser();
 		JSONObject obj = null;

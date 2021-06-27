@@ -1,5 +1,6 @@
 package com.mm.market.member;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -16,8 +17,11 @@ import com.mm.market.memberLocation.MemberLocationVO;
 import com.mm.market.product.HeartVO;
 import com.mm.market.product.ProductService;
 import com.mm.market.product.ProductVO;
+import com.mm.market.review.ReviewService;
+import com.mm.market.review.ReviewVO;
 import com.mm.market.util.Pager;
 import com.mm.market.util.ProductPager;
+import com.mm.market.util.ReviewPager;
 
 @Controller
 @RequestMapping("/store/**")
@@ -32,8 +36,11 @@ public class StoreController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private ReviewService reviewService;
+	
 	@GetMapping("{code}/products")
-	public ModelAndView products(@PathVariable("code") Long code, Authentication authentication, ModelAndView mv) throws Exception {
+	public ModelAndView products(@PathVariable("code") Long code, ProductPager productPager, Authentication authentication, ModelAndView mv) throws Exception {
 		
 		MemberVO memberVO = new MemberVO();
 		memberVO.setCode(code);
@@ -45,14 +52,20 @@ public class StoreController {
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
 		
-		ProductPager productPager = new ProductPager();
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setReviewee(memberVO.getUsername());
+		reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+		
+		
 		productPager.setUsername(memberVO.getUsername());
-		List<ProductVO> productList = productService.getList(productPager, 12L, 5L);
+		List<ProductVO> productList = productService.getList(productPager, 16L, 5L);
 		
 		mv.addObject("member", memberVO);
 		mv.addObject("file", memberFileVO);
 		mv.addObject("locations", locationList);
+		mv.addObject("rating", reviewVO);
 		mv.addObject("products", productList);
+		mv.addObject("pager", productPager);
 		mv.setViewName("/store/products");
 		return mv;
 	}
@@ -80,10 +93,36 @@ public class StoreController {
 		
 		return mv;
 	}
-	
+
 	@GetMapping("{code}/reviews")
-	public String reviews(@PathVariable("code") Long code) throws Exception {
-		return "/store/reviews";
+	public ModelAndView getLists(@PathVariable("code") Long code, ReviewPager reviewPager, ModelAndView mv) throws Exception {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setCode(code);
+		memberVO = memberService.getSelectByCode(memberVO);
+		
+		reviewPager.setReviewee(memberVO.getUsername());
+		List<ReviewVO> reviewList = reviewService.getListByReviewee(reviewPager, 10L);
+		
+		MemberFileVO revieweeFileVO = memberService.selectFile(memberVO);
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setReviewee(memberVO.getUsername());
+		reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+		
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		memberLocationVO.setUsername(memberVO.getUsername());
+		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+
+		mv.addObject("member", memberVO);
+		mv.addObject("file", revieweeFileVO);
+		mv.addObject("locations", locationList);
+		mv.addObject("rating", reviewVO);
+		mv.addObject("reviewPager", reviewPager);
+		mv.addObject("reviews", reviewList);
+
+		mv.setViewName("store/reviews");
+
+		return mv;
 	}
 	
 	@GetMapping("{code}/socials")

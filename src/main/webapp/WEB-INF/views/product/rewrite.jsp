@@ -8,89 +8,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <c:import url="../template/setting.jsp"></c:import>
-
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<title>Hello, world!</title>
-<style>
-img {
-	width: 100px;
-	height: 100px;
-}
-</style>
+<link rel="stylesheet" href="/resources/css/productNote.css"> 
+<title>판매상품 등록</title>
 </head>
 <body>
-<h2>Product Rewrite Page</h2>
-	<form class="form" id="uploadFrom" title="${vo.files.size()}" action="./rewrite" method="POST" enctype="multipart/form-data" onsubmit="return submitCheck();">
-	<input type="hidden" name="productNum" value="${vo.productNum}">
-	
-	
-			<div id=file>
-			<input type="button" id="add" value="ADD">
-			<div id="thumb">
-				<div class="inputimg">
-						<input type="file" name="file" accept="image/*" required class="img" onchange="previewImage(this,0)">
-						<input type="button" class="del" value="Delete">
-						<div id="preview0"></div>
-					</div>
-					
-			<c:forEach items="${files}" var="files" varStatus="status">
-				<div class="inputimg">
-					<input type="button" class="del" value="Delete" title="${files.fileNum}">
-					<div id="preview${status.count}">
-						<img src="/resources/upload/product/${files.fileName}">
-					</div>
-				</div>
-			</c:forEach>
-			
-			 </div>
-			</div>
+<c:import url="../template/header.jsp"></c:import>
 
+<div class="container">
+	<div class="title-container">
+		상품 정보 수정
+	</div>
+	<form action="./rewrite" method="POST" enctype="multipart/form-data" id="upload-form">
+		<input type="hidden" name="username" value="${principal.username}">
+		<input type="hidden" name="productNum" value="${product.productNum}">
 		<div class="form-group">
-	    <label>상품 명</label>
-	    <input type="text" name="productName" value="${vo.productName}" required>
-	  </div>
-	    <div class="form-group">
-	    <label>판매자</label>
-	    <input readonly="readonly" type="text" name="username" value="${principal.username}">
-	  </div>
-	  	<div>
-		  <div class="form-group">
-		    <label for="category">카테고리</label>
-		    <select class="form-control" id="category" name="categoryCode" value="${vo.categoryCode}">
-		      <option value="1">디지털/가전</option>
-		      <option value="2">가구/인테리어</option>
-		      <option value="3">유아동/유아도서</option>
-		      <option value="4">생활/가공식품</option>
-		      <option value="5">스포츠/레저</option>
-		      <option value="6">여성의류</option>
-		      <option value="7">여성잡화</option>
-		      <option value="8">남성의류</option>
-		      <option value="9">남성잡화</option>
-		      <option value="10">게임/취미</option>
-		      <option value="11">뷰티/미용</option>
-		      <option value="12">반려동물용품</option>
-		      <option value="13">도서/티켓/음반</option>
-		      <option value="14">삽니다</option>
-		    </select>
-		  </div>
+			<div class="form-title">상품 이미지</div>
+			<div class="preview-container">
+				<div class="add">
+					<i class="fas fa-camera"></i>
+					이미지 추가
+				</div>
+				<div class="inputs"></div>
+				<c:if test="${files[0].fileNum != null}">
+					<c:forEach begin="0" end="${files.size()-1}" var="i" varStatus="status">
+						<div class="preview preview_0 preview_0_${i}">
+							<img src="/resources/upload/product/${files[i].fileName}">
+						</div>
+						<div class="del-wrapper">
+							<div class="btn-del del_0 del_0_${i}" onclick="deleteFileInDB(${files[i].fileNum})">
+								<i class="fas fa-times"></i>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
+			</div>
 		</div>
-	    <div class="form-group">
-	    <label for="productContents">상품 설명</label>
-	    <textarea id="productContent" rows="5" name="productContent">${vo.productContent}</textarea>
-	  </div>
-	    <div class="form-group">
-	    <label>상품 가격</label>
-	    <input type="text" name="productPrice" value="${vo.productPrice}" required>
-	  </div>
-	  
+		<div class="preview-info">최대 7장까지 추가할 수 있습니다.</div>
+		<div class="form-group">
+			<div class="form-title">상품명</div>
+			<input type="text" name="productName" class="form-content" value="${product.productName}" required placeholder="상품명을 입력해주세요.">				
+		</div>
+		<div class="form-group">		
+			<div class="form-title">카테고리</div>
+			<div class="form-content form-content-select">
+				<select class="form-select" id="category" name="categoryCode">
+				  <c:forEach items="${categories}" var="category">
+				  	<option value="${category.categoryCode}"
+				  		<c:if test="${category.categoryCode == product.categoryCode}">selected</c:if>
+				  	>${category.categoryName}</option>
+				  </c:forEach>
+				</select>
+				<i class="fas fa-sort-down"></i>
+			</div>
+			<div class="form-info">카테고리를 선택해주세요.</div>
+		</div>
+		<div class="form-group">
+			<div class="form-title">상품 설명</div>
+			<textarea class="form-content" id="productContent" name="productContent" required placeholder="상품 설명을 입력해주세요.">
+				${product.productContent}
+			</textarea>
+		</div>
+		<div class="form-group">
+			<div class="form-title">가격</div>
+			<input type="text" name="productPrice" class="product-price form-content" value="${product.productPrice}" required placeholder="숫자만 입력해주세요.">
+		</div>
+		<div class="form-group">
+			<div class="form-title">지역</div>
+			<div class="form-content form-content-select">
+				<select class="form-select" id="locationCode" name="locationCode">
+					<c:forEach items="${locations}" var="location">
+				   <option value="${location.locationCode}"
+				   	<c:if test="${location.locationCode == product.locationCode}">selected</c:if>
+				   >${location.locationName}</option>
+				  </c:forEach>
+				</select>
+				<i class="fas fa-sort-down"></i>
+			</div>
+			<div class="form-info">내 지역으로 저장한 지역을 선택할 수 있습니다.</div>
+		</div>
+		<div class="btn-wrapper">
+			<input type="button" class="btn-presubmit" value="등록">
+		</div>
+	<button class="btn-submit"></button>
+	</form>
+</div>
 
-	 <button id="insertbtn" class="btn btn-outline-secondary">Write</button><br><br><br>
-</form>
 
-<script type="text/javascript" src="../resources/js/fileUpdate.js"></script>
+<c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/productNote.js"></script>
 </body>
 </html>

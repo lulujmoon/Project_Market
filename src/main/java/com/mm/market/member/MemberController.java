@@ -1,5 +1,6 @@
 package com.mm.market.member;
 
+import java.net.PasswordAuthentication;
 import java.security.Principal;
 import java.util.Enumeration;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.UUID;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -339,18 +339,21 @@ public class MemberController {
 		return "redirect:../";
 	}
 	
+	@GetMapping("search")
+	public void getEmail()throws Exception{
+		
+	}
 	
 	@PostMapping("search")
-	public String getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
+	public ModelAndView getEmail(MemberVO memberVO, ModelAndView mv)throws Exception{
 		memberVO = memberService.getEmail(memberVO);		
-
-		mv.addObject("dto",memberVO);
-		mv.setViewName("member/search");
-				
+		if(memberVO==null) {
+			mv.addObject("alert", "fail");
+			mv.setViewName("member/search");
+		}else {
 		String uuid = UUID.randomUUID().toString();		
 		memberVO.setPassword(uuid);		
 		memberService.setUpdate(memberVO);
-		
 		
 		//smtp서버명
 		  String host     = "smtp.naver.com";
@@ -366,8 +369,8 @@ public class MemberController {
 		  props.put("mail.smtp.auth", "true");
 
 		  Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-		   protected PasswordAuthentication getPasswordAuthentication() {
-		    return new PasswordAuthentication(user, password);
+		   protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+		    return new javax.mail.PasswordAuthentication(user, password);
 		   }
 		  });
 
@@ -389,9 +392,12 @@ public class MemberController {
 		   System.out.println("message sent successfully...");
 		  } catch (MessagingException e) {
 		   e.printStackTrace();
-		  }	  		
-		
-		return "redirect:./login" ;
+		  }
+		  
+		mv.addObject("alert", "success");
+		mv.setViewName("member/search");
+		}
+		return mv;
 	}
 
 	//-----------------shop	

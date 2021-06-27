@@ -46,20 +46,38 @@
 					<div class="top__small top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
 					<div class="top__small top__productDate">${product.productDate}</div>
 				</div>
-				<div class="top__small top__category"><i class="fas fa-tag"></i> ${product.category.categoryName}</div>
+				<div class="top__small top__category"><i class="fas fa-tag"></i>${product.category.categoryName}</div>
 				<div class="top__small top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
 			<div class="top__btns">
-				<div class="top-btn btn-contact"><a type="button" href="/chat/room">연락하기</a></div>
-				<div class="top-btn btn-nego">가격 제안하기</div>
-				<div class="btn-heart"></div>
-				<div class="btn-report"><i class="fas fa-exclamation-triangle"></i>
-					<a href="/report/report?productNum=${product.productNum}">신고</a></div>
+				<c:if test="${principal.username eq product.username}">
+					<div class="dropdown"> 
+					<input type="hidden" id="productStatus" value="${product.productStatus}">
+					<form action="/product/setStatus?productNum=${product.productNum}" method="post">
+					<div class="form-group">
+						  <label for="sel1">상태 변경</label>
+						  <select class="form-control" id="status" name="productStatus" onchange="submit()">
+						    <option>판매 중</option>
+						    <option>예약 중</option>
+						    <option>판매완료</option>
+						  </select>
+						</div>
+						</form>
+					</div>
+					
+					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
+					<a class="top-btn btn-contact" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
+					<a class="top-btn btn-del" href="../delete/${product.productNum}" onclick="if(confirm('삭제하시겠습니까?')==false){return false;}">삭제하기</a>
+				</c:if>
+				<c:if test="${principal.username != product.username}">
+					<div class="top-btn btn-contact" onclick="location.href='/chat/room'">연락하기</div>
+					<div class="top-btn btn-nego">가격 제안하기</div>
+					<div class="btn-heart"></div>
+					<div class="btn-report" onclick="openReport('${product.productNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
+				</c:if>
 			</div>
 			<c:if test="${principal.username eq product.username}">
-			<div class="top-btn btn-contact"><a type="button" href="/product/update?productNum=${product.productNum}">수정하기</a></div>	
-			<div class="top-btn btn-contact"><a type="button" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a></div>	
 			</c:if>
 			<div class="hidden">
 				<input type="hidden" class="heartValue" value="${heart}">
@@ -77,9 +95,9 @@
 				<div class="seller__joinDate">${seller.joinDate}</div>
 			</div>
 			<div class="seller__rating">
-				<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">6</div> (15)</div>
-				<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">7</div> (23)</div>
-				<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">8</div> (23)</div>
+				<div class="rating__content"><div class="rating__title">상품 상태</div> <div class="rate">${rating.avgState}</div> (${rating.countState})</div>
+				<div class="rating__content"><div class="rating__title">거래 매너</div> <div class="rate">${rating.avgManner}</div> (${rating.countManner})</div>
+				<div class="rating__content"><div class="rating__title">응답 속도</div> <div class="rate">${rating.avgSpeed}</div> (${rating.countSpeed})</div>
 			</div>
 		</div>
 		<div class="product-content">
@@ -90,6 +108,9 @@
 </div>
 
 <c:import url="../template/footer.jsp"></c:import>
+<script type="text/javascript">
+
+</script>
 <script type="text/javascript" src="/resources/js/common.js"></script>
 <script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/productSelect.js"></script>

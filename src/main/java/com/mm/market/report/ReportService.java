@@ -17,8 +17,14 @@ public class ReportService {
         message.setTo(ReportService.FROM_ADDRESS);
         message.setFrom(reportVO.getAddress());
         message.setSubject(reportVO.getTitle());
-        message.setText(reportVO.getMessage());
-
+        
+        String text = "신고자: " +reportVO.getUsername()+"\n";
+        text = text + "상품 링크: http://localhost/product/select/"+reportVO.getProductNum()+"\n";
+        text = text+ "신고 내용: \n" + reportVO.getMessage();
+        
+        System.out.println(text);
+        message.setText(text);
+        
         mailSender.send(message);
     }
 }
