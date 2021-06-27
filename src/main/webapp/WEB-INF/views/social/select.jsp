@@ -58,6 +58,7 @@
 			<i class="fas fa-heart"></i> ${social.socialGood}
 		</div>
 		<div class="btn-good"></div>
+		<div class="btn-report" onclick="openSocialReport('${social.socialNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 	</div>
 	<div class="hidden">
 		<input type="hidden" class="goodval" value="${good}">
