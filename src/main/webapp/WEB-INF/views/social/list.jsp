@@ -5,63 +5,57 @@
 <html>
 <head>
 <c:import url="../template/setting.jsp"></c:import>
-<title>우리동네</title>
+<title>우리 동네</title>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<link rel="stylesheet" href="/resources/css/socialList.css">
+<link rel="stylesheet" href="/resources/css/socialList.css"/>
+<link rel="stylesheet" href="/resources/css/socialCard.css"/>
 </head>
 <body>
-	<c:import url="../template/header.jsp"></c:import>
-	<div class="container">
-		<h2>우리동네</h2>
+<c:import url="../template/header.jsp"></c:import>
+<div class="container">
+	<input type="hidden" class="category" value="category" name="categoryCode">
+	<h2>우리동네</h2>
+	<div class="category-container">
+		<h3 class="category__title">카테고리</h3>
+		<ul class="category__list">
+			<c:forEach items="${categories}" var="category">
+				<li class="category__item"><a href="./list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
+			</c:forEach>
+		</ul>
+	</div>
+	<div class="social-container">
+		<c:forEach items="${list}" var="social">					
+			<div class="scl__card" onclick="goSelect(${social.socialNum})">
+				<div class="scl__top-wrapper">
+					<div class="scl__title">${social.socialTitle}</div>
+					<div class="scl__date">${social.socialDate}</div>
+				</div>
+				<div class="scl__mid-wrapper">
+					<div class="scl__writer">${social.writer.name}</div>
+					<span>&middot;</span>
+					<div class="scl__location">지역</div>
+					<span>&middot;</span>
+					<div class="scl__category">${social.socialCategory.categoryName}</div>
+				</div>
+				<div class="scl__content">${social.socialContent}</div>
+				<div class="scl__response">
+					<div class="scl__good"><i class="far fa-thumbs-up"></i> 0</div>
+					<div class="scl__comment"><i class="far fa-comment-dots"></i> 2</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>	
 
-		<div class="category-container">
-			<ul class="category-list">
-				<c:forEach items="${categories}" var="category">
-					<li>
-						<a href="./list?categoryCode=${category.categoryCode}"
-							onclick="${category.categoryCode}">${category.categoryName}</a>
-					</li>
-				</c:forEach>
-			</ul>
-
-			<input type="hidden" class="category" value="category" name="categoryCode">
-			<table class="table-box">
-				<thead class="thead-dark">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성 날짜</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${list}" var="dto">
-						<tr>
-							<td>${dto.socialNum}</td>
-							<td><a href="./select?socialNum=${dto.socialNum}">${dto.socialTitle}</a></td>
-							<td>${dto.username}</td>
-							<td>${dto.socialDate}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-
-		<ul class="pagination">
+		<ul class="page-container">
 			<c:if test="${pager.pre}">
-				<li class="page-item">
-					<a class="page-link p" href="#" title="${pager.startNum-1}">이전</a>
+				<li><a class="page-item arrow" href="#" title="${pager.startNum-1}">이전</a>
 				</li>
 			</c:if>
 			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<li class="page-item ">
-					<a class="page-link p" href="#" title="goPage('${pager.search}', ${i})">${i}</a>
-				</li>
+				<li><a class="page-item code_${i}" href="#" title="goPage('${pager.search}', ${i})">${i}</a></li>
 			</c:forEach>
 			<c:if test="${pager.next}">
-				<li class="page-item">
-					<a class="page-link p" href="#"	title="goPage(${pager.search}, ${pager.lastNum+1})">다음</a>
-				</li>
+				<li class="page-item"><a class="page-item arrow" href="#"	title="goPage(${pager.search}, ${pager.lastNum+1})">다음</a></li>
 			</c:if>
 		</ul>
 
@@ -88,5 +82,6 @@
 	<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
 	<script type="text/javascript" src="/resources/js/functions.js"></script>
+	<script type="text/javascript" src="/resources/js/socialList.js"></script>
 </body>
 </html>
