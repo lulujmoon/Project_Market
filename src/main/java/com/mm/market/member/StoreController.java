@@ -134,6 +134,10 @@ public class StoreController {
 	public String myReviews(@PathVariable("code") Long code, ReviewPager reviewPager, Authentication authentication, ModelAndView mv) throws Exception {
 		//본인 확인이 필요하다
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		if(memberVO.getCode() != code) {
+			mv.addObject("alert", "잘못된 접근입니다.");
+		}
+		
 		return "";
 	}
 		
