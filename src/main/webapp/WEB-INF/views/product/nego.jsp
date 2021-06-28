@@ -20,7 +20,7 @@
 		<input type="hidden" name="notiRecvUser" value="${product.username}">
 		
 		<div>제안할 가격을 입력하세요</div>
-		<input type="number" min="0" name="notiContent">
+		<input type="number" name="notiContent">
 		<input type="submit"> 
 	</form>
 </body>

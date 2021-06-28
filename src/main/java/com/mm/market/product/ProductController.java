@@ -361,7 +361,16 @@ public class ProductController {
 	
 	//가격 제안하기 페이지
 	@GetMapping("nego")
-	public void setNego(ProductVO productVO)throws Exception{
+	public void setNego(ProductVO productVO, Authentication auth)throws Exception{
+		MemberVO memberVO = (MemberVO)auth.getPrincipal();
+		String username = memberVO.getUsername();
 		
+		productVO = productService.getSelect(productVO);
+		Long productNum = productVO.getProductNum();
+		
+		String seller = productVO.getUsername();
+		System.out.println("sendUser: "+username);
+		System.out.println("productNum: "+productNum);
+		System.out.println("seller: "+seller);
 	}
 }
