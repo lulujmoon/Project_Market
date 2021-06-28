@@ -22,7 +22,8 @@
 				<div class="ntc__left">
 					<div class="ntc__title">
 						읽음 유무 : ${noti.notiReadChk}
-						<a href="/product/select/${noti.product.productNum}">[ ${noti.product.productName} ]</a> ${noti.notiSendUser}님이 가격제안을 하셨어요!
+						<a href="/product/select/${noti.product.productNum}">[ ${noti.product.productName} ]</a>
+						<a href="/notification/select?notiNum=${noti.notiNum}">${noti.notiSendUser}님이 가격제안을 하셨어요!</a>
 					</div>
 					<div class="ntc__date">
 						${noti.notiSendTime}

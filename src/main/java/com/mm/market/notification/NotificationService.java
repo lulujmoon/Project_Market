@@ -26,10 +26,11 @@ public class NotificationService {
 		return list;
 	}
 	
+	public int notiReadChk(NotificationVO notificationVO) throws Exception {
+		return notificationMapper.notiReadChk(notificationVO);
+	}
+	
 	public NotificationVO notiSelect(NotificationVO notificationVO) throws Exception {
-		
-		notificationMapper.notiReadChk(notificationVO);
-		
 		return notificationMapper.notiSelect(notificationVO);
 	}
 	
