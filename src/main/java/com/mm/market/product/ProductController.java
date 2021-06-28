@@ -144,16 +144,20 @@ public class ProductController {
 			String username = memberVO.getUsername();
 			chatVO.setUsername(username);
 			System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
+			System.out.println("productNum:"+productVO.getProductNum());
 			List<ChatVO> list = chatService.chatList(chatVO);
 			System.out.println("list : "+list);
 			
+			
 			if(list.size()<1) {
 				model.addAttribute("chat", 0);
+				model.addAttribute("product",productVO);
 			} else {
 				for(int i=0;i<list.size();i++) {
 					if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
 						model.addAttribute("chat", list.get(i).getOtherUser());
 					} else {
+						model.addAttribute("product",productVO);						
 						model.addAttribute("chat", 0);
 					}
 				}
