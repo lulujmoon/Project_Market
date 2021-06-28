@@ -47,7 +47,7 @@ public class ProductController {
 	private ProductService productService;
 	
 	@Autowired
-	private ChatService chatService;
+	private ChatService chatService;	
 
 	@Autowired
 	private CategoryMapper categoryMapper;
@@ -85,7 +85,7 @@ public class ProductController {
 
 		List<CategoryVO> categories = categoryMapper.getList();
 
-		
+
 		model.addAttribute("products", productList);
 		model.addAttribute("pager", productPager);
 		model.addAttribute("myLocation", myLocation);
@@ -290,7 +290,7 @@ public class ProductController {
 
 
 	@GetMapping("rewrite")
-	public ModelAndView setRewrite(ProductVO productVO, ModelAndView mv) throws Exception{
+	public ModelAndView setRewrite(ProductVO productVO, Authentication authentication, ModelAndView mv) throws Exception{
 		productVO = productService.getSelect(productVO);
 
 		long write = productVO.getProductDate().getTime();
@@ -321,18 +321,25 @@ public class ProductController {
 			mv.setViewName("common/commonResult");
 		} else {
 
-			List<ProductFileVO> file = productVO.getFiles();
+			List<ProductFileVO> files = productVO.getFiles();
 
-			for(int i=0;i<file.size();i++) {
-				file.get(i).setProductNum(productVO.getProductNum());
-
-				mv.addObject("vo", productVO);
-				mv.addObject("files", file);
-
-
-
-				mv.setViewName("product/rewrite");
+			for(ProductFileVO file:files) {
+				file.setProductNum(productVO.getProductNum());
 			}
+			
+			List<CategoryVO> categories = categoryMapper.getList();
+
+			MemberLocationVO memberLocationVO = new MemberLocationVO();
+			MemberVO memberVO = new MemberVO();
+			memberVO = (MemberVO)authentication.getPrincipal();
+			memberLocationVO.setUsername(memberVO.getUsername());
+			List<MemberLocationVO> locations = memberLocationService.getList(memberLocationVO);
+			
+			mv.addObject("files", files);
+			mv.addObject("product", productVO);
+			mv.addObject("categories", categories);
+			mv.addObject("locations", locations);
+			mv.setViewName("product/rewrite");
 		}
 
 		return mv;

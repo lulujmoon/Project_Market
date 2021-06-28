@@ -5,35 +5,38 @@
 
 <mapper namespace="com.mm.market.social.SocialMapper">
 
-	<select id="getList" resultMap="selectResult"
-		parameterType="SocialPager">
-		select S.*, SC.*, SF.*
-		from social S left join socialFile SF
-		on
-		S.socialNum = SF.socialNum
+	<select id="getList" resultMap="selectResult" parameterType="SocialPager">
+		select S.*, M.*, SC.*
+		from social S
+		left join member M
+		on S.username = M.username
 		inner join socialCategory SC
-		on
-		S.categoryCode = SC.categoryCode
+		on S.categoryCode = SC.categoryCode
+		inner join location L
+		on S.locationCode = L.locationCode
 		where
 		<if test="categoryCode != 0L">
 			S.categoryCode=#{categoryCode} and
 		</if>
+		<if test="locationCode != 0L">
+			S.locationCode = #{locationCode} and
+		</if>
+		<if test="username != null">
+			username = #{username} and
+		</if>
 		S.socialTitle like concat('%', #{search}, '%')
-		order by S.socialNum
-		desc
+		order by S.socialNum desc
 		limit #{startRow}, 20
 	</select>
 
-	<select id="getSelect" resultMap="selectResult"
-		parameterType="SocialVO">
-		select S.*, SC.*, SF.*
-		from social S left join socialFile
-		SF
-		on S.socialNum = SF.socialNum
+	<select id="getSelect" resultMap="selectResult" parameterType="SocialVO">
+		select S.*, SC.*
+		from social S
 		inner join socialCategory SC
-		on
-		S.categoryCode = SC.categoryCode
-		where S.socialNum=#{socialNum}
+		on S.categoryCode = SC.categoryCode
+		inner join location L
+		on S.locationCode = L.locationCode
+		where S.socialNum = #{socialNum}
 	</select>
 
 	<resultMap type="SocialVO" id="selectResult">
@@ -44,18 +47,20 @@
 		<result column="socialContent" property="socialContent" />
 		<result column="socialDate" property="socialDate" />
 		<result column="socialGood" property="socialGood" />
+		<result column="locationCode" property="locationCode" />
 		<association property="socialCategory" javaType="SocialCategoryVO">
 			<id property="categoryCode" column="categoryCode" />
 			<result property="categoryName" column="categoryName" />
 		</association>
-		<collection property="file" javaType="java.util.List"
-			ofType="SocialFileVO">
-			<id column="fileNum" property="fileNum" />
-			<result column="socialNum" property="socialNum" />
-			<result column="fileName" property="fileName" />
-			<result column="originName" property="originName" />
-		</collection>
-		<collection property="good" javaType="GoodVO">
+		<association property="location" javaType="LocationVO">
+			<id property="locationCode" column="locationCode" />
+			<result property="locationName" column="locationName" />
+		</association>
+		<association property="writer" javaType="MemberVO">
+			<id property="username" column="username" />
+			<result property="name" column="name" />
+		</association>
+		<collection property="goods" javaType="GoodVO">
 			<id column="goodNum" property="goodNum"/>
 			<result column="socialNum" property="socialNum"/>
 			<result column="username" property="username"/>
@@ -80,23 +85,6 @@
 		(#{socialNum}, #{socialTitle}, #{categoryCode}, #{username},
 		#{socialContent}, now())
 	</insert>
-
-	<insert id="setFileInsert" parameterType="SocialFileVO">
-		insert into socialFile
-		(socialNum, fileName, originName)
-		values (#{socialNum}, #{fileName},
-		#{originName})
-	</insert>
-
-	<delete id="setFileDelete" parameterType="SocialFileVO">
-		delete socialFile where
-		fileNum=#{fileNum}
-	</delete>
-
-	<select id="getFileSelect" parameterType="SocialFileVO"
-		resultType="SocialFileVO">
-		select * from socialFile where fileNum=#{fileNum}
-	</select>
 
 	<update id="setUpdate" parameterType="SocialVO">
 		update social set

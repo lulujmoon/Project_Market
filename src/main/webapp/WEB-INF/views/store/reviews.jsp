@@ -23,6 +23,11 @@
 				<a class="type-content code_1" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1&type=1">판매자</a>
 				<a class="type-content code_2" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1&type=2">구매자</a>
 			</div>
+			<c:if test="${reviews.size() == 0}">
+				<div class="empty__info">
+					아직 받은 후기가 없습니다.
+				</div> 
+			</c:if>
 			<c:forEach items="${reviews}" var="review">
 				<div class="rv__card" onclick="manageContent()">
 					<div class="rv__info">

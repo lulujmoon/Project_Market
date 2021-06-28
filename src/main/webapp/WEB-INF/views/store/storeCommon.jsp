@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <div class="profile-container">
 <div class="divide">
 	<div class="profile__photo">
@@ -33,5 +36,5 @@
 		<a class="nav__item" href="/store/${member.code}/reviews">받은 후기</a>
 		<a class="nav__item">동네 생활</a>
 		<a class="nav__item">찜한 상품</a>
-		<a class="nav__item">작성한 후기</a>
+		<a class="nav__item" href="/store/${principal.code}/myReviews">작성한 후기</a>
 	</div>

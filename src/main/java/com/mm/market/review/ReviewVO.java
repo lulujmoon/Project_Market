@@ -32,7 +32,5 @@ public class ReviewVO {
 	private Long countSpeed;
 	
 	private ProductVO product;
-	private MemberVO reviewerVO;
-	private MemberFileVO reviewerFile;
 
 }
