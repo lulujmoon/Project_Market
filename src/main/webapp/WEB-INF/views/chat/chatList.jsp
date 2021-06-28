@@ -50,6 +50,7 @@
 	          <div class="inbox_chat">
 		          <div>메시지 리스트</div>
 	          </div>
+	  
 	        </div>
 	        
 	        <!-- 메세지 내용 영역 -->

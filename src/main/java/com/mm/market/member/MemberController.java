@@ -313,7 +313,10 @@ public class MemberController {
 		if(originmemberVO==null) {
 			try {
 				System.out.println("기존회원아님->회원가입진행");
-				memberService.setKakaoJoin(KakaomemberVO);
+				int result = memberService.setKakaoJoin(KakaomemberVO);
+			
+				ModelAndView mv = new ModelAndView();
+				mv.addObject("result", result);
 			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

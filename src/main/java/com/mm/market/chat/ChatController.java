@@ -26,7 +26,7 @@ public class ChatController {
 
 	//메세지 목록
 	@RequestMapping("chatList")
-	public String chatList(Authentication auth, HttpServletRequest request) throws Exception {
+	public String chatList(Authentication auth, HttpServletRequest request, Long productNum) throws Exception {
 		
 		MemberVO memberVO= (MemberVO)auth.getPrincipal();
 //		System.out.println("auth : "+memberVO.getUsername());
@@ -66,9 +66,9 @@ public class ChatController {
 	
 	@RequestMapping("chatContentList")
 	public String chatContentList(HttpServletRequest request, Authentication auth) throws Exception {
-		
-		
+			
 		int room = Integer.parseInt(request.getParameter("room"));
+		
 		//System.out.println(room);
 		
 		ChatVO chatVO = new ChatVO();
@@ -78,8 +78,6 @@ public class ChatController {
 		chatVO.setUsername(username);
 		System.out.println("content list chatVO : "+chatVO);
 		List<ChatVO> clist = chatService.getVO(chatVO);
-		
-		
 		
 		System.out.println(clist);
 		
@@ -92,6 +90,7 @@ public class ChatController {
 		System.out.println("메세지내용 가져오기 후 : "+clist);
 		
 		request.setAttribute("clist", clist);
+		
 		
 		return "chat/chatContentList";
 	}

@@ -36,6 +36,6 @@ $(document).ready(function() {
 
 function heart_reload() {
 	$("#good").load(window.location.href='/social/select/'+socialNum);
-}
+
 	$("#good").load(window.location.href='/social/select/'+socialNum);
 }

@@ -121,3 +121,12 @@ function openReport(productNum){
 		'', 
 		"width=500,height=600,resizable,scrollbars=yes,left=1300,top=150");
 }
+
+$(document).ready(function(){
+var status =$("#productState").val();
+$("#status").val(status);
+})
+
+ if(status == '예약 중'){
+ 	location.href='/chat/chatList?productNum='+productNum
+ }
