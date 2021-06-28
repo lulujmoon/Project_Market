@@ -117,7 +117,6 @@ public class ProductController {
 
 		model.addAttribute("product", productVO);
 
-		System.out.println(authentication.getPrincipal());
 		//판매자 정보
 		if(productVO.getUsername() != null) {
 			MemberVO sellerVO = new MemberVO();
@@ -139,22 +138,24 @@ public class ProductController {
 			model.addAttribute("sellerLocation", sellerLocations.get(0));
 
 			//chat
-			ChatVO chatVO = new ChatVO();
-			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-			String username = memberVO.getUsername();
-			chatVO.setUsername(username);
-			System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
-			List<ChatVO> list = chatService.chatList(chatVO);
-			System.out.println("list : "+list);
-			
-			if(list.size()<1) {
-				model.addAttribute("chat", 0);
-			} else {
-				for(int i=0;i<list.size();i++) {
-					if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
-						model.addAttribute("chat", list.get(i).getOtherUser());
-					} else {
-						model.addAttribute("chat", 0);
+			if(authentication != null) {
+				ChatVO chatVO = new ChatVO();
+				MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+				String username = memberVO.getUsername();
+				chatVO.setUsername(username);
+				System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
+				List<ChatVO> list = chatService.chatList(chatVO);
+				System.out.println("list : "+list);
+				
+				if(list.size()<1) {
+					model.addAttribute("chat", 0);
+				} else {
+					for(int i=0;i<list.size();i++) {
+						if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
+							model.addAttribute("chat", list.get(i).getOtherUser());
+						} else {
+							model.addAttribute("chat", 0);
+						}
 					}
 				}
 			}
@@ -250,6 +251,7 @@ public class ProductController {
 
 		return "redirect:./list";
 	}
+
 
 	@GetMapping("update/{productNum}")
 	public String setUpdate(@PathVariable("productNum")Long productNum, Authentication authentication, Model model)throws Exception{
