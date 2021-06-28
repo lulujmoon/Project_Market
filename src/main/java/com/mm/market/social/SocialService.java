@@ -19,13 +19,7 @@ public class SocialService {
 	private SocialMapper socialMapper;
 
 	@Autowired
-	private FileManager fileManager;
-
-	@Autowired
 	private HttpSession session;
-
-	@Value("${social.filePath}")
-	private String filePath;
 
 	//List
 	public List<SocialVO> getList(SocialPager socialPager) throws Exception {
@@ -46,26 +40,11 @@ public class SocialService {
 	}
 
 	//Insert
-	public int setInsert(SocialVO socialVO, MultipartFile [] files) throws Exception {
+	public int setInsert(SocialVO socialVO) throws Exception {
 		int result = socialMapper.setInsert(socialVO);
 
-		String filePath = this.filePath;
-
-		for(MultipartFile mf:files) {
-
-			if(mf.getSize() == 0) {
-				continue;
-			}
-
-			String fileName = fileManager.save("social", mf, session);
-
-			SocialFileVO socialFileVO = new SocialFileVO();
-			socialFileVO.setFileName(fileName);
-			socialFileVO.setOriginName(mf.getOriginalFilename());
-			socialFileVO.setSocialNum(socialVO.getSocialNum());
-
-			socialMapper.setFileInsert(socialFileVO);
-		}
+		SocialFileVO socialFileVO = new SocialFileVO();
+		socialFileVO.setSocialNum(socialVO.getSocialNum());
 
 		return result; 
 	}
@@ -94,17 +73,5 @@ public class SocialService {
 		socialMapper.deleteGood(goodVO);
 		socialMapper.updateGood(goodVO.getSocialNum());
 	}
-	
-	//SummerFile
-	public String setSummerFileUpload(MultipartFile file) throws Exception {
-		String fileName = fileManager.save("social", file, session);
-		return fileName;
 
-	}
-
-	public Boolean setSummerFileDelete(String fileName) throws Exception {
-		boolean result = fileManager.delete("social", fileName, session);
-		return result;
-	}
-	
 }

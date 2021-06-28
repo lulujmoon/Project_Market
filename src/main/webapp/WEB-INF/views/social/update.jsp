@@ -1,59 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<sec:authorize access="isAuthenticated()">
+<sec:authentication property="principal" var="principal" />
+</sec:authorize>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <c:import url="../template/setting.jsp"></c:import>
-
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<title>우리동네</title>
-
-<!-- summernote -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<link rel="stylesheet" href="/resources/css/common.css" />
+<link rel="stylesheet" href="/resources/css/socialNote.css"/>
+<title>글쓰기</title>
 </head>
 <body>
-	<div class="container">
-		<h2>글 수정</h2>
-		<br>
-		<form class="form" action="./update" method="POST"
-			enctype="multipart/form-data">
-
-			<input type="hidden" name="socialNum" value="${vo.socialNum}">
-
-			<label>제목</label> <input type="text" value="${vo.socialTitle}"
-				name="socialTitle"> <br>
-			<br> <label>작성자</label> <input type="text" readonly="readonly"
-				value="${vo.username}" name="username"> <br> <br>
-			<label>카테고리</label> <select class="form-control" id="socialCategory"
-				name="categoryCode">
-				<option value="1">동네맛집</option>
-				<option value="2">동네소식</option>
-				<option value="3">취미생활</option>
-				<option value="4">애완동물</option>
-				<option value="5">살림/인테리어</option>
-				<option value="6">출산/육아</option>
-				<option value="7">기타</option>
-			</select> <br> <br> <label>글 내용</label>
-			<textarea id="socialContent" name="socialContent">${vo.socialContent}</textarea>
-
-			<input type="submit" value="수정">
-		</form>
+<c:import url="../template/header.jsp"></c:import>
+<div class="container">
+	<div class="title-container">
+		글 수정
 	</div>
-
-	<script type="text/javascript" src="/jquery/summerFile.js"></script>
+	<form class="upload-form" action="./update" method="POST" enctype="multipart/form-data">
+		<input type="hidden" name="socialNum" value="${social.socialNum}"> 
+		<input type="hidden" name="username" value="${principal.username}">
+		<div class="select-wrapper">
+			<select class="select" name="categoryCode">
+				<c:forEach items="${categories}" var="category">
+					<option value="${category.categoryCode}"
+						<c:if test="${category.categoryCode == social.categoryCode}">selected</c:if>				
+					>${category.categoryName}</option>
+				</c:forEach>
+			</select>
+			<i class="fas fa-sort-down"></i>
+		</div>
+		<div class="form-group">
+			<div class="form-title">지역</div>
+			<div class="form-content form-content-select">
+				<select class="form-select" id="locationCode" name="locationCode">
+					<c:forEach items="${location}" var="location">
+				   <option value="${location.locationCode}">${location.locationName}</option>
+				  </c:forEach>
+				</select>
+				<i class="fas fa-sort-down"></i>
+			</div>
+			<div class="form-info">
+				내 지역으로 저장한 지역을 선택할 수 있습니다.
+				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></a>
+			</div>
+		</div>
+		<input type="text" class="title" name="socialTitle" value="${social.socialTitle}" placeholder="제목"> 
+		<div class="btn-wrapper">
+			<button type="submit" class="btn-submit">등록</button>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="../resources/js/common.js"></script>
 </body>
 </html>

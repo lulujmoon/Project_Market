@@ -8,20 +8,80 @@
 
 <mapper namespace ="com.mm.market.review.ReviewMapper">
 	
-	<select id="getListByReviewer" parameterType="ReviewVO" resultType="ReviewVO">
-		select * from review where reviewer=#{reviewer}
+	<select id="getListByReviewer" parameterType="ReviewPager" resultMap="reviewResult">
+		select R.*, P.*
+		from review R
+		left join product P
+		on R.productNum = P.productNum
+		where R.reviewer=#{reviewer}
+		order by R.reviewNum desc
+		limit #{startRow}, #{perPage}
 	</select>
 	
-	<select id="getListByReviewee" parameterType="ReviewVO" resultType="ReviewVO">
-		select * from review where reviewee=#{reviewee} and type=#{type}
+	<select id="getListByReviewee" parameterType="ReviewPager" resultMap="reviewResult">
+		select R.*, P.*
+		from review R
+		left join product P
+		on R.productNum = P.productNum
+		where R.reviewee=#{reviewee}
+		<if test="type != null">
+		 and R.type=#{type}
+		</if>
+		order by R.reviewNum desc
+		limit #{startRow}, #{perPage}
+	</select>
+	
+	<resultMap type="ReviewVO" id="reviewResult">
+		<id property="reviewNum" column="reviewNum"/>
+		<result property="productNum" column="productNum"/>
+		<result property="reviewer" column="reviewer"/>
+		<result property="reviewee" column="reviewee"/>
+		<result property="type" column="type"/>
+		<result property="reviewDate" column="reviewDate"/>
+		<result property="locationCode" column="locationCode"/>
+		<result property="state" column="state"/>
+		<result property="manner" column="manner"/>
+		<result property="speed" column="speed"/>
+		<result property="reviewContent" column="reviewContent"/>
+		<association property="product" javaType="ProductVO">
+			<id property="productNum" column="productNum"/>
+			<result property="productName" column="productName"/>
+		</association>
+	</resultMap>
+	
+	<select id="getTotalCount" parameterType="ReviewPager" resultType="Long">
+		select count(reviewNum) from review 
+		where 
+		<if test="reviewee != null">
+			reviewee=#{reviewee}
+		</if>
+		<if test="reviewer != null">
+			reviewer=#{reviewer}
+		</if>
+		<if test="type != null">
+		 and type=#{type}
+		</if>
+		and reviewNum>0
 	</select>
 	
 	<select id="getSelect" parameterType="ReviewVO" resultType="ReviewVO">
 		select * from review where productNum=#{productNum}
+		<if test="reviewer != null">
+			and reviewer=#{reviewer}
+		</if>
 	</select>
 	
 	<insert id="setInsert" parameterType="ReviewVO">
-		insert into review (productNum, reviewer, reviewee, type, locationCode, state, manner, response, reviewContent)
-		values (#{productNum}, #{reviewer}, #{reviewee}, #{type}, #{locationCode}, #{state}, #{manner}, #{response}, #{reviewContent})
+		insert into review (productNum, reviewer, reviewee, type, locationCode, state, manner, speed, reviewContent)
+		values (#{productNum}, #{reviewer}, #{reviewee}, #{type}, #{locationCode}, #{state}, #{manner}, #{speed}, #{reviewContent})
 	</insert>
+	
+	<select id="getAvgsAndCounts" parameterType="ReviewVO" resultType="ReviewVO">
+		SELECT ROUND(AVG(state)) avgState, ROUND(AVG(manner)) avgManner, ROUND(AVG(speed)) avgSpeed, COUNT(state) countState, COUNT(manner) countManner, COUNT(speed) countSpeed FROM review WHERE reviewee=#{reviewee}
+	</select>
+	
+	<delete id="setDelete" parameterType="ReviewVO">
+		delete from review where reviewNum=#{reviewNum}
+	</delete>
+
 </mapper>

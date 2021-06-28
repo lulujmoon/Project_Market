@@ -42,7 +42,7 @@
 	        <div class="inbox_people">
 	          <div class="headind_srch">
 	            <div class="recent_heading">
-	              <h4>메시지 목록</h4>
+	              <h4>Recent</h4>
 	            </div>
 	          </div>
 	          
@@ -98,7 +98,7 @@
 					send_msg += "			<input type='text' class='write_msg form-control' placeholder='메세지를 입력...' />";
 					send_msg += "		</div>";
 					send_msg += "		<div class='col-1'>";
-					send_msg += "			<button class='msg_send_btn' type='button'>전송</button>";
+					send_msg += "			<button class='msg_send_btn' type='button'><i class='fa fa-paper-plane-o' aria-hidden='true'></i></button>";
 					send_msg += "		</div>";
 					send_msg += "	</div>";
 					send_msg += "</div>";

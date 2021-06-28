@@ -9,9 +9,9 @@
 				<div class="chat_img" >
 						<img src="/resources/upload/member/${tmp.profile}" alt="상대방 프로필" width="50px" height="50px">
 				</div>
-				<div>
-					<h5>${tmp.otherUser}</h5>
-					<span>${tmp.sendTime}</span>
+				<div >
+					<h5>${tmp.otherUser}<span>${tmp.sendTime}</span>
+					</h5>
 					<div class="row">
 						<div>
 							<p>${tmp.content}</p>
