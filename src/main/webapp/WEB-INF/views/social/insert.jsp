@@ -49,6 +49,7 @@
 			</div>
 		</div>
 		<input type="text" class="title" name="socialTitle" placeholder="제목">
+		<textarea class="content" id="socialContent" name="socialContent"></textarea>
 		<div class="btn-wrapper">
 			<button type="submit" class="btn-submit">등록</button>
 		</div>
