@@ -24,6 +24,10 @@
 	padding: 0 10px;
 }
 
+.category__item-location{
+	padding: 0 30px 0 10px;
+}
+
 .product-container{
 	width: 1050px;
 	margin: auto;

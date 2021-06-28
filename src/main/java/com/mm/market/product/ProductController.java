@@ -44,10 +44,10 @@ import com.mm.market.util.ProductPager;
 public class ProductController {
 
 	@Autowired
-	private ChatService chatService;
+	private ProductService productService;
 	
 	@Autowired
-	private ProductService productService;
+	private ChatService chatService;	
 
 	@Autowired
 	private CategoryMapper categoryMapper;
@@ -250,7 +250,6 @@ public class ProductController {
 
 		return "redirect:./list";
 	}
-
 
 	@GetMapping("update/{productNum}")
 	public String setUpdate(@PathVariable("productNum")Long productNum, Authentication authentication, Model model)throws Exception{

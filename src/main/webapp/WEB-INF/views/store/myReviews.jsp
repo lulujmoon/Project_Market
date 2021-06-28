@@ -8,24 +8,21 @@
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/store.css">
 <link rel="stylesheet" href="/resources/css/reviewCard.css" />
+<link rel="stylesheet" href="/resources/css/myReview.css" />
 <title>내 상점</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
+<div class="hidden alert">${alert}</div>
 <div class="hidden page-value">${reviewPager.page}</div>
 <div class="hidden type-value">${reviewPager.type}</div>
 	<c:import url="./storeCommon.jsp"></c:import>
 
 		<div class="board__contents">
-			<div class="type-container list-type">
-				<a class="type-content code_0" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1">전체</a>
-				<a class="type-content code_1" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1&type=1">판매자</a>
-				<a class="type-content code_2" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1&type=2">구매자</a>
-			</div>
 			<c:if test="${reviews.size() == 0}">
 				<div class="empty__info">
-					아직 받은 후기가 없습니다.
+					아직 작성한 후기가 없습니다.
 				</div> 
 			</c:if>
 			<c:forEach items="${reviews}" var="review">
@@ -34,8 +31,11 @@
 						<div class="rv__product" onclick="showProduct(${review.product.productNum})">
 							${review.product.productName}&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i> 
 						</div>
-						<div class="rv__date">
-							${review.reviewDate}
+						<div class="right-wrapper">
+							<div class="rv__date">
+								${review.reviewDate}
+							</div>
+							<div class="btn-del" onclick="deleteReview(${review.reviewNum})">삭제</div>
 						</div>
 					</div>
 					<div class="rv__rate">
@@ -74,5 +74,6 @@
 <script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/store.js"></script>
 <script type="text/javascript" src="/resources/js/storeReview.js"></script>
+<script type="text/javascript" src="/resources/js/myReview.js"></script>
 </body>
 </html>
