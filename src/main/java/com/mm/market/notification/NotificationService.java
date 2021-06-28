@@ -17,8 +17,6 @@ public class NotificationService {
 		
 		List<NotificationVO> list = notificationMapper.notiList(notificationVO);
 		
-		notificationMapper.notiReadChk(notificationVO);
-		
 		for(NotificationVO noti : list) {
 			noti.setNotiRecvUser(username);
 			int unread = notificationMapper.countUnread(notificationVO);
@@ -26,6 +24,13 @@ public class NotificationService {
 		}
 		
 		return list;
+	}
+	
+	public NotificationVO notiSelect(NotificationVO notificationVO) throws Exception {
+		
+		notificationMapper.notiReadChk(notificationVO);
+		
+		return notificationMapper.notiSelect(notificationVO);
 	}
 	
 	public int notiInsert(NotificationVO notificationVO) throws Exception {

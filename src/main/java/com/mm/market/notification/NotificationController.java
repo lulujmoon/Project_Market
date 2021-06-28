@@ -36,4 +36,11 @@ public class NotificationController {
 		return "notification/list";
 	}
 	
+	
+	@GetMapping("select")
+	public String notiSelect(NotificationVO notificationVO) throws Exception{
+		
+		return "notification/list";
+	}
+	
 }
