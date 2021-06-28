@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <sec:authorize access="isAuthenticated()">
 <sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -50,7 +49,8 @@
 				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></a>
 			</div>
 		</div>
-		<input type="text" class="title" name="socialTitle" value="${social.socialTitle}" placeholder="제목"> 
+		<input type="text" class="title" name="socialTitle" value="${social.socialTitle}" placeholder="제목">
+		<textarea class="content" id="socialContent" name="socialContent">${social.socialContent}</textarea>
 		<div class="btn-wrapper">
 			<button type="submit" class="btn-submit">등록</button>
 		</div>

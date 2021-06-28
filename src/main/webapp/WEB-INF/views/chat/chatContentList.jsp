@@ -39,5 +39,4 @@
 		</div>
 		</c:otherwise>
 	</c:choose>
-
 </c:forEach>

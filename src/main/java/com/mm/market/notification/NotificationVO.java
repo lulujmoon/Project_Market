@@ -1,5 +1,7 @@
 package com.mm.market.notification;
 
+import com.mm.market.product.ProductVO;
+
 import lombok.Data;
 
 @Data
@@ -16,4 +18,5 @@ public class NotificationVO {
 	private int unread;
 	private String username;
 	
+	private ProductVO product;
 }
