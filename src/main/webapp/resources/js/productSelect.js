@@ -121,3 +121,8 @@ function openReport(productNum){
 		'', 
 		"width=500,height=600,resizable,scrollbars=yes,left=1300,top=150");
 }
+
+$(document).ready(function(){
+   var status = $("#productStatus").val();
+   $("#status").val(status);
+})
