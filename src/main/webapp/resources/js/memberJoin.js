@@ -38,12 +38,12 @@
 /** 기능 2. 가입폼 제출
  *	1. 중복체크 여부를 확인하고 제출한다.
  */
- const form = document.querySelector('#form-submit');
  const btnSubmit = document.querySelector('.btn-submit');
+ const btnPreSubmit = document.querySelector('.btn-preSubmit');
  
- btnSubmit.addEventListener('click', ()=>{
+ btnPreSubmit.addEventListener('click', ()=>{
 	if(checked){
-		form.submit();
+		btnSubmit.click();
 	}else{
 		alert('아이디 중복체크는 필수입니다.');
 	}

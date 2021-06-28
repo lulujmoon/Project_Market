@@ -90,7 +90,6 @@
 
 	<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
-	<script type="text/javascript" src="/resources/js/functions.js"></script>
 	<script type="text/javascript" src="/resources/js/socialList.js"></script>
 </body>
 </html>

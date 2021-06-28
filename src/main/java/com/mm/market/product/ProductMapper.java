@@ -60,6 +60,6 @@ public interface ProductMapper {
 	
 	public void updateHeart(Long productNum)throws Exception;
 	
-	public List<ProductVO> getHeartList(HeartVO heartVO)throws Exception;
+	public List<ProductVO> getHeartList(ProductPager productPager)throws Exception;
 	
 }
