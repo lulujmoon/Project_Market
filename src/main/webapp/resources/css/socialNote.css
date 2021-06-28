@@ -31,6 +31,9 @@
 .location-container{
 	width: 100%;
 	margin: 20px 10px 10px 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .category-container{
@@ -48,7 +51,7 @@
 }
 
 .select-location{
-	width: 400px;
+	width: 350px;
 }
 
 .select-category{
@@ -66,6 +69,24 @@
 .location-container > i{
 	top: 0;
 	right: 35px;
+}
+
+.location-set{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.location-set > a{
+	width: 140px;
+	height: 35px;
+	margin-left: 15px;
+	border-radius: 5px;
+	background-color: #fadd85;
+	line-height: 35px;
+	color: #fbfbfb;
+	text-align: center;
+	font-weight: bold;
 }
 
 .category-container > i{
