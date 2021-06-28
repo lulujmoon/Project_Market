@@ -1,5 +1,10 @@
 package com.mm.market.notification;
 
+import com.mm.market.product.ProductVO;
+
+import lombok.Data;
+
+@Data
 public class NotificationVO {
 
 	private String notiNum;
@@ -9,7 +14,9 @@ public class NotificationVO {
 	private String notiContent;
 	private String notiReadChk; // 1: 읽지않음, 0: 읽음
 	
-	//안읽은 메세지 갯수
 	private int unread;
+	private String username;
+	
+	private ProductVO productPrice;
 	
 }
