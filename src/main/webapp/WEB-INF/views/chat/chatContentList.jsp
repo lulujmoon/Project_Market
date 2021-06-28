@@ -40,8 +40,9 @@
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
-	<a href="../reservation/insert?seller=${clist[0].recvUser}&&buyer=${clist[0].sendUser}?productNum=${productNum}">이사람한테판매</a>
+	<a href="../reservation/insert?seller=${clist[0].recvUser}&&buyer=${clist[0].sendUser}&&productNum=${param.productNum}">이사람한테판매</a>
 	<h5>${clist[0].sendUser}</h5>
 	<h5>${clist[0].recvUser}</h5>
+	<h5>${param.productNum}</h5>
 
 	

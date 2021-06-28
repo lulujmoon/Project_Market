@@ -41,6 +41,7 @@ public class ChatController {
 		System.out.println("chatList : "+list);
 		
 		request.setAttribute("list", list);
+		request.setAttribute("productNum", productNum);
 		
 		return "chat/chatList";
 	}

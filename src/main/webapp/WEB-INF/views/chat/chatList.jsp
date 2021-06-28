@@ -34,6 +34,7 @@
 </style>
 </head>
 <body>
+<h1>${productNum}</h1>
 <div class="msg-container">
 	
 		<div class="messaging">
