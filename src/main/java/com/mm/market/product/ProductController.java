@@ -199,27 +199,16 @@ public class ProductController {
 
 
 
-	@GetMapping("delete/{productNum}")
-	public ModelAndView setDelete(@PathVariable("productNum") Long productNum)throws Exception{
-		ModelAndView mv = new ModelAndView();
+	@PostMapping("delete")
+	public String setDelete(@PathVariable("productNum") Long productNum)throws Exception{
 		ProductVO productVO = new ProductVO();
 		productVO.setProductNum(productNum);
 		productVO = productService.getSelect(productVO);
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
 
-		String message="삭제 실패";
-		String path = "./list";
-
-		if(result>0) {
-			message="삭제 성공!";
-		}
-
-		mv.addObject("msg", message);
-		mv.addObject("path", path);
-		mv.setViewName("common/commonResult");
-
-		return mv;
+		
+		return "redirect: product/list";
 	}
 
 	@PostMapping("fileDelete")
