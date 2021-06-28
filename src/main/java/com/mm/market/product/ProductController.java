@@ -252,27 +252,6 @@ public class ProductController {
 	}
 
 
-	@PostMapping("summerFileDelete")
-	public ModelAndView setSummerFileDelete(String fileName) throws Exception {
-		ModelAndView mv= new ModelAndView();
-		boolean result = productService.setSummerFileDelete(fileName);
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
-		return mv;
-	}
-
-	@PostMapping("summerFileUpload")
-	public ModelAndView setSummerFileUpload(MultipartFile file) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		System.out.println("Summer File Upload");
-		System.out.println(file.getOriginalFilename()); 
-		String fileName = productService.setSummerFileUpload(file);
-		fileName = "../resources/upload/product/"+fileName;
-		mv.addObject("result", fileName);
-		mv.setViewName("common/ajaxResult");
-		return mv;
-	}
-
 	@GetMapping("update/{productNum}")
 	public String setUpdate(@PathVariable("productNum")Long productNum, Authentication authentication, Model model)throws Exception{
 		ProductVO productVO = new ProductVO();
