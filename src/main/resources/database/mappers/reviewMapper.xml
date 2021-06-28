@@ -8,20 +8,21 @@
 
 <mapper namespace ="com.mm.market.review.ReviewMapper">
 	
-	<select id="getListByReviewer" parameterType="ReviewVO" resultType="ReviewVO">
-		select * from review where reviewer=#{reviewer}
-		order by reviewNum desc
-	</select>
-	
-	<select id="getListByReviewee" parameterType="ReviewPager" resultMap="reviewResult">
-		select R.*, P.*, M.*, MF.*
+	<select id="getListByReviewer" parameterType="ReviewPager" resultMap="reviewResult">
+		select R.*, P.*
 		from review R
 		left join product P
 		on R.productNum = P.productNum
-		left join member M
-		on R.reviewer = M.username
-		left join memberFile MF
-		on R.reviewer = MF.username
+		where R.reviewer=#{reviewer}
+		order by R.reviewNum desc
+		limit #{startRow}, #{perPage}
+	</select>
+	
+	<select id="getListByReviewee" parameterType="ReviewPager" resultMap="reviewResult">
+		select R.*, P.*
+		from review R
+		left join product P
+		on R.productNum = P.productNum
 		where R.reviewee=#{reviewee}
 		<if test="type != null">
 		 and R.type=#{type}
@@ -46,20 +47,17 @@
 			<id property="productNum" column="productNum"/>
 			<result property="productName" column="productName"/>
 		</association>
-		<association property="reviewerVO" javaType="MemberVO">
-			<id property="username" column="username"/>
-			<result property="name" column="name"/>
-			<result property="code" column="code"/>
-		</association>
-		<association property="reviewerFile" javaType="MemberFileVO">
-			<id property="username" column="username"/>
-			<result property="fileName" column="fileName"/>
-		</association>
 	</resultMap>
 	
 	<select id="getTotalCount" parameterType="ReviewPager" resultType="Long">
 		select count(reviewNum) from review 
-		where reviewee=#{reviewee}
+		where 
+		<if test="reviewee != null">
+			reviewee=#{reviewee}
+		</if>
+		<if test="reviewer != null">
+			reviewer=#{reviewer}
+		</if>
 		<if test="type != null">
 		 and type=#{type}
 		</if>
@@ -81,5 +79,9 @@
 	<select id="getAvgsAndCounts" parameterType="ReviewVO" resultType="ReviewVO">
 		SELECT ROUND(AVG(state)) avgState, ROUND(AVG(manner)) avgManner, ROUND(AVG(speed)) avgSpeed, COUNT(state) countState, COUNT(manner) countManner, COUNT(speed) countSpeed FROM review WHERE reviewee=#{reviewee}
 	</select>
+	
+	<delete id="setDelete" parameterType="ReviewVO">
+		delete from review where reviewNum=#{reviewNum}
+	</delete>
 
 </mapper>

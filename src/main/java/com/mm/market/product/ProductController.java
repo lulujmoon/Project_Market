@@ -25,6 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
+import com.mm.market.chat.ChatService;
+import com.mm.market.chat.ChatVO;
 import com.mm.market.location.LocationVO;
 import com.mm.market.member.MemberFileVO;
 import com.mm.market.member.MemberService;
@@ -43,6 +45,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ChatService chatService;	
 
 	@Autowired
 	private CategoryMapper categoryMapper;
@@ -96,6 +101,7 @@ public class ProductController {
 		productVO.setProductNum(productNum);
 		productVO =	productService.getSelect(productVO);
 
+
 		if(authentication != null) {
 			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 			String username = memberVO.getUsername();
@@ -108,8 +114,10 @@ public class ProductController {
 			
 			model.addAttribute("heart", heart);			
 		}
-		
+
 		model.addAttribute("product", productVO);
+
+		System.out.println(authentication.getPrincipal());
 		//판매자 정보
 		if(productVO.getUsername() != null) {
 			MemberVO sellerVO = new MemberVO();
@@ -129,8 +137,30 @@ public class ProductController {
 			model.addAttribute("seller", sellerVO);
 			model.addAttribute("sellerFile", sellerFileVO);
 			model.addAttribute("sellerLocation", sellerLocations.get(0));
+
+			//chat
+			ChatVO chatVO = new ChatVO();
+			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+			String username = memberVO.getUsername();
+			chatVO.setUsername(username);
+			System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
+			List<ChatVO> list = chatService.chatList(chatVO);
+			System.out.println("list : "+list);
+			
+			if(list.size()<1) {
+				model.addAttribute("chat", 0);
+			} else {
+				for(int i=0;i<list.size();i++) {
+					if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
+						model.addAttribute("chat", list.get(i).getOtherUser());
+					} else {
+						model.addAttribute("chat", 0);
+					}
+				}
+			}
 			model.addAttribute("rating", reviewVO);
 		}
+
 		return "product/select";
 	}
 
@@ -219,28 +249,6 @@ public class ProductController {
 		productService.setInsert(productVO, file);
 
 		return "redirect:./list";
-	}
-
-
-	@PostMapping("summerFileDelete")
-	public ModelAndView setSummerFileDelete(String fileName) throws Exception {
-		ModelAndView mv= new ModelAndView();
-		boolean result = productService.setSummerFileDelete(fileName);
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
-		return mv;
-	}
-
-	@PostMapping("summerFileUpload")
-	public ModelAndView setSummerFileUpload(MultipartFile file) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		System.out.println("Summer File Upload");
-		System.out.println(file.getOriginalFilename()); 
-		String fileName = productService.setSummerFileUpload(file);
-		fileName = "../resources/upload/product/"+fileName;
-		mv.addObject("result", fileName);
-		mv.setViewName("common/ajaxResult");
-		return mv;
 	}
 
 	@GetMapping("update/{productNum}")
