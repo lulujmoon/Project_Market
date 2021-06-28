@@ -37,6 +37,8 @@ public class NotificationController {
 		//상품 번호
 		productVO.setProductNum(productNum);
 		productVO =	productService.getSelect(productVO);
+		productNum = productVO.getProductNum();
+		
 		
 		//판매자
 		notiRecvUser = productVO.getUsername();
