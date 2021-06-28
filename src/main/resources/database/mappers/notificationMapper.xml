@@ -46,8 +46,8 @@
 	
 	<!-- 알림 읽음 처리 -->
 	<update id="notiReadChk" parameterType="NotificationVO">
-		update notification set notiReadChk=1
-		where notiReadChk=0 and notiRecvUser=#{username}
+		update notification set notiReadChk=0
+		where notiNum=#{notiNum}
 	</update>
 	
 	<!-- 알림 보내기 -->

@@ -39,14 +39,15 @@ public class NotificationController {
 	}
 	
 	@PostMapping("readChk")
-	public void notiReadChk(NotificationVO notificationVO)throws Exception {
+	public String notiReadChk(NotificationVO notificationVO)throws Exception {
 		notificationService.notiReadChk(notificationVO);
+		return "redirect:./list";
 	}
 	
 	@GetMapping("select")
 	public String notiSelect(NotificationVO notificationVO) throws Exception{
 		
-		return "notification/list";
+		return "redirect:./list";
 	}
 	
 }
