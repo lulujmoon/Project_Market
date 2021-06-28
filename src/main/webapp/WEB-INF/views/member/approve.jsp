@@ -17,7 +17,7 @@
 	<div class="logo">
 		<i class="fas fa-lemon"></i><span>&nbsp;Join</span>
 	</div>
-	<form action="./member/approve" method="POST" id="form_wrap">
+	<form action="./approve" method="POST" id="form_wrap">
 		<div class="terms__check__all">
 			<input type="checkbox" name="checkAll" id="checkAll"/>
 			<label for="checkAll">

@@ -33,7 +33,7 @@
 			  <button type="button" class="btn-wide btn-kakao">Login with Kakao</button>
 			</div>
 			<div class="login-option">
-					<a href="./join">회원가입</a>
+					<a href="./approve">회원가입</a>
 					<a href="./search">비밀번호 찾기</a>
 			</div>
 			</form>
