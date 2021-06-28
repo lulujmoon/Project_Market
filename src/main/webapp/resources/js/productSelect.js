@@ -126,3 +126,30 @@ $(document).ready(function(){
 	var status = $("#productStatus").val();
 	$("#status").val(status);
 })
+
+
+function deleteProduct(productNum) {
+	let con = confirm("삭제하시겠습니까?");
+	if(con) {
+        const deleteForm = document.createElement('form');
+		deleteForm.action = './delete';
+		deleteForm.method = 'post';
+		
+		const inputNum = document.createElement('input');
+		inputNum.type = 'hidden';
+		inputNum.name = 'productNum';
+		inputNum.value = productNum;
+		
+		deleteForm.appendChild(inputNum);
+		document.body.appendChild(deleteForm);
+		
+		deleteForm.submit();
+          
+        }
+		
+		
+		
+	}
+	
+
+

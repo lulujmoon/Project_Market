@@ -69,7 +69,7 @@
 					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
 					<a class="top-btn btn-contact" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
 
-					<a class="top-btn btn-del" href="../delete/${product.productNum}" onclick="if(confirm('삭제하시겠습니까?')==false){return false;}">삭제하기</a>
+					<a class="top-btn btn-del" onclick="deleteProduct('${product.productNum}')">삭제하기</a>
 				</c:if>
 				<c:if test="${principal.username != product.username}">
 					<c:if test="${chat ne 0}">

@@ -200,9 +200,8 @@ public class ProductController {
 
 
 	@PostMapping("delete")
-	public String setDelete(@PathVariable("productNum") Long productNum)throws Exception{
-		ProductVO productVO = new ProductVO();
-		productVO.setProductNum(productNum);
+	public String setDelete(ProductVO productVO)throws Exception{
+		
 		productVO = productService.getSelect(productVO);
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
