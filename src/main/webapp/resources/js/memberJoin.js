@@ -23,7 +23,7 @@
  btnCheck.addEventListener('click', ()=>{
 	$.post('./idCheck', {
 		username: inputUsername.value
-	}, (result)=>{
+	}, function(result){
 		if(result == 0){
 			alert('사용 가능한 아이디입니다.');
 			checked = true;

@@ -164,18 +164,19 @@ public class MemberController {
 
 	}
 	
-	@ResponseBody
 	@PostMapping("idCheck")
-	public int idCheck(HttpServletRequest req)throws Exception{
-		
-		String username = req.getParameter("username");
-		MemberVO idCheck = memberService.idCheck(username);
-		
+	public ModelAndView idCheck(String username, ModelAndView mv)throws Exception{
+		System.out.println("여기");
+		MemberVO idCheck = memberService.idCheck(username);	
 		int result =0;
 		if(idCheck != null) {
 			result =1;
 		}
-		return result;
+		
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;
 	}
 	
 	@GetMapping("info")
