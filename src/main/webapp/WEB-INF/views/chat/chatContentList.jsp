@@ -39,5 +39,9 @@
 		</div>
 		</c:otherwise>
 	</c:choose>
-
 </c:forEach>
+
+<h5>${clist[0].sendUser}</h5>
+<h5>${clist[0].recvUser}</h5>
+<h5>${product.productNum}</h5>
+<a href="../reservation/insert">판매하기</a>
