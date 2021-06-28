@@ -166,7 +166,6 @@ public class MemberController {
 	
 	@PostMapping("idCheck")
 	public ModelAndView idCheck(String username, ModelAndView mv)throws Exception{
-		System.out.println("여기");
 		MemberVO idCheck = memberService.idCheck(username);	
 		int result =0;
 		if(idCheck != null) {
