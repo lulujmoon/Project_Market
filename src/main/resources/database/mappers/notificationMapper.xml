@@ -31,6 +31,14 @@
 		</association>
 	</resultMap>
 	
+	<select id="getSelect" parameterType="NotificationVO" resultMap="list">
+		select N.notiNum, N.notiSendUser, N.notiRecvUser, date_format(N.notiSendTime, '%Y.%m.%d %H:%i') notiSendTime, N.notiContent, N.notiReadChk, N.productNum, P.* 
+		from notification N left join product P
+		on N.productNum = P.productNum
+		where N.productNum=#{productNum}
+	</select>
+	
+	
 	<!-- 안읽은 알림 갯수 가져오기 -->
 	<select id="countUnread" parameterType="NotificationVO" resultType="Int">
 		select count(notiNum) from notification
