@@ -193,7 +193,6 @@
 				
 				// 이 함수로 메세지 내용을 가져올때마다 스크롤를 맨아래로 가게 한다.
 				$(".msg_history").scrollTop($(".msg_history")[0].scrollHeight);
-
 			},
 			error : function() {
 				alert('서버 에러');
