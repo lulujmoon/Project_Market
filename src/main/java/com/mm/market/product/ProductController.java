@@ -251,6 +251,7 @@ public class ProductController {
 		return "redirect:./list";
 	}
 
+
 	@GetMapping("update/{productNum}")
 	public String setUpdate(@PathVariable("productNum")Long productNum, Authentication authentication, Model model)throws Exception{
 		ProductVO productVO = new ProductVO();
