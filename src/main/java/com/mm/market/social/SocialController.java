@@ -18,10 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.comment.CommentService;
 import com.mm.market.comment.CommentVO;
-import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
-import com.mm.market.memberLocation.MemberLocationService;
-import com.mm.market.memberLocation.MemberLocationVO;
 import com.mm.market.socialCategory.SocialCategoryMapper;
 import com.mm.market.socialCategory.SocialCategoryVO;
 import com.mm.market.util.SocialPager;
@@ -39,37 +36,13 @@ public class SocialController {
 	@Autowired
 	private SocialCategoryMapper socialCategoryMapper;
 
-	@Autowired
-	private MemberService memberService;
-
-	@Autowired
-	private MemberLocationService memberLocationService;
-	
 	@GetMapping("list")
-	public String getList(SocialPager socialPager, Long myLocation, Authentication auth, Model model) throws Exception {
-		if(myLocation == null) {
-			myLocation = 0L;
-		}
-		
-		if(auth != null) {
-			MemberVO memberVO = (MemberVO)auth.getPrincipal();
-			MemberLocationVO memberLocationVO = new MemberLocationVO();
-			memberLocationVO.setUsername(memberVO.getUsername());
-			
-			List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
-			memberLocationVO.setLocationCode(0L);
-			locationList.add(0, memberLocationVO);
-			
-			socialPager.setLocationCode(locationList.get(myLocation.intValue()).getLocationCode());
-			model.addAttribute("locations", locationList);
-		}
-
+	public String getList(SocialPager socialPager, Model model) throws Exception {
 		List<SocialVO> ar = socialService.getList(socialPager);
 		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
 
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", socialPager);
-		model.addAttribute("myLocation", myLocation);
 		model.addAttribute("categories", categories);
 		
 		return "social/list";
@@ -106,23 +79,32 @@ public class SocialController {
 	}
 
 	@GetMapping("insert")
-	public void setInsert(Model model, Authentication authentication) throws Exception {
-		List<SocialCategoryVO> categoryList = socialCategoryMapper.getList();
-		
-		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-		MemberLocationVO memberLocationVO = new MemberLocationVO();
-		memberLocationVO.setUsername(memberVO.getUsername());
-		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+	public ModelAndView setInsert() throws Exception {
 
-		model.addAttribute("categories", categoryList);
-		model.addAttribute("locations", locationList);
+		ModelAndView mv = new ModelAndView();
+		SocialVO socialVO = new SocialVO();
+
+		mv.addObject("vo", socialVO);
+		mv.setViewName("social/insert");
+
+		return mv;
 	}
 
 	@PostMapping("insert")
-	public String setInsert(SocialVO socialVO, Model model) throws Exception {
+	public String setInsert(SocialVO socialVO, MultipartFile [] files, Model model) throws Exception {
+
+		for(MultipartFile mf:files) {
+			System.out.println(mf.getOriginalFilename());
+		}
+
+		int result = socialService.setInsert(socialVO, files);
 
 		String message = "등록에 실패했습니다!";
 		String path = "./list";
+
+		if(result>0) {
+			message = "등록에 성공했습니다!";
+		}
 
 		model.addAttribute("msg", message);
 		model.addAttribute("path", path);
@@ -135,10 +117,8 @@ public class SocialController {
 		ModelAndView mv = new ModelAndView();
 		
 		socialVO = socialService.getSelect(socialVO);
-		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
 		
-		mv.addObject("social", socialVO);
-		mv.addObject("categories", categories);
+		mv.addObject("vo", socialVO);
 		mv.setViewName("social/update");
 
 		return mv;
@@ -210,6 +190,33 @@ public class SocialController {
 		}
 
 		return good;
+	}
+
+	//summerfile upload	
+	@PostMapping("summerFileUpload")
+	public ModelAndView setSummerFileUpload(MultipartFile file) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		String fileName = socialService.setSummerFileUpload(file);
+		fileName = "../resources/upload/social"+fileName;
+		
+		mv.addObject("result", fileName);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;
+		
+	}
+	
+	@PostMapping("summerFileDelete")
+	public ModelAndView setSummerFileDelete(String fileName) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		boolean result = socialService.setSummerFileDelete(fileName);
+		mv.addObject("result", result);
+		mv.setViewName("common/ajaxResult");
+		
+		return mv;
 	}
 
 }

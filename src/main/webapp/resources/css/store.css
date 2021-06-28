@@ -195,10 +195,3 @@
 .type-content.selected{
 	font-weight: bold;
 }
-
-.empty__info{
-	width: 100%;
-	height: 40vh;
-	line-height: 40vh;
-	text-align: center;
-}

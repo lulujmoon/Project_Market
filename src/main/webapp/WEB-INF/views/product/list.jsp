@@ -62,6 +62,7 @@
 						</div>
 					</div>
 				</c:forEach>
+				<input type="hidden" id="size" value="${products.size()}">
 			</div>
 			<ul class="page-container list-page">
 				<c:if test="${pager.pre}">

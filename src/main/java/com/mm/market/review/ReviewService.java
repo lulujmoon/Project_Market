@@ -13,12 +13,8 @@ public class ReviewService {
 	@Autowired
 	private ReviewMapper reviewMapper;
 	
-	public List<ReviewVO> getListByReviewer(ReviewPager reviewPager, Long perPage) throws Exception {
-		reviewPager.setPerPage(perPage);
-		reviewPager.makeRow(perPage);
-		Long totalCount = reviewMapper.getTotalCount(reviewPager);
-		reviewPager.makeNum(totalCount, perPage, 5L);
-		return reviewMapper.getListByReviewer(reviewPager);
+	public List<ReviewVO> getListByReviewer(ReviewVO reviewVO) throws Exception {
+		return reviewMapper.getListByReviewer(reviewVO);
 	}
 	
 	public List<ReviewVO> getListByReviewee(ReviewPager reviewPager, Long perPage) throws Exception {
@@ -40,9 +36,5 @@ public class ReviewService {
 	
 	public ReviewVO getAvgsAndCounts(ReviewVO reviewVO) throws Exception {
 		return reviewMapper.getAvgsAndCounts(reviewVO);
-	}
-	
-	public int setDelete(ReviewVO reviewVO) throws Exception {
-		return reviewMapper.setDelete(reviewVO);
 	}
 }

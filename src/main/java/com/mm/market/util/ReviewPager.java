@@ -14,7 +14,6 @@ public class ReviewPager {
 	private boolean next;
 	
 	private String reviewee;
-	private String reviewer;
 	private Long type;
 	
 	
@@ -133,14 +132,6 @@ public class ReviewPager {
 
 	public void setReviewee(String reviewee) {
 		this.reviewee = reviewee;
-	}
-
-	public String getReviewer() {
-		return reviewer;
-	}
-
-	public void setReviewer(String reviewer) {
-		this.reviewer = reviewer;
 	}
 
 	public Long getType() {

@@ -88,14 +88,4 @@ public class ReviewController {
 		return "redirect:/";
 	}
 	
-	@PostMapping("delete")
-	public ModelAndView setDelete(ReviewVO reviewVO, ModelAndView mv) throws Exception {
-		int result = reviewService.setDelete(reviewVO);
-		
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
-		
-		return mv;
-	}
-	
 }

@@ -2,47 +2,56 @@
  * 
  */
 
-$("#socialContent").summernote({
-			width: 900,
-			height:500,
-			minHeight:null,
-			maxHeight:null,
-			focus:true,
-			placeholder: '내용을 작성해주세요.',
-			callbacks: {
-				onImageUpload: function(file) {
-				   uploadFile(file[0]);
-				},
-				onMediaDelete: function(file){
-					deleteFile(file);
-				}
-			}			
+$(document).ready(function() {
+  $('#productContent').summernote();
 });
 
-function deleteFile(file) {
-	let fileName = $(file[0]).attr("src");
-	fileName = fileName.substring(fileName.lastIndexOf('/')+1);
+$("#productContent").summernote({
+
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 120,
+    toolbar: [
+      ['style', ['style']],
+      ['font', ['bold', 'underline', 'clear']],
+      ['color', ['color']],
+      ['para', ['ul', 'ol', 'paragraph']],
+      ['table', ['table']],
+      ['insert', ['link', 'picture', 'video']],
+      ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+  });
+
+function deleteFile(files) {
+	let fileName = $(files[0]).attr("src");
+	fileName = fileName.substr(fileName.lastIndexOf('/')+1);
+	alert(fileName);
 	$.post("summerFileDelete", {fileName:fileName}, function(result){
 		console.log(result);
 	});
 }
 
-function uploadFile(file) {
-	const formData = new FormData();
-	formData.append('file', file);
+
+
+
+function uploadFile(files) {
+	const formData = new FormData();	//form 태그 생성
+	formData.append('file', files[0]);	//input type="file" name="files"
 	let fileName="";
+	
 	$.ajax({
-		type: "POST",
-		url: "./summerFileUpload",
+		type:"post",
+		url:"./summerFileUpload",
 		data:formData,
 		enctype:"multipart/form-data",
 		cache:false,
 		processData:false,
 		contentType:false,
 		success:function(result){
-			fileName=result.trim();
-			console.log(fileName);
-			$("#socialContent").summernote('insertImage', fileName);
-		}	
-	})
-};
+			fileName = result.trim();	//result : 파일의 경로명
+			$("#contents").summernote('insertImage', fileName);
+		}
+	});
+	
+}
+
