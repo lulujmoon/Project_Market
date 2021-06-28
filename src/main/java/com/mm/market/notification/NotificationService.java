@@ -10,8 +10,7 @@ public class NotificationService {
 	private NotificationMapper notificationMapper;
 	 
 	public int notiInsert(NotificationVO notificationVO) throws Exception {
-		int result = notificationMapper.notiInsert(notificationVO);
-		
+		int result = notificationMapper.notiInsert(notificationVO);		
 		return result;
 	}
 		

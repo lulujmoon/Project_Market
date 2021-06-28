@@ -349,5 +349,9 @@ public class ProductController {
 		return "redirect:./select/"+productVO.getProductNum();
 	}
 	
-
+	//가격 제안하기 페이지
+	@GetMapping("nego")
+	public void setNego(ProductVO productVO)throws Exception{
+		
+	}
 }

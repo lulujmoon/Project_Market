@@ -76,7 +76,7 @@
 					<c:if test="${chat eq 0}">
 						<div class="top-btn btn-contact"><a type="button" href="/chat/chatSendInList?room=0&otherUser=${seller.username}&content="${product.productName} onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
 					</c:if>
-					<div class="top-btn btn-nego">가격 제안하기</div>
+					<div class="top-btn btn-nego"><a href="/product/nego?productNum=${product.productNum}">가격 제안하기</a></div>
 					<div class="btn-heart"></div>
 					<div class="btn-report"><a href="/report/report?productNum=${product.productNum}"><i class="fas fa-exclamation-triangle"></i> 신고</a></div>
 				</c:if>

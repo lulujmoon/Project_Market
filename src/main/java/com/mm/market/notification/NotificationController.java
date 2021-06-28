@@ -3,6 +3,8 @@ package com.mm.market.notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,18 +18,18 @@ public class NotificationController {
 	@Autowired
 	private NotificationService notificationService;
 	
-	
 	//알림 인서트 하기	
-	@RequestMapping("notiInsert")
+	@PostMapping("notiInsert")
 	public String notiInsert(@RequestParam String notiContent, @RequestParam String notiRecvUser, Authentication auth)throws Exception{
 		NotificationVO notificationVO = new NotificationVO();
 		ProductVO productVO = new ProductVO();
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();
 		
 		String username = memberVO.getUsername();
+		
 		System.out.println("user: "+username);
 		notificationVO.setNotiSendUser(username);
-		notificationVO.setProduct(productVO);
+		notificationVO.setProductNum(productVO.getProductNum());
 		notificationVO.setNotiRecvUser(notiRecvUser);
 		notificationVO.setNotiContent(notiContent);
 		
