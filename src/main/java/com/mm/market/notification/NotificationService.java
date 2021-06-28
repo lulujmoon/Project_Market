@@ -12,18 +12,15 @@ public class NotificationService {
 	private NotificationMapper notificationMapper;
 	
 	public List<NotificationVO> notiList(NotificationVO notificationVO) throws Exception{
-		
 		String username = notificationVO.getNotiRecvUser();
 		
 		List<NotificationVO> list = notificationMapper.notiList(notificationVO);
 		
-		for(NotificationVO noti : list) {
-			noti.setNotiRecvUser(username);
-			int unread = notificationMapper.countUnread(notificationVO);
-			noti.setUnread(unread);
-		}
-		
 		return list;
+	}
+	
+	public int countUnread(NotificationVO notificationVO) throws Exception {
+		return notificationMapper.countUnread(notificationVO);
 	}
 	
 	public int notiReadChk(NotificationVO notificationVO) throws Exception {

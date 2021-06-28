@@ -26,13 +26,18 @@ public class NotificationController {
 		
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();
 		String username = memberVO.getUsername();
-		
+	
 		NotificationVO notificationVO = new NotificationVO();
 		notificationVO.setNotiRecvUser(username);
+		
+		int unread = notificationService.countUnread(notificationVO);
+		System.out.println("unread : " + unread);
 		
 		List<NotificationVO> list = notificationService.notiList(notificationVO);
 		System.out.println("Noti List : " + list);
 		
+		
+		request.setAttribute("unread", unread);
 		request.setAttribute("list", list);
 		
 		return "notification/list";

@@ -23,11 +23,13 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class=container>
+			<div>안읽은 알림 : ${unread} </div>
 	<div class="notice-container">
 		<c:forEach items="${list}" var="noti">
 			<div class="ntc__card">
 				<div class="ntc__left">
 						<input type="hidden" id="notiReadChk" value="${noti.notiReadChk}"> 
+
 					<div class="ntc__title">
 						<a href="/product/select/${noti.product.productNum}">[ ${noti.product.productName} ]</a>
 						<a onclick="read(${noti.notiNum})">${noti.notiSendUser}님이 가격제안을 하셨어요!</a>
