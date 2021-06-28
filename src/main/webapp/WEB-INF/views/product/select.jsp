@@ -71,16 +71,22 @@
 
 					<a class="top-btn btn-del" href="../delete/${product.productNum}" onclick="if(confirm('삭제하시겠습니까?')==false){return false;}">삭제하기</a>
 				</c:if>
-				<c:if test="${principal.username != product.username}">
+				<c:if test="${principal.username != null && principal.username != product.username}">
 					<c:if test="${chat ne 0}">
-						<div class="top-btn btn-contact"><a type="button" href="/chat/chatList" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
+						<div class="top-btn btn-contact"><a href="/chat/chatList" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
 					</c:if>
 					<c:if test="${chat eq 0}">
-						<div class="top-btn btn-contact"><a class="msg_send_btn" type="button" href="/chat/chatSendInList?room=0&otherUser=${seller.username}&content=※${principal.username}님이 ${product.productName}을 구매하고 싶어해요!" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
+						<div class="top-btn btn-contact"><a class="msg_send_btn" href="/chat/chatSendInList?room=0&otherUser=${seller.username}&content=※${principal.username}님이 ${product.productName}을 구매하고 싶어해요!" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
 					</c:if>
-					<div class="top-btn btn-nego"><a href="../nego?productNum=${product.productNum}">가격 제안하기</a></div>
+					<div class="top-btn btn-nego">가격 제안하기</div>
 					<div class="btn-heart"></div>
 					<div class="btn-report" onclick="openReport('${product.productNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
+				</c:if>
+				<c:if test="${principal.username == null}">
+					<div class="top-btn btn-contact" onclick="alertLogin()">연락하기</div>
+					<div class="top-btn btn-nego" onclick="alertLogin()">가격 제안하기</div>
+					<div class="btn-heart" onclick="alertLogin()"></div>
+					<div class="btn-report" onclick="alertLogin()"><i class="fas fa-exclamation-triangle"></i> 신고</div>					
 				</c:if>
 			</div>
 			<c:if test="${principal.username eq product.username}">

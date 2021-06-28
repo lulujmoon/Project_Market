@@ -122,7 +122,17 @@ function openReport(productNum){
 		"width=500,height=600,resizable,scrollbars=yes,left=1300,top=150");
 }
 
+/**
+ */
 $(document).ready(function(){
    var status = $("#productStatus").val();
    $("#status").val(status);
-})
+});
+
+/**	@function alertLogin()
+ *	-- 로그인 안내 후 로그인 페이지로 이동
+ */
+ function alertLogin(){
+	alert('먼저 로그인해주세요.');
+	location.href = '/member/login';
+}
