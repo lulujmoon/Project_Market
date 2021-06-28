@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.category-container {
+	width: 1010px;
+	margin: 40px auto;
+	padding: 0 20px;
+	display: flex;
+	flex-flow: row wrap;
+	background-color: white;
+}
+
+.category__title{
+	width: 12%;
+}
+
+.category__list{
+	width: 83%;
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.category__item{
+	width: 160px;
+	padding: 0 10px;
+}
+
+.category__item-location{
+	padding: 0 30px 0 10px;
+}
+
+.product-container{
+	width: 1050px;
+	margin: auto;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: center;
+}

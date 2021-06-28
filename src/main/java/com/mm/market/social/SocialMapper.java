@@ -21,12 +21,6 @@ public interface SocialMapper {
 	public long getSocialNum() throws Exception;
 	//Insert
 	public int setInsert(SocialVO socialVO) throws Exception;
-	//File Insert
-	public int setFileInsert(SocialFileVO socialFileVO) throws Exception;
-	//File Delete
-	public int setFileDelete(SocialFileVO socialFileVO) throws Exception;
-	//File Select
-	public SocialFileVO setFileSelect(SocialFileVO socialFileVO) throws Exception;
 	//Update
 	public int setUpdate(SocialVO socialVO) throws Exception;
 	//Delete
