@@ -26,7 +26,7 @@ public class NotificationController {
 	
 	//알림 인서트 하기	
 	@PostMapping("notiInsert")
-	public String notiInsert(@RequestParam String notiContent, @RequestParam Long productNum, @RequestParam String notiRecvUser, Authentication auth)throws Exception{
+	public String notiInsert(@RequestParam String notiContent, @RequestParam String notiRecvUser, Authentication auth)throws Exception{
 		NotificationVO notificationVO = new NotificationVO();
 		ProductVO productVO = new ProductVO();
 		
@@ -35,9 +35,9 @@ public class NotificationController {
 		String username = memberVO.getUsername();
 		
 		//상품 번호
-		productVO.setProductNum(productNum);
-		productVO =	productService.getSelect(productVO);
-		productNum = productVO.getProductNum();
+//		productVO.setProductNum();
+//		productVO =	productService.getSelect(productVO);
+//		productNum = productVO.getProductNum();
 		
 		
 		//판매자
@@ -46,12 +46,12 @@ public class NotificationController {
 		notificationVO.setNotiSendUser(username);
 		notificationVO.setNotiRecvUser(notiRecvUser);
 		notificationVO.setNotiContent(notiContent);
-		notificationVO.setProductNum(productNum);
+//		notificationVO.setProductNum(productNum);
 		
 		System.out.println("notiSendUser: "+username);
 		System.out.println("notiRecvUser: "+notiRecvUser);
 		System.out.println("notiContent: "+notiContent);
-		System.out.println("productNum: "+productNum);
+//		System.out.println("productNum: "+productNum);
 		
 		return "redirect:/product/list";
 		

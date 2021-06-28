@@ -45,7 +45,7 @@
 	
 	<!-- 알림 보내기 -->
 	<insert id="notiInsert" parameterType="NotificationVO">
-		insert into notification values(0, #{notiSendUser}, #{notiRecvUser}, now(), #{notiContent}, 0, #{productNum})	
+		insert into notification values(0, #{notiSendUser}, #{notiRecvUser}, now(), #{notiContent}, 1, #{productNum})	
 	</insert>
 	
 	<!-- 알림 삭제 -->

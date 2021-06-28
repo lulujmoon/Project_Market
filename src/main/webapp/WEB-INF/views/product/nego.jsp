@@ -16,7 +16,7 @@
 
 	<form action="../notification/notiInsert" method="POST">
 		<input type="hidden" name="username" value="${principal.username}">
-		<input type="hidden" name="productNum" value="${product.productNum}">
+		<%-- <input type="hidden" name="productNum" value="${product.productNum}"> --%>
 		<input type="hidden" name="notiRecvUser" value="${product.username}">
 		
 		<div>제안할 가격을 입력하세요</div>
