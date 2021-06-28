@@ -122,13 +122,13 @@
 		delete from good where socialNum = #{socialNum} and username = #{username}
 	</delete>
 
-	<select id="getGoodList" parameterType="GoodVO" resultMap="selectResult">
-		select G.*, S.*, M.username
+	<select id="getGoodList" parameterType="SocialPager" resultMap="selectResult">
+		select G.*, S.*, L.*
 		from good G
 		left Join social S
 		on S.socialNum = G.socialNum 
-		left Join member M
-		on M.username = G.username
+		inner Join location L 
+		on S.locationCode = L.locationCode
 		where G.username = #{username}
 	</select>
 </mapper>

@@ -2,8 +2,6 @@ package com.mm.market.social;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +12,6 @@ public class SocialService {
 
 	@Autowired
 	private SocialMapper socialMapper;
-
-	@Autowired
-	private HttpSession session;
 
 	//List
 	public List<SocialVO> getList(SocialPager socialPager) throws Exception {

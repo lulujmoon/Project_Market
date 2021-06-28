@@ -10,8 +10,9 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
-<title>우리동네</title>
 <link rel="stylesheet" href="/resources/css/socialSelect.css" />
+<title>우리동네</title>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
@@ -56,9 +57,9 @@
 		<a class="insert-button" href="./delete?socialNum=${social.socialNum}"
 			class="btn btn-primary" role="button">삭제</a>
 		<div class="icon_good">
-			<i class="fas fa-heart"></i> ${social.socialGood}
+			<i class="fas fa-thumbs-up"></i> ${social.socialGood}
 		</div>
-		<div class="btn-good"></div>
+		<div class="btn-thumbs-up"></div>
 		<div class="btn-report" onclick="openSocialReport('${social.socialNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 	</div>
 	<div class="hidden">

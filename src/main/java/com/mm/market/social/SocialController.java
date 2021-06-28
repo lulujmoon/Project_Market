@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.comment.CommentService;
 import com.mm.market.comment.CommentVO;
-import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
@@ -79,20 +77,21 @@ public class SocialController {
 		socialVO.setSocialNum(socialNum);
 		socialVO = socialService.getSelect(socialVO);
 		
-		int startInx = auth.getPrincipal().toString().indexOf("=");
-		int lastInx = auth.getPrincipal().toString().indexOf(",");
-
-		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
-
-		GoodVO goodVO = new GoodVO();
-		goodVO.setSocialNum(socialNum);
-		goodVO.setUsername(username);
-		
-		Long good = socialService.getGood(goodVO);
+		if(auth != null) {
+			MemberVO memberVO = (MemberVO)auth.getPrincipal();
+			String username = memberVO.getUsername();
+			
+			GoodVO goodVO = new GoodVO();
+			goodVO.setSocialNum(socialNum);
+			goodVO.setUsername(username);
+			
+			Long good = socialService.getGood(goodVO);
+			
+			mv.addObject("good", good);			
+		}
 
 		List<CommentVO> ar = commentService.getList(commentVO);
 
-		mv.addObject("good", good);
 		mv.addObject("social", socialVO);
 		mv.addObject("comment", commentVO);
 		mv.addObject("list", ar);
