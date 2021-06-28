@@ -56,7 +56,6 @@
 	top__status.style.backgroundColor = '#b4b4b4';
 }else if(status == '예약 중'){
 	top__status.style.backgroundColor = '#f7bd11';
-	location.href='/chat/chatList'
 }
 
 
