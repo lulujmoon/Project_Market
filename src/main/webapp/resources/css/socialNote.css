@@ -71,13 +71,13 @@
 	right: 35px;
 }
 
-.location-set{
+.location-set-wrapper{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 }
 
-.location-set > a{
+.location-set{
 	width: 140px;
 	height: 35px;
 	margin-left: 15px;
@@ -87,6 +87,7 @@
 	color: #fbfbfb;
 	text-align: center;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 .category-container > i{

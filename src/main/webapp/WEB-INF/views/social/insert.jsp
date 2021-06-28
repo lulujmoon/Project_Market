@@ -35,9 +35,9 @@
 				</c:forEach>
 			</select>
 			<i class="fas fa-sort-down"></i>		
-			<div class="location-set">
+			<div class="location-set-wrapper" id="location-set-wrapper">
 				내 지역으로 저장한 지역을 선택할 수 있습니다.
-				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></a>
+				<div class="location-set" onclick="openMemberInfo()">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></div>
 			</div>
 		</div>
 		<div class="category-container">
@@ -57,5 +57,6 @@
 </div>
 <script type="text/javascript" src="../resources/js/common.js"></script>
 <script type="text/javascript" src="../resources/js/summerFile.js"></script>
+<script type="text/javascript" src="../resources/js/socialNote.js"></script>
 </body>
 </html>

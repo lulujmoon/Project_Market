@@ -112,6 +112,9 @@ function submit() {
 	location.href = '/store/'+sellerCode+'/products/';
 }
 
+/** @function openReport(productNum)
+ *	-- productNum을 받아 신고 페이지를 팝업으로 띄운다.
+ */
 function openReport(productNum){
 	window.open(
 		"/report/report?productNum="+productNum, 
