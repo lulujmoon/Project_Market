@@ -95,6 +95,10 @@ public class SocialService {
 		socialMapper.updateGood(goodVO.getSocialNum());
 	}
 	
+	public List<SocialVO> getGoodList(GoodVO goodVO) throws Exception {
+		return socialMapper.getGoodList(goodVO);
+	}
+	
 	//SummerFile
 	public String setSummerFileUpload(MultipartFile file) throws Exception {
 		String fileName = fileManager.save("social", file, session);

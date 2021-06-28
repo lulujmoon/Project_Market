@@ -41,4 +41,6 @@ public interface SocialMapper {
 
 	public int deleteGood(GoodVO goodVO) throws Exception;
 	
+	public List<SocialVO> getGoodList(GoodVO goodVO) throws Exception;
+	
 }

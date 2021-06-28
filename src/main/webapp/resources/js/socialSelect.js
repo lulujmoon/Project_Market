@@ -34,8 +34,6 @@ $(document).ready(function() {
 	});
 });
 
-function heart_reload() {
-	$("#good").load(window.location.href='/social/select/'+socialNum);
-}
+function good_reload() {
 	$("#good").load(window.location.href='/social/select/'+socialNum);
 }
