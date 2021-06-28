@@ -6,10 +6,7 @@
 <mapper namespace="com.mm.market.social.SocialMapper">
 
 	<select id="getList" resultMap="selectResult" parameterType="SocialPager">
-		select S.*, M.*, SC.*
-		from social S
-		left join member M
-		on S.username = M.username
+		select S.*, SC.* from social S
 		inner join socialCategory SC
 		on S.categoryCode = SC.categoryCode
 		inner join location L
@@ -24,7 +21,7 @@
 		<if test="username != null">
 			username = #{username} and
 		</if>
-		S.socialTitle like concat('%', #{search}, '%')
+		S.socialTitle like concat('%', #{keyword}, '%')
 		order by S.socialNum desc
 		limit #{startRow}, 20
 	</select>
@@ -73,6 +70,18 @@
 
 	<select id="getTotalCount" resultType="Long" parameterType="SocialPager">
 		select count(socialNum) from social
+		where
+				<if test="categoryCode != 0L">
+					categoryCode = #{categoryCode} and 
+				</if>
+				<if test="locationCode != 0L">
+					locationCode = #{locationCode} and
+				</if>
+				<if test="username != null">
+					username = #{username} and
+				</if>
+		socialTitle like concat ('%', #{keyword}, '%')
+		and socialNum > 0		
 	</select>
 
 	<insert id="setInsert" parameterType="SocialVO" useGeneratedKeys="true" keyProperty="socialNum">
@@ -82,14 +91,14 @@
 
 	<update id="setUpdate" parameterType="SocialVO">
 		update social set
-		socialTitle=#{socialTitle}, categoryCode=#{categoryCode},
-		socialContent=#{socialContent}
-		where socialNum=#{socialNum}
+		socialTitle = #{socialTitle},
+		categoryCode = #{categoryCode},
+		socialContent = #{socialContent}
+		where socialNum = #{socialNum}
 	</update>
 
 	<delete id="setDelete" parameterType="SocialVO">
-		delete from social where
-		socialNum=#{socialNum}
+		delete from social where socialNum = #{socialNum}
 	</delete>
 
 	<!-- good -->
@@ -105,14 +114,21 @@
 	</insert>
 
 	<select id="updateGood" parameterType="GoodVO">
-		update social set
-		socialGood = (select count(*) from good
-		where socialNum=#{socialNum})
-		where socialNum=#{socialNum}
+		update social set socialGood = (select count(*) from good
+		where socialNum = #{socialNum}) where socialNum = #{socialNum}
 	</select>
 	
 	<delete id="deleteGood" parameterType="GoodVO">
-		delete from good
-		where socialNum=#{socialNum} and username=#{username}
+		delete from good where socialNum = #{socialNum} and username = #{username}
 	</delete>
+
+	<select id="getGoodList" parameterType="GoodVO" resultMap="selectResult">
+		select G.*, S.*, M.username
+		from good G
+		left Join social S
+		on S.socialNum = G.socialNum 
+		left Join member M
+		on M.username = G.username
+		where G.username = #{username}
+	</select>
 </mapper>

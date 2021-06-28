@@ -40,9 +40,6 @@ public class SocialController {
 	private SocialCategoryMapper socialCategoryMapper;
 
 	@Autowired
-	private MemberService memberService;
-
-	@Autowired
 	private MemberLocationService memberLocationService;
 	
 	@GetMapping("list")
@@ -192,7 +189,7 @@ public class SocialController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value="good", produces = "application/json")
+	@PostMapping(value = "good", produces = "application/json")
 	public Long good(HttpServletRequest request, Authentication auth) throws Exception {
 		Long good = Long.parseLong(request.getParameter("good"));
 		Long socialNum = Long.parseLong(request.getParameter("socialNum"));
