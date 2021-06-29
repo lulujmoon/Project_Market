@@ -182,7 +182,7 @@
 	const MessageContentList = function(room) {
 		
 		$.ajax({
-			url:"chatContentList",
+			url:"chatContentList?productNum=${productNum}&&locationCode=${locationCode}",
 			method:"GET",
 			data:{
 				room : room,

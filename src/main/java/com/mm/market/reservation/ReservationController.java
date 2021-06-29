@@ -3,10 +3,13 @@ package com.mm.market.reservation;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mm.market.member.MemberVO;
+import com.mm.market.memberLocation.MemberLocationVO;
 import com.mm.market.product.ProductController;
 import com.mm.market.product.ProductService;
 import com.mm.market.product.ProductVO;
@@ -22,13 +25,18 @@ public class ReservationController {
 	ProductService productService;
 	
 	@GetMapping
-	public void insert(String seller,String buyer,HttpServletRequest http)throws Exception{
+	public void insert(String buyer,Long productNum, ReservationVO reservationVO, Long locationCode, Authentication authentication)throws Exception{	
 		
-		String productNum = http.getParameter("productNum");
+		MemberVO memberVO =(MemberVO)authentication.getPrincipal();
+				
+		reservationVO.setProductNum(productNum);
+		reservationVO.setBuyer(buyer);
+		reservationVO.setSeller(memberVO.getUsername());
+		
 		
 		System.out.println(productNum);
+		System.out.println(locationCode);
 		
-		System.out.println(seller);
-		System.out.println(buyer);
+		reservationService.setInsert(reservationVO);
 	}
 }

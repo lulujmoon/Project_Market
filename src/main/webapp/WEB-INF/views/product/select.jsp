@@ -99,6 +99,7 @@
 			</div>
 			<div class="seller_locNdate">
 				<div class="seller__location">${sellerLocation.locationName}</div>
+				<div class="seller__LC" hidden="hidden">${sellerLocation.locationCode}</div>
 				<div class="seller__joinDate">${seller.joinDate}</div>
 			</div>
 			<div class="seller__rating">

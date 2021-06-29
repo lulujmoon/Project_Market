@@ -58,8 +58,8 @@
 	top__status.style.backgroundColor = '#f7bd11';
 }
 
-
-
+const seller__LC = document.querySelector('.seller__LC');
+const locationCode = seller__LC.innerText;
 
 /** 기능 1. 찜
  */
@@ -128,5 +128,5 @@ $("#status").val(status);
 })
 
  if(status == '예약 중'){
- 	location.href='/chat/chatList?productNum='+productNum
+ 	location.href='/chat/chatList?productNum='+productNum+'&&locationCode='+locationCode
  }
