@@ -98,7 +98,7 @@ if(btnHeart!=null){
 }
 		
 function heart_reload() {
-	$("#heart").load(window.location.href='/product/select/'+productNum);
+	document.location.reload(true);
 }
 
 function submit() {
