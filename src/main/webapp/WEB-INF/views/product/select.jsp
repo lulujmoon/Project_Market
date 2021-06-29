@@ -28,9 +28,9 @@
 			</div>	
 			<div class="carousel-btn">
 				<i class="fas fa-chevron-left" id="prev-btn"></i>
-<%-- 				<c:forEach begin="0" end="${product.files.size()-1}" var="i">
+				<c:forEach begin="0" end="${product.files.size()-1}" var="i">
 					<div class="circle" id="circle_${i}"></div>
-				</c:forEach> --%>
+				</c:forEach>
 				<i class="fas fa-chevron-right" id="next-btn"></i>
 			</div>
 		</div>
