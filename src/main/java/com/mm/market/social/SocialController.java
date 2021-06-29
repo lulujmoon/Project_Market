@@ -63,7 +63,7 @@ public class SocialController {
 		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
 
 		model.addAttribute("list", ar);
-		model.addAttribute("pager", socialPager);
+		model.addAttribute("socialPager", socialPager);
 		model.addAttribute("myLocation", myLocation);
 		model.addAttribute("categories", categories);
 		

@@ -17,38 +17,12 @@
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<div class="main-container">
-		<h2>${social.socialTitle}</h2>
-		<table class="table-box">
-			<thead class="thead-dark">
-				<tr>
-					<th>번호</th>
-					<th>작성자</th>
-					<th>작성 날짜</th>
-					<th>지역</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>${social.socialNum}</td>
-					<td>${social.username}</td>
-					<td>${social.socialDate}</td>
-					<td>${social.location.locationName}</td>
-				</tr>
-			</tbody>
-		</table>
-
-		<table class="table-box2">
-			<thead class="thead-dark">
-				<tr>
-					<th>내용</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>${social.socialContent}</td>
-				</tr>
-			</tbody>
-		</table>
+		${social.socialTitle}
+		${social.socialNum}
+		${social.username}
+		${social.socialDate}
+		${social.location.locationName}
+		${social.socialContent}
 	</div>
 
 	<div class="table-box2">
