@@ -59,7 +59,7 @@
 		<div class="icon_good">
 			<i class="fas fa-thumbs-up"></i> ${social.socialGood}
 		</div>
-		<div class="btn-thumbs-up"></div>
+		<div class="btn-good"></div>
 		<div class="btn-report" onclick="openSocialReport('${social.socialNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 	</div>
 	<div class="hidden">
