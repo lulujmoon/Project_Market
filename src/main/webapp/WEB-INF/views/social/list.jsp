@@ -18,6 +18,7 @@
 	<div class="category-container">
 		<h3 class="category__title">카테고리</h3>
 		<ul class="category__list">
+			<li class="category__item"><a href="./list">전체</a></li>
 			<c:forEach items="${categories}" var="category">
 				<li class="category__item"><a href="./list?categoryCode=${category.categoryCode}" onclick="${category.categoryCode}">${category.categoryName}</a></li>
 			</c:forEach>
@@ -49,7 +50,7 @@
 				</div>
 				<div class="scl__content">${social.socialContent}</div>
 				<div class="scl__response">
-					<div class="scl__good"><i class="far fa-thumbs-up"></i> 0</div>
+					<div class="scl__good"><i class="far fa-thumbs-up"></i> ${social.socialGood}</div>
 					<div class="scl__comment"><i class="far fa-comment-dots"></i> 2</div>
 				</div>
 			</div>
