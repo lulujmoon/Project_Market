@@ -3,6 +3,8 @@ package com.mm.market.notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,28 +23,32 @@ public class NotificationController {
 	@Autowired
 	private ProductService productservice;
 	
+	//가격 제안하기 페이지
+	@GetMapping("nego")
+	public void setNego(NotificationVO notificationVO, Authentication auth, Model model)throws Exception{
+		MemberVO memberVO = (MemberVO)auth.getPrincipal();
+		String username = memberVO.getUsername();
+		notificationVO.setNotiSendUser(username);
+
+		model.addAttribute("noti", notificationVO);
+	}
+	
 	//알림 인서트 하기	
-	@PostMapping("notiInsert")
-	public String notiInsert(@RequestParam String notiContent, @RequestParam String notiRecvUser, @RequestParam Long productNum, Authentication auth)throws Exception{
+	@PostMapping("nego")
+	public String notiInsert(NotificationVO notificationVO, Authentication auth)throws Exception{
 		
-		System.out.println("notiRecvUser: "+notiRecvUser);
-		System.out.println("notiContent: "+notiContent);
-		System.out.println("productNum: "+productNum);
+		System.out.println("seller: "+notificationVO.getNotiRecvUser());
+		System.out.println("notiContent: "+notificationVO.getNotiContent());
+		System.out.println("productNum: "+notificationVO.getProductNum());
 		
-		NotificationVO notificationVO = new NotificationVO();
 		ProductVO productVO = new ProductVO();
 		
 		//현재 로그인한 유저
 		MemberVO memberVO = (MemberVO)auth.getPrincipal();	
 		String username = memberVO.getUsername();
-		
-		//판매자		
 		notificationVO.setNotiSendUser(username);
-		notificationVO.setNotiRecvUser(notiRecvUser);
-		notificationVO.setNotiContent(notiContent);
-		notificationVO.setProductNum(productNum);
 		
-		System.out.println("notiSendUser: "+username);
+		notificationService.notiInsert(notificationVO);
 		
 		return "redirect:/product/list";
 		

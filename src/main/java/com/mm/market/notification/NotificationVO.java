@@ -18,6 +18,4 @@ public class NotificationVO {
 	private int unread;
 	private String username;
 	
-	private ProductVO product;
-	
 }

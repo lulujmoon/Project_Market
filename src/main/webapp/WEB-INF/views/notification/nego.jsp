@@ -14,10 +14,10 @@
 </head>
 <body>
 
-	<form action="../notification/notiInsert" method="POST">
+	<form action="../notification/nego" method="POST">
 		<input type="hidden" name="username" value="${principal.username}">
-		<input type="hidden" name="productNum" value="${product.productNum}">
-		<input type="hidden" name="notiRecvUser" value="${product.username}">
+		<input type="hidden" name="productNum" value="${noti.productNum}">
+		<input type="hidden" name="notiRecvUser" value="${noti.notiRecvUser}">
 		
 		<div>제안할 가격을 입력하세요</div>
 		<input type="number" name="notiContent">
