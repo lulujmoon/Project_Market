@@ -123,10 +123,22 @@ function openReport(productNum){
 }
 
 $(document).ready(function(){
-var status =$("#productState").val();
-$("#status").val(status);
-})
+	var status =$("#productState").val();
+	$("#status").val(status);
+	})
 
- if(status == '예약 중'){
- 	location.href='/chat/chatList?productNum='+productNum+'&&locationCode='+locationCode
- }
+
+$(document).ready(function(){
+	$.get('/reservation/select', {
+		productNum: productNum
+	}, function(result){
+		if(result==null){
+			alert('없어!!@@@');
+		}else{
+			alert('있어');
+		}
+	})
+	});
+
+	/* if(status == '예약 중'){	
+	 	location.href='/chat/chatList?productNum='+productNum+'&&locationCode='+locationCode}*/

@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.member.MemberVO;
 import com.mm.market.memberLocation.MemberLocationVO;
@@ -24,7 +25,7 @@ public class ReservationController {
 	@Autowired
 	ProductService productService;
 	
-	@GetMapping
+	@GetMapping("insert")
 	public String insert(String buyer,Long productNum, ReservationVO reservationVO, Long locationCode, Authentication authentication)throws Exception{	
 		
 		MemberVO memberVO =(MemberVO)authentication.getPrincipal();
@@ -38,5 +39,27 @@ public class ReservationController {
 		System.out.println(result);
 		
 		return "redirect:/"; 
+	}
+	
+	@GetMapping("select")
+	public ModelAndView getSelect(ReservationVO reservationVO,Long productNum)throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		reservationVO.setProductNum(productNum);
+		reservationVO =reservationService.getSelect(reservationVO);
+		
+		if(reservationVO!=null) {
+		
+		System.out.println(reservationVO.getProductNum());
+		mv.addObject("result",reservationVO);
+		
+		}else{
+			mv.addObject("result",null);	
+		}
+		
+		mv.setViewName("product/select");
+		
+		return mv;
+		
 	}
 }
