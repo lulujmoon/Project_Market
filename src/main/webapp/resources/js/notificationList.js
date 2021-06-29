@@ -19,7 +19,7 @@ function notiDelete(notiNum) {
 		url:"./notiDelete",
 		method:"POST",
 		data:{notiNum : notiNum},
-		success:function(){
+		success:function() {
 			console.log("알림 삭제 완료");
 			window.location.replace("/notification/list");
 		}
