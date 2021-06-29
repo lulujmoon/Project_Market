@@ -26,7 +26,7 @@ public class ChatController {
 
 	//메세지 목록
 	@RequestMapping("chatList")
-	public String chatList(Authentication auth, HttpServletRequest request, Long productNum) throws Exception {
+	public String chatList(Authentication auth, HttpServletRequest request, Long productNum, Long locationCode) throws Exception {
 		
 		MemberVO memberVO= (MemberVO)auth.getPrincipal();
 //		System.out.println("auth : "+memberVO.getUsername());
@@ -42,6 +42,7 @@ public class ChatController {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("productNum", productNum);
+		request.setAttribute("locationCode", locationCode);
 		
 		return "chat/chatList";
 	}

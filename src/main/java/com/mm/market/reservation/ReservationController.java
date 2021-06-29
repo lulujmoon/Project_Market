@@ -25,18 +25,18 @@ public class ReservationController {
 	ProductService productService;
 	
 	@GetMapping
-	public void insert(String buyer,Long productNum, ReservationVO reservationVO, Long locationCode, Authentication authentication)throws Exception{	
+	public String insert(String buyer,Long productNum, ReservationVO reservationVO, Long locationCode, Authentication authentication)throws Exception{	
 		
 		MemberVO memberVO =(MemberVO)authentication.getPrincipal();
 				
 		reservationVO.setProductNum(productNum);
 		reservationVO.setBuyer(buyer);
 		reservationVO.setSeller(memberVO.getUsername());
+		reservationVO.setLocationCode(locationCode);
+				
+		int result = reservationService.setInsert(reservationVO);
+		System.out.println(result);
 		
-		
-		System.out.println(productNum);
-		System.out.println(locationCode);
-		
-		reservationService.setInsert(reservationVO);
+		return "redirect:/"; 
 	}
 }
