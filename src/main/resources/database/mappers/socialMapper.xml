@@ -6,7 +6,10 @@
 <mapper namespace="com.mm.market.social.SocialMapper">
 
 	<select id="getList" resultMap="selectResult" parameterType="SocialPager">
-		select S.*, SC.* from social S
+		select S.*, SC.*,
+		<!-- 댓글 숫자 표시 -->
+		(select count(*) from comment where socialNum = S.socialNum) commentCount
+		from social S
 		inner join socialCategory SC
 		on S.categoryCode = SC.categoryCode
 		inner join location L
@@ -45,6 +48,7 @@
 		<result column="socialDate" property="socialDate" />
 		<result column="socialGood" property="socialGood" />
 		<result column="locationCode" property="locationCode" />
+		<result column="commentCount" property="commentCount" />
 		<association property="socialCategory" javaType="SocialCategoryVO">
 			<id property="categoryCode" column="categoryCode" />
 			<result property="categoryName" column="categoryName" />
@@ -122,13 +126,13 @@
 		delete from good where socialNum = #{socialNum} and username = #{username}
 	</delete>
 
-	<select id="getGoodList" parameterType="GoodVO" resultMap="selectResult">
-		select G.*, S.*, M.username
+	<select id="getGoodList" parameterType="SocialPager" resultMap="selectResult">
+		select G.*, S.*, L.*
 		from good G
 		left Join social S
 		on S.socialNum = G.socialNum 
-		left Join member M
-		on M.username = G.username
+		inner Join location L 
+		on S.locationCode = L.locationCode
 		where G.username = #{username}
 	</select>
 </mapper>
