@@ -139,3 +139,17 @@ $(document).ready(function(){
 		}
 	})
 	});
+	
+/*거래완료 상품처리*/
+$(document).ready(function(){
+	$.get('/reservation/select', {
+		productNum: productNum
+	}, function(result){
+		if(result==1&&status=='판매완료'){
+			location.href='/review/insert?productNum='+productNum
+		}if(result==0&&status=='판매완료'){
+
+		}
+	})
+	});
+
