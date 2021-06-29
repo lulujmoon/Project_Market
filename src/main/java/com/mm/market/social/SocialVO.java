@@ -19,7 +19,8 @@ public class SocialVO {
 	private Timestamp socialDate;
 	private Long socialGood;
 	private Long locationCode;
-	
+	private Long commentCount;
+
 	private MemberVO writer;
 	private LocationVO location;
 	private SocialCategoryVO socialCategory;
