@@ -127,6 +127,7 @@ $(document).ready(function(){
 	$("#status").val(status);
 	})
 
+/*예약중인 상품 처리*/
 $(document).ready(function(){
 	$.get('/reservation/select', {
 		productNum: productNum
@@ -138,6 +139,3 @@ $(document).ready(function(){
 		}
 	})
 	});
-
-/*if(status == '예약 중'){	
-	 	location.href='/chat/chatList?productNum='+productNum+'&&locationCode='+locationCode}*/
