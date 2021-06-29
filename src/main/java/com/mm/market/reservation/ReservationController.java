@@ -47,17 +47,18 @@ public class ReservationController {
 		ModelAndView mv = new ModelAndView();
 		reservationVO.setProductNum(productNum);
 		reservationVO =reservationService.getSelect(reservationVO);
+		int result=0;
 		
 		if(reservationVO!=null) {
 		
-		System.out.println(reservationVO.getProductNum());
-		mv.addObject("result",reservationVO);
-		
+		System.out.println("레저베이션넘버"+reservationVO.getProductNum());
+		result=1;
+		mv.addObject("result",result);
 		}else{
-			mv.addObject("result",null);	
+			mv.addObject("result",result);	
 		}
 		
-		mv.setViewName("product/select");
+		mv.setViewName("common/ajaxResult");
 		
 		return mv;
 		
