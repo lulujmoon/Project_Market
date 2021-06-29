@@ -40,9 +40,6 @@ public class SocialController {
 	private SocialCategoryMapper socialCategoryMapper;
 
 	@Autowired
-	private MemberService memberService;
-
-	@Autowired
 	private MemberLocationService memberLocationService;
 	
 	@GetMapping("list")
@@ -121,8 +118,14 @@ public class SocialController {
 	@PostMapping("insert")
 	public String setInsert(SocialVO socialVO, Model model) throws Exception {
 
+		int result = socialService.setInsert(socialVO);
+		
 		String message = "등록에 실패했습니다!";
 		String path = "./list";
+
+		if(result>0) {
+			message = "등록에 성공했습니다!";
+		}
 
 		model.addAttribute("msg", message);
 		model.addAttribute("path", path);
@@ -186,7 +189,7 @@ public class SocialController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value="good", produces = "application/json")
+	@PostMapping(value = "good", produces = "application/json")
 	public Long good(HttpServletRequest request, Authentication auth) throws Exception {
 		Long good = Long.parseLong(request.getParameter("good"));
 		Long socialNum = Long.parseLong(request.getParameter("socialNum"));

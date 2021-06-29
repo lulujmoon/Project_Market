@@ -98,7 +98,7 @@ if(btnHeart!=null){
 }
 		
 function heart_reload() {
-	$("#heart").load(window.location.href='/product/select/'+productNum);
+	document.location.reload(true);
 }
 
 function submit() {
@@ -112,9 +112,44 @@ function submit() {
 	location.href = '/store/'+sellerCode+'/products/';
 }
 
+/** @function openReport(productNum)
+ *	-- productNum을 받아 신고 페이지를 팝업으로 띄운다.
+ */
 function openReport(productNum){
 	window.open(
 		"/report/report?productNum="+productNum, 
 		'', 
 		"width=500,height=600,resizable,scrollbars=yes,left=1300,top=150");
 }
+
+$(document).ready(function(){
+	var status = $("#productStatus").val();
+	$("#status").val(status);
+})
+
+
+function deleteProduct(productNum) {
+	let con = confirm("삭제하시겠습니까?");
+	if(con) {
+        const deleteForm = document.createElement('form');
+		deleteForm.action = './delete';
+		deleteForm.method = 'post';
+		
+		const inputNum = document.createElement('input');
+		inputNum.type = 'hidden';
+		inputNum.name = 'productNum';
+		inputNum.value = productNum;
+		
+		deleteForm.appendChild(inputNum);
+		document.body.appendChild(deleteForm);
+		
+		deleteForm.submit();
+          
+        }
+		
+		
+		
+	}
+	
+
+

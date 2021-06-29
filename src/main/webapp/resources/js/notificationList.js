@@ -10,7 +10,7 @@ function read(notiNum) {
 		data:{notiNum : notiNum},
 		success:function() {
 			console.log("알림 읽기 완료");
-			window.location.replace("/notification/list");
+			document.location.reload(true);
 		}
 	});
 }

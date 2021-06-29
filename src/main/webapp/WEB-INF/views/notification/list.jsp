@@ -22,6 +22,7 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class=container>
+			<div>안읽은 알림 : ${unread} </div>
 	<div class="notice-container">
 		<c:forEach items="${list}" var="noti">
 			<div class="ntc__card">
@@ -45,6 +46,18 @@
 			
 		</c:forEach>
 	</div>
+	
+	<ul class="page-container list-page">
+		<c:if test="${notificationPager.pre}">	
+			<li><a class="page-item arrow" href="./list?page=${notificationPager.startNum-1}"><i class="fas fa-angle-double-left"></i></a></li>
+		</c:if>
+		<c:forEach begin="${notificationPager.startNum}" end="${notificationPager.lastNum}" var="i">
+			<li><a class="page-item code_${i}" href="./list?page=${i}">${i}</a></li>
+		</c:forEach>
+		<c:if test="${notificationPager.next}">
+			<li><a class="page-item arrow" href="./list?page=${notificationPager.lastNum+1}"><i class="fas fa-angle-double-left"></i></a></li>
+		</c:if>
+	</ul>
 	
 </div>
 <c:import url="../template/footer.jsp"></c:import>

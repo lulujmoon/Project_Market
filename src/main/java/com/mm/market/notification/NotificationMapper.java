@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mm.market.util.NotificationPager;
+
 @Mapper
 public interface NotificationMapper {
 	
-	public List<NotificationVO> notiList(NotificationVO notificationVO) throws Exception;
+	public List<NotificationVO> notiList(NotificationPager notificationPager) throws Exception;
+	
+	public Long getTotalCount(NotificationPager notificationPager) throws Exception;
 	
 	public NotificationVO notiSelect(NotificationVO notificationVO) throws Exception;
 	

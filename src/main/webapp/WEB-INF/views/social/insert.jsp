@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <sec:authorize access="isAuthenticated()">
 <sec:authentication property="principal" var="principal" />
 </sec:authorize>
@@ -35,9 +34,9 @@
 				</c:forEach>
 			</select>
 			<i class="fas fa-sort-down"></i>		
-			<div class="location-set">
+			<div class="location-set-wrapper" id="location-set-wrapper">
 				내 지역으로 저장한 지역을 선택할 수 있습니다.
-				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></a>
+				<div class="location-set" onclick="openMemberInfo()">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></div>
 			</div>
 		</div>
 		<div class="category-container">
@@ -48,8 +47,8 @@
 			</select>
 			<i class="fas fa-sort-down"></i>
 		</div>
-		<input type="text" class="title" name="socialTitle" placeholder="제목"> 
-		<textarea class="content"	id="socialContent" name="socialContent"></textarea>
+		<input type="text" class="title" name="socialTitle" placeholder="제목">
+		<textarea class="content" id="socialContent" name="socialContent"></textarea>
 		<div class="btn-wrapper">
 			<button type="submit" class="btn-submit">등록</button>
 		</div>
@@ -57,5 +56,6 @@
 </div>
 <script type="text/javascript" src="../resources/js/common.js"></script>
 <script type="text/javascript" src="../resources/js/summerFile.js"></script>
+<script type="text/javascript" src="../resources/js/socialNote.js"></script>
 </body>
 </html>

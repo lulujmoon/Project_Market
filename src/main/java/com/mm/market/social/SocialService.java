@@ -5,11 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.mm.market.util.FileManager;
 import com.mm.market.util.SocialPager;
 
 @Service
@@ -72,6 +69,10 @@ public class SocialService {
 	public void deleteGood(GoodVO goodVO) throws Exception {
 		socialMapper.deleteGood(goodVO);
 		socialMapper.updateGood(goodVO.getSocialNum());
+	}
+	
+	public List<SocialVO> getGoodList(GoodVO goodVO) throws Exception {
+		return socialMapper.getGoodList(goodVO);
 	}
 
 }
