@@ -9,17 +9,14 @@
 			<div class="other-user">
 				${tmp.otherUser}
 			</div>
-			<div class="send-time">
-				${tmp.sendTime}
-			</div>
+			<c:if test="${tmp.unread > 0}">
+				<div class="badge-unread">${tmp.unread}</div>
+			</c:if>
 			<div class="row">
 				<div class="content">${tmp.content}</div>
-				<%-- 만약 현재사용자가 안읽은 메세지 갯수가 0보다 클때만 badge를 표시한다. --%>
-				<c:if test="${tmp.unread > 0}">
-					<div class="unread${tmp.room}">
-						<span class="badge bg-danger">${tmp.unread}</span>
-					</div>
-				</c:if>
+				<div class="send-time">
+					${tmp.sendTime}
+				</div>
 			</div>
 		</div>
 	</div>
