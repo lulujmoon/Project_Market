@@ -12,7 +12,6 @@
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/socialSelect.css" />
 <title>우리동네</title>
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -62,7 +61,7 @@
 		<div class="comment__title">
 			댓글 (${social.commentCount})
 		</div>
-		<c:if test="${comments ne null}">
+		<c:if test="${comments.size() != 0}">
 			<div class="comment__list">
 				<c:forEach begin="0" end="${comments.size()-1}" var="i">
 				<div class="comment__item-wrapper wrapper_${i}">
@@ -102,7 +101,7 @@
 		</c:if>
 		<form class="comment-form" action="../comment/insert" method="post">
 			<input type="hidden" id="socialNum" name="socialNum" value="${social.socialNum}">
-			<input type="hidden" value="${social.username}" name="username">
+			<input type="hidden" value="${principal.username}" name="username">
 			<textarea class="comment__content" id="commentContent" name="commentContent" placeholder="내용을 입력하세요." required></textarea>
 			<input type="submit" class="btn-submit" value="작성" />
 		</form>

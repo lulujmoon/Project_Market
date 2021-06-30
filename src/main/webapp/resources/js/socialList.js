@@ -3,12 +3,10 @@
  *	1. 정규식을 이용해 <img>와 <p>, </p> 부분을 삭제한다.
  */
  const socialContents = document.querySelectorAll('.scl__content');
- const regContent = /(<img)[^>]*>/gm;
  const regStartP = /<p>/gm;
  const regEndP = /<\/p>/gm;
  for(let content of socialContents){
-	let replaced = content.innerHTML.replace(regContent, '');
-	replaced = replaced.replace(regStartP, '');
+	let replaced = content.innerHTML.replace(regStartP, '');
 	replaced = replaced.replace(regEndP, '&nbsp;');
 	content.innerHTML = replaced;
 }
@@ -33,11 +31,11 @@
 	 selectedContent.classList.add('selected');	
 }
 
-/** @function goSelect(socialNum)
- *	-- socialNum이 일치하는 글의 셀렉트 페이지로 이동한다.
+/** @function goSocialSelect(socialNum)
+ *	-- 소셜 상세 페이지로 이동한다.
  */
- function goSelect(socialNum){
-	location.href = './select?socialNum='+socialNum;
+function goSocialSelect(socialNum){
+	location.href = '/social/select?socialNum='+socialNum;
 }
 
 /** @function goSocialHome()
