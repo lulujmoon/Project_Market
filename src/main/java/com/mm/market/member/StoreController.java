@@ -70,25 +70,34 @@ public class StoreController {
 		return mv;
 	}
 	
-	//code 넣으면 다른 지역이 안나와서 그냥 빼고 했습니당!
-	@GetMapping("/hearts")
-	public ModelAndView hearts(Authentication authentication, ModelAndView mv) throws Exception {
-		MemberVO memberVO = new MemberVO();
-		memberVO = (MemberVO)authentication.getPrincipal();
-		MemberFileVO memberFileVO = memberService.selectFile(memberVO);
+	@GetMapping("{code}/hearts")
+	public ModelAndView hearts(@PathVariable("code") Long code, ProductPager productPager, Authentication authentication, ModelAndView mv) throws Exception {
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 		
-		MemberLocationVO memberLocationVO = new MemberLocationVO();
-		memberLocationVO.setUsername(memberVO.getUsername());
-		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		if(!memberVO.getCode().equals(code)) {
+			mv.addObject("alert", "잘못된 접근입니다.");
+		}else {
+			MemberFileVO memberFileVO = memberService.selectFile(memberVO);
+			
+			MemberLocationVO memberLocationVO = new MemberLocationVO();
+			memberLocationVO.setUsername(memberVO.getUsername());
+			List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+			
+			ReviewVO reviewVO = new ReviewVO();
+			reviewVO.setReviewee(memberVO.getUsername());
+			reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+			
+			productPager.setUsername(memberVO.getUsername());
+			List<ProductVO> productList = productService.getHeartList(productPager, 16L, 5L);
+			
+			mv.addObject("products", productList);
+			mv.addObject("member", memberVO);
+			mv.addObject("file", memberFileVO);
+			mv.addObject("rating", reviewVO);
+			mv.addObject("locations", locationList);
+			mv.addObject("pager", productPager);
+		}
 		
-		HeartVO heartVO = new HeartVO();
-		heartVO.setUsername(memberVO.getUsername());
-		List<ProductVO> productList = productService.getHeartList(heartVO);
-		
-		mv.addObject("products", productList);
-		mv.addObject("member", memberVO);
-		mv.addObject("file", memberFileVO);
-		mv.addObject("locations", locationList);
 		mv.setViewName("/store/hearts");
 		
 		return mv;

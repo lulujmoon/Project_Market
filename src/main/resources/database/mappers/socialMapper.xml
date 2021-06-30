@@ -6,9 +6,14 @@
 <mapper namespace="com.mm.market.social.SocialMapper">
 
 	<select id="getList" resultMap="selectResult" parameterType="SocialPager">
-		select S.*, SC.* from social S
+		select S.*, SC.*, M.*, L.*, 
+		<!-- 댓글 숫자 표시 -->
+		(select count(*) from comment where socialNum = S.socialNum) commentCount
+		from social S
 		inner join socialCategory SC
 		on S.categoryCode = SC.categoryCode
+		inner join member M
+		on S.username = M.username
 		inner join location L
 		on S.locationCode = L.locationCode
 		where
@@ -19,11 +24,21 @@
 			S.locationCode = #{locationCode} and
 		</if>
 		<if test="username != null">
-			username = #{username} and
+			S.username = #{username} and
 		</if>
-		S.socialTitle like concat('%', #{keyword}, '%')
+		<choose>
+			<when test="kind == 'writer'">
+				S.username in (select username from member where name like concat ('%', #{search}, '%'))
+			</when>
+			<when test="kind == 'content'">
+				S.socialContent like concat ('%', #{search}, '%')
+			</when>
+			<otherwise>
+				S.socialTitle like concat ('%', #{search}, '%')
+			</otherwise>
+		</choose>
 		order by S.socialNum desc
-		limit #{startRow}, 20
+		limit #{startRow}, #{perPage}
 	</select>
 
 	<select id="getSelect" resultMap="selectResult" parameterType="SocialVO">
@@ -45,6 +60,7 @@
 		<result column="socialDate" property="socialDate" />
 		<result column="socialGood" property="socialGood" />
 		<result column="locationCode" property="locationCode" />
+		<result column="commentCount" property="commentCount" />
 		<association property="socialCategory" javaType="SocialCategoryVO">
 			<id property="categoryCode" column="categoryCode" />
 			<result property="categoryName" column="categoryName" />
@@ -80,8 +96,18 @@
 				<if test="username != null">
 					username = #{username} and
 				</if>
-		socialTitle like concat ('%', #{keyword}, '%')
-		and socialNum > 0		
+				<choose>
+					<when test="kind == 'writer'">
+						username in (select username from member where name like concat ('%', #{search}, '%'))
+					</when>
+					<when test="kind == 'content'">
+						socialContent like concat ('%', #{search}, '%')
+					</when>
+					<otherwise>
+						socialTitle like concat ('%', #{search}, '%')
+					</otherwise>
+				</choose>
+		and socialNum > 0
 	</select>
 
 	<insert id="setInsert" parameterType="SocialVO" useGeneratedKeys="true" keyProperty="socialNum">
@@ -122,13 +148,13 @@
 		delete from good where socialNum = #{socialNum} and username = #{username}
 	</delete>
 
-	<select id="getGoodList" parameterType="GoodVO" resultMap="selectResult">
-		select G.*, S.*, M.username
+	<select id="getGoodList" parameterType="SocialPager" resultMap="selectResult">
+		select G.*, S.*, L.*
 		from good G
 		left Join social S
 		on S.socialNum = G.socialNum 
-		left Join member M
-		on M.username = G.username
+		inner Join location L 
+		on S.locationCode = L.locationCode
 		where G.username = #{username}
 	</select>
 </mapper>

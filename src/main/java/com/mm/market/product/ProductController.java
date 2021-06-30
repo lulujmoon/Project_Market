@@ -117,7 +117,6 @@ public class ProductController {
 
 		model.addAttribute("product", productVO);
 
-		System.out.println(authentication.getPrincipal());
 		//판매자 정보
 		if(productVO.getUsername() != null) {
 			MemberVO sellerVO = new MemberVO();
@@ -139,22 +138,24 @@ public class ProductController {
 			model.addAttribute("sellerLocation", sellerLocations.get(0));
 
 			//chat
-			ChatVO chatVO = new ChatVO();
-			MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-			String username = memberVO.getUsername();
-			chatVO.setUsername(username);
-			System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
-			List<ChatVO> list = chatService.chatList(chatVO);
-			System.out.println("list : "+list);
-			
-			if(list.size()<1) {
-				model.addAttribute("chat", 0);
-			} else {
-				for(int i=0;i<list.size();i++) {
-					if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
-						model.addAttribute("chat", list.get(i).getOtherUser());
-					} else {
-						model.addAttribute("chat", 0);
+			if(authentication != null) {
+				ChatVO chatVO = new ChatVO();
+				MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+				String username = memberVO.getUsername();
+				chatVO.setUsername(username);
+				System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
+				List<ChatVO> list = chatService.chatList(chatVO);
+				System.out.println("list : "+list);
+				
+				if(list.size()<1) {
+					model.addAttribute("chat", 0);
+				} else {
+					for(int i=0;i<list.size();i++) {
+						if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
+							model.addAttribute("chat", list.get(i).getOtherUser());
+						} else {
+							model.addAttribute("chat", 0);
+						}
 					}
 				}
 			}
@@ -198,7 +199,7 @@ public class ProductController {
 
 
 
-	@GetMapping("delete/{productNum}")
+	@PostMapping("delete/{productNum}")
 	public ModelAndView setDelete(@PathVariable("productNum") Long productNum)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		ProductVO productVO = new ProductVO();
@@ -207,11 +208,11 @@ public class ProductController {
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
 
-		String message="삭제 실패";
+		String message="글이 삭제되지 않았습니다. 다시 시도해주세요.";
 		String path = "./list";
 
 		if(result>0) {
-			message="삭제 성공!";
+			message="글이 삭제되었습니다.";
 		}
 
 		mv.addObject("msg", message);
@@ -240,8 +241,11 @@ public class ProductController {
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		
+		List<CategoryVO> categories = categoryMapper.getList();
 
 		model.addAttribute("location", locationList);
+		model.addAttribute("categories", categories);
 	}
 
 	@PostMapping("insert")

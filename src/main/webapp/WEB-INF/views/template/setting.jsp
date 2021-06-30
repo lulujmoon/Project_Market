@@ -8,3 +8,4 @@
 <link rel="icon" href="/resources/favicon.ico" type="image/x-icon">
 <script src="https://kit.fontawesome.com/1b543f6f46.js" crossorigin="anonymous"></script>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/resources/js/functions.js"></script>
