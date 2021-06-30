@@ -77,6 +77,7 @@
 		<association property="writer" javaType="MemberVO">
 			<id property="username" column="username" />
 			<result property="name" column="name" />
+			<result property="code" column="code"/>
 		</association>
 		<association property="writerFile" javaType="MemberFileVO">
 			<id property="fileNum" column="fileNum" />

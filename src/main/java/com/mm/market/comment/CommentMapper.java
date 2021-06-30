@@ -13,6 +13,9 @@ public interface CommentMapper {
 	public CommentVO getSelect(CommentVO commentVO) throws Exception;
 	//Insert
 	public int setInsert(CommentVO commentVO) throws Exception;
+	
+	public int setRef() throws Exception;
+	
 	//Update
 	public int setUpdate(CommentVO commentVO) throws Exception;
 	//Delete
