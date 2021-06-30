@@ -49,3 +49,8 @@ function openSocialReport(socialNum){
 		'', 
 		"width=500,height=600,resizable,scrollbars=yes,left=1300,top=150");
 }
+
+/** 초기설정 1. 날짜 표시
+ */
+ const postDate = document.querySelector('.post__date');
+ postDate.innerText = calculateTime(postDate.innerText);

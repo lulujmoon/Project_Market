@@ -15,24 +15,33 @@
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-	<c:import url="../template/header.jsp"></c:import>
-	<div class="main-container">
-		${social.socialTitle}
-		${social.socialNum}
-		${social.username}
-		${social.socialDate}
-		${social.location.locationName}
-		${social.socialContent}
+<c:import url="../template/header.jsp"></c:import>
+<div class="container">
+	<div class="title-wrapper">
+		<div class="post__category">${social.socialCategory.categoryName}</div>
+		<div class="post__title">${social.socialTitle}</div>
 	</div>
+	<div class="info-wrapper">
+		<div class="post__writer-wrapper">
+			<img src="../resources/upload/member/${social.writerFile.fileName}" class="writer__avatar"/>
+			<div class="writer__name">${social.writer.name}</div>
+			<span class="writer__middot">&middot;</span>
+			<div class="post__location">${social.location.locationName}</div>
+		</div>
+		<div class="post__right-wrapper">
+			<div class="post__date">${social.socialDate}</div>
+			<div class="icon_good">
+				<i class="fas fa-thumbs-up"></i> ${social.socialGood}
+			</div>
+		</div>
+	</div>
+	<div class="post__content">${social.socialContent}</div>
 
 	<div class="table-box2">
 		<a class="insert-button" href="./update?socialNum=${social.socialNum}"
 			class="btn btn-primary" role="button">수정</a>
 		<a class="insert-button" href="./delete?socialNum=${social.socialNum}"
 			class="btn btn-primary" role="button">삭제</a>
-		<div class="icon_good">
-			<i class="fas fa-thumbs-up"></i> ${social.socialGood}
-		</div>
 		<div class="btn-good"></div>
 		<div class="btn-report" onclick="openSocialReport('${social.socialNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 	</div>
@@ -76,6 +85,7 @@
 			</ul>
 		</c:forEach>
 	</c:if>
+</div>
 
 	<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
