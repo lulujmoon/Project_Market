@@ -143,23 +143,25 @@ public class ProductController {
 				MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 				String username = memberVO.getUsername();
 				chatVO.setUsername(username);
-				System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
 				List<ChatVO> list = chatService.chatList(chatVO);
 				System.out.println("list : "+list);
 				
-				if(list.size()<1) {
+				if(list.size()<1) { //아예 내역이 없을때
 					model.addAttribute("chat", 0);
 				} else {
-					for(int i=0;i<list.size();i++) {
-						if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
+					for(int i=0;i<list.size();i++) { // 리스트에서 otherUser가 판매자일때는 chat에 판매자를 보냄
+						if(list.get(i).getOtherUser().equals(sellerVO.getUsername())) {
 							model.addAttribute("chat", list.get(i).getOtherUser());
-						} else {
+							break;
+						} else { //리스트에서 판매자와 나눈 chat이 없을경우 0을보냄
 							model.addAttribute("chat", 0);
 						}
 					}
 				}
 			}
 			model.addAttribute("rating", reviewVO);
+			System.out.println("chat에 넣은 값 : "+model.getAttribute("chat"));
+			
 		}
 
 		return "product/select";
