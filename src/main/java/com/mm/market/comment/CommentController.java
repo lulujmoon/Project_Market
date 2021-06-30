@@ -50,9 +50,10 @@ public class CommentController {
 	@PostMapping("update")
 	public String setUpdate(CommentVO commentVO, Authentication authentication, ModelAndView mv) throws Exception {
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-		commentVO.setUsername(memberVO.getUsername());
-		
+		commentVO.setUsername(memberVO.getUsername());		
 		commentService.setUpdate(commentVO);
+		
+		commentVO = commentService.getSelect(commentVO);
 		
 		return "redirect:../social/select?socialNum="+commentVO.getSocialNum();
 	}
@@ -91,11 +92,10 @@ public class CommentController {
 	public String setReply(CommentVO commentVO, Authentication authentication) throws Exception {
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 		commentVO.setUsername(memberVO.getUsername());
-		
 		commentService.setReply(commentVO);
 		
+		commentVO = commentService.getSelect(commentVO);
 		
-		
-		return "redirect:../social/list";
+		return "redirect:../social/select?socialNum="+commentVO.getSocialNum();
 	}
 }

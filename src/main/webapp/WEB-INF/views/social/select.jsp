@@ -85,7 +85,7 @@
 									<div class="item__btn-wrapper">
 										<div onclick="manageReply(${i}, ${comments[i].commentNum})">답글</div>
 										<c:if test="${comments[i].username == principal.username}">
-											<a href="../comment/update?commentNum=${comments[i].commentNum}">수정</a>
+											<div onclick="manageCommentEdit(${comments[i].commentNum})">수정</div>
 											<a href="../comment/delete?commentNum=${comments[i].commentNum}">삭제</a>
 										</c:if>
 									</div>
