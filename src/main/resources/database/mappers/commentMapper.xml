@@ -7,12 +7,12 @@
 
 	<!-- 댓글 list -->
 	<select id="getList" parameterType="CommentVO" resultType="CommentVO">
-		select * from comment where socialNum=#{socialNum} order by ref desc
+		select * from comment where socialNum = #{socialNum} order by ref desc
 	</select>
 
 	<!-- 댓글 select -->
 	<select id="getSelect" parameterType="CommentVO" resultType="CommentVO">
-		select * from comment where commentNum=#{commentNum}
+		select * from comment where commentNum = #{commentNum}
 	</select>
 
 	<!-- 댓글 insert -->
@@ -23,13 +23,13 @@
 	
 	<!-- 댓글 update -->
 	<update id="setUpdate" parameterType="CommentVO">
-		update comment set commentContent=#{commentContent}, commentDate=now()
-		where commentNum=#{commentNum}
+		update comment set commentContent = #{commentContent}, commentDate=now()
+		where commentNum = #{commentNum}
 	</update>
 
 	<!-- 댓글 delete -->
 	<delete id="setDelete" parameterType="CommentVO">
-		delete from comment where commentNum=#{commentNum}
+		delete from comment where commentNum = #{commentNum}
 	</delete>
 
 	<!-- 댓글 setReply -->
@@ -40,7 +40,7 @@
 
 	<!-- 댓글 setReplyUpdate -->
 	<update id="setReplyUpdate" parameterType="CommentVO">
-		update comment set step=step+1 where ref=#{ref} and step>#{step}
+		update comment set step = step+1 where ref = #{ref} and step > #{step}
 	</update>
 
 </mapper>

@@ -53,12 +53,10 @@ public class CommentController {
 		int result = commentService.setUpdate(commentVO);
 
 		if(result>0) {
-			System.out.println("수정 완료!");
 			mv.setViewName("redirect:../social/list");
 		}
 		
 		else {
-			System.out.println("수정 실패");
 			mv.setViewName("redirect:../social/list");
 		}
 		
