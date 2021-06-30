@@ -20,7 +20,6 @@
 			<input type="hidden" id="socialNum" name="socialNum" value="${param.socialNum}" />
 			<input type="text" readonly="readonly" id="username" name="username" value="${principal.username}" />
 			<textarea id="commentContent" name="commentContent"></textarea>
-
 			<input type="submit" value="답글" />
 		</div>
 	</form>

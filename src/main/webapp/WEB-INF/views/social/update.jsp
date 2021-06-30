@@ -28,7 +28,7 @@
 		<input type="hidden" name="socialNum" value="${social.socialNum}"> 
 		<input type="hidden" name="username" value="${principal.username}" required>
 		<div class="location-container">
-			<select class="select-location" name="locationCode">			
+			<select class="select-location" name="locationCode">
 				<c:forEach items="${locations}" var="location">
 						<option value="${location.locationCode}">${location.locationName}</option>
 				</c:forEach>
