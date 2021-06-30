@@ -23,7 +23,7 @@
 	</div>
 	<form class="upload-form" action="./update" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="socialNum" value="${social.socialNum}"> 
-		<input type="hidden" name="username" value="${principal.username}">
+		<input type="hidden" name="username" value="${principal.username}" required>
 		<div class="location-container">
 			<select class="select-location" name="locationCode">			
 				<c:forEach items="${locations}" var="location">
@@ -46,8 +46,8 @@
 			</select>
 			<i class="fas fa-sort-down"></i>
 		</div>
-		<input type="text" class="title" name="socialTitle" value="${social.socialTitle}" placeholder="제목">
-		<textarea class="content" id="socialContent" name="socialContent">${social.socialContent}</textarea>
+		<input type="text" class="title" name="socialTitle" value="${social.socialTitle}" placeholder="제목" required>
+		<textarea class="content" id="socialContent" name="socialContent" required>${social.socialContent}</textarea>
 		<div class="btn-wrapper">
 			<button type="submit" class="btn-submit">등록</button>
 		</div>

@@ -18,16 +18,21 @@
 	<div class="hidden">${socialPager.page}</div>
 	<div class="top-container">
 		<div class="top__title" onclick="goSocialHome()">우리동네</div>
-		<form class="top__form-search" id="frm" action="./list" class="form-inline">
-			<select class="search__select" name="kind" id="kind">
-				<option class="sel" value="title">제목</option>
-				<option class="sel" value="content">내용</option>
-				<option class="sel" value="writer">작성자</option>
-			</select>
-			<i class="fas fa-sort-down"></i>
-			<input type="text" class="search__input" name="search" id="search" value="${socialPager.search}" placeholder="">
-			<button type="submit" class="btn btn-search">검색</button>		
-		</form>
+		<div class="top-right-container">
+			<form class="top__form-search" id="frm" action="./list" class="form-inline">
+				<select class="search__select" name="kind" id="kind">
+					<option class="sel" value="title">제목</option>
+					<option class="sel" value="content">내용</option>
+					<option class="sel" value="writer">작성자</option>
+				</select>
+				<i class="fas fa-sort-down"></i>
+				<input type="text" class="search__input" name="search" id="search" value="${socialPager.search}" placeholder="">
+				<button type="submit" class="btn btn-search">검색</button>		
+			</form>
+			<div class="btn-insert-wrapper">
+				<a href="./insert" class="btn btn-insert">작성</a>
+			</div>
+		</div>
 	</div>
 	<div class="category-container list-category">
 		<h3 class="category__title">카테고리</h3>
@@ -68,7 +73,7 @@
 				</div>
 			</div>
 		</c:forEach>
-	</div>	
+	</div>
 	<ul class="page-container list-page">
 		<c:if test="${socialPager.pre}">
 			<li><a class="page-item arrow" href="./list?page=${socialPager.startNum-1}&kind=${socialPager.kind}&search=${socialPager.search}"><i class="fas fa-angle-double-left"></i></a></li>

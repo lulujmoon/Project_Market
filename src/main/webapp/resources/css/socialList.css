@@ -19,6 +19,12 @@
 	cursor: pointer;
 }
 
+.top-right-container{
+	width: 500px;
+	display: flex;
+	justify-content: flex-end;
+}
+
 .top__form-search{
 	width: 360px;
 	display: flex;
@@ -65,22 +71,32 @@
 
 .btn{
 	all: unset;
+	width: 35px;	
 	display: block;
 	margin-left: 5px;
 	padding: 5px 10px;
 	border-radius: 5px;
 	text-align: center;
 	cursor: pointer;	
+	color: white;
 }
 
 .btn-search{
-	width: 35px;
 	background-color: #fadd85;
-	color: white;
 }
 
 .btn-search:hover{
 	background-color: #f9d568;
+}
+
+.btn-insert{
+	height: 25px;
+	line-height: 25px;
+	background-color: #b4b4b4;
+}
+
+.btn-insert:hover{
+	background-color: #cdcdcd;
 }
 
 .category-container {

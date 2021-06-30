@@ -2,9 +2,13 @@ package com.mm.market.social;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.mm.market.util.FileManager;
 import com.mm.market.util.SocialPager;
 
 @Service
@@ -12,6 +16,12 @@ public class SocialService {
 
 	@Autowired
 	private SocialMapper socialMapper;
+	
+	@Autowired
+	private FileManager fileManager;
+
+	@Autowired
+	private HttpSession session;	
 
 	//List
 	public List<SocialVO> getList(SocialPager socialPager) throws Exception {
@@ -68,6 +78,17 @@ public class SocialService {
 	
 	public List<SocialVO> getGoodList(GoodVO goodVO) throws Exception {
 		return socialMapper.getGoodList(goodVO);
+	}
+	
+	//SummerFile
+	public String setSummerFileUpload(MultipartFile file) throws Exception {
+		String fileName = fileManager.save("social", file, session);
+		return fileName;
+	}
+
+	public Boolean setSummerFileDelete(String fileName) throws Exception {
+		boolean result = fileManager.delete("social", fileName, session);
+		return result;
 	}
 
 }
