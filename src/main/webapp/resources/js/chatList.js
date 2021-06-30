@@ -96,7 +96,7 @@ const locationCode = document.querySelector('.location-code').innerText;
 const MessageContentList = function(room) {
 	
 	$.ajax({
-		url:"chatContentList?productNum="+productNum+"&&locationCode="+locationCode,
+		url:"chatContentList",
 		
 		method:"GET",
 		data:{

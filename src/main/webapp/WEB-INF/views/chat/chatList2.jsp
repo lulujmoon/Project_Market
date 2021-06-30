@@ -16,26 +16,22 @@
 <div class="container">
 <div class="hidden product-num">${productNum}</div>
 <div class="hidden location-code">${locationCode}</div>
-<div class="hidden seller-name">${sellerName}</div>
-	<div class="inbox_msg">
+<br>
+<div class="userSelect" style="width:100%;" >
+	<h4 style="text-align: center;">상품을 판매할 유저를 선택해주세요.</h4>
+</div>
+	<div class="inbox_msg" style="width: 300px;">
 		<div class="inbox_people">
 				<div class="recent_heading">
 					채팅 목록
 				</div>
 			<div class="inbox_chat"></div>
 		</div>
-		<div class="mesgs">
-			<div class="msg_history" name="contentList">
-				<div class="history__info">
-					채팅을 시작해보세요!
-				</div>
-			</div>
-			<div class="send_message"></div>
-		</div>
+		
 	</div>   
 </div>
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
-<script type="text/javascript" src="../resources/js/chatList.js"></script>
+<script type="text/javascript" src="../resources/js/chatList2.js"></script>
 </body>
 </html>

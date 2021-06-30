@@ -51,13 +51,11 @@ public class ReservationController {
 		
 		if(reservationVO!=null) {
 		
-		System.out.println("레저베이션넘버"+reservationVO.getProductNum());
 		result=1;
 		mv.addObject("result",result);
 		}else{
 			mv.addObject("result",result);	
 		}
-		
 		mv.setViewName("common/ajaxResult");
 		
 		return mv;

@@ -89,6 +89,7 @@
 			<div class="hidden">
 				<input type="hidden" class="heartValue" value="${heart}">
 				<input type="hidden" class="productNum" value="${product.productNum}">
+				
 			</div>
 		</div>
 	</div>

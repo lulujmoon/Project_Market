@@ -133,7 +133,7 @@ $(document).ready(function(){
 		productNum: productNum
 	}, function(result){
 		if(result==0&&status=='예약 중'){
-			location.href='/chat/chatList?productNum='+productNum+'&&locationCode='+locationCode
+			location.href='/chat/chatList2?productNum='+productNum+'&&locationCode='+locationCode
 		}if(result==1&&status=='예약 중'){
 			alert('이미 예약중인 상품입니다.');
 		}
@@ -148,7 +148,6 @@ $(document).ready(function(){
 		if(result==1&&status=='판매완료'){
 			location.href='/review/insert?productNum='+productNum
 		}if(result==0&&status=='판매완료'){
-
 		}
 	})
 	});

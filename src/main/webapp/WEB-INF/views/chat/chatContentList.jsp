@@ -37,9 +37,6 @@
 			</div>
 		</div>
 
-<c:if test="${principal.username eq tmp.sendUser}">
-<a href="../reservation/insert?buyer=${clist[0].sendUser}&&productNum=${param.productNum}&&locationCode=${param.locationCode}">이사람한테판매</a>
-</c:if>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
