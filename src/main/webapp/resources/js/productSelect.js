@@ -125,6 +125,10 @@ function openReport(productNum){
 $(document).ready(function(){
 	var status = $("#productStatus").val();
 	$("#status").val(status);
+	
+	/*if(status == '판매완료') {
+		$(".btn-contact").attr("href","#");
+	}*/
 })
 
 
@@ -144,11 +148,8 @@ function deleteProduct(productNum) {
 		document.body.appendChild(deleteForm);
 		
 		deleteForm.submit();
-          
+    
         }
-		
-		
-		
 	}
 	
 

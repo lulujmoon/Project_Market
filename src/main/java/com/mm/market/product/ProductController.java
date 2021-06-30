@@ -160,7 +160,6 @@ public class ProductController {
 				}
 			}
 			model.addAttribute("rating", reviewVO);
-			System.out.println("chat에 넣은 값 : "+model.getAttribute("chat"));
 			
 		}
 
