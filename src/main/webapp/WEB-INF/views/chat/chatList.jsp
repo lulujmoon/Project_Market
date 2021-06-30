@@ -14,6 +14,8 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
+<div class="hidden product-num">${productNum}</div>
+<div class="hidden location-code">${locationCode}</div>
 	<div class="inbox_msg">
 		<div class="inbox_people">
 				<div class="recent_heading">

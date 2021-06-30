@@ -88,13 +88,16 @@ const MessageList = function(){
 	})
 };
    
+const productNum = document.querySelector('.product-num').innerText;
+const locationCode = document.querySelector('.location-code').innerText;
 
 // 메세지 내용을 가져온다.
 // 읽지 않은 메세지들을 읽음으로 바꾼다.
 const MessageContentList = function(room) {
 	
 	$.ajax({
-		url:"chatContentList",
+		url:"chatContentList?productNum="+productNum+"&&locationCode="+locationCode,
+		
 		method:"GET",
 		data:{
 			room : room,
