@@ -71,7 +71,6 @@
 
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="/resources/js/common.js"></script>
-<script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/store.js"></script>
 <script type="text/javascript" src="/resources/js/storeReview.js"></script>
 <script type="text/javascript" src="/resources/js/myReview.js"></script>

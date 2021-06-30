@@ -177,14 +177,14 @@
 			SELECT COUNT(heartNum) FROM heart WHERE username=#{username} and productNum=#{productNum}
 		</select>
 		
-		<select id="getHeartList" parameterType="HeartVO" resultMap="selectResult">
-			SELECT H.*, P.*, PF.* ,M.username
+		<select id="getHeartList" parameterType="ProductPager" resultMap="selectResult">
+			SELECT H.*, P.*, PF.*, L.*
 			FROM heart H left Join product P
-			ON h.productNum = P.productNum
+			ON H.productNum = P.productNum
 			LEFT JOIN productFile PF
 			ON p.productNum = pf.productNum
-			LEFT JOIN member M
-			ON M.username = H.username
+		 	INNER JOIN location L
+		 	ON P.locationCode = L.locationCode
 			WHERE H.username = #{username}
 		</select>
 		

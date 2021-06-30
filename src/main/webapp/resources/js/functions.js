@@ -209,3 +209,11 @@
 		}		
 	}
 }
+
+/**	@function alertLogin()
+ *	-- 로그인 안내 후 로그인 페이지로 이동
+ */
+ function alertLogin(){
+	alert('먼저 로그인해주세요.');
+	location.href = '/member/login';
+}

@@ -23,7 +23,19 @@
 	</div>
 	<form class="upload-form" action="./update" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="socialNum" value="${social.socialNum}"> 
-		<input type="hidden" name="username" value="${principal.username}">
+		<input type="hidden" name="username" value="${principal.username}" required>
+		<div class="location-container">
+			<select class="select-location" name="locationCode">			
+				<c:forEach items="${locations}" var="location">
+						<option value="${location.locationCode}">${location.locationName}</option>
+				</c:forEach>
+			</select>
+			<i class="fas fa-sort-down"></i>		
+			<div class="location-set-wrapper" id="location-set-wrapper">
+				내 지역으로 저장한 지역을 선택할 수 있습니다.
+				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-chevron-right"></i></a>
+			</div>
+		</div>
 		<div class="select-wrapper">
 			<select class="select" name="categoryCode">
 				<c:forEach items="${categories}" var="category">
@@ -34,23 +46,8 @@
 			</select>
 			<i class="fas fa-sort-down"></i>
 		</div>
-		<div class="form-group">
-			<div class="form-title">지역</div>
-			<div class="form-content form-content-select">
-				<select class="form-select" id="locationCode" name="locationCode">
-					<c:forEach items="${location}" var="location">
-				   <option value="${location.locationCode}">${location.locationName}</option>
-				  </c:forEach>
-				</select>
-				<i class="fas fa-sort-down"></i>
-			</div>
-			<div class="form-info">
-				내 지역으로 저장한 지역을 선택할 수 있습니다.
-				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></a>
-			</div>
-		</div>
-		<input type="text" class="title" name="socialTitle" value="${social.socialTitle}" placeholder="제목">
-		<textarea class="content" id="socialContent" name="socialContent">${social.socialContent}</textarea>
+		<input type="text" class="title" name="socialTitle" value="${social.socialTitle}" placeholder="제목" required>
+		<textarea class="content" id="socialContent" name="socialContent" required>${social.socialContent}</textarea>
 		<div class="btn-wrapper">
 			<button type="submit" class="btn-submit">등록</button>
 		</div>
