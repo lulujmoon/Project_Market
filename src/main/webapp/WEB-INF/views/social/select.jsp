@@ -10,19 +10,44 @@
 <head>
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
-<link rel="stylesheet" href="/resources/css/socialSelect.css" />
 <title>우리동네</title>
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="/resources/css/socialSelect.css" />
 </head>
 <body>
 	<c:import url="../template/header.jsp"></c:import>
 	<div class="main-container">
-		${social.socialTitle}
-		${social.socialNum}
-		${social.username}
-		${social.socialDate}
-		${social.location.locationName}
-		${social.socialContent}
+		<h2>${social.socialTitle}</h2>
+		<table class="table-box">
+			<thead class="thead-dark">
+				<tr>
+					<th>번호</th>
+					<th>작성자</th>
+					<th>작성 날짜</th>
+					<th>지역</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>${social.socialNum}</td>
+					<td>${social.username}</td>
+					<td>${social.socialDate}</td>
+					<td>${social.location.locationName}</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<table class="table-box2">
+			<thead class="thead-dark">
+				<tr>
+					<th>내용</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>${social.socialContent}</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 	<div class="table-box2">
@@ -31,7 +56,7 @@
 		<a class="insert-button" href="./delete?socialNum=${social.socialNum}"
 			class="btn btn-primary" role="button">삭제</a>
 		<div class="icon_good">
-			<i class="fas fa-thumbs-up"></i> ${social.socialGood}
+			<i class="fas fa-heart"></i> ${social.socialGood}
 		</div>
 		<div class="btn-good"></div>
 		<div class="btn-report" onclick="openSocialReport('${social.socialNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
@@ -79,6 +104,7 @@
 
 	<c:import url="../template/footer.jsp"></c:import>
 	<script type="text/javascript" src="/resources/js/common.js"></script>
+	<script type="text/javascript" src="/resources/js/functions.js"></script>
 	<script type="text/javascript" src="/resources/js/socialSelect.js"></script>
 </body>
 </html>

@@ -17,12 +17,12 @@
 	.unread {
 		background-color: gray;
 	}
+
 </style>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class=container>
-			<div>안읽은 알림 : ${unread} </div>
 	<div class="notice-container">
 		<c:forEach items="${list}" var="noti">
 			<div class="ntc__card">
@@ -36,8 +36,7 @@
 						${noti.notiSendTime}
 					</div>
 				<a href="/chat/chatSendInList?room=0&otherUser=${noti.notiSendUser}&content=※${principal.username}님이 ${noti.product.productName} 가격제안을 수락하셨습니다." onclick="if(confirm('수락하시겠습니까?')==false){return false;}" class="btn btn-edit" >수락</a>
-				<div class="btn btn-del">
-					<a href="#" onclick="notiDelete(${noti.notiNum})">삭제</a></div>
+				<div class="btn btn-del">삭제</div>
 				<div class="ntc__content">
 					${noti.notiContent}
 				</div>
@@ -47,21 +46,10 @@
 		</c:forEach>
 	</div>
 	
-	<ul class="page-container list-page">
-		<c:if test="${notificationPager.pre}">	
-			<li><a class="page-item arrow" href="./list?page=${notificationPager.startNum-1}"><i class="fas fa-angle-double-left"></i></a></li>
-		</c:if>
-		<c:forEach begin="${notificationPager.startNum}" end="${notificationPager.lastNum}" var="i">
-			<li><a class="page-item code_${i}" href="./list?page=${i}">${i}</a></li>
-		</c:forEach>
-		<c:if test="${notificationPager.next}">
-			<li><a class="page-item arrow" href="./list?page=${notificationPager.lastNum+1}"><i class="fas fa-angle-double-left"></i></a></li>
-		</c:if>
-	</ul>
-	
 </div>
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
+<script type="text/javascript" src="../resources/js/functions.js"></script>
 <script type="text/javascript" src="../resources/js/notificationList.js"></script>
 </body>
 </html>

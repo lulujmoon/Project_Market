@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.comment.CommentService;
 import com.mm.market.comment.CommentVO;
+import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
@@ -64,7 +65,7 @@ public class SocialController {
 		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
 
 		model.addAttribute("list", ar);
-		model.addAttribute("socialPager", socialPager);
+		model.addAttribute("pager", socialPager);
 		model.addAttribute("myLocation", myLocation);
 		model.addAttribute("categories", categories);
 		
@@ -78,21 +79,20 @@ public class SocialController {
 		socialVO.setSocialNum(socialNum);
 		socialVO = socialService.getSelect(socialVO);
 		
-		if(auth != null) {
-			MemberVO memberVO = (MemberVO)auth.getPrincipal();
-			String username = memberVO.getUsername();
-			
-			GoodVO goodVO = new GoodVO();
-			goodVO.setSocialNum(socialNum);
-			goodVO.setUsername(username);
-			
-			Long good = socialService.getGood(goodVO);
-			
-			mv.addObject("good", good);			
-		}
+		int startInx = auth.getPrincipal().toString().indexOf("=");
+		int lastInx = auth.getPrincipal().toString().indexOf(",");
+
+		String username = auth.getPrincipal().toString().substring(startInx+1, lastInx);
+
+		GoodVO goodVO = new GoodVO();
+		goodVO.setSocialNum(socialNum);
+		goodVO.setUsername(username);
+		
+		Long good = socialService.getGood(goodVO);
 
 		List<CommentVO> ar = commentService.getList(commentVO);
 
+		mv.addObject("good", good);
 		mv.addObject("social", socialVO);
 		mv.addObject("comment", commentVO);
 		mv.addObject("list", ar);
@@ -214,30 +214,5 @@ public class SocialController {
 
 		return good;
 	}
-	
-	//summerfile upload	
-	@PostMapping("summerFileUpload")
-	public ModelAndView setSummerFileUpload(MultipartFile file) throws Exception {
-		
-		ModelAndView mv = new ModelAndView();
-		
-		String fileName = socialService.setSummerFileUpload(file);
-		fileName = "../resources/upload/social/"+fileName;
-		mv.addObject("result", fileName);
-		mv.setViewName("common/ajaxResult");
-		
-		return mv;
-		
-	}
-	
-	@PostMapping("summerFileDelete")
-	public ModelAndView setSummerFileDelete(String fileName) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		boolean result = socialService.setSummerFileDelete(fileName);
-		mv.addObject("result", result);
-		mv.setViewName("common/ajaxResult");
-		
-		return mv;
-	}
+
 }

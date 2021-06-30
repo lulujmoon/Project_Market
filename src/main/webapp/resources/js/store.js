@@ -29,17 +29,11 @@
   const btnAvatar = document.querySelector('.profile__photo');
 	const inputFile = document.querySelector('.input-file');
   const profileForm = document.querySelector('.profile__form');
-	const fileCheck = /\.(gif|jpg|jpeg|png|GIF|JPG|JPEG|PNG)$/;
   
   btnAvatar.addEventListener('click', ()=>{
 		inputFile.click();
 		inputFile.addEventListener('change', ()=>{
-		let file = inputFile.value;
-		if((file).search(fileCheck)!=-1){
 			profileForm.submit();
-		}else{
-			alert('지원되지 않는 파일 형식입니다. 첨부할 수 있는 파일 형식은 gif, jpg, jpeg, png입니다. ');
-		}
 		});
 });
 
@@ -66,12 +60,6 @@ if(typeContainer != null){
 	let selectedType = typeContainer.querySelector('.code_'+typeVal.innerText);
 	selectedType.classList.add('selected');	
 }
-
-/** 초기설정 5. 선택한 nav__item에 selected 클래스 추가
- */
- const urlArr = location.href.split('/');
- let selected = document.querySelector('.'+urlArr[5]);
- selected.classList.add('selected');
 
 
 /* products */

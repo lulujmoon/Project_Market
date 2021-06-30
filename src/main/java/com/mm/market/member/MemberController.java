@@ -95,7 +95,7 @@ public class MemberController {
 
 	@GetMapping("loginFail")
 	public String loginFail()throws Exception{
-		return "/member/login";
+		return "redirect:/member/login";
 	}
 
 	@GetMapping("loginResult")
@@ -103,6 +103,7 @@ public class MemberController {
 
 		Enumeration<String> en = session.getAttributeNames();
 		MemberVO memberVO = new MemberVO();
+		System.out.println(memberVO.getUsername());
 
 		while(en.hasMoreElements()) {
 			System.out.println("attribute Name:+"+en.nextElement());
@@ -114,6 +115,9 @@ public class MemberController {
 									//저장되는 session의 타입
 		Authentication auth = sc.getAuthentication();
 
+		System.out.println("obj : "+obj);
+
+		System.out.println("login 성공");
 
 		return "redirect:/";
 

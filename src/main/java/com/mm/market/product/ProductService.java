@@ -207,13 +207,8 @@ public class ProductService {
 		return productMapper.getHeart(heartVO);
 	}
 	
-	public List<ProductVO> getHeartList(ProductPager productPager, Long perPage, Long perBlock)throws Exception{
-		productPager.setPerPage(perPage);
-		productPager.makeRow(perPage);
-		Long totalCount = productMapper.getTotalCount(productPager);
-		productPager.makeNum(totalCount, perPage, perBlock);
-				
-		return productMapper.getHeartList(productPager);
+	public List<ProductVO> getHeartList(HeartVO heartVO)throws Exception{
+		return productMapper.getHeartList(heartVO);
 	}
 	
 	

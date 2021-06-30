@@ -2,7 +2,7 @@ package com.mm.market.util;
 
 public class SocialPager {
 	
-	private Long page;
+	private Long curPage;
 	private Long perPage;
 	
 	private Long startRow;
@@ -15,7 +15,7 @@ public class SocialPager {
 		
 	private Long categoryCode;
 	private Long locationCode;
-	private String kind;
+	private String keyword;
 	private String search;
 	private String username;
 	
@@ -32,8 +32,8 @@ public class SocialPager {
 			totalBlock++;
 		}
 
-		Long curBlock = this.getPage() / perBlock;
-		if(this.page%perBlock !=0) {
+		Long curBlock = this.getCurPage() / perBlock;
+		if(this.curPage%perBlock !=0) {
 			curBlock++;
 		}
 		
@@ -58,21 +58,21 @@ public class SocialPager {
 	
 	public void makeRow() {
 
-		this.startRow = (this.getPage()-1)*this.getPerPage(); 
+		this.startRow = (this.getCurPage()-1)*this.getPerPage(); 
 	}
 
-	public Long getPage() {
-		if(this.page == null || this.page==0) {
-			this.page=1L;
+	public Long getCurPage() {
+		if(this.curPage == null || this.curPage==0) {
+			this.curPage=1L;
 		}
-		return page;
+		return curPage;
 	}
 
-	public void setPage(Long page) {
-		if(page == null || page==0) {
-			this.page=1L;
+	public void setCurPage(Long curPage) {
+		if(curPage == null || curPage==0) {
+			this.curPage=1L;
 		}else {
-			this.page = page;
+			this.curPage = curPage;
 		}
 	}
 
@@ -131,16 +131,16 @@ public class SocialPager {
 		this.next = next;
 	}
 
-	public String getKind() {
-		if(this.kind==null) {
-			this.kind="";
+	public String getKeyword() {
+		if(this.keyword==null) {
+			this.keyword="";
 		}
 		
-		return kind;
+		return keyword;
 	}
 
-	public void setKind(String kind) {
-		this.kind = kind;
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 
 	public String getSearch() {

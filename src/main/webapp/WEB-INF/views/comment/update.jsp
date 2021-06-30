@@ -16,12 +16,20 @@
 
 	<form id="form" action="./update" method="post">
 		<div>
-			<input type="hidden" id="commentNum" name="commentNum" value="${param.commentNum}" />
-			<input type="text" readonly="readonly" id="username" name="username" value="${principal.username}" />
-			<textarea id="commentContent" name="commentContent">${comment.commentContent}</textarea>
+			<input type="hidden" id="commentNum" name="commentNum"
+				value="${param.commentNum}" /> <input type="text"
+				readonly="readonly" id="username" name="username"
+				value="${principal.username}" />
+
+			<textarea id="commentContent" name="commentContent">${comment.commentContent}
+		        </textarea>
+
 
 			<input type="submit" value="수정" />
+
 		</div>
+
 	</form>
+
 </body>
 </html>

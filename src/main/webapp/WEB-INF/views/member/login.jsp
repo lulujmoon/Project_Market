@@ -12,7 +12,6 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 	<div class="login">
-	<div class="hidden alert">${alert}</div>
 		<div class="container">
 			<div class="logo">
 				<i class="fas fa-lemon"></i><span>&nbsp;Login</span>

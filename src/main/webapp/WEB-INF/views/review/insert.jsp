@@ -12,7 +12,7 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
-	<div class="hidden alert">${alert}</div>
+	<div class="hidden alert">${warning}</div>
 	<form action="./insert" method="post" class="insert-form">
 		<input type="hidden" name="productNum" value="${product.productNum}">
 		<input type="hidden" name="locationCode" value="${product.locationCode}" />

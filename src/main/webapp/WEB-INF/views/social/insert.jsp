@@ -25,10 +25,10 @@
 		글쓰기
 	</div>
 	<form class="upload-form" action="./insert" method="POST" enctype="multipart/form-data">
-		<input type="hidden" name="socialNum">
-		<input type="hidden" name="username" value="${principal.username}" required>
+		<input type="hidden" name="socialNum"> 
+		<input type="hidden" name="username" value="${principal.username}">
 		<div class="location-container">
-			<select class="select-location" name="locationCode">
+			<select class="select-location" name="locationCode">			
 				<c:forEach items="${locations}" var="location">
 						<option value="${location.locationCode}">${location.locationName}</option>
 				</c:forEach>
@@ -36,7 +36,7 @@
 			<i class="fas fa-sort-down"></i>		
 			<div class="location-set-wrapper" id="location-set-wrapper">
 				내 지역으로 저장한 지역을 선택할 수 있습니다.
-				<a class="location-set" href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-chevron-right"></i></a>
+				<div class="location-set" onclick="openMemberInfo()">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></div>
 			</div>
 		</div>
 		<div class="category-container">
@@ -47,8 +47,8 @@
 			</select>
 			<i class="fas fa-sort-down"></i>
 		</div>
-		<input type="text" class="title" name="socialTitle" placeholder="제목" required>
-		<textarea class="content" id="socialContent" name="socialContent" required></textarea>
+		<input type="text" class="title" name="socialTitle" placeholder="제목">
+		<textarea class="content" id="socialContent" name="socialContent"></textarea>
 		<div class="btn-wrapper">
 			<button type="submit" class="btn-submit">등록</button>
 		</div>
