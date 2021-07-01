@@ -50,7 +50,7 @@ public class ReviewController {
 		reviewVO = reviewService.getSelect(reviewVO);
 		
 		if(reviewVO != null) {
-			model.addAttribute("warning", "이미 후기를 작성한 거래입니다.");
+			model.addAttribute("alert", "이미 후기를 작성한 거래입니다.");
 			return "review/insert";
 		}else {
 			reviewVO = new ReviewVO();
@@ -85,7 +85,7 @@ public class ReviewController {
 		
 		reviewService.setInsert(reviewVO);
 		
-		return "redirect:/";
+		return "redirect:/store/"+memberVO.getCode()+"/myReviews";
 	}
 	
 	@PostMapping("delete")

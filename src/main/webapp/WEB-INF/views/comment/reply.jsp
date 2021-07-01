@@ -16,18 +16,11 @@
 
 	<form id="form" action="./reply" method="post">
 		<div>
-			<input type="hidden" id="commentNum" name="commentNum"
-				value="${param.commentNum}" /> <input type="hidden" id="socialNum"
-				name="socialNum" value="${param.socialNum}" /> <input type="text"
-				readonly="readonly" id="username" name="username"
-				value="${principal.username}" />
-
-			<textarea id="commentContent" name="commentContent">
-		        </textarea>
-
-
+			<input type="hidden" id="commentNum" name="commentNum" value="${param.commentNum}" />
+			<input type="hidden" id="socialNum" name="socialNum" value="${param.socialNum}" />
+			<input type="text" readonly="readonly" id="username" name="username" value="${principal.username}" />
+			<textarea id="commentContent" name="commentContent"></textarea>
 			<input type="submit" value="답글" />
-
 		</div>
 	</form>
 </body>

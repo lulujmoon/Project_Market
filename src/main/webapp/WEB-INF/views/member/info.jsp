@@ -23,7 +23,9 @@
 		<div class="info__header">
 			<h2>내 정보</h2>
 			<div class="btn-group">
+			<c:if test="${principal.oauth eq false}">
 				<button class="btn btn-edit">수정</button>
+				</c:if>
 				<button class="btn btn-submit">완료</button>
 				<button class="btn btn-cancel">취소</button>
 				<button class="btn btn-delAcc active" onclick="deleteMember('${principal.username}')">탈퇴</button>
@@ -35,21 +37,25 @@
 				<div class="info__content">${principal.username}</div>
 				<input class="info__input username" type="text" name="username" value="${principal.username}">
 			</div>
+			<c:if test="${principal.oauth eq false}">
 			<div class="info-group">
 				<div class="info__title">Password</div>
 				<div class="info__content">********</div>
 				<input class="info__input" type="password" name="password" placeholder="영문, 숫자, 특수기호 조합, 8-20자">
 			</div>
+			</c:if>
 			<div class="info-group">
 				<div class="info__title">Name</div>
 				<div class="info__content">${principal.name}</div>
 				<input class="info__input" type="text" name="name" value="${principal.name}">
 			</div>
+			<c:if test="${principal.oauth eq false}">
 			<div class="info-group">
 				<div class="info__title">Phone</div>
 				<div class="info__content">${principal.phone}</div>
 				<input class="info__input" type="text" name="phone" value="${principal.phone}">
 			</div>
+			</c:if>
 			<div class="info-group">
 				<div class="info__title">Email</div>
 				<div class="info__content">${principal.email}</div>

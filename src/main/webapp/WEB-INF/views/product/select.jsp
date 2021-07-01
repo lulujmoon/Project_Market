@@ -71,7 +71,10 @@
 
 					<a class="top-btn btn-del" onclick="deleteProduct('${product.productNum}')">삭제하기</a>
 				</c:if>
+				
+				
 				<c:if test="${principal.username != product.username}">
+				<c:if test="${product.productStatus != '판매완료'}"> 
 					<c:if test="${chat ne 0}">
 						<div class="top-btn btn-contact"><a type="button" href="/chat/chatList" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
 					</c:if>
@@ -81,6 +84,7 @@
 					<div class="top-btn btn-nego"><a href="/notification/nego?productNum=${product.productNum}&notiRecvUser=${seller.username}">가격 제안하기</a></div>
 					<div class="btn-heart"></div>
 					<div class="btn-report" onclick="openReport('${product.productNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
+				</c:if> 
 				</c:if>
 			</div>
 			<c:if test="${principal.username eq product.username}">

@@ -11,8 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mm.market.product.ProductService;
 import com.mm.market.product.ProductVO;
+import com.mm.market.social.SocialService;
+import com.mm.market.social.SocialVO;
 import com.mm.market.util.Pager;
 import com.mm.market.util.ProductPager;
+import com.mm.market.util.SocialPager;
 
 @Controller
 public class HomeController {
@@ -20,12 +23,17 @@ public class HomeController {
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired
+	private SocialService socialService;
+	
 	@GetMapping("/")
 	public ModelAndView home(ProductPager productPager, ModelAndView mv)throws Exception {
+
+		List<ProductVO> productList = productService.getList(productPager, 11L, 5L);
+		List<SocialVO> socialList = socialService.getList(new SocialPager());
 		
-		List<ProductVO> list = productService.getList(productPager, 11L, 5L);
-		
-		mv.addObject("products", list);
+		mv.addObject("products", productList);
+		mv.addObject("socials", socialList);
 		mv.setViewName("home");
 		
 		return mv;

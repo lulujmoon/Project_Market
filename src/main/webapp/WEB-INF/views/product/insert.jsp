@@ -38,24 +38,28 @@
 			<div class="form-title">상품명</div>
 			<input type="text" name="productName" class="form-content" required placeholder="상품명을 입력해주세요.">				
 		</div>
+		<div class="form-group">
+			<div class="form-title">지역</div>
+			<div class="form-content form-content-select">
+				<select class="form-select" id="locationCode" name="locationCode">
+					<c:forEach items="${location}" var="vo">
+				   <option value="${vo.locationCode}">${vo.locationName}</option>
+				  </c:forEach>
+				</select>
+				<i class="fas fa-sort-down"></i>
+			</div>
+			<div class="form-info">
+				내 지역으로 저장한 지역을 선택할 수 있습니다.
+				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-chevron-right"></i></a>
+			</div>
+		</div>		
 		<div class="form-group">		
 			<div class="form-title">카테고리</div>
 			<div class="form-content form-content-select">
 				<select class="form-select" id="category" name="categoryCode">
-				  <option value="1">디지털/가전</option>
-				  <option value="2">가구/인테리어</option>
-				  <option value="3">유아동/유아도서</option>
-				  <option value="4">생활/가공식품</option>
-				  <option value="5">스포츠/레저</option>
-				  <option value="6">여성의류</option>
-				  <option value="7">여성잡화</option>
-				  <option value="8">남성의류</option>
-				  <option value="9">남성잡화</option>
-				  <option value="10">게임/취미</option>
-				  <option value="11">뷰티/미용</option>
-				  <option value="12">반려동물용품</option>
-				  <option value="13">도서/티켓/음반</option>
-				  <option value="14">삽니다</option>
+				  <c:forEach items="${categories}" var="category">
+				  	<option value="${category.categoryCode}">${category.categoryName}</option>
+				  </c:forEach>
 				</select>
 				<i class="fas fa-sort-down"></i>
 			</div>
@@ -71,21 +75,6 @@
 			<div class="form-title">가격 제안</div>
 			<input type="radio" name="productNego" value="1" id="nego-enabled">&nbsp;<label for="nego-enabled">가능</label>&nbsp;&nbsp;&nbsp;
 			<input type="radio" name="productNego" value="0" id="nego-disabled" checked>&nbsp;<label for="nego-disabled">불가</label>
-		</div>
-		<div class="form-group">
-			<div class="form-title">지역</div>
-			<div class="form-content form-content-select">
-				<select class="form-select" id="locationCode" name="locationCode">
-					<c:forEach items="${location}" var="vo">
-				   <option value="${vo.locationCode}">${vo.locationName}</option>
-				  </c:forEach>
-				</select>
-				<i class="fas fa-sort-down"></i>
-			</div>
-			<div class="form-info">
-				내 지역으로 저장한 지역을 선택할 수 있습니다.
-				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i></a>
-			</div>
 		</div>
 		<div class="btn-wrapper">
 			<input type="button" class="btn-presubmit" value="등록">

@@ -12,6 +12,7 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 	<div class="login">
+	<div class="hidden alert">${alert}</div>
 		<div class="container">
 			<div class="logo">
 				<i class="fas fa-lemon"></i><span>&nbsp;Login</span>
@@ -25,6 +26,9 @@
 				<div class="form-group">
 					<label for="password">Password</label><br> 
 					<input type="password" class="form-control" id="password" name="password">
+				</div>
+				<div class="form-group">
+				<small class="message">${message}</small>
 				</div>
 				<div class="btn-wrapper">
 					<button type="submit" class="btn-wide btn-submit">Login</button>
