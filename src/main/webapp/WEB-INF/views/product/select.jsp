@@ -46,7 +46,7 @@
 					<div class="top__small top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
 					<div class="top__small top__productDate">${product.productDate}</div>
 				</div>
-				<div class="top__small top__category"><i class="fas fa-tag"></i> ${product.category.categoryName}</div>
+				<div class="top__small top__category"><i class="fas fa-tag"></i>${product.category.categoryName}</div>
 				<div class="top__small top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
@@ -64,7 +64,8 @@
 						<button class="hidden btn-status-submit"></button>
 					</form>
 					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
-					<a class="top-btn btn-rewrite" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
+					<a class="top-btn btn-contact" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
+
 					<a class="top-btn btn-del" onclick="deleteProduct('${product.productNum}')">삭제하기</a>
 				</c:if>
 				<c:if test="${product.productStatus != '판매완료' && principal.username != product.username}">
@@ -95,7 +96,6 @@
 			</div>
 			<div class="seller_locNdate">
 				<div class="seller__location">${sellerLocation.locationName}</div>
-				<div class="seller__LC" hidden="hidden">${sellerLocation.locationCode}</div>
 				<div class="seller__joinDate">${seller.joinDate}</div>
 			</div>
 			<div class="seller__rating">
@@ -107,6 +107,7 @@
 		<div class="product-content">
 			${product.productContent}
 		</div>
+
 		
 </div>
 

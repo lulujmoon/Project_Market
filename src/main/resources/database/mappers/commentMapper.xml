@@ -14,7 +14,7 @@
 		inner join memberFile MF
 		on C.username = MF.username
 		where socialNum=#{socialNum} 
-		order by ref desc
+		order by ref desc, step asc
 	</select>
 	
 	<resultMap type="CommentVO" id="selectResult">
