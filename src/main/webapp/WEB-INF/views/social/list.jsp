@@ -54,7 +54,7 @@
 	</div>
 	<div class="social-container">
 		<c:forEach items="${list}" var="social">
-			<div class="scl__card" onclick="goSelect(${social.socialNum})">
+			<div class="scl__card" onclick="goSocialSelect(${social.socialNum})">
 				<div class="scl__top-wrapper">
 					<div class="scl__title">${social.socialTitle}</div>
 					<div class="scl__date">${social.socialDate}</div>
@@ -68,7 +68,7 @@
 				</div>
 				<div class="scl__content">${social.socialContent}</div>
 				<div class="scl__response">
-					<div class="scl__good"><i class="far fa-thumbs-up"></i> ${social.socialGood}</div>
+					<div class="scl__good"><i class="far fa-heart"></i> ${social.socialGood}</div>
 					<div class="scl__comment"><i class="far fa-comment-dots"></i> ${social.commentCount}</div>
 				</div>
 			</div>

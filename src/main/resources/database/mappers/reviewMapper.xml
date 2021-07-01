@@ -52,16 +52,16 @@
 	<select id="getTotalCount" parameterType="ReviewPager" resultType="Long">
 		select count(reviewNum) from review 
 		where 
+		reviewNum>0
 		<if test="reviewee != null">
-			reviewee=#{reviewee}
+			and	reviewee=#{reviewee}
 		</if>
 		<if test="reviewer != null">
-			reviewer=#{reviewer}
+			and	reviewer=#{reviewer}
 		</if>
 		<if test="type != null">
-		 and type=#{type}
+			and type=#{type}
 		</if>
-		and reviewNum>0
 	</select>
 	
 	<select id="getSelect" parameterType="ReviewVO" resultType="ReviewVO">

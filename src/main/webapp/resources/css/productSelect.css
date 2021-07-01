@@ -2,7 +2,7 @@
 
 .container{
 	background-color: white;
-	margin-top: 165px;
+	margin-top: 180px;
 }
 
 .top-container{
@@ -22,7 +22,7 @@
 .top__productName{
 	width: 100%;
 	padding: 20px 0;
-	font-size: 2.3rem;
+	font-size: 1.7rem;
 	font-weight: 800;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .top__price{
-	font-size: 2rem;
+	font-size: 1.3rem;
 	font-weight: 800;
 }
 
@@ -89,7 +89,7 @@
 	color: white;
 }
 
-.tob-btn>a{
+.top-btn > a{
 	color: white;
 }
 
@@ -97,7 +97,7 @@
 	background-color: #fadd85;
 }
 
-.btn-nego, .btn-edit{
+.btn-nego, .btn-edit, .btn-sold{
 	background-color: #b4b4b4;
 }
 

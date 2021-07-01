@@ -88,14 +88,13 @@ public class SocialController {
 			
 			Long good = socialService.getGood(goodVO);
 			
-			mv.addObject("good", good);			
+			mv.addObject("good", good);
 		}
 
-		List<CommentVO> ar = commentService.getList(commentVO);
+		List<CommentVO> commentList = commentService.getList(commentVO);
 
 		mv.addObject("social", socialVO);
-		mv.addObject("comment", commentVO);
-		mv.addObject("list", ar);
+		mv.addObject("comments", commentList);
 
 		mv.setViewName("social/select");
 

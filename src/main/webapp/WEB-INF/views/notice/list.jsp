@@ -35,10 +35,12 @@
 				<i class="fas fa-sort-down"></i>
 			</div>
 			<div class="content-wrapper">
-				<div class="ntc__btn">
-					<a href="./update?noticeNum=${notice.noticeNum}" class="btn btn-edit">수정</a>
-					<div class="btn btn-del" onclick="deleteNotice('${notice.noticeNum}')">삭제</div>
-				</div>
+				<sec:authorize access="hasRole('ADMIN')">
+					<div class="ntc__btn">
+						<a href="./update?noticeNum=${notice.noticeNum}" class="btn btn-edit">수정</a>
+						<div class="btn btn-del" onclick="deleteNotice('${notice.noticeNum}')">삭제</div>
+					</div>
+				</sec:authorize>
 				<div class="ntc__content">
 					${notice.noticeContent}
 				</div>

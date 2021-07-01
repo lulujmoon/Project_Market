@@ -1,11 +1,14 @@
 package com.mm.market.comment;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.mm.market.member.MemberVO;
 
 @Controller
 @RequestMapping("/comment/**")
@@ -26,14 +29,10 @@ public class CommentController {
 	}
 
 	@PostMapping("insert")
-	public ModelAndView setInsert(CommentVO commentVO) throws Exception {
-
-		ModelAndView mv = new ModelAndView();
-		int result = commentService.setInsert(commentVO);
+	public String setInsert(CommentVO commentVO) throws Exception {
+		commentService.setInsert(commentVO);
 		
-		mv.setViewName("redirect:../social/list");
-		
-		return mv;
+		return "redirect:../social/select?socialNum="+commentVO.getSocialNum();
 	}
 	
 	@GetMapping("update") //댓글 수정
@@ -49,20 +48,14 @@ public class CommentController {
 	}
 	
 	@PostMapping("update")
-	public ModelAndView setUpdate(CommentVO commentVO, ModelAndView mv) throws Exception {
-		int result = commentService.setUpdate(commentVO);
-
-		if(result>0) {
-			System.out.println("수정 완료!");
-			mv.setViewName("redirect:../social/list");
-		}
+	public String setUpdate(CommentVO commentVO, Authentication authentication, ModelAndView mv) throws Exception {
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		commentVO.setUsername(memberVO.getUsername());		
+		commentService.setUpdate(commentVO);
 		
-		else {
-			System.out.println("수정 실패");
-			mv.setViewName("redirect:../social/list");
-		}
+		commentVO = commentService.getSelect(commentVO);
 		
-		return mv;
+		return "redirect:../social/select?socialNum="+commentVO.getSocialNum();
 	}
 
 	@GetMapping("delete")
@@ -96,13 +89,13 @@ public class CommentController {
 	}
 
 	@PostMapping("reply")
-	public ModelAndView setReply(CommentVO commentVO) throws Exception {
-		ModelAndView mv = new ModelAndView();
+	public String setReply(CommentVO commentVO, Authentication authentication) throws Exception {
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
+		commentVO.setUsername(memberVO.getUsername());
+		commentService.setReply(commentVO);
 		
-		int result = commentService.setReply(commentVO);
+		commentVO = commentService.getSelect(commentVO);
 		
-		mv.setViewName("redirect:../social/list");
-		
-		return mv;
+		return "redirect:../social/select?socialNum="+commentVO.getSocialNum();
 	}
 }

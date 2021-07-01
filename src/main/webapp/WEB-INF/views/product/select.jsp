@@ -46,7 +46,7 @@
 					<div class="top__small top__heart"><i class="fas fa-heart"></i> ${product.productHeart}</div>
 					<div class="top__small top__productDate">${product.productDate}</div>
 				</div>
-				<div class="top__small top__category"><i class="fas fa-tag"></i>${product.category.categoryName}</div>
+				<div class="top__small top__category"><i class="fas fa-tag"></i> ${product.category.categoryName}</div>
 				<div class="top__small top__location"><i class="fas fa-map-marker-alt"></i> ${product.location.locationName}</div>
 				<div class="top__small top__nego">${product.productNego}</div>
 			</div>
@@ -64,14 +64,12 @@
 						  </select>
 						</div>
 						</form>
-					</div>
-					
+					</div>				
 					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
 					<a class="top-btn btn-contact" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
-
 					<a class="top-btn btn-del" onclick="deleteProduct('${product.productNum}')">삭제하기</a>
 				</c:if>
-				<c:if test="${principal.username != product.username}">
+				<c:if test="${product.productStatus != '판매완료' && principal.username != product.username}">
 					<c:if test="${chat ne 0}">
 						<div class="top-btn btn-contact"><a type="button" href="/chat/chatList" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
 					</c:if>
@@ -83,8 +81,8 @@
 					<div class="btn-report" onclick="openReport('${product.productNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 				</c:if>
 			</div>
-			<c:if test="${principal.username eq product.username}">
-
+			<c:if test="${product.productStatus == '판매완료' && principal.username != product.username}">
+				<div class="top-btn btn-sold">판매완료</div>
 			</c:if>
 			<div class="hidden">
 				<input type="hidden" class="heartValue" value="${heart}">

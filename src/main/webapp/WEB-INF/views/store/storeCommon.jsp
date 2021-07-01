@@ -49,7 +49,7 @@
 		<c:if test="${principal.username == member.username}">
 			<a class="nav__item my-store products" href="./products">판매 상품</a>
 			<a class="nav__item my-store reviews" href="/store/${member.code}/reviews">받은 후기</a>
-			<a class="nav__item my-store socials">동네 생활</a>
+			<a class="nav__item my-store socials" href="/store/${member.code}/socials">동네 생활</a>
 			<a class="nav__item my-store hearts" href="/store/${principal.code}/hearts">찜한 상품</a>
 			<a class="nav__item my-store myReviews" href="/store/${principal.code}/myReviews">작성한 후기</a>
 		</c:if>

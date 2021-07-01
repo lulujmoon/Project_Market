@@ -42,10 +42,15 @@
 	</select>
 
 	<select id="getSelect" resultMap="selectResult" parameterType="SocialVO">
-		select S.*, SC.*
+		select S.*, SC.*, M.*, MF.*, L.*, 
+		(select count(*) from comment where socialNum = S.socialNum) commentCount
 		from social S
 		inner join socialCategory SC
 		on S.categoryCode = SC.categoryCode
+		inner join member M
+		on S.username = M.username
+		inner join memberFile MF
+		on S.username = MF.username
 		inner join location L
 		on S.locationCode = L.locationCode
 		where S.socialNum = #{socialNum}
@@ -72,6 +77,12 @@
 		<association property="writer" javaType="MemberVO">
 			<id property="username" column="username" />
 			<result property="name" column="name" />
+			<result property="code" column="code"/>
+		</association>
+		<association property="writerFile" javaType="MemberFileVO">
+			<id property="fileNum" column="fileNum" />
+			<result property="username" column="username"/>
+			<result property="fileName" column="fileName"/>
 		</association>
 		<collection property="goods" javaType="GoodVO">
 			<id column="goodNum" property="goodNum"/>

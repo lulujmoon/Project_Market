@@ -13,7 +13,7 @@
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<li><a href="${pageContext.request.contextPath}/member/info">내 정보</a>&nbsp;|&nbsp;</li>
-				<li><a href="${pageContext.request.contextPath}/notification/list">알림</a>&nbsp;|&nbsp;</li>
+				<li><a href="#" class="btn-noti">알림</a>&nbsp;|&nbsp;</li>
 				<li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 			</sec:authorize>
 		</ul>	
@@ -31,7 +31,7 @@
 				<input type="hidden" name="page" value="1" id="page">
 				<input type="text" class="nav__searchbox" name="keyword" id="keyword" placeholder="상품명을 검색하세요" value="${pager.keyword}">
 				<button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
-			</form>	
+			</form>
 		</div>
 		<ul class="nav__personal">
 			<sec:authorize access="isAnonymous()">
@@ -46,6 +46,7 @@
 			</sec:authorize>
 		</ul>
 	</nav>
+	<div class="noti-container"></div>
 </header>
 <!-- 사이드 메뉴 -->
 <div class="side side-menu">

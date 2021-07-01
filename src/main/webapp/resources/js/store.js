@@ -56,7 +56,9 @@ for(infoPrice of infoPrices){
 /** 초기설정 4. 선택한 페이지와 조회조건(전체/판매자/구매자)
  */
 const pageContainer = document.querySelector('.page-container');
-selectPage(pageContainer);
+if(pageContainer != null){
+	selectPage(pageContainer);	
+}
 const typeContainer = document.querySelector('.type-container');
 const typeVal = document.querySelector('.type-value');
 if(typeContainer != null){
@@ -76,6 +78,10 @@ if(typeContainer != null){
 
 /* products */
 
-function goSelect(productNum){
+function goProductSelect(productNum){
 	location.href = '/product/select/'+productNum;
+}
+
+function goSocialSelect(socialNum){
+	location.href = '/social/select?socialNum='+socialNum;
 }
