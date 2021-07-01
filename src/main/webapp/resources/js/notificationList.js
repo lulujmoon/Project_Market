@@ -10,7 +10,6 @@ function read(notiNum) {
 		data:{notiNum : notiNum},
 		success:function() {
 			console.log('성공');
-			document.location.reload(true);
 		}
 	});
 }
