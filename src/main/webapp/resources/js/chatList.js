@@ -175,8 +175,18 @@ $(document).ready(function(){
  */
  function refreshChat(){
 	const currentRoom = document.querySelector('.selected');
-	let roomNum = $(currentRoom).attr("room");
-	MessageContentList(roomNum);
+	if(currentRoom != null){
+		let roomNum = $(currentRoom).attr("room");
+		MessageContentList(roomNum);
+		
+		const sendUser = document.querySelector('.rcv__sendUser');
+		const otherUsers = document.querySelector('.other-user');
+		for(let other of otherUsers){
+			if(sendUser.innerText == other.innerText){
+				sendUser.classList.add('selected');
+			}
+		}
+	}
 }
 
 	setInterval(refreshChat, 3000);
