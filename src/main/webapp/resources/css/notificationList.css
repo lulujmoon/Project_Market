@@ -18,13 +18,20 @@
 }
 
 .noti-container.active{
-	min-height: 600px;
+	min-height: 200px;
 	max-height: 600px;
 	border: 1px solid #e6e6e6;
 	border-top: none;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	box-shadow: 0 7px 10px 3px rgba(0, 0, 0, 0.1);
+}
+
+.noti__info{
+	width: 100%;
+	height: 200px;
+	text-align: center;
+	line-height: 200px;
 }
 
 .noti__card{
