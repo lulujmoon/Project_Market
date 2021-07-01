@@ -166,6 +166,3 @@ function deleteProduct(productNum) {
     
         }
 	}
-	
-
-
