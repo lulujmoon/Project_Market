@@ -27,8 +27,8 @@
 		</div>
 		<c:if test="${principal.username == social.username}">
 			<div class="top-btn-wrapper">
-				<a class="insert-button" href="./update?socialNum=${social.socialNum}">수정</a>
-				<a class="insert-button" href="./delete?socialNum=${social.socialNum}">삭제</a>
+				<a class="btn-so-edit" href="./update?socialNum=${social.socialNum}">수정</a>
+				<a class="btn-so-del" href="#" onclick="deleteSocial(${social.socialNum})">삭제</a>
 			</div>
 		</c:if>
 	</div>
@@ -86,7 +86,7 @@
 										<div onclick="manageReply(${i}, ${comments[i].commentNum})">답글</div>
 										<c:if test="${comments[i].username == principal.username}">
 											<div onclick="manageCommentEdit(${comments[i].commentNum})">수정</div>
-											<a href="../comment/delete?commentNum=${comments[i].commentNum}">삭제</a>
+											<a href="#" onclick="deleteComment(${comments[i].commentNum})">삭제</a>
 										</c:if>
 									</div>
 								</div>
