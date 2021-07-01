@@ -25,8 +25,46 @@
 
 .noti__card{
 	width: 260px;
-	height: 100px;
+	min-height: 100px;
 	font-size: 0.9rem;
 	padding: 10px 20px;
+	border-bottom: 1px solid #f5f5f5;
+	cursor: pointer;
+}
+
+.noti__card:hover, .noti__card.read{
+	background-color: #f5f5f5;
+}
+
+.noti__top-wrapper{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.noti__product-name{
+	font-weight: 800;
+}
+
+.noti__del{
 	border-bottom: 1px solid #e6e6e6;
+}
+
+.noti__del > a, .noti__date{
+	color: grey;
+}
+
+.btn-accept{
+	width: 40px;
+	height: 20px;
+	border-radius: 5px;
+	border: 1px solid #e6e6e6;
+	text-align: center;
+	line-height: 20px;
+}
+
+.btn-accept > a{
+	all: unset;
+	cursor: pointer;
 }

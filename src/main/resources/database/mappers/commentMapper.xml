@@ -72,7 +72,7 @@
 
 	<!-- 댓글 setReplyUpdate -->
 	<update id="setReplyUpdate" parameterType="CommentVO">
-		update comment set step=step+1 where ref=#{ref} and step>#{step}
+		update comment set step=step+1 where (ref=#{ref} and step>#{step}) or commentNum=#{ref}
 	</update>
 
 </mapper>
