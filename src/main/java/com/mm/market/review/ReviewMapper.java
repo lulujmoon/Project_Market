@@ -23,4 +23,6 @@ public interface ReviewMapper {
 	public ReviewVO getAvgsAndCounts(ReviewVO reviewVO) throws Exception;
 	
 	public int setDelete(ReviewVO reviewVO) throws Exception;
+	
+	public List<ReviewVO> getListByReview(ReviewVO reviewVO) throws Exception; 
 }

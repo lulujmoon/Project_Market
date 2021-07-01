@@ -35,6 +35,7 @@ public class ReviewController {
 	
 	@Autowired
 	private ProductService productService;
+	
 
 	@GetMapping("insert")
 	public String setInsert(ReservationVO reservationVO, Authentication authentication, Model model) throws Exception {
@@ -81,9 +82,17 @@ public class ReviewController {
 	@PostMapping("insert")
 	public String setInsert(ReviewVO reviewVO, Authentication authentication) throws Exception {
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-		reviewVO.setReviewer(memberVO.getUsername());
-		
+		reviewVO.setReviewer(memberVO.getUsername());		
 		reviewService.setInsert(reviewVO);
+			
+		List<ReviewVO> reviewList =reviewService.getListByReview(reviewVO);
+		
+		ReservationVO reservationVO = new ReservationVO();
+		reservationVO.setProductNum(reviewVO.getProductNum());
+		
+		if(reviewList.size()>1) {
+			reservationService.setDelete(reservationVO);
+		}
 		
 		return "redirect:/store/"+memberVO.getCode()+"/myReviews";
 	}
