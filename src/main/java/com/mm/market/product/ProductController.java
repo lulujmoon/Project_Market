@@ -190,27 +190,14 @@ public class ProductController {
 
 
 
-	@PostMapping("delete/{productNum}")
-	public ModelAndView setDelete(@PathVariable("productNum") Long productNum)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		ProductVO productVO = new ProductVO();
-		productVO.setProductNum(productNum);
+	@PostMapping("delete")
+	public String setDelete(ProductVO productVO)throws Exception{
+		
 		productVO = productService.getSelect(productVO);
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
 
-		String message="글이 삭제되지 않았습니다. 다시 시도해주세요.";
-		String path = "./list";
-
-		if(result>0) {
-			message="글이 삭제되었습니다.";
-		}
-
-		mv.addObject("msg", message);
-		mv.addObject("path", path);
-		mv.setViewName("common/commonResult");
-
-		return mv;
+		return "redirect: product/list";
 	}
 
 	@PostMapping("fileDelete")
