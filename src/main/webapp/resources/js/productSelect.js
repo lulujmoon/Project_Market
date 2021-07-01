@@ -58,8 +58,8 @@
 	top__status.style.backgroundColor = '#f7bd11';
 }
 
-
-
+const seller__LC = document.querySelector('.seller__LC');
+const locationCode = seller__LC.innerText;
 
 /** 기능 1. 찜
  */
@@ -122,9 +122,33 @@ function openReport(productNum){
 		"width=500,height=600,resizable,scrollbars=yes,left=1300,top=150");
 }
 
-/**
- */
 $(document).ready(function(){
-   var status = $("#productStatus").val();
-   $("#status").val(status);
-});
+	var status =$("#productState").val();
+	$("#status").val(status);
+	})
+
+/*예약중인 상품 처리*/
+$(document).ready(function(){
+	$.get('/reservation/select', {
+		productNum: productNum
+	}, function(result){
+		if(result==0&&status=='예약 중'){
+			location.href='/chat/chatList2?productNum='+productNum+'&&locationCode='+locationCode
+		}if(result==1&&status=='예약 중'){
+			alert('이미 예약중인 상품입니다.');
+		}
+	})
+	});
+	
+/*거래완료 상품처리*/
+$(document).ready(function(){
+	$.get('/reservation/select', {
+		productNum: productNum
+	}, function(result){
+		if(result==1&&status=='판매완료'){
+			location.href='/review/insert?productNum='+productNum
+		}if(result==0&&status=='판매완료'){
+		}
+	})
+	});
+

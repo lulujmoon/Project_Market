@@ -36,6 +36,11 @@
 					<div class="sent__content">${tmp.content}</div>
 			</div>
 		</div>
+
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
+
+
+
+	

@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/notice/**").hasAnyRole("ADMIN")
 		.antMatchers("/member/auth/kakao/callback").permitAll()
 		.antMatchers("/mail/**").permitAll()
+		.antMatchers("/reservation/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		

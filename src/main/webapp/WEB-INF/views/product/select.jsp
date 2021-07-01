@@ -87,6 +87,7 @@
 			<div class="hidden">
 				<input type="hidden" class="heartValue" value="${heart}">
 				<input type="hidden" class="productNum" value="${product.productNum}">
+				
 			</div>
 		</div>
 	</div>
@@ -97,6 +98,7 @@
 			</div>
 			<div class="seller_locNdate">
 				<div class="seller__location">${sellerLocation.locationName}</div>
+				<div class="seller__LC" hidden="hidden">${sellerLocation.locationCode}</div>
 				<div class="seller__joinDate">${seller.joinDate}</div>
 			</div>
 			<div class="seller__rating">
@@ -108,7 +110,6 @@
 		<div class="product-content">
 			${product.productContent}
 		</div>
-
 		
 </div>
 

@@ -40,6 +40,7 @@ public class ChatController {
 		List<ChatVO> list = chatService.chatList(chatVO);
 		System.out.println("chatList : "+list);
 		
+		
 		request.setAttribute("list", list);
 		
 		return "chat/chatList";
@@ -63,12 +64,35 @@ public class ChatController {
 		return "chat/chatAjaxList";
 	}
 	
-	
+	//메세지 목록
+		@RequestMapping("chatList2")
+		public String chatList2(Authentication auth, HttpServletRequest request, Long productNum, Long locationCode) throws Exception {
+			
+			MemberVO memberVO= (MemberVO)auth.getPrincipal();
+//			System.out.println("auth : "+memberVO.getUsername());
+			
+			String username = memberVO.getUsername();
+			
+			ChatVO chatVO = new ChatVO();
+			chatVO.setUsername(username);
+			//System.out.println(chatVO);
+			
+			List<ChatVO> list = chatService.chatList(chatVO);
+			System.out.println("chatList : "+list);
+			
+			
+			request.setAttribute("list", list);
+			request.setAttribute("productNum", productNum);
+			request.setAttribute("locationCode", locationCode);
+			
+			return "chat/chatList2";
+		}
+			
 	@RequestMapping("chatContentList")
 	public String chatContentList(HttpServletRequest request, Authentication auth) throws Exception {
-		
-		
+			
 		int room = Integer.parseInt(request.getParameter("room"));
+		
 		//System.out.println(room);
 		
 		ChatVO chatVO = new ChatVO();
@@ -78,8 +102,6 @@ public class ChatController {
 		chatVO.setUsername(username);
 		System.out.println("content list chatVO : "+chatVO);
 		List<ChatVO> clist = chatService.getVO(chatVO);
-		
-		
 		
 		System.out.println(clist);
 		
@@ -92,6 +114,7 @@ public class ChatController {
 		System.out.println("메세지내용 가져오기 후 : "+clist);
 		
 		request.setAttribute("clist", clist);
+		
 		
 		return "chat/chatContentList";
 	}

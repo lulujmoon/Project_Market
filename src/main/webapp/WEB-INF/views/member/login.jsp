@@ -27,6 +27,9 @@
 					<label for="password">Password</label><br> 
 					<input type="password" class="form-control" id="password" name="password">
 				</div>
+				<div class="form-group">
+				<small class="message">${message}</small>
+				</div>
 				<div class="btn-wrapper">
 					<button type="submit" class="btn-wide btn-submit">Login</button>
 				</div>
