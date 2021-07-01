@@ -8,13 +8,22 @@
 <div class="profile-container">
 <div class="divide">
 	<div class="profile__photo">
+		<c:if test="${principal.oauth eq false}">
 		<img class="profile__img" src = "/resources/upload/member/${file.fileName}">
+		</c:if>	
+		<c:if test="${principal.oauth eq true}">
+		<img class="profile__img" src = "/resources/upload/member/basic.PNG">
+		</c:if>
+		<c:if test="${principal.oauth eq false}">
 		<div class="profile-hover">프로필 수정하기</div>
+		</c:if>
 	</div>
+	 <c:if test="${principal.oauth eq false}">
 	<form action="./profileUpdate" method="post" enctype="multipart/form-data" class="profile__form">
 		<input type="text" name="fileNum" value="${file.fileNum}">
 		<input type="file" name="avatar" class="input-file">
   </form>
+  </c:if>
 	<div class="profile__info">
 		<div class="profile__name">${member.name}</div>
 		<div class="profile__location">${locations[0].locationName}</div>
