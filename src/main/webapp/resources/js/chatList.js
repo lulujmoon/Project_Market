@@ -127,7 +127,6 @@ const MessageContentList = function(room) {
 const SendMessage = function(room, otherUser, productNum){
 	
 	let content = $('.write_msg').val();
-	console.log(productNum);
 	
 	content = content.trim();
 	

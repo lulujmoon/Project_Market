@@ -123,7 +123,7 @@ public class ChatController {
 	//메세지 리스트에서 메세지 보내기
 	
 	@RequestMapping("chatSendInList")
-	public String chatSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Authentication auth) throws Exception {
+	public String chatSendInList(@RequestParam int room, @RequestParam String otherUser, @RequestParam String content, Long productNum, Authentication auth) throws Exception {
 		System.out.println("otherUser : " + otherUser);
 		ModelAndView mv= new ModelAndView();
 		ChatVO chatVO = new ChatVO();
@@ -136,7 +136,8 @@ public class ChatController {
 		System.out.println("user : "+username);
 		chatVO.setRecvUser(otherUser);
 		chatVO.setContent(content);
-		
+		chatVO.setProductNum(productNum);		
+				
 		ProductVO productVO = new ProductVO();
 		productVO.setUsername(username);
 		
