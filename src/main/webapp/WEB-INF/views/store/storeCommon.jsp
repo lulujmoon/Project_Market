@@ -44,7 +44,7 @@
 		<c:if test="${principal.username != member.username}">
 			<a class="nav__item products" href="./products">판매 상품</a>
 			<a class="nav__item reviews" href="/store/${member.code}/reviews">받은 후기</a>
-			<a class="nav__item socials">동네 생활</a>
+			<a class="nav__item socials" href="/store/${member.code}/socials">동네 생활</a>
 		</c:if>
 		<c:if test="${principal.username == member.username}">
 			<a class="nav__item my-store products" href="./products">판매 상품</a>

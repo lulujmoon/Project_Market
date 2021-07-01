@@ -166,3 +166,15 @@ function deleteProduct(productNum) {
     
         }
 	}
+	
+/** @function suggestPrice(productNum, counterpart)
+ *	-- 가격 제안 팝업을 띄운다.
+ */
+function suggestPrice(productNum, counterpart){
+	window.open(
+		'/notification/nego?productNum='+productNum+'&notiRecvUser='+counterpart,
+		'',
+		'width=400, height=100, top=400, left=600, resizable'
+	);
+}
+

@@ -12,19 +12,3 @@ var side_menu = document.querySelector(".side-menu");
 toggle_btn.addEventListener("click", function(){
 	side_menu.classList.toggle("active");
 });
-
-/** 초기설정 . 알림 버튼
- */
-const btnNoti = document.querySelector('.btn-noti');
-const notiContainer = document.querySelector('.noti-container');
-btnNoti.addEventListener('click', ()=>{
-	$.get(
-		'../notification/list',
-		function(result){
-			notiContainer.innerHTML = result;
-		});
-	
-	
-	
-	notiContainer.classList.toggle('active');
-});
