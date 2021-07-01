@@ -113,8 +113,7 @@ public class MemberController {
 		SecurityContextImpl sc = (SecurityContextImpl)obj;
 									//저장되는 session의 타입
 		Authentication auth = sc.getAuthentication();
-
-
+		
 		return "redirect:/";
 
 	}

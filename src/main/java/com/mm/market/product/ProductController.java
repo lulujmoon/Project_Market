@@ -361,18 +361,21 @@ public class ProductController {
 	@PostMapping("setStatus")
 	public String setStatus(ProductVO productVO)throws Exception{
 		productService.setStatus(productVO);
-	
+		productVO=productService.getSelect(productVO);
 		String url ="";
-
-		System.out.println(productVO.getProductStatus());
 		
-		if(productVO.getProductStatus().equals("예약 중")) {
-			url = "/chat/chatList2?productNum="+productVO.getProductNum()+"&&locationCode="+productVO.getLocationCode();
-		}else if(productVO.getProductStatus().equals("판매완료")) {
-			url = "/review/insert?productNum="+productVO.getProductNum();
-		}else if(productVO.getProductStatus().equals("판매 중")) {
-			url = "redirect:./select/"+productVO.getProductNum();
+		String status = productVO.getProductStatus();
+
+		if(status.equals("예약 중")) {
+			url = "redirect:/chat/chatList2?productNum="+productVO.getProductNum()+"&&locationCode="+productVO.getLocationCode();
+		}else if(status.equals("판매완료")) {
+			url = "redirect:/review/insert?productNum="+productVO.getProductNum();
+		}else if(status.equals("판매 중")) {
+			url = "redirect:select/"+productVO.getProductNum();
 		}
+		
+		System.out.println(url);
+		
 		return url;
 	}
 	
