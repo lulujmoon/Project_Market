@@ -58,8 +58,8 @@
 	top__status.style.backgroundColor = '#f7bd11';
 }
 
-const seller__LC = document.querySelector('.seller__LC');
-const locationCode = seller__LC.innerText;
+
+
 
 /** 기능 1. 찜
  */
@@ -98,7 +98,7 @@ if(btnHeart!=null){
 }
 		
 function heart_reload() {
-	$("#heart").load(window.location.href='/product/select/'+productNum);
+	document.location.reload(true);
 }
 
 function submit() {
@@ -123,8 +123,9 @@ function openReport(productNum){
 }
 
 $(document).ready(function(){
-	var status =$("#productState").val();
+	var status = $("#productStatus").val();
 	$("#status").val(status);
+
 	});
 
 /** @function manageStatus()
@@ -146,29 +147,25 @@ $(document).ready(function(){
 	btnSubmit.click();
 }
 
-
-/* 예약중인상품
-$(document).ready(function(){
-	$.get('/reservation/select', {
-		productNum: productNum
-	}, function(result){
-		if(result==0&&status=='예약 중'){
-			location.href='/chat/chatList2?productNum='+productNum+'&&locationCode='+locationCode
-		}if(result==1&&status=='예약 중'){
-			alert('이미 예약중인 상품입니다.');
-		}
-	})
-	});*/
+function deleteProduct(productNum) {
+	let con = confirm("삭제하시겠습니까?");
+	if(con) {
+        const deleteForm = document.createElement('form');
+		deleteForm.action = './delete';
+		deleteForm.method = 'post';
+		
+		const inputNum = document.createElement('input');
+		inputNum.type = 'hidden';
+		inputNum.name = 'productNum';
+		inputNum.value = productNum;
+		
+		deleteForm.appendChild(inputNum);
+		document.body.appendChild(deleteForm);
+		
+		deleteForm.submit();
+    
+        }
+	}
 	
-/*거래완료 상품처리
-$(document).ready(function(){
-	$.get('/reservation/select', {
-		productNum: productNum
-	}, function(result){
-		if(result==1&&status=='판매완료'){
-			location.href='/review/insert?productNum='+productNum
-		}if(result==0&&status=='판매완료'){
-		}
-	})
-	});*/
+
 

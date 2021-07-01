@@ -1,12 +1,6 @@
 package com.mm.market.product;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +20,6 @@ import com.mm.market.category.CategoryMapper;
 import com.mm.market.category.CategoryVO;
 import com.mm.market.chat.ChatService;
 import com.mm.market.chat.ChatVO;
-import com.mm.market.location.LocationVO;
 import com.mm.market.member.MemberFileVO;
 import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
@@ -35,8 +27,6 @@ import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
 import com.mm.market.review.ReviewService;
 import com.mm.market.review.ReviewVO;
-import com.mm.market.util.FileManager;
-import com.mm.market.util.Pager;
 import com.mm.market.util.ProductPager;
 
 @Controller
@@ -143,23 +133,24 @@ public class ProductController {
 				MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 				String username = memberVO.getUsername();
 				chatVO.setUsername(username);
-				System.out.println("@chatVO.getUsername : "+chatVO.getUsername());
 				List<ChatVO> list = chatService.chatList(chatVO);
 				System.out.println("list : "+list);
 				
-				if(list.size()<1) {
+				if(list.size()<1) { //아예 내역이 없을때
 					model.addAttribute("chat", 0);
 				} else {
-					for(int i=0;i<list.size();i++) {
-						if(list.get(i).getOtherUser() == sellerVO.getUsername()) {
+					for(int i=0;i<list.size();i++) { // 리스트에서 otherUser가 판매자일때는 chat에 판매자를 보냄
+						if(list.get(i).getOtherUser().equals(sellerVO.getUsername())) {
 							model.addAttribute("chat", list.get(i).getOtherUser());
-						} else {
+							break;
+						} else { //리스트에서 판매자와 나눈 chat이 없을경우 0을보냄
 							model.addAttribute("chat", 0);
 						}
 					}
 				}
 			}
 			model.addAttribute("rating", reviewVO);
+			
 		}
 
 		return "product/select";
