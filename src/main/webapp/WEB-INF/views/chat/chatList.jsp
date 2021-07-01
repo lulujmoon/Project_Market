@@ -34,6 +34,7 @@
 		</div>
 	</div>   
 </div>
+<div class="hidden hidden-message"></div>
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/chatList.js"></script>
 </body>

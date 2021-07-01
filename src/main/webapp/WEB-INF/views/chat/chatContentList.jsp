@@ -5,14 +5,9 @@
 <sec:authorize access="isAuthenticated()">
 <sec:authentication property="principal" var="principal"/>
 </sec:authorize>
-
-
-
 <c:forEach var="tmp" items="${clist}">
-	
 	<c:choose>
 		<c:when test="${principal.username ne tmp.sendUser}">
-		<!-- 받은 메세지 -->
 		<div class="incoming_msg">
 				<input type="hidden" value="${tmp.otherUser}">
 				<input type="hidden" value="${tmp.profile}">
@@ -27,16 +22,13 @@
 			</div>
 		</div>
 		</c:when>
-		
 		<c:otherwise>
-		<!-- 보낸 메세지 -->
 		<div class="outgoing_msg">
 			<div class="sent-msg">
 					<div class="sent__time">${tmp.sendTime}</div> 
 					<div class="sent__content">${tmp.content}</div>
 			</div>
 		</div>
-
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
