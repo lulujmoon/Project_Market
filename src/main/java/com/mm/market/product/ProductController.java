@@ -363,6 +363,9 @@ public class ProductController {
 		productVO=productService.getSelect(productVO);
 		productService.setStatus(productVO);
 		String url ="";
+
+		System.out.println(productVO.getProductStatus());
+		
 		if(productVO.getProductStatus() == "예약 중") {
 			url = "/chat/chatList2?productNum="+productVO.getProductNum()+"&&locationCode="+productVO.getLocationCode();
 		}else if(productVO.getProductStatus() == "판매완료") {
