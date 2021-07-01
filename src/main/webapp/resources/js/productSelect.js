@@ -150,6 +150,3 @@ function deleteProduct(productNum) {
 		
 		
 	}
-	
-
-

@@ -35,7 +35,7 @@
 					<div class="ntc__date">
 						${noti.notiSendTime}
 					</div>
-				<a href="/chat/chatSendInList?room=0&otherUser=${noti.notiSendUser}&content=※${principal.username}님이 ${noti.product.productName} 가격제안을 수락하셨습니다." onclick="if(confirm('수락하시겠습니까?')==false){return false;}" class="btn btn-edit" >수락</a>
+				<a href="/chat/chatSendInList?room=0&otherUser=${noti.notiSendUser}&content=※${principal.username}님이 ${noti.product.productName} 가격제안을 수락하셨습니다." onclick="check(); notiInsert();" class="btn btn-edit" >수락</a>
 				<div class="btn btn-del">
 					<a href="#" onclick="notiDelete(${noti.notiNum})">삭제</a></div>
 				<div class="ntc__content">
