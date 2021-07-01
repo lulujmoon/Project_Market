@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.btn-noti{
+	cursor: pointer;
+}
+
 .noti-container{
 	min-height: 0;
 	max-height: 0;
