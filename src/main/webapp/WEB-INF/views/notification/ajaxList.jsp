@@ -11,7 +11,7 @@
 		<div class="hidden counterpart">${noti.notiSendUser}</div>
 		<div class="hidden user">${principal.username}</div>
 		<div class="hidden product">${noti.product.productName}</div>
-		<div class="hidden productNum">${noti.product.productNum</div>
+		<div class="hidden productNum">${noti.product.productNum}</div>
 		<input type="hidden" id="notiReadChk" value="${noti.notiReadChk}"/>
 		<div class="noti__top-wrapper">
 			<div class="noti__product-name"><a href="/product/select/${noti.product.productNum}">${noti.product.productName}</a></div>
