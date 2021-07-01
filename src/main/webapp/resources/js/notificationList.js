@@ -67,13 +67,19 @@ btnNoti.addEventListener('click', ()=>{
 function setClick(){
 	const notiCards = document.querySelectorAll('.noti__card');
 	for(let notiCard of notiCards){
-		let notiNum = Number(notiCard.querySelector('.notiNum'));
-		let counterpart = notiCard.querySelector('.counterpart');
-		let user = notiCard.querySelector('.user');
-		let product = notiCard.querySelector('.product');
+		let notiNum = Number(notiCard.querySelector('.notiNum').innerText);
+		let counterpart = notiCard.querySelector('.counterpart').innerText;
+		let user = notiCard.querySelector('.user').innerText;
+		let product = notiCard.querySelector('.product').innerText;
+		let productNum = notiCard.querySelector('.productNum').innerText;
+		let notiContent = notiCard.querySelector('.noti-content');
 		notiCard.addEventListener('click', ()=>{
 			read(notiNum);
-			acceptPrice(counterpart, user, product);
+			if(notiContent == null){
+				acceptPrice(counterpart, user, product, productNum);
+			}else {
+				location.href='/chat/chatList';
+			}
 		});
 	}	
 }
