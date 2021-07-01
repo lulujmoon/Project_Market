@@ -84,12 +84,8 @@ public class ReviewController {
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 		reviewVO.setReviewer(memberVO.getUsername());		
 		reviewService.setInsert(reviewVO);
-		
-		System.out.println("인서트한 리뷰vo"+reviewVO.getProductNum());
-		
+			
 		List<ReviewVO> reviewList =reviewService.getListByReview(reviewVO);
-		
-		System.out.println("리스트뽑은 넘버"+reviewList.get(0).getProductNum()); 
 		
 		ReservationVO reservationVO = new ReservationVO();
 		reservationVO.setProductNum(reviewVO.getProductNum());
