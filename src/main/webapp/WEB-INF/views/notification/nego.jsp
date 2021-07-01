@@ -7,34 +7,26 @@
 </sec:authorize>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/resources/css/nego.css" />
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<c:import url="../template/setting.jsp"></c:import>
-<link rel="stylesheet" href="/resources/css/noticeList.css"/>
 <title>가격 제안하기</title>
-</style>
 </head>
 <body>
-<c:import url="../template/header.jsp"></c:import>
-<h2>가격 제안하기 페이지</h2>
-<div class="container">
-	<div class="notice-container">
-	<form action="../notification/nego" method="POST" name="nego" onsubmit="return check()">
+<form action="../notification/nego" method="POST" name="nego">
+	<div class="nego-container">
 		<input type="hidden" name="username" value="${principal.username}">
 		<input type="hidden" name="productNum" value="${noti.productNum}">
 		<input type="hidden" name="notiRecvUser" value="${noti.notiRecvUser}">
-		
-		<div>제안할 가격을 입력하세요</div>
-		<input type="number" id="notiContent" name="notiContent">
-		<div class="btn-wrapper">
-			<input type="submit" id="btn" class="btn-presubmit" value="등록">
+		<div class="nego-info">제안할 가격을 입력하세요.</div>
+		<div class="price-wrapper">
+			<input type="number" class="nego-price" id="notiContent" name="notiContent">
+			<div class="btn-presubmit" onclick="check()">제안</div>
+			<button class="hidden btn-submit"></button>
 		</div>
-	</form>
 	</div>
-</div>
-<c:import url="../template/footer.jsp"></c:import>
+</form>
 <script type="text/javascript" src="../resources/js/common.js"></script>
 <script type="text/javascript" src="../resources/js/functions.js"></script>
 <script type="text/javascript">
@@ -43,13 +35,19 @@ function check() {
 	if(confirm('가격을 제안하시겠습니까?')){		
 	  if(nego.notiContent.value == "") {
 	    alert("값을 입력해 주세요.");
-	    return false;
 	  }else {
-		alert("제안 성공");
-		return true;
-	  }		  
-	}else {
-		return false;
+		  $.post(
+				'/notification/nego',
+				{username: '${principal.username}',
+				 productNum: '${noti.productNum}',
+				 notiRecvUser: '${noti.notiRecvUser}',
+				 notiContent: $(".nego-price").val()
+				},
+				function(result){
+					alert("가격을 제안했습니다. 답장을 기다려주세요.");
+					window.open("about:blank", "_self").close();
+				});
+		 }		  
 	}
 }
 

@@ -8,7 +8,7 @@
 		</div>
 		<div>Favicon made by <a href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market">Vectors Market</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 	</div>
-
-
 </footer>
-
+<script type="text/javascript" src="/resources/js/common.js"></script>
+<script type="text/javascript" src="/resources/js/functions.js"></script>
+<script type="text/javascript" src="/resources/js/notificationList.js"></script>

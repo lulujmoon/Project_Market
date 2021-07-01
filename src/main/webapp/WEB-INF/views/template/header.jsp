@@ -13,7 +13,7 @@
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 				<li><a href="${pageContext.request.contextPath}/member/info">내 정보</a>&nbsp;|&nbsp;</li>
-				<li><a href="#" class="btn-noti">알림</a>&nbsp;|&nbsp;</li>
+				<li><a class="btn-noti">알림</a>&nbsp;|&nbsp;</li>
 				<li><a href="${pageContext.request.contextPath}/member/logout">로그아웃</a></li>
 			</sec:authorize>
 		</ul>	

@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.nego-container{
+	width: 392px;
+	height: 200px;
+}
+
+.nego-info{
+	width: 100%;
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 80px 0 20px 0;
+	text-align: center;
+}
+
+.price-wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.nego-price{
+	all: unset;
+	width: 140px;
+	height: 30px;
+	border-radius: 5px;
+	border: 1px solid #b4b4b4;
+	padding: 0 5px;
+}
+
+.btn-presubmit{
+	all: unset;
+	width: 60px;
+	height: 30px;
+	margin: 7px;
+	line-height: 30px;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	color: white;
+	border-radius: 5px;
+	background-color: #fadd85;		
+}
+
+.hidden{
+	display: none;
+}
