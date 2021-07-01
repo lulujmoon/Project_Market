@@ -8,13 +8,22 @@
 <div class="profile-container">
 <div class="divide">
 	<div class="profile__photo">
+		<c:if test="${principal.oauth eq false}">
 		<img class="profile__img" src = "/resources/upload/member/${file.fileName}">
+		</c:if>	
+		<c:if test="${principal.oauth eq true}">
+		<img class="profile__img" src = "/resources/upload/member/basic.PNG">
+		</c:if>
+		<c:if test="${principal.oauth eq false}">
 		<div class="profile-hover">프로필 수정하기</div>
+		</c:if>
 	</div>
+	 <c:if test="${principal.oauth eq false}">
 	<form action="./profileUpdate" method="post" enctype="multipart/form-data" class="profile__form">
 		<input type="text" name="fileNum" value="${file.fileNum}">
 		<input type="file" name="avatar" class="input-file">
   </form>
+  </c:if>
 	<div class="profile__info">
 		<div class="profile__name">${member.name}</div>
 		<div class="profile__location">${locations[0].locationName}</div>
@@ -32,9 +41,16 @@
 </div>
 <div class="board-container">	<!-- 엔드 태그는 본문에 있음 -->
 	<div class="board__nav">
-		<a class="nav__item nav__selected" href="./products">판매 상품</a>
-		<a class="nav__item" href="/store/${member.code}/reviews">받은 후기</a>
-		<a class="nav__item">동네 생활</a>
-		<a class="nav__item">찜한 상품</a>
-		<a class="nav__item" href="/store/${principal.code}/myReviews">작성한 후기</a>
+		<c:if test="${principal.username != member.username}">
+			<a class="nav__item products" href="./products">판매 상품</a>
+			<a class="nav__item reviews" href="/store/${member.code}/reviews">받은 후기</a>
+			<a class="nav__item socials">동네 생활</a>
+		</c:if>
+		<c:if test="${principal.username == member.username}">
+			<a class="nav__item my-store products" href="./products">판매 상품</a>
+			<a class="nav__item my-store reviews" href="/store/${member.code}/reviews">받은 후기</a>
+			<a class="nav__item my-store socials" href="/store/${member.code}/socials">동네 생활</a>
+			<a class="nav__item my-store hearts" href="/store/${principal.code}/hearts">찜한 상품</a>
+			<a class="nav__item my-store myReviews" href="/store/${principal.code}/myReviews">작성한 후기</a>
+		</c:if>
 	</div>

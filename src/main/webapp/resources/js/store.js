@@ -29,11 +29,17 @@
   const btnAvatar = document.querySelector('.profile__photo');
 	const inputFile = document.querySelector('.input-file');
   const profileForm = document.querySelector('.profile__form');
+	const fileCheck = /\.(gif|jpg|jpeg|png|GIF|JPG|JPEG|PNG)$/;
   
   btnAvatar.addEventListener('click', ()=>{
 		inputFile.click();
 		inputFile.addEventListener('change', ()=>{
+		let file = inputFile.value;
+		if((file).search(fileCheck)!=-1){
 			profileForm.submit();
+		}else{
+			alert('지원되지 않는 파일 형식입니다. 첨부할 수 있는 파일 형식은 gif, jpg, jpeg, png입니다. ');
+		}
 		});
 });
 
@@ -50,7 +56,9 @@ for(infoPrice of infoPrices){
 /** 초기설정 4. 선택한 페이지와 조회조건(전체/판매자/구매자)
  */
 const pageContainer = document.querySelector('.page-container');
-selectPage(pageContainer);
+if(pageContainer != null){
+	selectPage(pageContainer);	
+}
 const typeContainer = document.querySelector('.type-container');
 const typeVal = document.querySelector('.type-value');
 if(typeContainer != null){
@@ -61,9 +69,19 @@ if(typeContainer != null){
 	selectedType.classList.add('selected');	
 }
 
+/** 초기설정 5. 선택한 nav__item에 selected 클래스 추가
+ */
+ const urlArr = location.href.split('/');
+ let selected = document.querySelector('.'+urlArr[5]);
+ selected.classList.add('selected');
+
 
 /* products */
 
-function goSelect(productNum){
+function goProductSelect(productNum){
 	location.href = '/product/select/'+productNum;
+}
+
+function goSocialSelect(socialNum){
+	location.href = '/social/select?socialNum='+socialNum;
 }

@@ -19,9 +19,12 @@ import com.mm.market.product.ProductService;
 import com.mm.market.product.ProductVO;
 import com.mm.market.review.ReviewService;
 import com.mm.market.review.ReviewVO;
+import com.mm.market.social.SocialService;
+import com.mm.market.social.SocialVO;
 import com.mm.market.util.Pager;
 import com.mm.market.util.ProductPager;
 import com.mm.market.util.ReviewPager;
+import com.mm.market.util.SocialPager;
 
 @Controller
 @RequestMapping("/store/**")
@@ -38,6 +41,9 @@ public class StoreController {
 	
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private SocialService socialService;
 	
 	@GetMapping("{code}/products")
 	public ModelAndView products(@PathVariable("code") Long code, ProductPager productPager, Authentication authentication, ModelAndView mv) throws Exception {
@@ -70,25 +76,34 @@ public class StoreController {
 		return mv;
 	}
 	
-	//code 넣으면 다른 지역이 안나와서 그냥 빼고 했습니당!
-	@GetMapping("/hearts")
-	public ModelAndView hearts(Authentication authentication, ModelAndView mv) throws Exception {
-		MemberVO memberVO = new MemberVO();
-		memberVO = (MemberVO)authentication.getPrincipal();
-		MemberFileVO memberFileVO = memberService.selectFile(memberVO);
+	@GetMapping("{code}/hearts")
+	public ModelAndView hearts(@PathVariable("code") Long code, ProductPager productPager, Authentication authentication, ModelAndView mv) throws Exception {
+		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
 		
-		MemberLocationVO memberLocationVO = new MemberLocationVO();
-		memberLocationVO.setUsername(memberVO.getUsername());
-		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		if(!memberVO.getCode().equals(code)) {
+			mv.addObject("alert", "잘못된 접근입니다.");
+		}else {
+			MemberFileVO memberFileVO = memberService.selectFile(memberVO);
+			
+			MemberLocationVO memberLocationVO = new MemberLocationVO();
+			memberLocationVO.setUsername(memberVO.getUsername());
+			List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+			
+			ReviewVO reviewVO = new ReviewVO();
+			reviewVO.setReviewee(memberVO.getUsername());
+			reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+			
+			productPager.setUsername(memberVO.getUsername());
+			List<ProductVO> productList = productService.getHeartList(productPager, 16L, 5L);
+			
+			mv.addObject("products", productList);
+			mv.addObject("member", memberVO);
+			mv.addObject("file", memberFileVO);
+			mv.addObject("rating", reviewVO);
+			mv.addObject("locations", locationList);
+			mv.addObject("pager", productPager);
+		}
 		
-		HeartVO heartVO = new HeartVO();
-		heartVO.setUsername(memberVO.getUsername());
-		List<ProductVO> productList = productService.getHeartList(heartVO);
-		
-		mv.addObject("products", productList);
-		mv.addObject("member", memberVO);
-		mv.addObject("file", memberFileVO);
-		mv.addObject("locations", locationList);
 		mv.setViewName("/store/hearts");
 		
 		return mv;
@@ -126,8 +141,36 @@ public class StoreController {
 	}
 	
 	@GetMapping("{code}/socials")
-	public String socials(@PathVariable("code") Long code) throws Exception {
-		return "/store/socials";
+	public ModelAndView socials(@PathVariable("code") Long code, SocialPager socialPager, ModelAndView mv) throws Exception {
+		MemberVO memberVO = new MemberVO();
+		memberVO.setCode(code);
+		memberVO = memberService.getSelectByCode(memberVO);
+		
+		MemberFileVO memberFileVO = memberService.selectFile(memberVO);
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setReviewee(memberVO.getUsername());
+		reviewVO = reviewService.getAvgsAndCounts(reviewVO);
+		
+		MemberLocationVO memberLocationVO = new MemberLocationVO();
+		memberLocationVO.setUsername(memberVO.getUsername());
+		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		
+		
+		socialPager.setUsername(memberVO.getUsername());
+		List<SocialVO> socialList = socialService.getList(socialPager);
+
+		mv.addObject("member", memberVO);
+		mv.addObject("file", memberFileVO);
+		mv.addObject("locations", locationList);
+		mv.addObject("rating", reviewVO);
+		mv.addObject("socialPager", socialPager);
+		mv.addObject("socials", socialList);
+
+		mv.setViewName("store/socials");		
+		
+		
+		return mv;
 	}
 	
 	@GetMapping("{code}/myReviews")

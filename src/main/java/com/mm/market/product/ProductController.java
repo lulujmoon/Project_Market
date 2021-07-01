@@ -190,15 +190,27 @@ public class ProductController {
 
 
 
-	@PostMapping("delete")
-	public String setDelete(ProductVO productVO)throws Exception{
-		
+	@PostMapping("delete/{productNum}")
+	public ModelAndView setDelete(@PathVariable("productNum") Long productNum)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		ProductVO productVO = new ProductVO();
+		productVO.setProductNum(productNum);
 		productVO = productService.getSelect(productVO);
 		System.out.println(productVO);
 		int result = productService.setDelete(productVO);
 
-		
-		return "redirect: product/list";
+		String message="글이 삭제되지 않았습니다. 다시 시도해주세요.";
+		String path = "./list";
+
+		if(result>0) {
+			message="글이 삭제되었습니다.";
+		}
+
+		mv.addObject("msg", message);
+		mv.addObject("path", path);
+		mv.setViewName("common/commonResult");
+
+		return mv;
 	}
 
 	@PostMapping("fileDelete")
@@ -220,8 +232,11 @@ public class ProductController {
 		MemberLocationVO memberLocationVO = new MemberLocationVO();
 		memberLocationVO.setUsername(memberVO.getUsername());
 		List<MemberLocationVO> locationList = memberLocationService.getList(memberLocationVO);
+		
+		List<CategoryVO> categories = categoryMapper.getList();
 
 		model.addAttribute("location", locationList);
+		model.addAttribute("categories", categories);
 	}
 
 	@PostMapping("insert")
@@ -337,7 +352,36 @@ public class ProductController {
 	@PostMapping("setStatus")
 	public String setStatus(ProductVO productVO)throws Exception{
 		productService.setStatus(productVO);
-		return "redirect:./select/"+productVO.getProductNum();
+		productVO=productService.getSelect(productVO);
+		String url ="";
+		
+		String status = productVO.getProductStatus();
+
+		if(status.equals("예약 중")) {
+			url = "redirect:/chat/chatList2?productNum="+productVO.getProductNum()+"&&locationCode="+productVO.getLocationCode();
+		}else if(status.equals("판매완료")) {
+			url = "redirect:/review/insert?productNum="+productVO.getProductNum();
+		}else if(status.equals("판매 중")) {
+			url = "redirect:select/"+productVO.getProductNum();
+		}
+		
+		System.out.println(url);
+		
+		return url;
 	}
 	
+	//가격 제안하기 페이지
+	@GetMapping("nego")
+	public void setNego(ProductVO productVO, Authentication auth)throws Exception{
+		MemberVO memberVO = (MemberVO)auth.getPrincipal();
+		String username = memberVO.getUsername();
+		
+		productVO = productService.getSelect(productVO);
+		Long productNum = productVO.getProductNum();
+		
+		String seller = productVO.getUsername();
+		System.out.println("sendUser: "+username);
+		System.out.println("productNum: "+productNum);
+		System.out.println("seller: "+seller);
+	}
 }

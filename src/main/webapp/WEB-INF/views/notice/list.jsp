@@ -35,10 +35,12 @@
 				<i class="fas fa-sort-down"></i>
 			</div>
 			<div class="content-wrapper">
-				<div class="ntc__btn">
-					<a href="./update?noticeNum=${notice.noticeNum}" class="btn btn-edit">수정</a>
-					<div class="btn btn-del" onclick="deleteNotice('${notice.noticeNum}')">삭제</div>
-				</div>
+				<sec:authorize access="hasRole('ADMIN')">
+					<div class="ntc__btn">
+						<a href="./update?noticeNum=${notice.noticeNum}" class="btn btn-edit">수정</a>
+						<div class="btn btn-del" onclick="deleteNotice('${notice.noticeNum}')">삭제</div>
+					</div>
+				</sec:authorize>
 				<div class="ntc__content">
 					${notice.noticeContent}
 				</div>
@@ -64,7 +66,6 @@
 </div>
 <c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/common.js"></script>
-<script type="text/javascript" src="../resources/js/functions.js"></script>
 <script type="text/javascript" src="../resources/js/noticeList.js"></script>
 </body>
 </html>

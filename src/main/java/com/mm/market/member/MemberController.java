@@ -95,7 +95,7 @@ public class MemberController {
 
 	@GetMapping("loginFail")
 	public String loginFail()throws Exception{
-		return "redirect:/member/login";
+		return "/member/login";
 	}
 
 	@GetMapping("loginResult")
@@ -103,7 +103,6 @@ public class MemberController {
 
 		Enumeration<String> en = session.getAttributeNames();
 		MemberVO memberVO = new MemberVO();
-		System.out.println(memberVO.getUsername());
 
 		while(en.hasMoreElements()) {
 			System.out.println("attribute Name:+"+en.nextElement());
@@ -114,11 +113,7 @@ public class MemberController {
 		SecurityContextImpl sc = (SecurityContextImpl)obj;
 									//저장되는 session의 타입
 		Authentication auth = sc.getAuthentication();
-
-		System.out.println("obj : "+obj);
-
-		System.out.println("login 성공");
-
+		
 		return "redirect:/";
 
 	}
@@ -313,7 +308,10 @@ public class MemberController {
 		if(originmemberVO==null) {
 			try {
 				System.out.println("기존회원아님->회원가입진행");
-				memberService.setKakaoJoin(KakaomemberVO);
+				int result = memberService.setKakaoJoin(KakaomemberVO);
+			
+				ModelAndView mv = new ModelAndView();
+				mv.addObject("result", result);
 			
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
