@@ -73,7 +73,8 @@ public class ReviewController {
 			
 			model.addAttribute("counterpart", counterpart);
 			model.addAttribute("product", productVO);
-			model.addAttribute("dealType", reviewVO.getType());		
+			model.addAttribute("dealType", reviewVO.getType());
+			model.addAttribute("reviewVO",reviewVO.getReviewer());
 		}
 		
 		return "review/insert";
@@ -106,5 +107,7 @@ public class ReviewController {
 		
 		return mv;
 	}
+	
+	
 	
 }

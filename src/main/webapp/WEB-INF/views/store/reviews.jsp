@@ -40,7 +40,10 @@
 							<div class="rv__date">
 								${review.reviewDate}
 							</div>
+							
+							
 						<div class="btn-add-review" onclick="location.href='/review/insert?productNum=${review.productNum}'">리뷰작성</div>
+						
 						</div>
 						</div>
 						<div class="rv__rate">
