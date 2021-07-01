@@ -127,7 +127,8 @@ $(document).ready(function(){
 	$("#status").val(status);
 	})
 
-/*예약중인 상품 처리*/
+
+/* 예약중인상품
 $(document).ready(function(){
 	$.get('/reservation/select', {
 		productNum: productNum
@@ -138,9 +139,9 @@ $(document).ready(function(){
 			alert('이미 예약중인 상품입니다.');
 		}
 	})
-	});
+	});*/
 	
-/*거래완료 상품처리*/
+/*거래완료 상품처리
 $(document).ready(function(){
 	$.get('/reservation/select', {
 		productNum: productNum
@@ -150,5 +151,5 @@ $(document).ready(function(){
 		}if(result==0&&status=='판매완료'){
 		}
 	})
-	});
+	});*/
 
