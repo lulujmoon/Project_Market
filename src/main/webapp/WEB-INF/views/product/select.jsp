@@ -69,7 +69,7 @@
 					<a class="top-btn btn-contact" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
 					<a class="top-btn btn-del" onclick="deleteProduct('${product.productNum}')">삭제하기</a>
 				</c:if>
-				<c:if test="${principal.username != product.username}">
+				<c:if test="${product.productStatus != '판매완료' && principal.username != product.username}">
 					<c:if test="${chat ne 0}">
 						<div class="top-btn btn-contact"><a type="button" href="/chat/chatList" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
 					</c:if>
@@ -81,8 +81,8 @@
 					<div class="btn-report" onclick="openReport('${product.productNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 				</c:if>
 			</div>
-			<c:if test="${principal.username eq product.username}">
-
+			<c:if test="${product.productStatus == '판매완료' && principal.username != product.username}">
+				<div class="top-btn btn-sold">판매완료</div>
 			</c:if>
 			<div class="hidden">
 				<input type="hidden" class="heartValue" value="${heart}">

@@ -29,3 +29,8 @@ const infoDates = document.querySelectorAll('.info__date');
 for(let infoDate of infoDates){
 	infoDate.innerText = calculateTime(infoDate.innerText);
 }
+
+const sclDates = document.querySelectorAll('.scl__date');
+for(let sclDate of sclDates){
+	sclDate.innerText = calculateTime(sclDate.innerText);
+}
