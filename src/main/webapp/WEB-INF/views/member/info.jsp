@@ -61,7 +61,6 @@
 				<div class="info__content">${principal.email}</div>
 				<input class="info__input" type="text" name="email" value="${principal.email}">
 			</div>
-			<input class="info__input" type="text" name="oauth" value="${principal.oauth}" hidden="hidden">
 		</form>
 	</div>
 	<div class="location-container">
