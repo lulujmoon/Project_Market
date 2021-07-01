@@ -35,6 +35,7 @@
 			<result property="productName" column="productName"/>
 			<result property="categoryCode" column="categoryCode"/>
 			<result property="productNego" column="productNego"/>
+			<result property="notiFrom" column="notiFrom"/>
 		</association>
 	</resultMap>
 	
