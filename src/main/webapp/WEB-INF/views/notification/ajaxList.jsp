@@ -6,6 +6,10 @@
 	<sec:authentication property="principal" var="principal" />
 </sec:authorize>
 
+<c:if test="${list.size() == 0}">
+	<div class="noti__info">새로 온 알림이 없습니다.</div>
+</c:if>
+
 <c:forEach items="${list}" var="noti">
 	<div class="noti__card <c:if test="${noti.notiReadChk == 1}">read</c:if>">
 		<div class="hidden notiNum">${noti.notiNum}</div>
@@ -22,7 +26,7 @@
 			<div class="noti-content">${noti.notiSendUser} 님으로부터 ${noti.notiContent}</div>
 		</c:if>
 		<c:if test="${noti.notiFrom == false}">
-			<div>${noti.notiSendUser}님이 가격을 제안하셨어요! : ${noti.notiContent}원</div>			
+			<div>${noti.notiSendUser}님이 ${noti.notiContent}원을 제안하셨어요!</div>			
 		</c:if>
 		<div class="noti__date">${noti.notiSendTime}</div>
 	</div>

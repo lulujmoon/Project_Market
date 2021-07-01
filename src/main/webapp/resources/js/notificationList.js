@@ -23,7 +23,6 @@ function notiDelete(notiNum) {
 			data:{notiNum : notiNum},
 			success:function() {
 				console.log("알림 삭제 완료");
-				location.reload();
 			}
 		});
 	}else {
