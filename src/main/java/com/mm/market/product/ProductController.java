@@ -360,17 +360,17 @@ public class ProductController {
 	
 	@PostMapping("setStatus")
 	public String setStatus(ProductVO productVO)throws Exception{
-		productVO=productService.getSelect(productVO);
 		productService.setStatus(productVO);
+	
 		String url ="";
 
 		System.out.println(productVO.getProductStatus());
 		
-		if(productVO.getProductStatus() == "예약 중") {
+		if(productVO.getProductStatus().equals("예약 중")) {
 			url = "/chat/chatList2?productNum="+productVO.getProductNum()+"&&locationCode="+productVO.getLocationCode();
-		}else if(productVO.getProductStatus() == "판매완료") {
+		}else if(productVO.getProductStatus().equals("판매완료")) {
 			url = "/review/insert?productNum="+productVO.getProductNum();
-		}else if(productVO.getProductStatus() == "판매 중") {
+		}else if(productVO.getProductStatus().equals("판매 중")) {
 			url = "redirect:./select/"+productVO.getProductNum();
 		}
 		return url;
