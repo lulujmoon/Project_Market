@@ -12,7 +12,6 @@
 				<input type="hidden" value="${tmp.otherUser}">
 				<input type="hidden" value="${tmp.profile}">
 				<input type="hidden" value="${tmp.recvUser}">
-				<input type="hidden" value="${tmp.productNum}">
 			<div class="received-msg">
 				<img class="rcv__avatar" src="/resources/upload/member/${tmp.profile}" alt="보낸사람 프로필">
 				<div class="rcv__content-wrapper">

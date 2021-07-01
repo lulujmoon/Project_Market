@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mm.market.member.MemberVO;
-import com.mm.market.product.ProductVO;
 import com.mm.market.util.NotificationPager;
 
 @Controller
@@ -82,7 +81,7 @@ public class NotificationController {
 			
 			return "redirect:/product/list";
 		}
-						
+		
 		@PostMapping("notiDelete")
 		public String notiDelete(NotificationVO notificationVO)throws Exception{
 			notificationService.notiDelete(notificationVO);

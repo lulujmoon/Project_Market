@@ -17,7 +17,6 @@ const FirstMessageList = function(){
 				
 				let room = $(this).attr('room');
 				let otherUser = $(this).attr('otherUser');
-				let productNum = $(this).attr('productNum');
 				
 				let send_msg = "";
 				send_msg += "	<input type='text' class='write_msg' placeholder='메세지를 입력하세요.' />";
@@ -30,7 +29,7 @@ const FirstMessageList = function(){
 				$('.btn-send').on('click',function(){
 					
 					// 메세지 전송 함수 호출
-					SendMessage(room, otherUser, productNum);
+					SendMessage(room, otherUser);
 					
 				});
 				
@@ -64,7 +63,6 @@ const MessageList = function(){
 				
 				let room = $(this).attr('room');
 				let otherUser = $(this).attr('otherUser');
-				let productNum = $(this).attr('productNum');
 				
 				let send_msg = "";
 				send_msg += "	<input type='text' class='write_msg' placeholder='메세지를 입력하세요.' />";
@@ -77,7 +75,7 @@ const MessageList = function(){
 				$('.msg_send_btn').on('click',function(){
 					
 					// 메세지 전송 함수 호출
-					SendMessage(room, otherUser, productNum);
+					SendMessage(room, otherUser);
 					
 				});
 				
@@ -124,7 +122,7 @@ const MessageContentList = function(room) {
 
 
 // 메세지를 전송하는 함수
-const SendMessage = function(room, otherUser, productNum){
+const SendMessage = function(room, otherUser){
 	
 	let content = $('.write_msg').val();
 	
@@ -139,8 +137,7 @@ const SendMessage = function(room, otherUser, productNum){
 			data:{
 				room : room,
 				otherUser: otherUser,
-				content: content,
-				productNum: productNum
+				content: content
 			},
 			success:function(data){
 				console.log("메세지 전송 성공");
