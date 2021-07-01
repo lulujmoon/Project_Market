@@ -126,29 +126,3 @@ $(document).ready(function(){
 	var status =$("#productState").val();
 	$("#status").val(status);
 	})
-
-/*예약중인 상품 처리*/
-$(document).ready(function(){
-	$.get('/reservation/select', {
-		productNum: productNum
-	}, function(result){
-		if(result==0&&status=='예약 중'){
-			location.href='/chat/chatList2?productNum='+productNum+'&&locationCode='+locationCode
-		}if(result==1&&status=='예약 중'){
-			alert('이미 예약중인 상품입니다.');
-		}
-	})
-	});
-	
-/*거래완료 상품처리*/
-$(document).ready(function(){
-	$.get('/reservation/select', {
-		productNum: productNum
-	}, function(result){
-		if(result==1&&status=='판매완료'){
-			location.href='/review/insert?productNum='+productNum
-		}if(result==0&&status=='판매완료'){
-		}
-	})
-	});
-

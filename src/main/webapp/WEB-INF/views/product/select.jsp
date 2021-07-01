@@ -52,21 +52,18 @@
 			</div>
 			<div class="top__btns">
 				<c:if test="${principal.username eq product.username}">
-					<div class="dropdown"> 
-					<input type="hidden" id="productStatus" value="${product.productStatus}">
-					<form action="/product/setStatus?productNum=${product.productNum}" method="post">
-					<div class="form-group">
-						  <label for="sel1">상태 변경</label>
-						  <select class="form-control" id="status" name="productStatus" onchange="submit()">
-						    <option>판매 중</option>
-						    <option>예약 중</option>
-						    <option>판매완료</option>
-						  </select>
-						</div>
+						<div class="top-btn btn-status">상태 변경</div>
+						<form action="/product/setStatus?productNum=${product.productNum}" method="post" class="status-form">
+						<input type="hidden" id="productStatus" value="${product.productStatus}">
+							<input type="hidden" class="input-status" name = "productStatus"/>
+							<div class="status-select">
+								<div class="status-option">판매중</div>
+								<div class="status-option">예약중</div>
+								<div class="status-option">판매완료</div>
+							</div>
 						</form>
-					</div>				
 					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
-					<a class="top-btn btn-contact" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
+					<a class="top-btn btn-rewrite" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
 					<a class="top-btn btn-del" onclick="deleteProduct('${product.productNum}')">삭제하기</a>
 				</c:if>
 				<c:if test="${product.productStatus != '판매완료' && principal.username != product.username}">
@@ -80,14 +77,13 @@
 					<div class="btn-heart"></div>
 					<div class="btn-report" onclick="openReport('${product.productNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
 				</c:if>
+				<c:if test="${product.productStatus == '판매완료' && principal.username != product.username}">
+					<div class="top-btn btn-sold">판매완료</div>
+				</c:if>
 			</div>
-			<c:if test="${product.productStatus == '판매완료' && principal.username != product.username}">
-				<div class="top-btn btn-sold">판매완료</div>
-			</c:if>
 			<div class="hidden">
 				<input type="hidden" class="heartValue" value="${heart}">
 				<input type="hidden" class="productNum" value="${product.productNum}">
-				
 			</div>
 		</div>
 	</div>
