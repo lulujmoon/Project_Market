@@ -35,10 +35,10 @@ function notiDelete(notiNum) {
 /** @function acceptPrice()
  *	--가격제안 수락 확인 후 페이지로 이동한다.
  */
-function acceptPrice(counterpart, user, productName){
+function acceptPrice(counterpart, user, productName, productNum){
 	let conf = confirm('가격 제안을 수락하시겠어요?');
 	if(conf){
-		location.href = '/chat/chatSendInList?room=0&otherUser='+counterpart+'&content=※'+user+'님이 '+productName+' 상품의 가격제안을 수락하셨습니다.';
+		location.href = '/chat/chatSendInList?room=0&otherUser='+counterpart+'&content=※'+user+'님이 '+productName+' 상품의 가격제안을 수락하셨습니다.&productNum='+productNum;
 	}
 }
 
@@ -71,9 +71,10 @@ function setClick(){
 		let counterpart = notiCard.querySelector('.counterpart');
 		let user = notiCard.querySelector('.user');
 		let product = notiCard.querySelector('.product');
+		let productNum = notiCard.querySelector('.productNum');
 		notiCard.addEventListener('click', ()=>{
 			read(notiNum);
-			acceptPrice(counterpart, user, product);
+			acceptPrice(counterpart, user, product, productNum);
 		});
 	}	
 }

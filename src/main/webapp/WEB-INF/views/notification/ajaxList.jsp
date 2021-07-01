@@ -12,12 +12,18 @@
 		<div class="hidden counterpart">${noti.notiSendUser}</div>
 		<div class="hidden user">${principal.username}</div>
 		<div class="hidden product">${noti.product.productName}</div>
+		<div class="hidden productNum">${noti.product.productNum}</div>
 		<input type="hidden" id="notiReadChk" value="${noti.notiReadChk}"/>
 		<div class="noti__top-wrapper">
 			<div class="noti__product-name"><a href="/product/select/${noti.product.productNum}">${noti.product.productName}</a></div>
 			<div class="noti__del"><a href="#" onclick="notiDelete(${noti.notiNum})">삭제</a></div>
 		</div>
-		<div>${noti.notiSendUser}님이 가격을 제안하셨어요! : ${noti.notiContent}원</div>			
+		<c:if test="${noti.notiFrom == false}">
+			<div>${noti.notiSendUser}님이 가격을 제안하셨어요! : ${noti.notiContent}원</div>			
+		</c:if>
+		<c:if test="${noti.notiFrom == true}">
+			<div class="notiContent">${noti.notiContent}</div>
+		</c:if>
 		<div class="noti__date">${noti.notiSendTime}</div>
 	</div>
 </c:forEach>
