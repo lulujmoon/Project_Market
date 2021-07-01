@@ -178,18 +178,18 @@ $(document).ready(function(){
  */
  function refreshChat(){
 	const currentRoom = document.querySelector('.selected');
-	if(currentRoom != null){
-		let roomNum = $(currentRoom).attr("room");
-		MessageContentList(roomNum);
-		
-		const sendUser = document.querySelector('.rcv__sendUser');
-		const otherUsers = document.querySelector('.other-user');
+	const sendUser = document.querySelector('.rcv__sendUser');
+	const otherUsers = document.querySelectorAll('.other-user');
+
+	if(sendUser != null){
 		for(let other of otherUsers){
 			if(sendUser.innerText == other.innerText){
-				sendUser.classList.add('selected');
+				other.parentNode.parentNode.classList.add('selected');
 			}
-		}
+		}		
+		let roomNum = $(currentRoom).attr("room");
+		MessageContentList(roomNum);
 	}
 }
 
-	setInterval(refreshChat, 3000);
+setInterval(refreshChat, 3000);

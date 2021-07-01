@@ -38,7 +38,7 @@ public class ReservationController {
 		int result = reservationService.setInsert(reservationVO);
 		System.out.println(result);
 		
-		return "redirect:/"; 
+		return "redirect:/product/select/"+reservationVO.getProductNum(); 
 	}
 	
 	@GetMapping("select")
