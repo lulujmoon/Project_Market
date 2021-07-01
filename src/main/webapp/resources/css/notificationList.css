@@ -53,10 +53,16 @@
 
 .noti__del{
 	border-bottom: 1px solid #e6e6e6;
+	margin-bottom: 15px;
 }
 
 .noti__del > a, .noti__date{
 	color: grey;
+}
+
+.noti__date{
+	font-size: 0.8rem;
+	padding-top: 15px;
 }
 
 .btn-accept{

@@ -17,9 +17,12 @@
 			<div class="noti__product-name"><a href="/product/select/${noti.product.productNum}">${noti.product.productName}</a></div>
 			<div class="noti__del"><a href="#" onclick="notiDelete(${noti.notiNum})">삭제</a></div>
 		</div>
-		<div>${noti.notiSendUser}님이 가격을 제안하셨어요! : ${noti.notiContent}원</div>			
-		<div class="noti__date">${noti.notiSendTime}</div>
-	</div>
+		<c:if test="${noti.notiFrom == true}">
+			<div>${noti.notiSendUser}님이 가격을 제안하셨어요! : ${noti.notiContent}원</div>			
+		</c:if>
+		<c:if test="${noti.notiFrom == false}">
+			<div class="noti-content">${noti.notiSendUser} 님으로부터 ${noti.notiContent}</div>
+		</c:if>
 </c:forEach>
 </body>
 </html>

@@ -10,7 +10,6 @@ function read(notiNum) {
 		data:{notiNum : notiNum},
 		success:function() {
 			console.log('성공');
-			document.location.reload(true);
 		}
 	});
 }
@@ -24,7 +23,6 @@ function notiDelete(notiNum) {
 			data:{notiNum : notiNum},
 			success:function() {
 				console.log("알림 삭제 완료");
-				location.reload();
 			}
 		});
 	}else {
