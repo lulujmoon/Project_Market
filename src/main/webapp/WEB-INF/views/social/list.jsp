@@ -52,42 +52,48 @@
 			</c:if>
 		</ul>
 	</div>
-	<div class="social-container">
-		<c:forEach items="${list}" var="social">
-			<div class="scl__card" onclick="goSocialSelect(${social.socialNum})">
-				<div class="scl__top-wrapper">
-					<div class="scl__title">${social.socialTitle}</div>
-					<div class="scl__date">${social.socialDate}</div>
+	<c:if test="${list[0].socialTitle != null}">
+		<div class="social-container">
+			<c:forEach items="${list}" var="social">
+				<div class="scl__card" onclick="goSocialSelect(${social.socialNum})">
+					<div class="scl__top-wrapper">
+						<div class="scl__title">${social.socialTitle}</div>
+						<div class="scl__date">${social.socialDate}</div>
+					</div>
+					<div class="scl__mid-wrapper">
+						<div class="scl__writer">${social.writer.name}</div>
+						<span>&middot;</span>
+						<div class="scl__location">${social.location.locationName}</div>
+						<span>&middot;</span>
+						<div class="scl__category">${social.socialCategory.categoryName}</div>
+					</div>
+					<div class="scl__content">${social.socialContent}</div>
+					<div class="scl__response">
+						<div class="scl__good"><i class="far fa-heart"></i> ${social.socialGood}</div>
+						<div class="scl__comment"><i class="far fa-comment-dots"></i> ${social.commentCount}</div>
+					</div>
 				</div>
-				<div class="scl__mid-wrapper">
-					<div class="scl__writer">${social.writer.name}</div>
-					<span>&middot;</span>
-					<div class="scl__location">${social.location.locationName}</div>
-					<span>&middot;</span>
-					<div class="scl__category">${social.socialCategory.categoryName}</div>
-				</div>
-				<div class="scl__content">${social.socialContent}</div>
-				<div class="scl__response">
-					<div class="scl__good"><i class="far fa-heart"></i> ${social.socialGood}</div>
-					<div class="scl__comment"><i class="far fa-comment-dots"></i> ${social.commentCount}</div>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
-	<ul class="page-container list-page">
-		<c:if test="${socialPager.pre}">
-			<li><a class="page-item arrow" href="./list?page=${socialPager.startNum-1}&kind=${socialPager.kind}&search=${socialPager.search}"><i class="fas fa-angle-double-left"></i></a></li>
-		</c:if>
-		<c:forEach begin="${socialPager.startNum}" end="${socialPager.lastNum}" var="i">
-			<li><a class="page-item code_${i}" href="./list?page=${i}&kind=${socialPager.kind}&search=${socialPager.search}">${i}</a></li>
-		</c:forEach>
-		<c:if test="${socialPager.next}">
-			<li class="page-item"><a class="page-item arrow" href="./list?page=${socialPager.lastNum+1}&kind=${socialPager.kind}&search=${socialPager.search}"><i class="fas fa-angle-double-left"></i></a></li>
-		</c:if>
-	</ul>
+			</c:forEach>
+		</div>
+		<ul class="page-container list-page">
+			<c:if test="${socialPager.pre}">
+				<li><a class="page-item arrow" href="./list?page=${socialPager.startNum-1}&kind=${socialPager.kind}&search=${socialPager.search}"><i class="fas fa-angle-double-left"></i></a></li>
+			</c:if>
+			<c:forEach begin="${socialPager.startNum}" end="${socialPager.lastNum}" var="i">
+				<li><a class="page-item code_${i}" href="./list?page=${i}&kind=${socialPager.kind}&search=${socialPager.search}">${i}</a></li>
+			</c:forEach>
+			<c:if test="${socialPager.next}">
+				<li class="page-item"><a class="page-item arrow" href="./list?page=${socialPager.lastNum+1}&kind=${socialPager.kind}&search=${socialPager.search}"><i class="fas fa-angle-double-left"></i></a></li>
+			</c:if>
+		</ul>
+	</c:if>
+	<c:if test="${list.size() == 0}">
+		<div class="zero-container">
+			조회된 글이 없습니다.
+		</div>
+	</c:if>
 </div>
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="/resources/js/common.js"></script>
 <script type="text/javascript" src="/resources/js/socialList.js"></script>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/store.css">
 <link rel="stylesheet" href="/resources/css/reviewCard.css" />
-<link rel="stylesheet" href="/resources/css/myReview.css" />
+<link rel="stylesheet" href="/resources/css/reviews.css" />
 <title>내 상점</title>
 </head>
 <body>
@@ -19,17 +19,17 @@
 	<c:import url="./storeCommon.jsp"></c:import>
 
 		<div class="board__contents">
+			<div class="type-container list-type">
+				<a class="type-content code_0" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1">전체</a>
+				<a class="type-content code_1" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1&type=1">판매자</a>
+				<a class="type-content code_2" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1&type=2">구매자</a>
+			</div>
 			<c:if test="${reviews.size() == 0}">
 				<div class="empty__info">
 					아직 받은 후기가 없습니다.
 				</div> 
 			</c:if>
 			<c:if test="${reviews.size() > 0}">
-			<div class="type-container list-type">
-				<a class="type-content code_0" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1">전체</a>
-				<a class="type-content code_1" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1&type=1">판매자</a>
-				<a class="type-content code_2" href="${pageContext.request.contextPath}/store/${member.code}/reviews?page=1&type=2">구매자</a>
-			</div>
 				<c:forEach items="${reviews}" var="review">
 					<div class="rv__card" onclick="manageContent()">
 						<div class="rv__info">
@@ -40,7 +40,7 @@
 							<div class="rv__date">
 								${review.reviewDate}
 							</div>
-						<div class="btn-del" onclick="location.href='/review/insert?productNum=${review.productNum}'">리뷰작성</div>
+						<div class="btn-add-review" onclick="location.href='/review/insert?productNum=${review.productNum}'">리뷰작성</div>
 						</div>
 						</div>
 						<div class="rv__rate">

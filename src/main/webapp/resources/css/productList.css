@@ -9,6 +9,12 @@
 	background-color: white;
 }
 
+.zero-container{
+	width: 100%;
+	padding-top: 70px;	
+	text-align: center;
+}
+
 .top__title{
 	width: 12%;
 }
