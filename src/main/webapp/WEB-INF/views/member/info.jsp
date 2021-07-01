@@ -102,7 +102,6 @@
 </div>
 
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="../resources/js/memberInfo.js"></script>
 </body>

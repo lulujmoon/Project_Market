@@ -64,7 +64,6 @@
 </div>	<!-- 스타팅 태그는 임포트한 부분에 포함되어 있음 -->
 
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="/resources/js/common.js"></script>
 <script type="text/javascript" src="/resources/js/store.js"></script>
 </body>
 </html>

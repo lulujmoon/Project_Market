@@ -125,12 +125,27 @@ function openReport(productNum){
 $(document).ready(function(){
 	var status = $("#productStatus").val();
 	$("#status").val(status);
-	
-	/*if(status == '판매완료') {
-		$(".btn-contact").attr("href","#");
-	}*/
-})
 
+	});
+
+/** @function manageStatus()
+ *	-- 상태변경 옵션을 보여주거나 숨긴다.
+ */
+ function manageStatus(){
+	const statusSelect = document.querySelector('.status-select');
+	statusSelect.classList.toggle('active');
+}
+
+/** @function submitStatus()
+ *	-- status-form을 제출한다.
+ */
+ function submitStatus(){
+	const inputStatus = document.querySelector('.input-status');
+	const btnSubmit = document.querySelector('.btn-status-submit');
+	let val = event.currentTarget.innerText;
+	inputStatus.value = val;
+	btnSubmit.click();
+}
 
 function deleteProduct(productNum) {
 	let con = confirm("삭제하시겠습니까?");
@@ -152,5 +167,14 @@ function deleteProduct(productNum) {
         }
 	}
 	
-
+/** @function suggestPrice(productNum, counterpart)
+ *	-- 가격 제안 팝업을 띄운다.
+ */
+function suggestPrice(productNum, counterpart){
+	window.open(
+		'/notification/nego?productNum='+productNum+'&notiRecvUser='+counterpart,
+		'',
+		'width=400, height=100, top=400, left=600, resizable'
+	);
+}
 

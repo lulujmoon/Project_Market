@@ -52,49 +52,42 @@
 			</div>
 			<div class="top__btns">
 				<c:if test="${principal.username eq product.username}">
-					<div class="dropdown"> 
-					<input type="hidden" id="productStatus" value="${product.productStatus}">
-					<form action="/product/setStatus?productNum=${product.productNum}" method="post">
-					<div class="form-group">
-						  <label for="sel1">상태 변경</label>
-						  <select class="form-control" id="status" name="productStatus" onchange="submit()">
-						    <option>판매 중</option>
-						    <option>예약 중</option>
-						    <option>판매완료</option>
-						  </select>
+					<div class="top-btn btn-status" onclick="manageStatus()">상태 변경</div>
+					<form action="/product/setStatus" method="post" class="status-form">
+						<input type="hidden" name="productNum" value="${product.productNum}">
+						<input type="hidden" class="input-status" name = "productStatus"/>
+						<div class="status-select">
+							<div class="status-option" onclick="submitStatus()">판매 중</div>
+							<div class="status-option" onclick="submitStatus()">예약 중</div>
+							<div class="status-option" onclick="submitStatus()">판매완료</div>
 						</div>
-						</form>
-					</div>
-					
+						<button class="hidden btn-status-submit"></button>
+					</form>
 					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
 					<a class="top-btn btn-contact" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
 
 					<a class="top-btn btn-del" onclick="deleteProduct('${product.productNum}')">삭제하기</a>
 				</c:if>
-				
-				
-				<c:if test="${principal.username != product.username}">
-				<c:if test="${product.productStatus != '판매완료'}"> 
+				<c:if test="${product.productStatus != '판매완료' && principal.username != product.username}">
 					<c:if test="${chat ne 0}">
 						<div class="top-btn btn-contact"><a type="button" href="/chat/chatList" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
 					</c:if>
 					<c:if test="${chat eq 0}">
-						<div class="top-btn btn-contact"><a class="msg_send_btn" type="button" href="/chat/chatSendInList?room=0&otherUser=${seller.username}&content=※${principal.username}님이 ${product.productName}을 구매하고 싶어해요!" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
-					</c:if>
+						<div class="top-btn btn-contact"><a class="msg_send_btn" type="button" href="/chat/chatSendInList?room=0&otherUser=${seller.username}&productNum=${product.productNum}&content=※${principal.username}님이 ${product.productName}을 구매하고 싶어해요!" onclick="if(confirm('연락하시겠습니까?')==false){return false;}">연락하기</a></div>
+					</c:if>																	   
 					<c:if test="${product.productNego == true}">
-						<div class="top-btn btn-nego"><a href="/notification/nego?productNum=${product.productNum}&notiRecvUser=${seller.username}">가격 제안하기</a></div>
+						<div class="top-btn btn-nego" onclick="suggestPrice(${product.productNum}, '${seller.username}')">가격 제안하기</a></div>
 					</c:if>
 					<c:if test="${product.productNego == false}">
 						<div class="top-btn btn-nego">가격 제안 불가</div>
 					</c:if>
 					<div class="btn-heart"></div>
 					<div class="btn-report" onclick="openReport('${product.productNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</div>
-				</c:if> 
+				</c:if>
+				<c:if test="${product.productStatus == '판매완료' && principal.username != product.username}">
+					<div class="top-btn btn-sold">판매완료</div>
 				</c:if>
 			</div>
-			<c:if test="${principal.username eq product.username}">
-
-			</c:if>
 			<div class="hidden">
 				<input type="hidden" class="heartValue" value="${heart}">
 				<input type="hidden" class="productNum" value="${product.productNum}">
@@ -124,8 +117,6 @@
 </div>
 
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="/resources/js/common.js"></script>
-<script type="text/javascript" src="/resources/js/functions.js"></script>
 <script type="text/javascript" src="/resources/js/productSelect.js"></script>
 </body>
 </html>
