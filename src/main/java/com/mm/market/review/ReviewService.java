@@ -45,4 +45,8 @@ public class ReviewService {
 	public int setDelete(ReviewVO reviewVO) throws Exception {
 		return reviewMapper.setDelete(reviewVO);
 	}
+	
+	public List<ReviewVO>getListByReview(ReviewVO reviewVO) throws Exception {
+		return reviewMapper.getListByReview(reviewVO);
+	}
 }

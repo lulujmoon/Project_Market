@@ -8,6 +8,7 @@
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/store.css">
 <link rel="stylesheet" href="/resources/css/reviewCard.css" />
+<link rel="stylesheet" href="/resources/css/myReview.css" />
 <title>내 상점</title>
 </head>
 <body>
@@ -35,9 +36,12 @@
 							<div class="rv__product" onclick="showProduct(${review.product.productNum})">
 								${review.product.productName}&nbsp;&nbsp;<i class="fas fa-external-link-alt"></i> 
 							</div>
+							<div class="right-wrapper">
 							<div class="rv__date">
 								${review.reviewDate}
 							</div>
+						<div class="btn-del" onclick="location.href='/review/insert?productNum=${review.productNum}'">리뷰작성</div>
+						</div>
 						</div>
 						<div class="rv__rate">
 							<c:if test="${review.type != 1}">
@@ -53,6 +57,8 @@
 							${review.reviewContent}
 						</div>
 						<div class="rv__more active">... 더 보기</div>
+					</div>
+					<div>
 					</div>
 				</c:forEach>
 				<ul class="page-container list-page">

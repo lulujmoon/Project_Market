@@ -16,5 +16,9 @@
 	<select id="getSelect" parameterType="ReservationVO" resultType="ReservationVO">
 		select * from reservation where productNum=#{productNum}
 	</select>
+	
+	<delete id="setDelete" parameterType="ReservationVO">
+		delete from reservation where productNum=#{productNum}
+	</delete>
 
 </mapper>

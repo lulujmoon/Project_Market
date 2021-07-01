@@ -18,4 +18,8 @@ public class ReservationService {
 	public int setInsert(ReservationVO reservationVO) throws Exception{
 		return reservationMapper.setInsert(reservationVO);
 	}
+	
+	public int setDelete(ReservationVO reservationVO) throws Exception{
+		return reservationMapper.setDelete(reservationVO);
+	}
 }

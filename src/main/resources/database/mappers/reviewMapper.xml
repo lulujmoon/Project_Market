@@ -83,5 +83,11 @@
 	<delete id="setDelete" parameterType="ReviewVO">
 		delete from review where reviewNum=#{reviewNum}
 	</delete>
+	
+	<select id="getListByReview" parameterType="ReviewVO" resultType="ReviewVO">
+		select * from review where reviewNum=#{reviewNum}
+	</select>
+	
+
 
 </mapper>
