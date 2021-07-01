@@ -82,13 +82,18 @@ public class ReviewController {
 	@PostMapping("insert")
 	public String setInsert(ReviewVO reviewVO, Authentication authentication) throws Exception {
 		MemberVO memberVO = (MemberVO)authentication.getPrincipal();
-		reviewVO.setReviewer(memberVO.getUsername());
-		
+		reviewVO.setReviewer(memberVO.getUsername());		
 		reviewService.setInsert(reviewVO);
 		
-		List<ReviewVO> reviewList = reviewService.getListByReview(reviewVO);
+		System.out.println("인서트한 리뷰vo"+reviewVO.getProductNum());
+		
+		List<ReviewVO> reviewList =reviewService.getListByReview(reviewVO);
+		
+		System.out.println("리스트뽑은 넘버"+reviewList.get(0).getProductNum()); 
+		
 		ReservationVO reservationVO = new ReservationVO();
 		reservationVO.setProductNum(reviewVO.getProductNum());
+		
 		if(reviewList.size()>1) {
 			reservationService.setDelete(reservationVO);
 		}

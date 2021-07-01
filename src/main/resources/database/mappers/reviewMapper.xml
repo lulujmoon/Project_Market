@@ -85,7 +85,7 @@
 	</delete>
 	
 	<select id="getListByReview" parameterType="ReviewVO" resultType="ReviewVO">
-		select * from review where reviewNum=#{reviewNum}
+		select * from review where productNum=#{productNum}
 	</select>
 	
 
