@@ -43,23 +43,10 @@ public class ReservationController {
 	}
 	
 	@GetMapping("select")
-	public ModelAndView getSelect(ReservationVO reservationVO,Long productNum)throws Exception{
+	public void getSelect(ReservationVO reservationVO)throws Exception{
 		
-		ModelAndView mv = new ModelAndView();
-		reservationVO.setProductNum(productNum);
-		reservationVO =reservationService.getSelect(reservationVO);
-		int result=0;
+		reservationVO = reservationService.getSelect(reservationVO);
 		
-		if(reservationVO!=null) {
-		
-		result=1;
-		mv.addObject("result",result);
-		}else{
-			mv.addObject("result",result);	
-		}
-		mv.setViewName("common/ajaxResult");
-		
-		return mv;	
 	}
 	
 }
