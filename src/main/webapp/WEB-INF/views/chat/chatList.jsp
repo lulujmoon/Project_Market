@@ -14,6 +14,9 @@
 <body>
 <c:import url="../template/header.jsp"></c:import>
 <div class="container">
+<div class="hidden product-num">${productNum}</div>
+<div class="hidden location-code">${locationCode}</div>
+<div class="hidden seller-name">${sellerName}</div>
 	<div class="inbox_msg">
 		<div class="inbox_people">
 				<div class="recent_heading">
@@ -31,8 +34,8 @@
 		</div>
 	</div>   
 </div>
+<div class="hidden hidden-message"></div>
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
 <script type="text/javascript" src="../resources/js/chatList.js"></script>
 </body>
 </html>

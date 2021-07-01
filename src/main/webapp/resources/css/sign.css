@@ -85,6 +85,9 @@
 	color: white;
 }
 
+.message{
+	color: red;
+}
 
 .btn-wrapper{
 	padding: 0 18px;

@@ -1,14 +1,10 @@
-/**
- * 
- */
- 
- 
- 
+
+
 /* 로고 */
 var nav__logo = document.querySelector(".nav__logo");
 nav__logo.addEventListener("click", function(){
 	location.href = "/";
-})
+});
 
 /* 사이드 메뉴 토글 */
 var toggle_btn = document.querySelector("#toggle-btn");

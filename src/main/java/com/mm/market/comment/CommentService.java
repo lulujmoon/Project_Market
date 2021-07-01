@@ -36,13 +36,13 @@ public class CommentService {
 	public int setReply(CommentVO commentVO) throws Exception{
 		//부모 글의 ref, step, depth 조회
 		CommentVO parent = commentMapper.getSelect(commentVO);
+		int result = commentMapper.setReplyUpdate(parent);
 		
 		commentVO.setSocialNum(parent.getSocialNum());
 		commentVO.setRef(parent.getRef());
 		commentVO.setStep(parent.getStep()+1);
 		commentVO.setDepth(parent.getDepth()+1);
 		
-		int result = commentMapper.setReplyUpdate(parent);
 		result = commentMapper.setReply(commentVO);
 		
 		return result;

@@ -7,6 +7,7 @@
 <c:import url="./template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/home.css">
 <link rel="stylesheet" href="/resources/css/productCard.css">
+<link rel="stylesheet" href="/resources/css/socialCard.css" />
 <title>레몬 마켓</title>
 </head>
 <body>
@@ -35,7 +36,7 @@
 			</div>
 			<div class="section-contents">
 				<c:forEach var="i" begin="0" end="7">
-					<div class="prd__card" onclick="goSelect(${products[i].productNum})">
+					<div class="prd__card" onclick="goProductSelect(${products[i].productNum})">
 						<c:if test="${products[i].files[0].fileName != null}">
 							<img class="card__img" src="/resources/upload/product/${products[i].files[0].fileName}">
 							<input type="hidden" id="category" value="${product[i].categoryCode}">
@@ -57,18 +58,34 @@
 		<section class="social-container">
 			<div class="section-title">
 				<h2>새로 올라온 글</h2>
-				<a href="#">더 보기</a>
+				<a href="${pageContext.request.contextPath}/social/list">더 보기</a>
 			</div>
 			<div class="section-contents">
-				<div class="soc__article"></div>
-				<div class="soc__article"></div>
-				<div class="soc__article"></div>
+				<c:forEach var="i" begin="0" end="2">
+			<div class="scl__card" onclick="goSocialSelect(${socials[i].socialNum})">
+				<div class="scl__top-wrapper">
+					<div class="scl__title">${socials[i].socialTitle}</div>
+					<div class="scl__date">${socials[i].socialDate}</div>
+				</div>
+				<div class="scl__mid-wrapper">
+					<div class="scl__writer">${socials[i].writer.name}</div>
+					<span>&middot;</span>
+					<div class="scl__location">${socials[i].location.locationName}</div>
+					<span>&middot;</span>
+					<div class="scl__category">${socials[i].socialCategory.categoryName}</div>
+				</div>
+				<div class="scl__content">${socials[i].socialContent}</div>
+				<div class="scl__response">
+					<div class="scl__good"><i class="far fa-heart"></i> ${socials[i].socialGood}</div>
+					<div class="scl__comment"><i class="far fa-comment-dots"></i> ${socials[i].commentCount}</div>
+				</div>
+			</div>					
+				</c:forEach>
 			</div>
 		</section>
 	</div>
 
 <c:import url="./template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
 <script type="text/javascript" src="../resources/js/home.js"></script>
 </body>
 </html>

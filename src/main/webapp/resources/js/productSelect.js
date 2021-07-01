@@ -98,7 +98,7 @@ if(btnHeart!=null){
 }
 		
 function heart_reload() {
-	$("#heart").load(window.location.href='/product/select/'+productNum);
+	document.location.reload(true);
 }
 
 function submit() {
@@ -122,9 +122,59 @@ function openReport(productNum){
 		"width=500,height=600,resizable,scrollbars=yes,left=1300,top=150");
 }
 
-/**
- */
 $(document).ready(function(){
-   var status = $("#productStatus").val();
-   $("#status").val(status);
-});
+	var status = $("#productStatus").val();
+	$("#status").val(status);
+
+	});
+
+/** @function manageStatus()
+ *	-- 상태변경 옵션을 보여주거나 숨긴다.
+ */
+ function manageStatus(){
+	const statusSelect = document.querySelector('.status-select');
+	statusSelect.classList.toggle('active');
+}
+
+/** @function submitStatus()
+ *	-- status-form을 제출한다.
+ */
+ function submitStatus(){
+	const inputStatus = document.querySelector('.input-status');
+	const btnSubmit = document.querySelector('.btn-status-submit');
+	let val = event.currentTarget.innerText;
+	inputStatus.value = val;
+	btnSubmit.click();
+}
+
+function deleteProduct(productNum) {
+	let con = confirm("삭제하시겠습니까?");
+	if(con) {
+        const deleteForm = document.createElement('form');
+		deleteForm.action = './delete';
+		deleteForm.method = 'post';
+		
+		const inputNum = document.createElement('input');
+		inputNum.type = 'hidden';
+		inputNum.name = 'productNum';
+		inputNum.value = productNum;
+		
+		deleteForm.appendChild(inputNum);
+		document.body.appendChild(deleteForm);
+		
+		deleteForm.submit();
+    
+        }
+	}
+	
+/** @function suggestPrice(productNum, counterpart)
+ *	-- 가격 제안 팝업을 띄운다.
+ */
+function suggestPrice(productNum, counterpart){
+	window.open(
+		'/notification/nego?productNum='+productNum+'&notiRecvUser='+counterpart,
+		'',
+		'width=400, height=100, top=400, left=600, resizable'
+	);
+}
+

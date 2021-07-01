@@ -74,6 +74,7 @@ function openSocialReport(socialNum){
 		const replyNum = document.createElement('input');
 		const replyBtn = document.createElement('button');
 		replyContent.name = 'commentContent';
+		replyContent.required = 'required';
 		replyContent.classList.add('comment__content');
 		replyNum.type = 'hidden';
 		replyNum.name = 'commentNum';
@@ -87,6 +88,38 @@ function openSocialReport(socialNum){
 		
 		target.appendChild(replyForm);		
 	}
+}
+
+/** @function manageCommentEdit(commentNum)
+ *	-- comment 수정 폼을 생성하고 삭제한다.
+ */
+ function manageCommentEdit(commentNum){
+	const target = event.currentTarget.parentNode.parentNode.nextElementSibling;
+	
+	const editForm = document.createElement('form');
+	editForm.action = '../comment/update';
+	editForm.method = 'post';
+	editForm.classList.add('edit-form');
+	const editContent = document.createElement('textarea');
+	editContent.name = 'commentContent';
+	editContent.value = target.innerText;
+	editContent.classList.add('comment__content');
+	editContent.style.width = '898px';
+	const editNum = document.createElement('input');
+	editNum.type = 'hidden';
+	editNum.name = 'commentNum';
+	editNum.value = commentNum;	
+	const editBtn = document.createElement('button');
+	editBtn.innerText = '수정';
+	editBtn.classList.add('btn-submit');
+	editBtn.style.width = '920px';
+	
+	editForm.appendChild(editContent);
+	editForm.appendChild(editNum);
+	editForm.appendChild(editBtn);
+	
+	target.innerHTML = "";
+	target.appendChild(editForm);
 }
 
 /** 초기설정 1. 날짜 표시

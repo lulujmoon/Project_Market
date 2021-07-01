@@ -88,7 +88,7 @@ public class SocialController {
 			
 			Long good = socialService.getGood(goodVO);
 			
-			mv.addObject("good", good);			
+			mv.addObject("good", good);
 		}
 
 		List<CommentVO> commentList = commentService.getList(commentVO);

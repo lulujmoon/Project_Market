@@ -27,6 +27,9 @@
 					<label for="password">Password</label><br> 
 					<input type="password" class="form-control" id="password" name="password">
 				</div>
+				<div class="form-group">
+				<small class="message">${message}</small>
+				</div>
 				<div class="btn-wrapper">
 					<button type="submit" class="btn-wide btn-submit">Login</button>
 				</div>
@@ -42,7 +45,6 @@
 	</div>
 	
 <c:import url="../template/footer.jsp"></c:import>
-<script type="text/javascript" src="../resources/js/common.js"></script>
 <script type="text/javascript" src="../resources/js/login.js"></script>
 </body>
 </html>

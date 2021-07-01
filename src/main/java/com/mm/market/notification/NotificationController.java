@@ -43,7 +43,7 @@ public class NotificationController {
 		request.setAttribute("unread", unread);
 		request.setAttribute("list", list);
 		
-		return "notification/list";
+		return "notification/ajaxList";
 	}
 	
 	@PostMapping("readChk")
