@@ -125,7 +125,26 @@ function openReport(productNum){
 $(document).ready(function(){
 	var status =$("#productState").val();
 	$("#status").val(status);
-	})
+	});
+
+/** @function manageStatus()
+ *	-- 상태변경 옵션을 보여주거나 숨긴다.
+ */
+ function manageStatus(){
+	const statusSelect = document.querySelector('.status-select');
+	statusSelect.classList.toggle('active');
+}
+
+/** @function submitStatus()
+ *	-- status-form을 제출한다.
+ */
+ function submitStatus(){
+	const inputStatus = document.querySelector('.input-status');
+	const btnSubmit = document.querySelector('.btn-status-submit');
+	let val = event.currentTarget.innerText;
+	inputStatus.value = val;
+	btnSubmit.click();
+}
 
 
 /* 예약중인상품

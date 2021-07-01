@@ -52,17 +52,17 @@
 			</div>
 			<div class="top__btns">
 				<c:if test="${principal.username eq product.username}">
-						<form action="/product/setStatus" method="post">
-							<input type="hidden" name="productNum" value="${product.productNum}"/>
-							<div class="form-group">
-						 	 <label for="sel1">상태 변경</label>
-							  <select class="form-control" id="status" name="productStatus" onchange="submit()">
-						 	   <option value="판매 중">판매 중</option>
-						 	   <option value="예약 중">예약 중</option>
-						 	   <option value="판매완료">판매완료</option>
-						 	 </select>
+					<div class="top-btn btn-status" onclick="manageStatus()">상태 변경</div>
+					<form action="/product/setStatus" method="post" class="status-form">
+						<input type="hidden" name="productNum" value="${product.productNum}">
+						<input type="hidden" class="input-status" name = "productStatus"/>
+						<div class="status-select">
+							<div class="status-option" onclick="submitStatus()">판매 중</div>
+							<div class="status-option" onclick="submitStatus()">예약 중</div>
+							<div class="status-option" onclick="submitStatus()">판매완료</div>
 						</div>
-						</form>	
+						<button class="hidden btn-status-submit"></button>
+					</form>
 					<a class="top-btn btn-edit" href="../update/${product.productNum}">수정하기</a>
 					<a class="top-btn btn-rewrite" href="/product/rewrite?productNum=${product.productNum}">끌올하기</a>
 					<a class="top-btn btn-del" onclick="deleteProduct('${product.productNum}')">삭제하기</a>

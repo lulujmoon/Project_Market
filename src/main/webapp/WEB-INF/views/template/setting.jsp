@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="/resources/css/common.css">
+<link rel="stylesheet" href="/resources/css/notificationList.css" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
 <link rel="shortcut icon" href="/resources/favicon.ico" type="image/x-icon">
