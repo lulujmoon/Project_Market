@@ -25,6 +25,8 @@ import com.mm.market.member.MemberService;
 import com.mm.market.member.MemberVO;
 import com.mm.market.memberLocation.MemberLocationService;
 import com.mm.market.memberLocation.MemberLocationVO;
+import com.mm.market.reservation.ReservationService;
+import com.mm.market.reservation.ReservationVO;
 import com.mm.market.review.ReviewService;
 import com.mm.market.review.ReviewVO;
 import com.mm.market.util.ProductPager;
@@ -50,6 +52,9 @@ public class ProductController {
 	
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private ReservationService reservationService;
 
 	@GetMapping("list")
 	public String getList(ProductPager productPager, Long myLocation, Authentication authentication, Model model) throws Exception {
@@ -340,6 +345,7 @@ public class ProductController {
 	public String setStatus(ProductVO productVO)throws Exception{
 		productService.setStatus(productVO);
 		productVO=productService.getSelect(productVO);
+		
 		String url ="";
 		
 		String status = productVO.getProductStatus();
@@ -349,6 +355,11 @@ public class ProductController {
 		}else if(status.equals("판매완료")) {
 			url = "redirect:/review/insert?productNum="+productVO.getProductNum();
 		}else if(status.equals("판매 중")) {
+			ReservationVO reservationVO = new ReservationVO();
+			reservationVO.setProductNum(productVO.getProductNum());
+			if(reservationService.getSelect(reservationVO)!=null) {
+				reservationService.setDelete(reservationVO);
+			}
 			url = "redirect:select/"+productVO.getProductNum();
 		}
 		
