@@ -180,13 +180,13 @@ $(document).ready(function(){
 		MessageContentList(roomNum);
 		
 		const sendUser = document.querySelector('.rcv__sendUser');
-		const otherUsers = document.querySelector('.other-user');
+		const otherUsers = document.querySelectorAll('.other-user');
 		for(let other of otherUsers){
 			if(sendUser.innerText == other.innerText){
-				sendUser.classList.add('selected');
+				other.classList.add('selected');
 			}
 		}
 	}
 }
 
-	setInterval(refreshChat, 3000);
+setInterval(refreshChat, 3000);

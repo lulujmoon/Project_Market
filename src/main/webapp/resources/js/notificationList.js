@@ -9,8 +9,6 @@ function read(notiNum) {
 		method:"POST",	
 		data:{notiNum : notiNum},
 		success:function() {
-			console.log('성공');
-			document.location.reload(true);
 		}
 	});
 }
@@ -24,7 +22,7 @@ function notiDelete(notiNum) {
 			data:{notiNum : notiNum},
 			success:function() {
 				console.log("알림 삭제 완료");
-				window.location.replace("/notification/list");
+				location.reload();
 			}
 		});
 	}else {
@@ -72,9 +70,14 @@ function setClick(){
 		let user = notiCard.querySelector('.user');
 		let product = notiCard.querySelector('.product');
 		let productNum = notiCard.querySelector('.productNum');
+		let notiContent = notiCard.querySelector('.noti-content');
 		notiCard.addEventListener('click', ()=>{
 			read(notiNum);
-			acceptPrice(counterpart, user, product, productNum);
+			if(notiContent == null){
+				acceptPrice(counterpart, user, product, productNum);				
+			}else{
+				location.href = '/chat/chatList';
+			}
 		});
 	}	
 }

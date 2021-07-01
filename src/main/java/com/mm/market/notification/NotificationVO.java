@@ -14,6 +14,7 @@ public class NotificationVO {
 	private String notiContent;
 	private String notiReadChk; // 1: 읽지않음, 0: 읽음
 	private String productNum;
+	private boolean notiFrom;
 	
 	private int unread;
 	private String username;
