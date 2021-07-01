@@ -51,33 +51,39 @@
 <!-- 사이드 메뉴 -->
 <div class="side side-menu">
 	<div class="side__user">
-		<h3>
 			<sec:authorize access="isAnonymous()">
+			<h3>
 				<a href="${pageContext.request.contextPath}/member/login"><i class="fas fa-unlock-alt"></i> 로그인</a>
+			</h3>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-				<a href="${pageContext.request.contextPath}/member/logout"><sec:authentication property="principal.name"/> 님</a>
+			<h3>
+				<sec:authentication property="principal.name"/> 님
+			</h3>
+		<ul>
+			<li><a href="/member/info">내 정보</a></li>
+			<li><a href="/store/<sec:authentication property="principal.code"/>/products">내 상점</a></li>
+			<li><a href="/member/logout">로그아웃</a></li>
+		</ul>
 			</sec:authorize>
-		</h3>
 	</div>
 	<div class="side__categories">
 		<h3>카테고리</h3>
 		<ul>
-			<li><a href="#">디지털/가전</a></li>
-			<li><a href="#">가구/인테리어</a></li>
-			<li><a href="#">유아동/유아도서</a></li>
-			<li><a href="#">생활/가공식품</a></li>
-			<li><a href="#">스포츠/레저</a></li>
-			<li><a href="#">여성잡화</a></li>
-			<li><a href="#">여성의류</a></li>
-			<li><a href="#">남성패션/잡화</a></li>
-			<li><a href="#">게임/취미</a></li>
-			<li><a href="#">뷰티/미용</a></li>
-			<li><a href="#">반려동물용품</a></li>
-			<li><a href="#">도서/티켓/음반</a></li>
-			<li><a href="#">식물</a></li>
-			<li><a href="#">기타 중고물품</a></li>	
-			<li><a href="#">삽니다</a></li>			
+			<li><a href="/product/list?page=1&categoryCode=1">디지털/가전</a></li>
+			<li><a href="/product/list?page=1&categoryCode=2">가구/인테리어</a></li>
+			<li><a href="/product/list?page=1&categoryCode=3">유아동/유아도서</a></li>
+			<li><a href="/product/list?page=1&categoryCode=4">생활/가공식품</a></li>
+			<li><a href="/product/list?page=1&categoryCode=5">스포츠/레저</a></li>
+			<li><a href="/product/list?page=1&categoryCode=6">여성잡화</a></li>
+			<li><a href="/product/list?page=1&categoryCode=7">여성의류</a></li>
+			<li><a href="/product/list?page=1&categoryCode=8">남성의류</a></li>
+			<li><a href="/product/list?page=1&categoryCode=9">남성잡화</a></li>
+			<li><a href="/product/list?page=1&categoryCode=10">게임/취미</a></li>
+			<li><a href="/product/list?page=1&categoryCode=11">뷰티/미용</a></li>
+			<li><a href="/product/list?page=1&categoryCode=12">반려동물용품</a></li>
+			<li><a href="/product/list?page=1&categoryCode=13">도서/티켓/음반</a></li>
+			<li><a href="/product/list?page=1&categoryCode=14">삽니다</a></li>			
 		</ul>
 	</div>
 	<div class="side__socials">
@@ -91,6 +97,12 @@
 			<li><a href="#">취미생활</a></li>
 			<li><a href="#">고양이</a></li>
 			<li><a href="3">강아지</a></li>				
+		</ul>
+	</div>
+	<div class="side__services">
+		<h3>서비스</h3>
+		<ul>
+			<li><a href="/notice/list">공지사항</a></li>
 		</ul>
 	</div>
 </div>

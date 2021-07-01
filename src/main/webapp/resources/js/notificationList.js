@@ -9,6 +9,7 @@ function read(notiNum) {
 		method:"POST",	
 		data:{notiNum : notiNum},
 		success:function() {
+			console.log('성공');
 			document.location.reload(true);
 		}
 	});

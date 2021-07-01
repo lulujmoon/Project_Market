@@ -10,6 +10,5 @@ nav__logo.addEventListener("click", function(){
 var toggle_btn = document.querySelector("#toggle-btn");
 var side_menu = document.querySelector(".side-menu");
 toggle_btn.addEventListener("click", function(){
-	console.log('hi');
 	side_menu.classList.toggle("active");
 });

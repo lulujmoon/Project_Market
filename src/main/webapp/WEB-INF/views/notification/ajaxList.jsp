@@ -7,7 +7,7 @@
 </sec:authorize>
 
 <c:forEach items="${list}" var="noti">
-	<div class="noti__card <c:if test="${noti.notiReadChk == true}">read</c:if>">
+	<div class="noti__card <c:if test="${noti.notiReadChk == 1}">read</c:if>">
 		<div class="hidden notiNum">${noti.notiNum}</div>
 		<div class="hidden counterpart">${noti.notiSendUser}</div>
 		<div class="hidden user">${principal.username}</div>
