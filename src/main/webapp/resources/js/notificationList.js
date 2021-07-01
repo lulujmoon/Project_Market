@@ -24,7 +24,7 @@ function notiDelete(notiNum) {
 			data:{notiNum : notiNum},
 			success:function() {
 				console.log("알림 삭제 완료");
-				window.location.replace("/notification/list");
+				location.reload();
 			}
 		});
 	}else {
@@ -35,10 +35,10 @@ function notiDelete(notiNum) {
 /** @function acceptPrice()
  *	--가격제안 수락 확인 후 페이지로 이동한다.
  */
-function acceptPrice(counterpart, user, productName){
+function acceptPrice(counterpart, user, productName, productNum){
 	let conf = confirm('가격 제안을 수락하시겠어요?');
 	if(conf){
-		location.href = '/chat/chatSendInList?room=0&otherUser='+counterpart+'&content=※'+user+'님이 '+productName+' 상품의 가격제안을 수락하셨습니다.';
+		location.href = '/chat/chatSendInList?room=0&otherUser='+counterpart+'&content=※'+user+'님이 '+productName+' 상품의 가격제안을 수락하셨습니다.&productNum='+productNum;
 	}
 }
 
