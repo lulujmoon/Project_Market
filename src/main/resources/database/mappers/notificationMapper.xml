@@ -30,6 +30,7 @@
 		<result property="notiContent" column="notiContent"/>
 		<result property="notiReadChk" column="notiReadChk"/>
 		<result property="productNum" column="productNum"/>
+		<result property="notiFrom" column="notiFrom"/>
 		<association property="product" javaType="ProductVO">
 			<id property="productNum" column="productNum"/>
 			<result property="productName" column="productName"/>
