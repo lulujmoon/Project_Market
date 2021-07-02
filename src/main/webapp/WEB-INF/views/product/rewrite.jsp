@@ -21,7 +21,7 @@
 	<div class="title-container">
 		상품 정보 수정
 	</div>
-	<form action="./update" method="POST" enctype="multipart/form-data" id="upload-form">
+	<form action="./rewrite" method="POST" enctype="multipart/form-data" id="upload-form">
 		<input type="hidden" name="username" value="${principal.username}">
 		<input type="hidden" name="productNum" value="${product.productNum}">
 		<div class="form-group">
