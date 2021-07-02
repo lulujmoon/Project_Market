@@ -21,7 +21,7 @@
 	<div class="title-container">
 		상품 정보 수정
 	</div>
-	<form action="./rewrite" method="POST" enctype="multipart/form-data" id="upload-form">
+	<form action="./update" method="POST" enctype="multipart/form-data" id="upload-form">
 		<input type="hidden" name="username" value="${principal.username}">
 		<input type="hidden" name="productNum" value="${product.productNum}">
 		<div class="form-group">
@@ -51,6 +51,23 @@
 			<div class="form-title">상품명</div>
 			<input type="text" name="productName" class="form-content" value="${product.productName}" required placeholder="상품명을 입력해주세요.">				
 		</div>
+		<div class="form-group">
+			<div class="form-title">지역</div>
+			<div class="form-content form-content-select">
+				<select class="form-select" id="locationCode" name="locationCode">
+					<c:forEach items="${locations}" var="location">
+				   <option value="${location.locationCode}"
+				   	<c:if test="${location.locationCode == product.locationCode}">selected</c:if>
+				   >${location.locationName}</option>
+				  </c:forEach>
+				</select>
+				<i class="fas fa-sort-down"></i>
+			</div>
+			<div class="form-info">
+				내 지역으로 저장한 지역을 선택할 수 있습니다.
+				<a href="${pageContext.request.contextPath}/member/info">내 지역 설정&nbsp;&nbsp;<i class="fas fa-chevron-right"></i></i></a>
+			</div>
+		</div>		
 		<div class="form-group">		
 			<div class="form-title">카테고리</div>
 			<div class="form-content form-content-select">
@@ -73,21 +90,14 @@
 		</div>
 		<div class="form-group">
 			<div class="form-title">가격</div>
-			<input type="text" name="productPrice" class="product-price form-content" value="${product.productPrice}" required placeholder="숫자만 입력해주세요.">
-		</div>
-		<div class="form-group">
-			<div class="form-title">지역</div>
-			<div class="form-content form-content-select">
-				<select class="form-select" id="locationCode" name="locationCode">
-					<c:forEach items="${locations}" var="location">
-				   <option value="${location.locationCode}"
-				   	<c:if test="${location.locationCode == product.locationCode}">selected</c:if>
-				   >${location.locationName}</option>
-				  </c:forEach>
-				</select>
-				<i class="fas fa-sort-down"></i>
-			</div>
-			<div class="form-info">내 지역으로 저장한 지역을 선택할 수 있습니다.</div>
+			<input type="text" name="productPrice" class="product-price form-content" value="${product.productPrice}" required placeholder="무료나눔은 0을 입력하세요.">
+			<div class="form-title">가격 제안</div>
+				<input type="radio" name="productNego" value="1" id="nego-enabled"
+				  <c:if test="${product.productNego==true}">checked</c:if>
+				>&nbsp;<label for="nego-enabled">가능</label>&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="productNego" value="0" id="nego-disabled"
+					<c:if test="${product.productNego==false}">checked</c:if>
+				>&nbsp;<label for="nego-disabled">불가</label>
 		</div>
 		<div class="btn-wrapper">
 			<input type="button" class="btn-presubmit" value="등록">

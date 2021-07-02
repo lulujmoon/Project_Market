@@ -202,4 +202,4 @@ $(document).ready(function(){
 	}
 }
 
-setInterval(refreshChat, 1000);
+setInterval(refreshChat, 500);
