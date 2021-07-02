@@ -16,7 +16,7 @@
 			<table>
 				<tr>
 					<td>김지윤</td>
-					<td class="td-right"><a href="https://github.com/fly5824">https://github.com/fly5824</a></td>
+					<td><a href="https://github.com/fly5824">https://github.com/fly5824</a></td>
 				</tr>
 				<tr>
 					<td>김지혜</td>

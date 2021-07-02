@@ -144,11 +144,11 @@ public class MemberController {
 	}
 	
 	@PostMapping("join")
-	public String setJoin(@Valid MemberVO memberVO,Errors errors,ModelAndView mv,MultipartFile avatar)throws Exception{
+	public String setJoin(@Valid MemberVO memberVO, Errors errors, Model model, MultipartFile avatar) throws Exception{
 		System.out.println("Join process"+ memberVO.getName().length());
 
 		  if(memberService.memberError(memberVO, errors)) { 
-			  
+			  model.addAttribute("checked", "checked");
 		  return"member/join"; 
 		  
 		  }

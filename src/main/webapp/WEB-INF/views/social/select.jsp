@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/socialSelect.css" />
-<title>우리동네</title>
+<title>${social.socialTitle}</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>

@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/sign.css">
-<title>Join</title>
+<title>회원가입</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>

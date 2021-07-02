@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="../resources/css/sign.css">
-<title>Login</title>
+<title>로그인</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
