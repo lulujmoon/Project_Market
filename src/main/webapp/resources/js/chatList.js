@@ -177,14 +177,18 @@ $(document).ready(function(){
  *	-- 3초마다 현재 채팅방의 채팅을 새로 가져온다.
  */
  function refreshChat(){
-	const currentRoom = document.querySelector('.selected');
-	const sendUser = document.querySelector('.rcv__sendUser');
+	let currentRoom = document.querySelector('.selected');
+	let sendUser = document.querySelector('.rcv__sendUser');
 	const otherUsers = document.querySelectorAll('.other-user');
 
 	if(sendUser != null){
 		for(let other of otherUsers){
+			let	notSelected = other.parentNode.parentNode;
+			notSelected.classList.remove('selected');
 			if(sendUser.innerText == other.innerText){
-				other.parentNode.parentNode.classList.add('selected');
+				let selected = other.parentNode.parentNode;
+				selected.classList.add('selected');
+				currentRoom = selected;
 			}
 		}		
 		let roomNum = $(currentRoom).attr("room");
@@ -192,4 +196,4 @@ $(document).ready(function(){
 	}
 }
 
-setInterval(refreshChat, 3000);
+setInterval(refreshChat, 1000);
