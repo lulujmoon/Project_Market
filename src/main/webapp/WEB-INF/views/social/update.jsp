@@ -56,7 +56,6 @@
 		</div>
 	</form>
 </div>
-<script type="text/javascript" src="../resources/js/common.js"></script>
 <script type="text/javascript" src="../resources/js/summerFile.js"></script>
 <script type="text/javascript" src="../resources/js/socialNote.js"></script>
 </body>

@@ -8,7 +8,7 @@
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/store.css">
 <link rel="stylesheet" href="/resources/css/reviewCard.css" />
-<link rel="stylesheet" href="/resources/css/myReview.css" />
+<link rel="stylesheet" href="/resources/css/reviews.css" />
 <title>내 상점</title>
 </head>
 <body>

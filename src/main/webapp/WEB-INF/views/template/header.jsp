@@ -89,14 +89,11 @@
 	<div class="side__socials">
 		<h3>우리동네</h3>
 		<ul>
-			<li><a href="#">일상</a></li>
-			<li><a href="#">같이해요</a></li>
-			<li><a href="#">해주세요</a></li>
-			<li><a href="#">동네맛집</a></li>
-			<li><a href="#">동네소식</a></li>
-			<li><a href="#">취미생활</a></li>
-			<li><a href="#">고양이</a></li>
-			<li><a href="3">강아지</a></li>				
+			<li><a href="/social/list?categoryCode=1">동네소식</a></li>
+			<li><a href="/social/list?categoryCode=2">동네맛집</a></li>
+			<li><a href="/social/list?categoryCode=3">일상</a></li>
+			<li><a href="/social/list?categoryCode=4">취미생활</a></li>
+			<li><a href="/social/list?categoryCode=5">분실센터</a></li>	
 		</ul>
 	</div>
 	<div class="side__services">

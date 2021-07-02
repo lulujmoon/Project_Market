@@ -17,6 +17,7 @@ const FirstMessageList = function(){
 				
 				let room = $(this).attr('room');
 				let otherUser = $(this).attr('otherUser');
+				let productNum = $(this).attr('productNum');
 				
 				let send_msg = "";
 				send_msg += "	<input type='text' class='write_msg' placeholder='메세지를 입력하세요.' />";
@@ -29,7 +30,7 @@ const FirstMessageList = function(){
 				$('.btn-send').on('click',function(){
 					
 					// 메세지 전송 함수 호출
-					SendMessage(room, otherUser);
+					SendMessage(room, otherUser, productNum);
 					
 				});
 				
@@ -63,6 +64,7 @@ const MessageList = function(){
 				
 				let room = $(this).attr('room');
 				let otherUser = $(this).attr('otherUser');
+				let productNum = $(this).attr('productNum');
 				
 				let send_msg = "";
 				send_msg += "	<input type='text' class='write_msg' placeholder='메세지를 입력하세요.' />";
@@ -75,7 +77,7 @@ const MessageList = function(){
 				$('.msg_send_btn').on('click',function(){
 					
 					// 메세지 전송 함수 호출
-					SendMessage(room, otherUser);
+					SendMessage(room, otherUser, productNum);
 					
 				});
 				
@@ -122,7 +124,7 @@ const MessageContentList = function(room) {
 
 
 // 메세지를 전송하는 함수
-const SendMessage = function(room, otherUser){
+const SendMessage = function(room, otherUser, productNum){
 	
 	let content = $('.write_msg').val();
 	
@@ -137,7 +139,8 @@ const SendMessage = function(room, otherUser){
 			data:{
 				room : room,
 				otherUser: otherUser,
-				content: content
+				content: content,
+				productNum: productNum
 			},
 			success:function(data){
 				console.log("메세지 전송 성공");
@@ -175,17 +178,17 @@ $(document).ready(function(){
  */
  function refreshChat(){
 	const currentRoom = document.querySelector('.selected');
-	if(currentRoom != null){
-		let roomNum = $(currentRoom).attr("room");
-		MessageContentList(roomNum);
-		
-		const sendUser = document.querySelector('.rcv__sendUser');
-		const otherUsers = document.querySelectorAll('.other-user');
+	const sendUser = document.querySelector('.rcv__sendUser');
+	const otherUsers = document.querySelectorAll('.other-user');
+
+	if(sendUser != null){
 		for(let other of otherUsers){
 			if(sendUser.innerText == other.innerText){
-				other.classList.add('selected');
+				other.parentNode.parentNode.classList.add('selected');
 			}
-		}
+		}		
+		let roomNum = $(currentRoom).attr("room");
+		MessageContentList(roomNum);
 	}
 }
 

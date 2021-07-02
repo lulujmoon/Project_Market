@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,27 +39,14 @@ public class ReservationController {
 		int result = reservationService.setInsert(reservationVO);
 		System.out.println(result);
 		
-		return "redirect:/"; 
+		return "redirect:/product/select/"+reservationVO.getProductNum(); 
 	}
 	
 	@GetMapping("select")
-	public ModelAndView getSelect(ReservationVO reservationVO,Long productNum)throws Exception{
+	public void getSelect(ReservationVO reservationVO)throws Exception{
 		
-		ModelAndView mv = new ModelAndView();
-		reservationVO.setProductNum(productNum);
-		reservationVO =reservationService.getSelect(reservationVO);
-		int result=0;
-		
-		if(reservationVO!=null) {
-		
-		result=1;
-		mv.addObject("result",result);
-		}else{
-			mv.addObject("result",result);	
-		}
-		mv.setViewName("common/ajaxResult");
-		
-		return mv;
+		reservationVO = reservationService.getSelect(reservationVO);
 		
 	}
+	
 }

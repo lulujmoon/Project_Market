@@ -38,7 +38,6 @@ public class NotificationController {
 		List<NotificationVO> list = notificationService.notiList(pager);
 		System.out.println("Noti List : " + list);
 		
-		
 		request.setAttribute("notificationPager", pager);
 		request.setAttribute("unread", unread);
 		request.setAttribute("list", list);
