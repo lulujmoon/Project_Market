@@ -192,7 +192,13 @@ $(document).ready(function(){
 			}
 		}		
 		let roomNum = $(currentRoom).attr("room");
+		let productNum = $(currentRoom).attr('productNum');
+		
 		MessageContentList(roomNum);
+		$(".btn-send").attr('onclick', '').unbind('click');
+		$('.btn-send').on('click',function(){
+			SendMessage(roomNum, sendUser.innerText, productNum);	
+		});
 	}
 }
 
