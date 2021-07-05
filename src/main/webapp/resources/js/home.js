@@ -11,7 +11,7 @@ function goProductSelect(productNum){
 }
 
 function goSocialSelect(socialNum){
-	location.href = '/social/select?socialNum='+socialNum;
+	location.href = '/social/select/'+socialNum;
 }
 /** 초기설정 2. 가격 표시
  */

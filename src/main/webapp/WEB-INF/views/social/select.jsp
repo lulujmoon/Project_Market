@@ -34,7 +34,7 @@
 	</div>
 	<div class="info-wrapper">
 		<div class="post__writer-wrapper">
-			<img src="../resources/upload/member/${social.writerFile.fileName}" class="writer__avatar" onclick="goStore(${social.writer.code})"/>
+			<img src="/resources/upload/member/${social.writerFile.fileName}" class="writer__avatar" onclick="goStore(${social.writer.code})"/>
 			<div class="writer__name" onclick="goStore(${social.writer.code})">${social.writer.name}</div>
 			<span class="writer__middot">&middot;</span>
 			<div class="post__location">${social.location.locationName}</div>
@@ -75,7 +75,7 @@
 								<div class="item__top-container">
 									<div class="top-left-wrapper">
 										<div class="item__writer-wrapper">
-											<img src="../resources/upload/member/${comments[i].writerFile.fileName}" class="item__writer__avatar" onclick="goStore(${social.writer.code})"/>
+											<img src="/resources/upload/member/${comments[i].writerFile.fileName}" class="item__writer__avatar" onclick="goStore(${social.writer.code})"/>
 											<div class="item__writer__name" onclick="goStore(${comments[i].writer.code})">${comments[i].writer.name}</div>		
 										</div>
 										<div class="item__date">

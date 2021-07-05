@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,8 +72,8 @@ public class SocialController {
 		return "social/list";
 	}
 
-	@GetMapping("select")
-	public ModelAndView getSelect(@RequestParam("socialNum") Long socialNum, SocialVO socialVO, CommentVO commentVO, Authentication auth) throws Exception {
+	@GetMapping("select/{socialNum}")
+	public ModelAndView getSelect(@PathVariable Long socialNum, SocialVO socialVO, CommentVO commentVO, Authentication auth) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		socialVO.setSocialNum(socialNum);
@@ -124,7 +125,7 @@ public class SocialController {
 
 		if(result>0) {
 			message = "글이 등록되었습니다.";
-			path = "./select?socialNum="+socialService.getSocialNum();
+			path = "./select/"+socialService.getSocialNum();
 		}
 
 		model.addAttribute("msg", message);
@@ -155,7 +156,7 @@ public class SocialController {
 		//실행 O
 		if(result>0) {
 			System.out.println("수정 완료");
-			mv.setViewName("redirect:./select?socialNum="+socialVO.getSocialNum());
+			mv.setViewName("redirect:./select/"+socialVO.getSocialNum());
 		}
 		
 		//실행 X
@@ -209,7 +210,7 @@ public class SocialController {
 		ModelAndView mv = new ModelAndView();
 		
 		String fileName = socialService.setSummerFileUpload(file);
-		fileName = "../resources/upload/social/"+fileName;
+		fileName = "/resources/upload/social/"+fileName;
 		mv.addObject("result", fileName);
 		mv.setViewName("common/ajaxResult");
 		

@@ -35,7 +35,7 @@
  *	-- 소셜 상세 페이지로 이동한다.
  */
 function goSocialSelect(socialNum){
-	location.href = '/social/select?socialNum='+socialNum;
+	location.href = '/social/select/'+socialNum;
 }
 
 /** @function goSocialHome()
