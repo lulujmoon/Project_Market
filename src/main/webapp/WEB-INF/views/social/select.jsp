@@ -99,7 +99,7 @@
 				</c:forEach>
 			</div>
 		</c:if>
-		<form class="comment-form" action="../comment/insert" method="post">
+		<form class="comment-form" action="/comment/insert" method="post">
 			<input type="hidden" id="socialNum" name="socialNum" value="${social.socialNum}">
 			<input type="hidden" value="${principal.username}" name="username">
 			<textarea class="comment__content" id="commentContent" name="commentContent" placeholder="내용을 입력하세요." required></textarea>
