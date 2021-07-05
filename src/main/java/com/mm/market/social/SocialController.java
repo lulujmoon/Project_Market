@@ -134,9 +134,12 @@ public class SocialController {
 		return "common/commonResult";
 	}
 
-	@GetMapping("update")
-	public ModelAndView setUpdate(SocialVO socialVO) throws Exception {
+	@GetMapping("update/{socialNum}")
+	public ModelAndView setUpdate(@PathVariable Long socialNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
+		SocialVO socialVO = new SocialVO();
+		socialVO.setSocialNum(socialNum);
 		
 		socialVO = socialService.getSelect(socialVO);
 		List<SocialCategoryVO> categories = socialCategoryMapper.getList();

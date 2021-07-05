@@ -27,7 +27,7 @@
 		</div>
 		<c:if test="${principal.username == social.username}">
 			<div class="top-btn-wrapper">
-				<a class="btn-so-edit" href="./update?socialNum=${social.socialNum}">수정</a>
+				<a class="btn-so-edit" href="/social/update/${social.socialNum}">수정</a>
 				<a class="btn-so-del" href="#" onclick="deleteSocial(${social.socialNum})">삭제</a>
 			</div>
 		</c:if>
@@ -54,7 +54,7 @@
 		<div class="btn-good"></div>
 		<div class="response-left-wrapper">
 			<a class="btn-report" href="#" onclick="openSocialReport('${social.socialNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</a>
-			<a href="./list" class="btn-list"><i class="fas fa-bars"></i> 목록</a>
+			<a href="/social/list" class="btn-list"><i class="fas fa-bars"></i> 목록</a>
 		</div>
 	</div>
 	<div class="comment__container">

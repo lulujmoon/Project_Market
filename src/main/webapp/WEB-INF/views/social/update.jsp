@@ -13,9 +13,9 @@
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/common.css" />
 <link rel="stylesheet" href="/resources/css/socialNote.css"/>
-<link rel="stylesheet" href="../resources/css/summernote/summernote-lite.css">
-<script src="../resources/js/summernote/summernote-lite.js"></script>
-<script src="../resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="/resources/css/summernote/summernote-lite.css">
+<script src="/resources/js/summernote/summernote-lite.js"></script>
+<script src="/resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <title>글쓰기</title>
 </head>
 <body>
@@ -56,7 +56,7 @@
 		</div>
 	</form>
 </div>
-<script type="text/javascript" src="../resources/js/summerFile.js"></script>
-<script type="text/javascript" src="../resources/js/socialNote.js"></script>
+<script type="text/javascript" src="/resources/js/summerFile.js"></script>
+<script type="text/javascript" src="/resources/js/socialNote.js"></script>
 </body>
 </html>
