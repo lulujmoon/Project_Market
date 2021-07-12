@@ -35,7 +35,7 @@
 			<div class="info-group">
 				<div class="info__title">Username</div>
 				<div class="info__content">${principal.username}</div>
-				<input class="info__input username" type="text" name="username" value="${principal.username}">
+				<input class="info__input username" type="text" name="username" value="${principal.username}" readonly="readonly">
 			</div>
 			<c:if test="${principal.oauth eq false}">
 			<div class="info-group">

@@ -83,10 +83,10 @@ public class NotificationController {
 		}
 						
 		@PostMapping("notiDelete")
-		public String notiDelete(NotificationVO notificationVO)throws Exception{
-			notificationService.notiDelete(notificationVO);
-			
-			return "redirect:./list";
+		public String notiDelete(NotificationVO notificationVO, Model model) throws Exception{
+			int result = notificationService.notiDelete(notificationVO);
+			model.addAttribute("result", result);
+			return "/common/ajaxResult";
 		}
 	
 	

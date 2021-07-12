@@ -179,7 +179,7 @@ btnAdd.addEventListener('click', ()=>{
 					inputNum++;
 					innerNum = 0;
 				}else{
-					alert('첨부할 수 있는 파일 형식은 gif, jpg, jpeg, png입니다. \n현재 파일 형식은 '+file.name+'입니다.');
+					alert('첨부할 수 있는 파일 형식은 gif, jpg, jpeg, png입니다.');
 					inputs.removeChild(inputFile);
 				}						
 			}else{

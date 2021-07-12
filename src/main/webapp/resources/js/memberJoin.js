@@ -8,7 +8,7 @@
  const divCheck = document.querySelector('.checked');
  
  var checked = false;
- if(divCheck.innerText == 'true'){
+ if(divCheck.innerText == 'checked'){
 	checked = true;
 }
  
