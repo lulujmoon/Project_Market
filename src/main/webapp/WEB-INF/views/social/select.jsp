@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/socialSelect.css" />
-<title>우리동네</title>
+<title>${social.socialTitle}</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>
@@ -27,14 +27,14 @@
 		</div>
 		<c:if test="${principal.username == social.username}">
 			<div class="top-btn-wrapper">
-				<a class="insert-button" href="./update?socialNum=${social.socialNum}">수정</a>
-				<a class="insert-button" href="./delete?socialNum=${social.socialNum}">삭제</a>
+				<a class="btn-so-edit" href="/social/update/${social.socialNum}">수정</a>
+				<a class="btn-so-del" href="#" onclick="deleteSocial(${social.socialNum})">삭제</a>
 			</div>
 		</c:if>
 	</div>
 	<div class="info-wrapper">
 		<div class="post__writer-wrapper">
-			<img src="../resources/upload/member/${social.writerFile.fileName}" class="writer__avatar" onclick="goStore(${social.writer.code})"/>
+			<img src="/resources/upload/member/${social.writerFile.fileName}" class="writer__avatar" onclick="goStore(${social.writer.code})"/>
 			<div class="writer__name" onclick="goStore(${social.writer.code})">${social.writer.name}</div>
 			<span class="writer__middot">&middot;</span>
 			<div class="post__location">${social.location.locationName}</div>
@@ -54,7 +54,7 @@
 		<div class="btn-good"></div>
 		<div class="response-left-wrapper">
 			<a class="btn-report" href="#" onclick="openSocialReport('${social.socialNum}')"><i class="fas fa-exclamation-triangle"></i> 신고</a>
-			<a href="./list" class="btn-list"><i class="fas fa-bars"></i> 목록</a>
+			<a href="/social/list" class="btn-list"><i class="fas fa-bars"></i> 목록</a>
 		</div>
 	</div>
 	<div class="comment__container">
@@ -75,7 +75,7 @@
 								<div class="item__top-container">
 									<div class="top-left-wrapper">
 										<div class="item__writer-wrapper">
-											<img src="../resources/upload/member/${comments[i].writerFile.fileName}" class="item__writer__avatar" onclick="goStore(${social.writer.code})"/>
+											<img src="/resources/upload/member/${comments[i].writerFile.fileName}" class="item__writer__avatar" onclick="goStore(${social.writer.code})"/>
 											<div class="item__writer__name" onclick="goStore(${comments[i].writer.code})">${comments[i].writer.name}</div>		
 										</div>
 										<div class="item__date">
@@ -86,7 +86,7 @@
 										<div onclick="manageReply(${i}, ${comments[i].commentNum})">답글</div>
 										<c:if test="${comments[i].username == principal.username}">
 											<div onclick="manageCommentEdit(${comments[i].commentNum})">수정</div>
-											<a href="../comment/delete?commentNum=${comments[i].commentNum}">삭제</a>
+											<a href="#" onclick="deleteComment(${comments[i].commentNum})">삭제</a>
 										</c:if>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 				</c:forEach>
 			</div>
 		</c:if>
-		<form class="comment-form" action="../comment/insert" method="post">
+		<form class="comment-form" action="/comment/insert" method="post">
 			<input type="hidden" id="socialNum" name="socialNum" value="${social.socialNum}">
 			<input type="hidden" value="${principal.username}" name="username">
 			<textarea class="comment__content" id="commentContent" name="commentContent" placeholder="내용을 입력하세요." required></textarea>

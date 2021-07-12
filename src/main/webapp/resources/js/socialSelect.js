@@ -37,7 +37,7 @@ if(btnGood != null) {
 }
 
 function good_reload() {
-	$("#good").load(window.location.href='/social/select?socialNum='+socialNum);
+	document.location.reload(true);
 }
 
 /** @function openSocialReport(socialNum)
@@ -45,7 +45,7 @@ function good_reload() {
  */
 function openSocialReport(socialNum){
 	window.open(
-		"/report/socialReport?socialNum="+socialNum, 
+		"/report/socialReport/"+socialNum, 
 		'', 
 		"width=500,height=600,resizable,scrollbars=yes,left=1300,top=150");
 }
@@ -54,7 +54,7 @@ function openSocialReport(socialNum){
  *	--멤버 코드를 받아 상점 페이지로 이동한다.
  */
  function goStore(code){
-	location.href = '../store/'+code+'/products';
+	location.href = '/store/'+code+'/products';
 }
 
 /** @function manageReply(code, commentNum)
@@ -67,7 +67,7 @@ function openSocialReport(socialNum){
 		target.removeChild(target.lastElementChild);
 	}else{
 		const replyForm = document.createElement('form');
-		replyForm.action = '../comment/reply';
+		replyForm.action = '/comment/reply';
 		replyForm.method = 'post';
 		replyForm.classList.add('reply-form');
 		const replyContent = document.createElement('textarea');
@@ -97,7 +97,7 @@ function openSocialReport(socialNum){
 	const target = event.currentTarget.parentNode.parentNode.nextElementSibling;
 	
 	const editForm = document.createElement('form');
-	editForm.action = '../comment/update';
+	editForm.action = '/comment/update';
 	editForm.method = 'post';
 	editForm.classList.add('edit-form');
 	const editContent = document.createElement('textarea');
@@ -129,4 +129,37 @@ function openSocialReport(socialNum){
  postDate.innerText = calculateTime(postDate.innerText);
  for(let itemDate of itemDates){
 	itemDate.innerText = calculateTime(itemDate.innerText);
+}
+
+/** @function deleteSocial(socialNum) 
+ *	글 삭제
+ */
+ function deleteSocial(socialNum){
+	let conf = confirm('삭제한 게시물은 복구할 수 없습니다. 그래도 삭제하시겠습니까?');
+	if(conf){
+		$.post(
+			'./delete',
+			{socialNum: socialNum},
+			()=>{
+				alert('삭제되었습니다.');
+				location.href = './list';
+			}
+		);
+	}
+}
+
+/** @function deleteComment(commentNum)
+ *	-- 댓글 삭제
+ */
+ function deleteComment(commentNum){
+	let conf = confirm('삭제한 댓글은 복구할 수 없습니다. 그래도 삭제하시겠습니까?');
+	if(conf){
+		$.post(
+			'/comment/delete',
+			{commentNum: commentNum},
+			()=>{
+				location.reload();
+			}
+		)
+	}
 }

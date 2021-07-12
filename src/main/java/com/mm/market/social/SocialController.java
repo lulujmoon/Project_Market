@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,8 +72,8 @@ public class SocialController {
 		return "social/list";
 	}
 
-	@GetMapping("select")
-	public ModelAndView getSelect(@RequestParam("socialNum") Long socialNum, SocialVO socialVO, CommentVO commentVO, Authentication auth) throws Exception {
+	@GetMapping("select/{socialNum}")
+	public ModelAndView getSelect(@PathVariable Long socialNum, SocialVO socialVO, CommentVO commentVO, Authentication auth) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		socialVO.setSocialNum(socialNum);
@@ -119,11 +120,12 @@ public class SocialController {
 
 		int result = socialService.setInsert(socialVO);
 		
-		String message = "등록에 실패했습니다!";
+		String message = "등록에 실패했습니다.";
 		String path = "./list";
 
 		if(result>0) {
-			message = "등록에 성공했습니다!";
+			message = "글이 등록되었습니다.";
+			path = "./select/"+socialService.getSocialNum();
 		}
 
 		model.addAttribute("msg", message);
@@ -132,9 +134,12 @@ public class SocialController {
 		return "common/commonResult";
 	}
 
-	@GetMapping("update")
-	public ModelAndView setUpdate(SocialVO socialVO) throws Exception {
+	@GetMapping("update/{socialNum}")
+	public ModelAndView setUpdate(@PathVariable Long socialNum) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
+		SocialVO socialVO = new SocialVO();
+		socialVO.setSocialNum(socialNum);
 		
 		socialVO = socialService.getSelect(socialVO);
 		List<SocialCategoryVO> categories = socialCategoryMapper.getList();
@@ -154,7 +159,7 @@ public class SocialController {
 		//실행 O
 		if(result>0) {
 			System.out.println("수정 완료");
-			mv.setViewName("redirect:./list");
+			mv.setViewName("redirect:./select/"+socialVO.getSocialNum());
 		}
 		
 		//실행 X
@@ -166,25 +171,12 @@ public class SocialController {
 		return mv;
 	}
 
-	@GetMapping("delete")
-	public ModelAndView setDelete(SocialVO socialVO) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		
+	@PostMapping("delete")
+	public String setDelete(SocialVO socialVO, Model model) throws Exception {
 		int result = socialService.setDelete(socialVO);
-
-		String message = "삭제 실패";
-		String path = "./list";
-
-		if(result>0) {
-			message = "삭제 성공!";
-		}
-
-		mv.addObject("msg", message);
-		mv.addObject("path", path);
+		model.addAttribute("result", result);
 		
-		mv.setViewName("common/commonResult");
-
-		return mv;
+		return "/common/ajaxResult";
 	}
 	
 	@ResponseBody
@@ -221,7 +213,7 @@ public class SocialController {
 		ModelAndView mv = new ModelAndView();
 		
 		String fileName = socialService.setSummerFileUpload(file);
-		fileName = "../resources/upload/social/"+fileName;
+		fileName = "/resources/upload/social/"+fileName;
 		mv.addObject("result", fileName);
 		mv.setViewName("common/ajaxResult");
 		
