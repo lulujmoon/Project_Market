@@ -9,20 +9,20 @@ function read(notiNum) {
 		method:"POST",	
 		data:{notiNum : notiNum},
 		success:function() {
+			console.log('성공');
 		}
 	});
 }
 
 // 알림 삭제
 function notiDelete(notiNum) {
-	event.stopPropagation();
 	if(confirm("정말 삭제하시겠습니까?")){			
 		$.ajax({
 			url:"/notification/notiDelete",
 			method:"POST",
 			data:{notiNum : notiNum},
 			success:function() {
-				location.reload();
+				console.log("알림 삭제 완료");
 			}
 		});
 	}else {

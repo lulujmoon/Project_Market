@@ -130,36 +130,3 @@ function openSocialReport(socialNum){
  for(let itemDate of itemDates){
 	itemDate.innerText = calculateTime(itemDate.innerText);
 }
-
-/** @function deleteSocial(socialNum) 
- *	글 삭제
- */
- function deleteSocial(socialNum){
-	let conf = confirm('삭제한 게시물은 복구할 수 없습니다. 그래도 삭제하시겠습니까?');
-	if(conf){
-		$.post(
-			'./delete',
-			{socialNum: socialNum},
-			()=>{
-				alert('삭제되었습니다.');
-				location.href = './list';
-			}
-		);
-	}
-}
-
-/** @function deleteComment(commentNum)
- *	-- 댓글 삭제
- */
- function deleteComment(commentNum){
-	let conf = confirm('삭제한 댓글은 복구할 수 없습니다. 그래도 삭제하시겠습니까?');
-	if(conf){
-		$.post(
-			'../comment/delete',
-			{commentNum: commentNum},
-			()=>{
-				location.reload();
-			}
-		)
-	}
-}

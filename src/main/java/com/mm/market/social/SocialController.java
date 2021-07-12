@@ -119,12 +119,11 @@ public class SocialController {
 
 		int result = socialService.setInsert(socialVO);
 		
-		String message = "등록에 실패했습니다.";
+		String message = "등록에 실패했습니다!";
 		String path = "./list";
 
 		if(result>0) {
-			message = "글이 등록되었습니다.";
-			path = "./select?socialNum="+socialService.getSocialNum();
+			message = "등록에 성공했습니다!";
 		}
 
 		model.addAttribute("msg", message);
@@ -155,7 +154,7 @@ public class SocialController {
 		//실행 O
 		if(result>0) {
 			System.out.println("수정 완료");
-			mv.setViewName("redirect:./select?socialNum="+socialVO.getSocialNum());
+			mv.setViewName("redirect:./list");
 		}
 		
 		//실행 X
@@ -167,12 +166,25 @@ public class SocialController {
 		return mv;
 	}
 
-	@PostMapping("delete")
-	public String setDelete(SocialVO socialVO, Model model) throws Exception {
-		int result = socialService.setDelete(socialVO);
-		model.addAttribute("result", result);
+	@GetMapping("delete")
+	public ModelAndView setDelete(SocialVO socialVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
 		
-		return "/common/ajaxResult";
+		int result = socialService.setDelete(socialVO);
+
+		String message = "삭제 실패";
+		String path = "./list";
+
+		if(result>0) {
+			message = "삭제 성공!";
+		}
+
+		mv.addObject("msg", message);
+		mv.addObject("path", path);
+		
+		mv.setViewName("common/commonResult");
+
+		return mv;
 	}
 	
 	@ResponseBody

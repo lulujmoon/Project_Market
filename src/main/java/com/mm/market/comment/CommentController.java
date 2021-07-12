@@ -3,7 +3,6 @@ package com.mm.market.comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,14 +58,24 @@ public class CommentController {
 		return "redirect:../social/select?socialNum="+commentVO.getSocialNum();
 	}
 
-	@PostMapping("delete")
-	public String commentDelete(CommentVO commentVO, Model model) throws Exception {
+	@GetMapping("delete")
+	public ModelAndView commentDelete(CommentVO commentVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = commentService.setDelete(commentVO);
-		model.addAttribute("result", result);
+		String message = "삭제 실패";
+		String path = "../social/list";
 		
-		return "/common/ajaxResult";
+		if(result>0) {
+			message = "삭제 성공";
+		}
+		
+		mv.addObject("msg", message);
+		mv.addObject("path", path);
+		
+		mv.setViewName("common/commonResult");
+		
+		return mv;
 	}
 
 	@GetMapping("reply")

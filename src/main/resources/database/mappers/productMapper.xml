@@ -140,9 +140,7 @@
 			productName=#{productName}, 
 			categoryCode=#{categoryCode}, 
 			productContent=#{productContent}, 
-			productPrice=#{productPrice},
-			productNego=#{productNego},
-			locationCode=#{locationCode}
+			productPrice=#{productPrice}
 			where productNum=#{productNum}
 		</update>
 		
@@ -153,9 +151,7 @@
 			categoryCode=#{categoryCode}, 
 			productContent=#{productContent}, 
 			productDate=NOW(),
-			productPrice=#{productPrice},
-			productNego=#{productNego},
-			locationCode=#{locationCode}
+			productPrice=#{productPrice}
 			where productNum=#{productNum}
 		</update>
 		

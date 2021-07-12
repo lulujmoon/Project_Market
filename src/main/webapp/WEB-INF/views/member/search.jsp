@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <c:import url="../template/setting.jsp"></c:import>
 <link rel="stylesheet" href="/resources/css/sign.css">
-<title>비밀번호 찾기</title>
+<title>Insert title here</title>
 </head>
 <body>
 <c:import url="../template/header.jsp"></c:import>

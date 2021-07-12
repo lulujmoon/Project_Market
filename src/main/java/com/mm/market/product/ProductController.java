@@ -272,7 +272,7 @@ public class ProductController {
 		productService.setUpdate(productVO, file);
 		productVO = productService.getSelect(productVO);
 
-		return "redirect:./select/"+productVO.getProductNum();
+		return "redirect:./list";
 	}
 
 

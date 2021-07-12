@@ -26,12 +26,11 @@
 	* 2. input file이 변경되면 form을 제출한다.
   */
   
-  const btnAvatar = document.querySelector('.edit_true');
+  const btnAvatar = document.querySelector('.profile__photo');
 	const inputFile = document.querySelector('.input-file');
   const profileForm = document.querySelector('.profile__form');
 	const fileCheck = /\.(gif|jpg|jpeg|png|GIF|JPG|JPEG|PNG)$/;
-  if(btnAvatar != null){
-	
+  
   btnAvatar.addEventListener('click', ()=>{
 		inputFile.click();
 		inputFile.addEventListener('change', ()=>{
@@ -43,7 +42,6 @@
 		}
 		});
 });
-}
 
 /** 초기설정 3. 가격 표시
  */

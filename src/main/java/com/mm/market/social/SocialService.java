@@ -35,11 +35,6 @@ public class SocialService {
 	public List<SocialVO> getCategoryList(SocialPager socialPager) throws Exception {
 		return socialMapper.getCategoryList(socialPager);
 	}
-	
-	//방금 입력한 글의 번호 가져오기
-	public Long getSocialNum() throws Exception {
-		return socialMapper.getSocialNum();
-	}
 
 	//Select
 	public SocialVO getSelect(SocialVO socialVO) throws Exception {
