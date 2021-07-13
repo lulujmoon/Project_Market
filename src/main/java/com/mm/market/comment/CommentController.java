@@ -32,7 +32,7 @@ public class CommentController {
 	public String setInsert(CommentVO commentVO) throws Exception {
 		commentService.setInsert(commentVO);
 		
-		return "redirect:../social/select/"+commentVO.getSocialNum();
+		return "redirect:../social/select?socialNum="+commentVO.getSocialNum();
 	}
 	
 	@GetMapping("update") //댓글 수정
@@ -55,7 +55,7 @@ public class CommentController {
 		
 		commentVO = commentService.getSelect(commentVO);
 		
-		return "redirect:../social/select/"+commentVO.getSocialNum();
+		return "redirect:../social/select?socialNum="+commentVO.getSocialNum();
 	}
 
 	@GetMapping("delete")
@@ -96,6 +96,6 @@ public class CommentController {
 		
 		commentVO = commentService.getSelect(commentVO);
 		
-		return "redirect:../social/select/"+commentVO.getSocialNum();
+		return "redirect:../social/select?socialNum="+commentVO.getSocialNum();
 	}
 }

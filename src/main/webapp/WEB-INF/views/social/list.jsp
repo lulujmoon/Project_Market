@@ -19,7 +19,7 @@
 	<div class="top-container">
 		<div class="top__title" onclick="goSocialHome()">우리동네</div>
 		<div class="top-right-container">
-			<form class="top__form-search" id="frm" action="../list" class="form-inline">
+			<form class="top__form-search" id="frm" action="./list" class="form-inline">
 				<select class="search__select" name="kind" id="kind">
 					<option class="sel" value="title">제목</option>
 					<option class="sel" value="content">내용</option>
@@ -30,7 +30,7 @@
 				<button type="submit" class="btn btn-search">검색</button>		
 			</form>
 			<div class="btn-insert-wrapper">
-				<a href="../insert" class="btn btn-insert">작성</a>
+				<a href="./insert" class="btn btn-insert">작성</a>
 			</div>
 		</div>
 	</div>
@@ -39,15 +39,15 @@
 		<ul class="category__list">
 			<li class="category__item code_0"><a href="./list">전체</a></li>
 			<c:forEach begin="0" end="${categories.size()-1}" var="i">
-				<li class="category__item code_${i+1}"><a href="../list?categoryCode=${categories[i].categoryCode}&myLocation=${myLocation}&kind=${socialPager.kind}&search=${socialPager.search}">${categories[i].categoryName}</a></li>
+				<li class="category__item code_${i+1}"><a href="./list?categoryCode=${categories[i].categoryCode}&myLocation=${myLocation}&kind=${socialPager.kind}&search=${socialPager.search}">${categories[i].categoryName}</a></li>
 			</c:forEach>
 		</ul>
 		<h3 class="category__title">지역</h3>
 		<ul class="category__list list-myLocation">
-			<li class="category__item-location code_0"><a href="../list?page=1&categoryCode=${socialPager.categoryCode}&search=${socialPager.search}">전체</a></li>
+			<li class="category__item-location code_0"><a href="./list?page=1&categoryCode=${socialPager.categoryCode}&search=${socialPager.search}">전체</a></li>
 			<c:if test="${locations.size()!=0}">
 				<c:forEach begin="1" end="3" var="i">
-					<li class="category__item-location code_${i}"><a href="../list?page=1&categoryCode=${socialPager.categoryCode}&myLocation=${i}&kind=${socialPager.kind}&search=${socialPager.search}">${locations[i].locationName}</a></li>
+					<li class="category__item-location code_${i}"><a href="./list?page=1&categoryCode=${socialPager.categoryCode}&myLocation=${i}&kind=${socialPager.kind}&search=${socialPager.search}">${locations[i].locationName}</a></li>
 				</c:forEach>
 			</c:if>
 		</ul>
@@ -77,13 +77,13 @@
 		</div>
 		<ul class="page-container list-page">
 			<c:if test="${socialPager.pre}">
-				<li><a class="page-item arrow" href="../list?page=${socialPager.startNum-1}&kind=${socialPager.kind}&search=${socialPager.search}"><i class="fas fa-angle-double-left"></i></a></li>
+				<li><a class="page-item arrow" href="./list?page=${socialPager.startNum-1}&kind=${socialPager.kind}&search=${socialPager.search}"><i class="fas fa-angle-double-left"></i></a></li>
 			</c:if>
 			<c:forEach begin="${socialPager.startNum}" end="${socialPager.lastNum}" var="i">
-				<li><a class="page-item code_${i}" href="../list?page=${i}&kind=${socialPager.kind}&search=${socialPager.search}">${i}</a></li>
+				<li><a class="page-item code_${i}" href="./list?page=${i}&kind=${socialPager.kind}&search=${socialPager.search}">${i}</a></li>
 			</c:forEach>
 			<c:if test="${socialPager.next}">
-				<li class="page-item"><a class="page-item arrow" href="../list?page=${socialPager.lastNum+1}&kind=${socialPager.kind}&search=${socialPager.search}"><i class="fas fa-angle-double-left"></i></a></li>
+				<li class="page-item"><a class="page-item arrow" href="./list?page=${socialPager.lastNum+1}&kind=${socialPager.kind}&search=${socialPager.search}"><i class="fas fa-angle-double-left"></i></a></li>
 			</c:if>
 		</ul>
 	</c:if>
