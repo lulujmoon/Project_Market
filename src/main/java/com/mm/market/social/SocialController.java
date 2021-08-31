@@ -73,7 +73,7 @@ public class SocialController {
 	}
 
 	@GetMapping("select/{socialNum}")
-	public ModelAndView getSelect(@PathVariable Long socialNum, SocialVO socialVO, CommentVO commentVO, Authentication auth) throws Exception {
+	public ModelAndView getSelect(@PathVariable("socialNum") Long socialNum, SocialVO socialVO, CommentVO commentVO, Authentication auth) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		socialVO.setSocialNum(socialNum);
