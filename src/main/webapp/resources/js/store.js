@@ -85,5 +85,5 @@ function goProductSelect(productNum){
 }
 
 function goSocialSelect(socialNum){
-	location.href = '/social/select?socialNum='+socialNum;
+	location.href = '/social/select/'+socialNum;
 }

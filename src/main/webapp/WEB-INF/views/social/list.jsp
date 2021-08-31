@@ -30,7 +30,7 @@
 				<button type="submit" class="btn btn-search">검색</button>		
 			</form>
 			<div class="btn-insert-wrapper">
-				<a href="../insert" class="btn btn-insert">작성</a>
+				<a href="/social/insert" class="btn btn-insert">작성</a>
 			</div>
 		</div>
 	</div>
