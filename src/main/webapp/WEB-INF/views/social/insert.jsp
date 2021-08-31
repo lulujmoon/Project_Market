@@ -54,6 +54,7 @@
 		</div>
 	</form>
 </div>
+<c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript" src="../resources/js/summerFile.js"></script>
 <script type="text/javascript" src="../resources/js/socialNote.js"></script>
 </body>
