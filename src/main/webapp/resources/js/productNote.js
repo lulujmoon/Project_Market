@@ -106,7 +106,8 @@ function makeBtnDel(){
 		oldClassName = btnDelGroup[i].classList.item(2);
 		btnDelGroup[i].classList.replace(oldClassName, 'del_'+inputNum+'_'+i);
 	}
-	counter = (document.querySelectorAll('.preview')).length;		
+	counter = (document.querySelectorAll('.preview')).length;
+	
 }
 
 /** @function checkFiles(files)

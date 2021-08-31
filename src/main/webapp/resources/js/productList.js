@@ -13,7 +13,6 @@
 	 let selectedContent = container.querySelector('.code_'+hiddens[i].innerText);
 	 selectedContent.classList.add('selected');	
 }
- 
 
 /** @function goSelect()
  */
