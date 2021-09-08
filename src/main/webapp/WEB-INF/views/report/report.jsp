@@ -14,20 +14,18 @@
 <title>신고하기</title>
 </head>
 <body>
-
-<%--         <input readonly="readonly" type="text" name="address" value="${principal.email}"><br> --%>
-<div class="container">
-<div class="title-container">
-	신고하기
-</div>
-<form action="/report/report" method="post" class="send-form">
-  <input type="hidden" name="productNum" value="${product.productNum}">
-	<div class="form-content">${principal.name}</div>
-  <input readonly="readonly" type="text" class="form-content" name="title" value="상품 신고 : ${product.productName}">
-  <textarea name="message" class="form-content message" placeholder="내용을 입력해주세요."></textarea>
-  <input type="button" class="btn-report" value="신고하기">
-</form>
-</div>
+	<div class="container">
+		<div class="title-container">
+			신고하기
+		</div>
+		<form action="/report/report" method="post" class="send-form">
+		  <input type="hidden" name="productNum" value="${product.productNum}">
+			<div class="form-content">${principal.name}</div>
+		  <input readonly="readonly" type="text" class="form-content" name="title" value="상품 신고 : ${product.productName}">
+		  <textarea name="message" class="form-content message" placeholder="내용을 입력해주세요."></textarea>
+		  <input type="button" class="btn-report" value="신고하기">
+		</form>
+	</div>
 <script type="text/javascript" src="../resources/js/report.js"></script>
 </body>
 </html>
